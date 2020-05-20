@@ -1,4 +1,18 @@
-theme: jekyll-theme-cayman
-baseurl: "/"
-name: Powerlean
-description: 第二自媒体
+# Setup
+title:        Powerlean
+tagline:      第二数据分发点
+baseurl:      ""
+paginate:     1
+locale:       "zh_CN"
+
+# About/contact
+author:
+  name:       Powerlean
+  url:        http://powerlean.top
+
+# Gems
+gems:
+  - Personal Web
+
+#Others
+markdown: kramdown
