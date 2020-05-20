@@ -6,8 +6,8 @@ paginate:     1
 locale:       "zh-CN"
 
 # About/contact
-author:       Powerlen
-name:       Powerlen
+author:     Powerlen
+name:       Powerlen.top
 url:        http://powerlean.top 
 
 # Gems

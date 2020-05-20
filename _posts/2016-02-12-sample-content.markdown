@@ -1,24 +1,12 @@
 ---
 layout: default
-title:  "Welcome to Jekyll!"
-date:   2016-02-12 17:50:00
+title:  "博客初步架设步骤完成"
+date:   2020-05-21 17:50:00
 categories: main
 ---
 
-You'll find this post in your `_posts` directory - edit this post and re-build (or run with the `-w` switch) to see your changes!
-To add new posts, simply add a file in the `_posts` directory that follows the convention: YYYY-MM-DD-name-of-post.ext.
-
-Jekyll also offers powerful support for code snippets:
-
-{% highlight ruby %}
-def print_hi(name)
-  puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
-{% endhighlight %}
-
-Check out the [Jekyll docs][jekyll] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll's GitHub repo][jekyll-gh].
-
-[jekyll-gh]: https://github.com/mojombo/jekyll
-[jekyll]:    http://jekyllrb.com
+当你看见这篇帖子，说明powerlean.top这个域名已经投入使用了，这是一个静态的page,托管于GitHub(白嫖党的胜利!)。
+域名审核就花掉了一个星期，中间因为不了解流程，没有马上push文件到存储库...
+网站计划会存储一些源码。
+[网页模板]: https://github.com/mojombo/jekyll
+[我的GitHub]:    http://github.com/edges5352
