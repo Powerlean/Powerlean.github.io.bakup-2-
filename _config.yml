@@ -7,8 +7,8 @@ locale:       "zh-CN"
 
 # About/contact
 author:       Powerlen
-  name:       Powerlen
-  url:        http://powerlean.top 
+name:       Powerlen
+url:        http://powerlean.top 
 
 # Gems
 gems:
