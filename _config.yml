@@ -1,18 +1,18 @@
 # Setup
 title:        Powerlean
-tagline:      资源分享站
+tagline:      第二存储分发库
 baseurl:      ""
 paginate:     1
-locale:       "zh_CN"
+locale:       "zh-CN"
 
 # About/contact
-author:       Powerlean.top
-  name:       Powerlean
-  url:        http://powerlean.top
+author:       Powerlen
+  name:       Powerlen.top
+  url:        http://powerlean.top 
 
 # Gems
 gems:
-  - Personal Web
+  - jekyll-paginate
 
 #Others
 markdown: kramdown
