@@ -1,5 +1,5 @@
 # Setup
-title:        Powerlean
+title:        Powerlean -通用博客
 tagline:      第二存储分发库
 baseurl:      ""
 paginate:     1
@@ -7,7 +7,7 @@ locale:       "zh-CN"
 
 # About/contact
 author:     Powerlen
-name:       Powerlen.top
+name:       Powerlen
 url:        http://powerlean.top 
 
 # Gems
@@ -15,4 +15,5 @@ gems:
   - jekyll-paginate
 
 #Others
+auto: true
 markdown: kramdown
