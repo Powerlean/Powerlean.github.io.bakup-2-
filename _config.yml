@@ -1,14 +1,14 @@
 # Setup
-title:        Powerlean -通用博客
-tagline:      第二存储分发库
-baseurl:      ""
-paginate:     1
-locale:       "zh-CN"
+title: Powerlean
+tagline: 第二存储分发库
+baseurl: ""
+paginate: 1
+locale: "zh-CN"
 
 # About/contact
-author:     Powerlen
-name:       Powerlen
-url:        http://powerlean.top 
+author: Powerlen
+name: Powerlen
+url: https://powerlean.top 
 
 # Gems
 gems:
@@ -17,3 +17,4 @@ gems:
 #Others
 auto: true
 markdown: kramdown
+email: bluebreeze191@gmail.com
