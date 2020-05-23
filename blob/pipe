@@ -1,0 +1,227 @@
+#!/bin/bash -e
+#(C)Code by Solaris Eco 2020
+#blog:https://edges5352.github.io
+#Email:bluebreeze191.gmail.com
+#GitHub:EdgeS5352
+
+
+#路径变量设定
+export ver="3.1.7"
+export mirrors="$PREFIX/etc/apt/sources.list"
+export output="/dev/null"
+
+
+#URL变量设定
+export database="https://raw.githubusercontent.com/EdgeS5352/PickPipe/master/fast-up.sh"
+export log="https://powerlean.top/blob/update.log"
+
+
+#命令变量设定
+export error="echo -e \033[41;37m │X│遇到不明原因错误:$? \033[0m"
+export install="apt install"
+export remove="apt remove"
+export update="apt update"
+export upgrade="apt upgrade"
+export search="apt search"
+export list="apt list"
+
+
+
+
+#字符变量
+export EI1="│X│"
+export EI2="\033[41;37m X \033[0m"
+export TI1="│√│"
+export SI="\033[47;30m ❚❚ \033[0m"
+export SI1="│❚❚│"
+export LI="\033[47;30m ↻ \033[0m"
+export CI="↹"
+
+
+#包管理器名称
+case $install in
+  "apk add")
+export PM="apk"
+;;
+ "pip install")
+export PM="pip"
+;;
+ "pacman -S")
+export PM="pacman"
+;;
+ "brew install")
+export PM="brew"
+;;
+ "pkg install")
+export PM="apt"
+;;
+ "apt install")
+export PM="apt"
+;;
+"apt-get install")
+export PM="apt"
+;;
+"dpkg -i")
+export PM="dpkg"
+;;
+"dnf install")
+export PM="redhat"
+;;
+"yum install")
+export PM="redhat"
+;;
+"rpm -i")
+export PM="synaptic"
+;;
+*)
+export PM="___"
+esac
+
+
+#progress函数
+function progress {
+b=''
+for ((i=0;$i<=100;i+=2))
+do
+  printf "   │%-50s│%d%%\r" $b $i
+  sleep 0."$RANDOM"
+  b="|$b"
+done
+}
+
+
+#用户无输入时
+if [ x"$1" = x ]; then
+function about { 
+  clear
+  echo -e "\033[36m  ____  _      _      \033[0m"
+  echo -e "\033[36m |  _ \(_) ___| | __  \033[0m"
+  echo -e "\033[36m | |_) | |/ __| |/ /  \033[0m"
+  echo -e "\033[36m |  __/| | (__|   <   \033[0m"
+  echo -e "\033[36m |_|   |_|\___|_|\__) \033[0m"
+  echo ""
+  echo "Ver$ver  Code by Solaris"
+  bash -c "$(curl -fsSL $log)"
+  echo "尝试终端运行pipe h来获取更多"
+}
+about #于下方可直接引用此函数  
+
+
+#安装
+elif [ $1 == d ]; then
+  if [ x"$2" = x ]; then
+    echo -e "\033[31m $EI2 请指定一个参数 \033[0m"
+    exit 1
+  else  
+    echo -e "$LI 默认使用$PM安装软件包"
+    $install $2 -y 1>"$output" 2>&1 | progress
+  fi
+   if [ $? == 100 ]; then
+     echo -e "\033[41;37m $EI1软件包$2不存在或未被当前软件源收录 \033[0m"
+     exit 1
+   elif [ $? == 2 ]; then
+     echo -e "\033[41;37m $EI1软件包$2已在之前被安装 \033[0m"
+   elif [ "$?" == 0 -o "$?" == 1 ]; then
+     echo -e "\033[47;30m $TI1$2安装完成 \033[0m"
+   else
+    $error
+   fi
+ 
+
+#移除
+ elif [ $1 == r ]; then
+  if [ x"$2" = x ]; then
+    echo -e "\033[31m $EI2 请指定一个参数 \033[0m"
+    exit 1
+  else
+    read -p "$CI 您确定要移除软件包$2吗? [Y/n] " ask
+  fi
+    if [ "$ask" == Y -o "$ask" == y ]; then
+    echo -e "$LI 默认使用$PM移除软件包"
+    $remove $2 -y 1>"$output" 2>&1 | progress
+    if [ "$?" == 0 -o "$?" == 1 ]; then
+      echo -e "\033[47;30m $TI1移除完成 \033[0m"
+    else
+      $error
+    fi
+  elif [ "$ask" == N -o "$ask" == n ]; then
+    echo -e "$SI 终止"
+    exit 0
+  else 
+    echo -e "\033[31m $EI2 无效命令 \033[0m"
+    exit 1
+  fi
+
+
+#更新
+elif [ $1 == Uy ]; then
+  echo -e "$LI 默认使用$PM更新软件包"
+  $update -y 1>"$output" 2>&1 | progress
+  if [ $? == 0 ]; then
+    echo -e "\033[47;30m $SI1已就绪 \033[0m"
+  else  
+    $error
+  fi
+
+
+#升级
+elif [ $1 == Ud ]; then
+  echo -e "$LI 默认使用$PM升级软件包"
+  $upgrade -y 1>"$output" 2>&1 | progress
+  if [ $? == 0 ]; then
+    echo -e "\033[47;30m $TI1升级完成 \033[0m"
+  else
+    $error
+  fi
+
+
+#搜索
+elif [ $1 == s ]; then
+  if [ x"$2" = x ]; then
+    echo -e "\033[31m $EI2 请指定一个参数 \033[0m"
+    exit 1
+  else
+    $search $2
+  fi
+
+
+#帮助
+elif [ $1 == h ]; then
+function usage {  
+  echo "PickPipe   ver$ver for termux"
+  echo "Usage：pipe [命令] [参数]"
+  echo ""
+  echo "PickPipe意在将当前的$PM包管理器进行简化"
+  echo ""
+  echo "命令:"
+  echo "d    安装软件包"
+  echo "r    移除软件包"
+  echo "s    查找软件包"
+  echo "h    命令及参数"
+  echo "p    拉取新版包"
+  echo "l    列出软件包"
+  echo "Uy   更新软件包"
+  echo "Ud   升级软件包"
+  echo ""
+  echo "当前主镜像源:"
+  head -n 2 "$mirrors"
+}
+usage #于下方可直接引用此函数
+
+
+#拉取
+elif [ $1 == p ]; then
+  echo -e "\033[32m $LI 正在从$database中拉取软件包 \033[0m"
+  bash -c "$(curl -fsSL $database)" 1>"$output" 2>&1 | progress
+
+
+#列出
+elif [ $1 == l ]; then
+  $list
+
+
+#无效
+else
+  echo -e "\033[31m $EI2 未被定义的命令，运行pipe h来获取帮助 \033[0m"
+  exit 1
+fi
