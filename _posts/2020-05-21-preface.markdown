@@ -12,14 +12,14 @@ categories: main
 # 关于
 - Powerlean.top是业余构建出来的，虽然它并不曼妙，但仍在砥砺前行。
 # 联系
-[Email](bluebreeze191@gmail.com "谷歌邮箱")
+- [Email](bluebreeze191@gmail.com "谷歌邮箱")
 
-[GitHub](http://github.com/edges5352 "GitHub")
+- [GitHub](http://github.com/edges5352 "GitHub")
 
-[QQ](https://qm.qq.com/cgi-bin/qm/qr?k=PJemsUFPRexZMeBd1N1JjEf07DFiIqis&noverify=0 "腾讯QQ")
+- [QQ](https://qm.qq.com/cgi-bin/qm/qr?k=PJemsUFPRexZMeBd1N1JjEf07DFiIqis&noverify=0 "腾讯QQ")
 
-[Telegram](https://flychat.in/@SolarisEco "Telegram")  
+- [Telegram](https://flychat.in/@SolarisEco "Telegram")  
  
-![](https://i.loli.net/2020/05/23/LZ9QA4iSkNWtvc2.jpg "moe")
+![](https://i.loli.net/2020/05/23/LZ9QA4iSkNWtvc2.jpg "没错，我是个死肥宅")
 
 ©Powerlean 著写
