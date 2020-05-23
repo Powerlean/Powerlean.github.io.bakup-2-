@@ -8,7 +8,7 @@ categories: main
 # 拾贝  
 - 淼淼汪洋，大海抱起薄薄的浪片，绵柔的拍击着滩边细沙。
 脚印啊，一个接一个，留在滩边，印在心里……
-- - -
+
 # 关于
 - Powerlean.top是业余构建出来的，虽然它并不曼妙，但仍在砥砺前行。
 # 联系
@@ -19,6 +19,7 @@ categories: main
 [QQ](https://qm.qq.com/cgi-bin/qm/qr?k=PJemsUFPRexZMeBd1N1JjEf07DFiIqis&noverify=0 "腾讯QQ")
 
 [Telegram](https://flychat.in/@SolarisEco "Telegram")  
-©Powerlean 著写  
+ 
 ![](https://i.loli.net/2020/05/23/LZ9QA4iSkNWtvc2.jpg "moe")
 
+©Powerlean 著写
