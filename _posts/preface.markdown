@@ -1,6 +1,6 @@
 ---
 layout: default
-title:  "博客初步架设步骤完成"
+title:  "序言"
 date:   2020-05-21 17:50:00
 categories: main
 ---
