@@ -13,9 +13,9 @@ categories: main
 - Powerlean.top是业余构建出来的，也许它并不曼妙，但仍在砥砺前行。
 
 # 联系
-- [Email](bluebreeze191@gmail.com "谷歌邮箱")
+- [Email](https://bluebreeze191@gmail.com "谷歌邮箱")
 
-- [GitHub](http://github.com/edges5352 "GitHub")
+- [GitHub](https://github.com/edges5352 "GitHub")
 
 - [QQ](https://qm.qq.com/cgi-bin/qm/qr?k=PJemsUFPRexZMeBd1N1JjEf07DFiIqis&noverify=0 "腾讯QQ")
 
