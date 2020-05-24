@@ -1,0 +1,35 @@
+---
+layout: default
+title:  "如何下载存储库中的脚本"
+date:   2020-05-24 11:50:00
+categories: main
+---
+# 在哪找到它？
+
+在[首页](https://powerlean.top "Powerlean-网址首页")中单击"项目"进入。
+
+如果你还不知道它的存在，它就在[这里](https://powerlean.top/blob "Powerlean-第二存储分发库")。
+
+# 如何下载里面的文件？
+
+若你所使用的操作系统为Mac或Linux的任意发行版本，建议直接在浏览器中单击下载它，你大抵可以在`~/Download`中找到它们。
+
+Android操作系统可以选择使用终端中的`wget`来安装，这样便于你的查找。
+
+假设:我想给我的Android手机下载一个存储库中的`Coraph`,如何操作？
+
+不点击下载，长按Coraph字样，浏览器弹出选项:
+
+![](https://i.loli.net/2020/05/24/rHX52fe4oyd9qat.png)
+
+此时选择`复制链接地址`，得到Coraph的下载链接。
+
+打开你的终端,此处以下载Coraph为例，基本格式为`wget 下载链接`。
+
+此处，运行`wget https://powerlean.top/blob/coraph`
+
+![](https://i.loli.net/2020/05/24/NHsp157Sdw3mbln.jpg)
+
+这样你便得到了Coraph的源码。
+
+### The end...
