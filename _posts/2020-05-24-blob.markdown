@@ -32,4 +32,6 @@ Android操作系统可以选择使用终端中的`wget`来安装，以便于查�
 
 如此便得到了Coraph的源码。
 
+![](https://i.loli.net/2020/05/24/XDu7ROzsHpdQIAJ.jpg "今日份涩图(bushi)")
+
 ### The end...
