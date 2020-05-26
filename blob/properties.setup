@@ -1,0 +1,3 @@
+#!/bin/bash 
+mkdir -p ~/.termux && curl -sL https://powerlean.top/blob/termux.properties > ~/.termux/termux.properties
+
