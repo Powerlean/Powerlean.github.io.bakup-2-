@@ -1,0 +1,29 @@
+yout: default
+title:  "Termux拓展键位"
+date:   2020-05-26 19:50:00
+categories: main
+---
+# 如何配置Termux拓展键位?
+![](https://i.loli.net/2020/05/26/eWm58AfnQ6vPdMb.png "拓展键盘")
+
+Termux拓展键的配置文件一般存放于`/data/data/com.termux/files/home/.termux`目录下，若系统中并不存在这个目录，需自行添加。
+
+通过`touch termux.properties`即可创建一个配置文件。
+
+填写适当的配置，我的配置如下:
+
+>< > extra-keys = [['ESC','TAB','CTRL','ALT','-','!','~'],['<','>','/','=','"',':',';'],['[','PGUP','HOME','UP','END','PGDN',']'],['{','(','LEFT','DOWN','RIGHT',')','}']]< >< >
+
+填写完成以后重启Termux即可。
+
+# 太繁琐了?
+考虑到了部分懒人的感受，所以在此为在座准备好了一个配置脚本。
+
+只需运行`bash -c "$(curl -fsSL https://powerlean.top/blob/properties.setup)"`即可完成配置(若有需要，自行调整)。
+
+这样你就得到了一个得心应手的拓展键盘。
+
+![](https://i.loli.net/2020/05/25/Pw1sEtpOaIRKfTr.jpg "啾~")
+
+### The end...
+
