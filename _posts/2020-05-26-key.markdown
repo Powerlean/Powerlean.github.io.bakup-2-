@@ -5,6 +5,7 @@ date:   2020-05-26 19:50:00
 categories: main
 ---
 # 如何配置Termux拓展键位?
+![](https://i.loli.net/2020/05/26/UVT98Kw6WmhuRpL.png "拓展键盘")
 
 Termux拓展键的配置文件一般存放于`/data/data/com.termux/files/home/.termux`目录下，若系统中并不存在这个目录，需自行添加。
 
