@@ -5,7 +5,7 @@ date:   2020-05-26 19:50:00
 categories: main
 ---
 # 如何配置Termux拓展键位?
-Termux拓展键的配置文件一般存放于`/data/data/com.termux/files/home/.termux`目录下，若系统中并不存在这个目录，需自行添加。
+Termux拓展键的配置文件一般存放于`/data/data/com.termux/files/home/.termux`目录下，若系统中并不存在这个目录，则可运行`mkdir -p /data/data/com.termux/files/home/.termux`进行创建。
 
 通过`touch termux.properties`即可创建一个配置文件。
 
@@ -18,11 +18,11 @@ Termux拓展键的配置文件一般存放于`/data/data/com.termux/files/home/.
 ![](https://i.loli.net/2020/05/26/UVT98Kw6WmhuRpL.png "拓展键盘")
 
 # 太繁琐了?
-考虑到了部分懒人的感受，所以在此为在座准备好了一个配置脚本。
+考虑到了部分懒人的感受，所以在此已准备好了一个配置脚本。
 
 只需运行`bash -c "$(curl -fsSL https://powerlean.top/blob/properties.setup)"`即可完成配置(若有需要，自行调整)。
 
-这样你就得到了一个得心应手的拓展键盘。
+这样你就拥有了一个得心应手的拓展键盘。
 
 ![](https://i.loli.net/2020/05/25/Pw1sEtpOaIRKfTr.jpg "啾~")
 
