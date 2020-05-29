@@ -1,0 +1,58 @@
+---
+layout: default
+title:  "Termux-MTG入群问题"
+date:   2020-05-30 23:50:00
+categories: main
+---
+# 入群Q&A
+
+入群问题意在设置一道门槛来提升群成员基本素质。
+
+## 问题一
+
+著名文本编辑器Vim保存修改内容的命令是以下的( )。
+
+- A. q
+- B. r
+- C. w
+- D. j
+
+
+## 问题二
+
+对Metasploit的看法( )。
+
+- A. 我进群就是为了了解如何安装它
+- B. 我清楚它是什么东西，但我并不想安装它
+
+## 问题三
+
+Shell Script(Shell脚本)中，"#"符合的作用是( )。
+
+- A. 声明变量 
+- B. 注释代码
+- C. 作为通配符补全命令/路径中的内容
+
+## 问题四
+
+以下哪条命令不会对操作系统造成危险( )。
+
+- A. sudo rm -rf /bin
+- B. :(){:|:&};: 
+- C. uname -r
+- D. rm -rf /${dir}sbin,其中变量"dir"为空
+
+## 问题五
+
+是否愿意遵守群规，文明发言，不吐粗言稚语( )。
+
+- A. 是
+- B. 否
+
+请将答案以数字形式填入QQ群验证消息中，例如，我的答案是`AABDC`,那么应顺序填入`11243`。
+
+*加入Termux-MTG即代表你已同意将遵守群规，文明发言。*
+
+- [群组①](https://qm.qq.com/cgi-bin/qm/qr?k=Hhx185mzUzb_tbJnUHh1UnASm9FGuqae&authKey=m5zVKyProRyudSRRsm2mfUiGjqMzGg9//nCgyTXFXCr1oj2TYZ6Uez2/sdcWrMuy&noverify=0 "一群"):714730084
+- [群组②](https://qm.qq.com/cgi-bin/qm/qr?k=n5rWJl8FaLlp2jLtPVML5S3lSOphJEzj&authKey=s+E/oppAbs6Iz89vJh2LD3CbxurGQ5wH6LJf5b/KAimWYgP5nLYKM0EC8l6AcWme&noverify=0 "二群"):463233836
+
