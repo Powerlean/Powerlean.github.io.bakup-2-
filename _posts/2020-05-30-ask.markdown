@@ -38,7 +38,7 @@ Shell Script(脚本)中，"#"的作用是( )。
 以下哪条命令不会对操作系统造成危险( )。
 
 - A. sudo rm -rf /bin
-- B. :(){:|:&};:
+- B. mv 文件夹 /dev/null
 - C. uname -r
 - D. rm -rf /${dir}sbin,其中变量"dir"为空
 
