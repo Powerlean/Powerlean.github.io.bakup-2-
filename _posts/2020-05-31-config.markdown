@@ -60,4 +60,6 @@ categories: main
 
 *https://www.gnu.org/software/sed/manual/sed.html*
 
+![](https://i.loli.net/2020/05/31/EWLAX2sGOCqmQNu.gif "贴贴~")
+
 ### The end...
