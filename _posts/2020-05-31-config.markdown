@@ -46,5 +46,7 @@ root@localhost:~#
 有趣的事情发生了:`test.sh`准确无误的将所有参数读了出来。
 
 *希望这对你有所启发。*
+*本文使用的编程语言为Shell。*
+*参考:https://www.gnu.org/software/sed/manual/sed.html*
 
 ### The end...
