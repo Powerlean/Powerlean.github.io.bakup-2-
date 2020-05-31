@@ -48,6 +48,6 @@ categories: main
 
 *本文使用的编程语言为Shell。*
 
-*提供参考:https://www.gnu.org/software/sed/manual/sed.html*
+*文献:https://www.gnu.org/software/sed/manual/sed.html*
 
 ### The end...
