@@ -23,33 +23,33 @@ categories: main
 在`config`中写入我们需要知道的参数:
 
 > password=123456
-
+>
 > Url=https://powerlean.top
-
+>
 > Name=powerlean
 
 在`test.sh`中写入读取命令:
 
 > passwd=`sed '/^password=/!d;s/.*=//' test.sh`#注意，本处是相对路径  
-
+>
 > url=`sed '/^Url=/!d;s/.*=//' test.sh`  
-
+>
 > name=`sed '/^Name=/!d;s/.*=//' test.sh`  
-
+>
 > echo $passwd  
-
+>
 > echo $url 
-
+>
 > echo $name
 
 运行`test.sh`脚本:
 
 > root@localhost:~# bash test.sh
-
+>
 > 123456
-
+>
 > https://powerlean.top
-
+>
 > powerlean 
 
 有趣的事情发生了:`test.sh`准确无误的将所有参数读了出来。
