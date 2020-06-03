@@ -17,8 +17,8 @@ echo "│ 脚本分发:Powerlean.top │"
 echo "│ 脚本编写:Powerlean     │"
 echo "└────────────────────────┘"
 echo "注意:文件仅可在Termux中运行"
-apt install fish 1>"$output" 2>&1 | pro
-apt install ruby 1>"$output" 2>&1
+apt install fish -y 1>"$output" 2>&1 | pro
+apt install ruby -y 1>"$output" 2>&1
 curl -L https://get.oh-my.fish | fish
 wget https://powerlean.top/blob/net-checker
 chmod +x net-checker
@@ -30,5 +30,9 @@ echo "net-checker" >>"/data/data/com.termux/files/home/.config/fish/conf.d/omf.f
 echo "date" >>"/data/data/com.termux/files/home/.config/fish/conf.d/omf.fish"
 echo "colorls" >>"/data/data/com.termux/files/home/.config/fish/conf.d/omf.fish"
 echo "pwd" >>"/data/data/com.termux/files/home/.config/fish/conf.d/omf.fish"
+wget https://powerlean.top/blob/TFont.ttf
+mkdir -p ~/.termux
+mkdir -p ~/.termux/fonts
+mv TFont.ttf ~/.termux/fonts
 echo "操作完成"
 
