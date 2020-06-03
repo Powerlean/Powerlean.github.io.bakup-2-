@@ -8,9 +8,9 @@ categories: main
 
 类似pacman.conf，source.list，config.yml之类的文件都属于配置文件，作为用户与计算机程序的中介，是它让我们不必直接面对冗长的程序代码。
 
-# 原理是什么?
+# 如何实现?
 
-利用sed程序从文件中读出配置参数，将其赋值于变量，传参给程序，使程序进一步判断。
+利用`sed`从文件中读出配置参数，将其赋值于变量，传参给程序，使程序进一步判断。
 
 # 着手编写
 
@@ -30,11 +30,11 @@ categories: main
 
 在`test.sh`中写入读取命令:
 
-> passwd=`sed '/^password=/!d;s/.*=//' test.sh`#注意，本处是相对路径  
+> passwd=``sed '/^password=/!d;s/.*=//' config``#注意，本处是相对路径  
 >
-> url=`sed '/^Url=/!d;s/.*=//' test.sh`  
+> url=`sed '/^Url=/!d;s/.*=//' config`  
 >
-> name=`sed '/^Name=/!d;s/.*=//' test.sh`  
+> name=`sed '/^Name=/!d;s/.*=//' config`  
 >
 > echo $passwd  
 >
@@ -52,7 +52,7 @@ categories: main
 >
 > powerlean 
 
-有趣的事情发生了:`test.sh`准确无误的将所有参数读了出来。
+现象:`test.sh`准确无误的将`config`内的参数读了出来。
 
 *希望这对你有所启发。*
 
