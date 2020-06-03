@@ -1,0 +1,11 @@
+#!/bin/bash -e
+export f="1"
+export output="/dev/null"
+ping -c $f baidu.com 1>"$output" 2>&1
+if [ "$?" == 0 ]; then
+  echo -e "\033[42;30m                             当前国内通用网络良好                                \033[0m"
+elif [ "$?" == 2 ];then
+  echo -e "\033[41;30m                             当前国内通用网络异常                                \033[0m"
+else
+  echo -e "\033[41;30m                             当前国内通用网络异常                                \033[0m"
+fi
