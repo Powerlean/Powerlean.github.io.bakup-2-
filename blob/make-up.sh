@@ -23,6 +23,7 @@ curl -L https://get.oh-my.fish | fish
 wget https://powerlean.top/blob/net-checker
 chmod +x net-checker
 mv net-checker /data/data/com.termux/files/usr/bin
+chsh -s fish
 omf install bobthefish 1>"$output" 2>&1 
 gem install colorls 1>"$output" 2>&1
 echo "net-checker" >>"/data/data/com.termux/files/home/.config/fish/conf.d/omf.fish"
