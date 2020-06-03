@@ -30,7 +30,7 @@ categories: main
 
 在`test.sh`中写入读取命令:
 
-> passwd=``sed '/^password=/!d;s/.*=//' config``#注意，本处是相对路径  
+> passwd=&#96;sed '/^password=/!d;s/.*=//' config &#96;
 >
 > url=`sed '/^Url=/!d;s/.*=//' config`  
 >
