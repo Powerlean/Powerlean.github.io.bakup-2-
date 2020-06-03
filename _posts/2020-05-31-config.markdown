@@ -30,6 +30,8 @@ categories: main
 
 在`test.sh`中写入读取命令:
 
+> #!/bin/bash
+>
 > passwd=&#96;sed '/^password=/!d;s/.*=//' config&#96;
 >
 > url=&#96;sed '/^Url=/!d;s/.*=//' config&#96;  
@@ -55,6 +57,8 @@ categories: main
 现象:`test.sh`准确无误的将`config`内的参数读了出来。
 
 *希望这对你有所启发。*
+
+**符号经过转义，直接复制无效。*
 
 *本文使用的编程语言为Shell。*
 
