@@ -30,11 +30,11 @@ categories: main
 
 在`test.sh`中写入读取命令:
 
-> passwd=&#96;sed '/^password=/!d;s/.*=//' config &#96;
+> passwd=&#96;sed '/^password=/!d;s/.*=//' config&#96;
 >
-> url=&#96;sed '/^Url=/!d;s/.*=//' config &#96;  
+> url=&#96;sed '/^Url=/!d;s/.*=//' config&#96;  
 >
-> name=&#96;sed '/^Name=/!d;s/.*=//' config &#96;  
+> name=&#96;sed '/^Name=/!d;s/.*=//' config&#96;  
 >
 > echo $passwd  
 >
