@@ -32,11 +32,11 @@ categories: main
 
 > #!/bin/bash
 >
-> passwd=&#96;sed '/^password=/!d;s/.*=//' config&#96;
+> passwd=&#96;sed &#39;/^password=/!d;s/.*=//&#39; config&#96;
 >
-> url=&#96;sed '/^Url=/!d;s/.*=//' config&#96;  
+> url=&#96;sed &#39;/^Url=/!d;s/.*=//&#39; config&#96;  
 >
-> name=&#96;sed '/^Name=/!d;s/.*=//' config&#96;  
+> name=&#96;sed &#39;/^Name=/!d;s/.*=//&#39; config&#96;  
 >
 > echo $passwd  
 >
