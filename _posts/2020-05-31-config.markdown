@@ -32,9 +32,9 @@ categories: main
 
 > passwd=&#96;sed '/^password=/!d;s/.*=//' config &#96;
 >
-> url=`sed '/^Url=/!d;s/.*=//' config`  
+> url=&#96;sed '/^Url=/!d;s/.*=//' config &#96;  
 >
-> name=`sed '/^Name=/!d;s/.*=//' config`  
+> name=&#96;sed '/^Name=/!d;s/.*=//' config &#96;  
 >
 > echo $passwd  
 >
