@@ -6,7 +6,7 @@ categories: main
 ---
 # 配置文件是什么?
 
-类似pacman.conf，source.list，config.yml之类的文件都属于配置文件，作为用户与计算机程序的中介，是它让我们不必直接面对冗长的程序代码。
+形如pacman.conf，source.list，config.yml等文件都属于配置文件，作为用户与计算机程序的中介，是它让我们不必直接面对冗长的程序代码。
 
 # 如何实现?
 
