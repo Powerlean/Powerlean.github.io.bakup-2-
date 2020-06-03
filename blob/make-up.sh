@@ -11,7 +11,7 @@ function pro {
   $point
   sleep 0.3
 }
-echo "运行操作:修改拓展键位文件"
+echo "运行操作:修改Fish配置"
 echo "┌────────────────────────┐"
 echo "│ 脚本分发:Powerlean.top │"
 echo "│ 脚本编写:Powerlean     │"
