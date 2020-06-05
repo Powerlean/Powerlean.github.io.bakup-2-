@@ -10,7 +10,8 @@ categories: main
 小贝，在柔软的沙床上滚动，脚印，一个接一个，留在滩边，印在心里……
 
 # 关于
-- Powerlean.top是业余构建出来的，也许它并不曼妙，但仍在砥砺前行。
+- [单击此处](https://github.com/EdgeS5352/EdgeS5352.github.io?files=1)以跳转至项目地址。
+- 网页使用[GitHub Pages](https://pages.github.com/)。
 
 # 联系
 - [Email](https://bluebreeze191@gmail.com "谷歌邮箱")
