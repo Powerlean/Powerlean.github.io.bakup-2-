@@ -19,7 +19,7 @@ echo "└───────────────────────�
 echo "注意:文件仅可在Termux中运行"
 apt install fish -y 1>"$output" 2>&1 | pro
 apt install ruby -y 1>"$output" 2>&1
-curl -L https://powerlean.top/blob/setup.fish | fish
+curl https://powerlean.top/blob/setup.fish | fish
 wget https://powerlean.top/blob/net-checker
 chmod +x net-checker
 mv net-checker /data/data/com.termux/files/usr/bin
@@ -34,5 +34,6 @@ wget https://powerlean.top/blob/TFont.ttf
 mkdir -p ~/.termux
 mkdir -p ~/.termux/fonts
 mv TFont.ttf ~/.termux/fonts
+curl https://powerlean.top/blob/termux.properties | bash
 echo "操作完成"
 
