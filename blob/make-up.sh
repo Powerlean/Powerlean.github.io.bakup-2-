@@ -34,6 +34,6 @@ wget https://powerlean.top/blob/TFont.ttf
 mkdir -p ~/.termux
 mkdir -p ~/.termux/fonts
 mv TFont.ttf ~/.termux/fonts
-curl https://powerlean.top/blob/termux.properties | bash
+curl https://powerlean.top/blob/properties.setup | bash
 echo "操作完成"
 
