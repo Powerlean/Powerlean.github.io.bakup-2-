@@ -1,5 +1,5 @@
 # 关于
-- [单击此处](https://github.com/EdgeS5352/EdgeS5352.github.io?files=1)以跳转至项 目地址。
+- [单击此处](https://github.com/EdgeS5352/EdgeS5352.github.io?files=1)以跳转至项目地址。
 - 网页使用[GitHub Pages](https://pages.github.com/)。
 
 # 联系
