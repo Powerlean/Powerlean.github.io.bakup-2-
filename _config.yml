@@ -1,8 +1,8 @@
 # Site settings 配置站点
-title: 'your awesome title'
-description: 'your web description'
+title: 'Powerlean'
+description: ''
 keywords: 'your web keywords, another keywords'
-url: 'https://abc.github.io' # your host
+url: 'https://powerlean.top' # your host
 
 # nav 中文字符空格：&emsp;
 nav: # 最佳体验 六个标签 且最好每个标签不超过4中文字
@@ -19,7 +19,7 @@ NickName: 'Powerlean'
 webtitle: 'Powerlean'
 bio: ''
 about: true
-aboutyou: 'your introduction'
+aboutyou: 'A boring guy...'
 portraits: '/assets/profile.jpeg' # your portraits image file path
 
 # SNS
