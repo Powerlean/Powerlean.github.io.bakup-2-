@@ -8,9 +8,9 @@ url: 'https://powerlean.top' # your host
 nav: # 最佳体验 六个标签 且最好每个标签不超过4中文字
   首页: '/'
   标签: '/tags.html'
-  时间线: '/timeline.html'
+  足迹: '/timeline.html'
   关于: '/about.html'
-  友情链接: '/friendLink.html'
+  链接: '/friendLink.html'
 
 # 博主
 author: true
