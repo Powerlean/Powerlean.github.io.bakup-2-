@@ -1,28 +1,12 @@
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 <footer id="bottom">
-    <br>
-      <span>{{ site.title }} ©
-          {% assign current = "now" | date: "%Y" | plus: 0%}
-            {% unless site.footer.since and site.footer.since == current %}
-                {{ site.footer.since }}
-<sup><span style="color:grey" class="post-meta-divider">网页来自 <a href="https://powerlean.top">Powerlean</a></span></sup>
- <div>
-
-    
-
-    <span id="busuanzi_container_site_pv">
-
-        <sup style="color:grey">总访问量<span id="busuanzi_value_site_pv"></span>次</sup>
-
-    </span>
-
-    <sup><span style="color:grey" class="post-meta-divider">·</span></sup>
-
-    <span id="busuanzi_container_site_uv">
-
-        <sup style="color:grey">访问人数<span id="busuanzi_value_site_uv" ></span>位</sup>
-
-    </span>
-
-</div> 
+  <br>
+  <span>{{ site.title }} ©
+  {% assign current = "now" | date: "%Y" | plus: 0%}
+  {% unless site.footer.since and site.footer.since == current %}
+    {{ site.footer.since }}
+    -
+  {% endunless %}
+  {{ current }}
+  <br>
+  Powered by <a href="https://www.jekyll.com.cn/">Jekyll</a> | <a href="https://github.com/xukimseven/HardCandy-Jekyll">HardCandy-Jekyll</a></span>
 </footer>
