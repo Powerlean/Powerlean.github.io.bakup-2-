@@ -1,7 +1,7 @@
 # Site settings 配置站点
 title: 'Powerlean'
-description: ''
-keywords: 'your web keywords, another keywords'
+description: "Beautiful things don't ask for attention."
+keywords: 'linux, blog'
 url: 'https://powerlean.top' # your host
 
 # nav 中文字符空格：&emsp;
@@ -20,7 +20,7 @@ webtitle: 'Powerlean'
 bio: ''
 about: true
 aboutyou: 'A boring guy...'
-portraits: '/assets/profile.jpeg' # your portraits image file path
+portraits: 'https://powerlean.top/images/favicon.ico' # your portraits image file path
 
 # SNS
 SNS: true
