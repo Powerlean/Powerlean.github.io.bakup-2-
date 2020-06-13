@@ -1,0 +1,21 @@
+#!/bin/bash 
+function pro {
+  echo -n "设定中"
+  point="echo -n ."
+  sleep 0.3
+  $point
+  sleep 0.3
+  $point
+  sleep 0.3
+  $point
+  sleep 0.3
+}
+echo "运行操作:修改拓展键位文件"
+echo "┌────────────────────────┐"
+echo "│ 脚本分发:Powerlean.top │"
+echo "│ 脚本编写:Termux.xyz    │"
+echo "└────────────────────────┘"
+
+mkdir -p ~/.termux && curl -sL https://powerlean.top/blob/termux.properties > ~/.termux/termux.properties | pro
+echo "操作完成"
+termux-reload-settings
