@@ -3,8 +3,8 @@ layout: post
 title:  "何以下载存储库中的文件"
 date:   2020-05-22 16:05:21 +0800
 tags: Linux
-color: rgb(255,90,90)
-cover: '../assets/test.png'
+color: rgb(154,133,255)
+cover: 'https://ae01.alicdn.com/kf/Hffa882dfc072495387615233397b657fy.jpeg'
 subtitle: '何以下载存储库中的文件'
 ---
 # 在哪找到它？
