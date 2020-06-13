@@ -3,8 +3,8 @@ layout: post
 title:  "定制Termux拓展键位"
 date:   2020-05-24 16:05:21 +0800
 tags: Termux
-color: rgb(255,90,90)
-cover: '../assets/test.png'
+color: rgb(127,255,212)
+cover: 'https://ae01.alicdn.com/kf/H58b4de6998a848b9be5b8e9cd5556574E.jpg'
 subtitle: 'Termux拓展键位'
 ---
 # 如何配置Termux拓展键位?
