@@ -25,10 +25,10 @@ portraits: 'https://powerlean.top/images/favicon.ico' # your portraits image fil
 # SNS
 SNS: true
 SNS-icon: #['Facebook', 'weibo', 'qq', 'github', 'Dribbble', 'Twitter', 'instagram', 'weixin', 'Codepen']
-  mail: 'mailto:abc@gmail.com'
+  mail: 'mailto:bluebreeze191@gmail.com'
   weixin: '' # 你的微信二维码存放的地址
-  qq: '' # 你的qq二维码存放的地址 or http://wpa.qq.com/msgrd?v=3&uin='你的QQ号'&site=qq&menu=yes
-  github: ''
+  qq: 'https://qm.qq.com/cgi-bin/qm/qr?k=PJemsUFPRexZMeBd1N1JjEf07DFiIqis&noverify=0' # 你的qq二维码存放的地址 or http://wpa.qq.com/msgrd?v=3&uin='你的QQ号'&site=qq&menu=yesa
+  github: 'https://github.com/edges5352'
   Codepen: ''
   weibo: ''
   instagram: ''
@@ -41,12 +41,12 @@ SNS-icon: #['Facebook', 'weibo', 'qq', 'github', 'Dribbble', 'Twitter', 'instagr
   twitch: ''
 
 # 分页
-paginate: 2
+paginate: 3
 paginatepath: ['page:num']
 
 # since
 footer:
-  since: 2018
+  since: 2020
 
 # Markdown
 markdown: kramdown
