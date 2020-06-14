@@ -1,34 +1,34 @@
 # Site settings 配置站点
-title: 'Powerlean'
-description: 'Beautiful things never ask for attention.'
-keywords: 'linux, blog'
-url: 'https://powerlean.top' # your host
+title: 'your awesome title'
+description: 'your web description'
+keywords: 'your web keywords, another keywords'
+url: 'https://abc.github.io' # your host
 
 # nav 中文字符空格：&emsp;
 nav: # 最佳体验 六个标签 且最好每个标签不超过4中文字
   首页: '/'
   标签: '/tags.html'
-  足迹: '/timeline.html'
-  关于: '/about.html'
-  链接: '/friendLink.html'
-  存储: '/blob'
+  时间线: '/timeline.html'
+  关于博主: '/about.html'
+  友情链接: '/friendLink.html'
+
 # 博主
 author: true
-name: 'Powerlean'
-NickName: 'Powerlean'
-webtitle: 'Powerlean'
-bio: ''
+name: 'your awesome name'
+NickName: 'your awesome nickname'
+webtitle: 'your awesome webtitle'
+bio: 'your awesome bio'
 about: true
-aboutyou: 'A boring guy...'
-portraits: 'https://powerlean.top/images/favicon.ico' # your portraits image file path
+aboutyou: 'your introduction'
+portraits: '/assets/profile.jpeg' # your portraits image file path
 
 # SNS
 SNS: true
 SNS-icon: #['Facebook', 'weibo', 'qq', 'github', 'Dribbble', 'Twitter', 'instagram', 'weixin', 'Codepen']
-mail: 'bluebreeze191@gmail.com'
+  mail: 'mailto:abc@gmail.com'
   weixin: '' # 你的微信二维码存放的地址
-  qq: 'https://qm.qq.com/cgi-bin/qm/qr?k=PJemsUFPRexZMeBd1N1JjEf07DFiIqis&noverify=0' # 你的qq二维码存放的地址 or http://wpa.qq.com/msgrd?v=3&uin='你的QQ号'&site=qq&menu=yes
-  github: 'https://github.com/edges5352'
+  qq: '' # 你的qq二维码存放的地址 or http://wpa.qq.com/msgrd?v=3&uin='你的QQ号'&site=qq&menu=yes
+  github: ''
   Codepen: ''
   weibo: ''
   instagram: ''
@@ -46,7 +46,7 @@ paginatepath: ['page:num']
 
 # since
 footer:
-  since: 2020
+  since: 2018
 
 # Markdown
 markdown: kramdown
@@ -60,8 +60,7 @@ pygmentsTheme: 'default'
 # 友情链接
 friends:
   jekyll: 'https://www.jekyll.com.cn/'
-  Termux菜鸟之家: 'https://qm.qq.com/cgi-bin/qm/qr?k=T-77j4AcllqmoN7Eh5hTrPhgVwTLNZPV&authKey=Mwd5f5A07bYao3X9rI26EBN2lRXYbuYP9d+1mA57ftuLsV3sLVBPSmQhaUR4DxJK&noverify=0'
-  HackError: 'https://hackerror.top'
+
 # 评论 最佳体验 在disqus、livere和Gitment之间三选一
 # disqus 评论
 disqus: false
