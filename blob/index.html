@@ -1,92 +1,159 @@
-
+<!-- 首页及其他页面的布局-Layout -->
 <!DOCTYPE html>
-<html lang="zh-CN">
-      
-      <head>
-                <meta charset="UTF-8">
-                        <title>Powerlean·存储分发</title>
-                        <link rel="icon" href="https://powerlean.top/images/favicon.ico">
-                                <meta name="viewport" content="width=device-width, initial-scale=1">
-                                     
-                                        <link rel="stylesheet" href="https://powerlean.top/css/normalize.css">
-                                                <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-                                                        <link rel="stylesheet" href="https://powerlean.top/css/cayman.css">
-                                                            <style>
-      .page-header{
-                background-image:url('https://i.loli.net/2020/05/25/ku1QLNvRWCoOtP4.jpg') ;
+<html>
+<head>
+<!-- 引入head标签 -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-sclable=0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="description" content="Beautiful things don't ask for attention." />
+<meta name="keywords" content="linux, blog" />
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/media.css">
+<link rel="stylesheet" href="/assets/css/animate.min.css">
+<link rel="stylesheet" href="/assets/css/pygments/pygments_default.css">
+<link rel="stylesheet" href="/assets/css/github-markdown.css">
+<!-- SNS-icon -->
+<script src="//at.alicdn.com/t/font_856428_y9z6nq7zf5.js"></script>
+<!-- share.css -->
+<link rel="stylesheet" href="/assets/css/share.min.css">
+<!-- font -->
+<link rel="stylesheet" href="/assets/css/font.css">
+<!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet"> -->
+
+<!-- Favicon -->
+<link href="https://powerlean.top/images/favicon.ico" rel="shortcut icon" />
+<link href="https://powerlean.top/images/favicon.ico" rel="apple-touch-icon-precomposed" />
+<!-- Android Lolipop Theme Color -->
+<!-- <meta name="theme-color" content="#1464FB"> -->
+<title>Powerlean</title>
+<!-- 百度统计 -->
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- 谷歌分析 -->
+
+
+</head>
+<body>
+<!-- 页面主体 -->
+<header id="index-header">
+  <div class="top-center">
+      <div class="logo">
+        <img src="https://powerlean.top/images/powblack.png" width="126" height="45" align ="center">
+      </div>
+      <nav class="top-nav">
+          <ul>
+              
+                <li><a href="/">首页</a></li>
+              
+                <li><a href="/tags.html">标签</a></li>
+              
+                <li><a href="/timeline.html">足迹</a></li>
+              
+                <li><a href="/about.html">关于</a></li>
+              
+                <li><a href="/friendLink.html">链接</a></li>
+              
+                <li><a href="/blob">存储</a></li>
+              
+          </ul>
+      </nav>
+      <div id="top-boot">
+        <a href="javascript:;" id="boot1" style="display:block;" onclick="document.getElementById('boot-area').style.display='block';document.getElementById('boot1').style.display='none';document.getElementById('boot2').style.display='block';"><img src="/assets/boot.png" alt=""></a>
+        <a href="javascript:;" id="boot2" style="display: none;" onclick="document.getElementById('boot-area').style.display='none';document.getElementById('boot1').style.display='block';document.getElementById('boot2').style.display='none';"><img src="/assets/boot.png" alt=""></a>
+      </div>
+  </div>
+
+</header>
+
+<div id="boot-area">
+    <ul>
         
-          text-align: center;
-               background-size:100% 100%;
-          background-repeat:no-repeat;
-            }
-            cspan {
-      font-family: 'Microsoft YaHei';
-      font-size: 12px;
-      color: #572adc;
-      background: linear-gradient(40deg, #2812da 0%, #e82aa3 100%);
-      background-size: cover;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-fill-color: transparent;
-    }
-          </style>
-              </head>
-                      
+          <a href="/"><li>首页</li></a>
+        
+          <a href="/tags.html"><li>标签</li></a>
+        
+          <a href="/timeline.html"><li>足迹</li></a>
+        
+          <a href="/about.html"><li>关于</li></a>
+        
+          <a href="/friendLink.html"><li>链接</li></a>
+        
+          <a href="/blob"><li>存储</li></a>
+        
+    </ul>
+</div>
 
-                  <body background="https://i.loli.net/2020/05/26/bH6TOeiqFwGEy7r.jpg">
-                    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=66564370" charset="UTF-8"></script>     
-                    <div class="post">
-                                   <section class="page-header" >
-                                             <h1 class="project-name">Powerlean</h1>
-                                                     <h2 class="project-tagline">第二存储分发库</h2>
-                                                             <a href="https://powerlean.top" class="btn">返回主页</a>
-                                                                    </section>
-
-
-                                                                        <section class="main-content">
-                                                                                                  
-                                                                              <div id="home">
-                                                                                      <h1>索引</h1>
-                                                                                      <a href="https://powerlean.top/blob/">予知:</a>
-                                                                                      Coraph部分脚本实测时出现问题，若非开发者，毋下载体验 
-<footer class="site-footer">
-                                                                                        <a href="https://powerlean.top/blob/state-up.sh">Coraph安装程序</a><br><a href="https://powerlean.top/blob/coraph.conf">Coraph源文件</a><br><a href="https://powerlean.top/blob/coraph">Coraph</a><br><a href="https://powerlean.top/blob/update.log">PickPipe日志</a><br><a href="https://powerlean.top/blob/fast-up.sh">PickPipe安装程序</a><br><a href="https://powerlean.top/blob/pipe">PickPipe</a><br><a href="https://powerlean.top/blob/properties.setup">拓展键配置文件</a>
+<main>
+    <div class="wow fadeIn top" data-wow-duration="3.5s" >
+  <span class="wow fadeInUp" data-wow-delay="0.1s">存储分发</span>
+    <span class="wow fadeInUp" data-wow-delay="0.4s">Online Repository</span>
+    <span class="wow fadeInUp" data-wow-delay="0.6s">PORF</span>
+</div>
+<a href="https://powerlean.top/blob/state-up.sh">Coraph安装程序</a><br><a href="https://powerlean.top/blob/coraph.conf">Coraph源文件</a><br><a href="https://powerlean.top/blob/coraph">Coraph</a><br><a href="https://powerlean.top/blob/update.log">PickPipe日志</a><br><a href="https://powerlean.top/blob/fast-up.sh">PickPipe安装程序</a><br><a href="https://powerlean.top/blob/pipe">PickPipe</a><br><a href="https://powerlean.top/blob/properties.setup">拓展键配置文件</a>
                                                                                              <br><a href="https://powerlean.top/blob/make-up.sh">Fish配置文件</a>
                                                                                              <br><a href="https://powerlean.top/blob/setup.fish">Fish安装脚本</a>
-                                                                                                        </div>
+</main>
 
+      
 
-                                                                                                            <footer class="site-footer">
-                                                                                                                  <span class="site-footer-owner">©Powerlean │ 2020年5月20日-现在</span>
-                                                                                                                      <span class="site-footer-credits">网页来自 <a href="https://powerlean.top">Powerlean</a></span>
-                                                                                                             <div>
-
-    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-    <cspan id="busuanzi_container_site_pv">
-
-        <cspan>总访问量<cspan id="busuanzi_value_site_pv"></cspan>次</cspan>
-
-    </cspan>
-
-    <cspan><cspan style="color:grey" class="post-meta-divider">·</cspan>
-
-    <cspan id="busuanzi_container_site_uv">
-
-        <cspan>访问人数<cspan id="busuanzi_value_site_uv" ></cspan>位</cspan>
-
-    </cspan>
-
-</div>            
-                                                                                                             </footer>
-                                                                                                                          
-
-
-                                                                                                                              </section>
- </div>
-                                                                                                                                    
-  </body>
-</html>
-
+<footer id="bottom">
+  <br>
+  <span>Powerlean ©
   
+  
+  2020
+  <br>
+  <div>
+
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+            <span id="busuanzi_container_site_pv">
+
+                      <sup style="color:grey">总访问量<span id="busuanzi_value_site_pv"></span>次</sup>
+
+                          </span>
+
+                              <sup><span style="color:grey" class="post-meta-divider">·</span></sup>
+
+                                  <span id="busuanzi_container_site_uv">
+
+                                            <sup style="color:grey">访问人数<span id="busuanzi_value_site_uv" ></span>位</sup>
+
+                                                </span>
+
+  </div>
+</footer>
+
+
+
+<!-- 引用wow.js的动画效果 -->
+<script src="/assets/js/wow.js"></script>
+<script>
+    var wow = new WOW({
+        boxClass: 'wow',
+        animateClass: 'animated',
+        // offset: 5,
+        mobile: true,
+        live: true
+    });
+    wow.init();
+</script>
+<!-- 页面刷新回到顶部 -->
+<script>
+    window.onbeforeunload = function(){
+        //刷新后页面自动回到顶部
+        document.documentElement.scrollTop = 0;  //ie下
+        document.body.scrollTop = 0;  //非ie
+    }
+</script>
+
