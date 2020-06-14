@@ -11,7 +11,7 @@ nav: # 最佳体验 六个标签 且最好每个标签不超过4中文字
   足迹: '/timeline.html'
   关于: '/about.html'
   链接: '/friendLink.html'
-
+  存储: '/blob'
 # 博主
 author: true
 name: 'Powerlean'
