@@ -20,7 +20,7 @@ webtitle: 'Powerlean'
 bio: ''
 about: true
 aboutyou: 'A boring guy...'
-portraits: 'https://img03.sogoucdn.com/app/a/100520146/5cadb28a3d77613dc23ab4b4c8ba065f' # your portraits image file path
+portraits: '/images/favicon.ico' # your portraits image file path
 
 # SNS
 SNS: true
