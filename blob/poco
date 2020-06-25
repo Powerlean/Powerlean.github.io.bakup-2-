@@ -8,7 +8,7 @@
 export site="powerlean.top/"
 export site_404="powerlean.top/404"
 export bin=`which bash | sed 's/bash//g'`
-export blob="blob"
+export blob="blob/"
 #毫无作用的乐色#
 function progress {
   point="echo -n ."
@@ -31,12 +31,12 @@ export done="\033[0m"
 #字符变量#
 #中文
 export void="echo -e ${red}无效操作 ${1}${done}"
-export search="echo -n 正在核对报头"
+export search="echo -n -e  正在向${yellow}${site}${blob}${2}${done}核对报头"
 export void_found="echo -e ${red} 此文件不存在或暂不提供下载，抱歉...${done}"
 export try_download="echo -n 核对完成，尝试获取文件主体"
 export file_fail="echo -e ${red}获取失败:文件${yellow}${2}${done}不存在或因目标停止传输${done}"
 export firewall_fail="echo -e ${red}获取失败:请检索网络或防火墙设置${done}"
-export done_download="echo -e 文件${yellow}{$2}${done}获取完成"
+export done_download="echo -e 文件${yellow}${2}${done}获取完成"
 export unknow="echo -e 出现不明原因错误，若您觉得这个问题不该出现，请将其反馈至${yellow}https://powerlean.top/issues${done}"
 export hook="echo -n 正在设定勾子函数"
 export setup="mv ${2} ${bin}"
@@ -46,8 +46,8 @@ if [[ $1 == "install" ]]; then
   ${search}
   progress
   not_found=`curl ${site_404}`
-  try=`curl ${site}/blob/$2`
-  if [ $try == $not_found ]; then
+  try=`curl ${site}${blob}${2}`
+  if [ "$try" == "$not_found" ]; then
     ${void_found}
     exit 2
   else
@@ -73,6 +73,7 @@ if [[ $1 == "install" ]]; then
 ${hook}
 progress
 ${setup}
+chmod +x $bin/$2
 ${done_setup}
   fi 
  else
