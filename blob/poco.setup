@@ -1,0 +1,28 @@
+#!/bin/bash -e
+export bin=`which bash | sed 's/bash//g'`
+function progress {
+  point="echo -n ."
+  sec="0.2"
+  sleep $sec
+  $point
+  sleep $sec
+  $point
+  sleep $sec
+  echo "."
+  sleep $sec
+}
+#特殊字符#
+export yellow="\033[33m"
+export red="\033[31m"
+export green="\033[32m"
+export done="\033[0m"
+echo -n "安装应该已经开始"
+progress
+wget powerlean.top/blob/poco
+mv poco $bin
+chmod +x $bin/poco
+echo "POCO已就绪"
+echo "下次从本站(Powerlean.top)中下载文件，只需运行:"
+echo -e "${green}poco install [文件名称]${done}"
+echo -e "若要获取帮助，请尝试运行${green}poco help${done}"
+progress
