@@ -51,7 +51,7 @@ export help_info_cn="查询有效参数"
 export intro_info_cn="poco是Powerlean资源存储分发库附带的下载安装文件管理程序"
 #English
 export void="echo -e ${red}Invalid operation ${1}${done}"
-export search="echo -n -e  Checking header to ${yellow}${site}${blob}${2}${done}"
+export search="echo -n -e  Checking header from ${yellow}${site}${blob}${2}${done}"
 export void_found="echo -e ${red} No such file or cannot be collecting,sorry...${done}"
 export try_download="echo -n Check done,start collecting"
 export file_fail="echo -e ${red}Something error:file${yellow}${2}${done} is not exist or progress interruption${done}"
