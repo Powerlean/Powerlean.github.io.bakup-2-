@@ -54,6 +54,7 @@ export hook="echo -n Setting hook function"
 export done_setup="echo -e ${yellow}${2}${done} is already set done"
 
 #语言设定
+#LANG="zh_CN.UTF-8"#取消该注释将程序设定为中文
 if [ $LANG == "zh_CN.UTF-8" -o $LANG == "zh_TW.UTF-8" ]; then
   export void=$void_cn
   export search=$search_cn
