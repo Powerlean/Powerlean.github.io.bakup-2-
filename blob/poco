@@ -9,6 +9,7 @@ export site="powerlean.top/"
 export site_404="powerlean.top/404"
 export bin=`which bash | sed 's/bash//g'`
 export blob="blob/"
+export setup="mv ${2} ${bin}"
 #毫无作用的乐色#
 function progress {
   point="echo -n ."
@@ -30,17 +31,42 @@ export done="\033[0m"
 
 #字符变量#
 #中文
-export void="echo -e ${red}无效操作 ${1}${done}"
-export search="echo -n -e  正在向${yellow}${site}${blob}${2}${done}核对报头"
-export void_found="echo -e ${red} 此文件不存在或暂不提供下载，抱歉...${done}"
-export try_download="echo -n 核对完成，尝试获取文件主体"
-export file_fail="echo -e ${red}获取失败:文件${yellow}${2}${done}不存在或因目标停止传输${done}"
-export firewall_fail="echo -e ${red}获取失败:请检索网络或防火墙设置${done}"
-export done_download="echo -e 文件${yellow}${2}${done}获取完成"
-export unknow="echo -e 出现不明原因错误，若您觉得这个问题不该出现，请将其反馈至${yellow}https://powerlean.top/issues${done}"
-export hook="echo -n 正在设定勾子函数"
-export setup="mv ${2} ${bin}"
-export done_setup="echo -e ${yellow}${2}${done}设定完成"
+export void_cn="echo -e ${red}无效操作 ${1}${done}"
+export search_cn="echo -n -e  正在向${yellow}${site}${blob}${2}${done}核对报头"
+export void_found_cn="echo -e ${red} 此文件不存在或暂不提供下载，抱歉...${done}"
+export try_download_cn="echo -n 核对完成，尝试获取文件主体"
+export file_fail_cn="echo -e ${red}获取失败:文件${yellow}${2}${done}不存在或因目标停止传输${done}"
+export firewall_fail_cn="echo -e ${red}获取失败:请检索网络或防火墙设置${done}"
+export done_download_cn="echo -e 文件${yellow}${2}${done}获取完成"
+export unknow_cn="echo -e 出现不明原因错误，若您觉得这个问题不该出现，请将其反馈至${yellow}https://powerlean.top/issues${done}"
+export hook_cn="echo -n 正在设定勾子函数"
+export done_setup_cn="echo -e ${yellow}${2}${done}设定完成"
+#English
+export void="echo -e ${red}Invalid operation ${1}${done}"
+export search="echo -n -e  Checking header to ${yellow}${site}${blob}${2}${done}"
+export void_found="echo -e ${red} No such file or cannot be collecting,sorry...${done}"
+export try_download="echo -n Check done,start collecting"
+export file_fail="echo -e ${red}Something error:file${yellow}${2}${done} is not exist or progress interruption${done}"
+export firewall_fail="echo -e ${red}Something error:please check your network and firewall settings${done}"
+export done_download="echo -e File ${yellow}${2}${done} is downloaded"
+export unknow="echo -e Something wrong,if you think it is a problem,please send feedback to ${yellow}https://powerlean.top/issues${done}"
+export hook="echo -n Setting hook function"
+export done_setup="echo -e ${yellow}${2}${done} is already set done"
+
+#语言设定
+if [ $LANG == "zh_CN.UTF-8" -o $LANG == "zh_TW.UTF-8" ]; then
+  export void=$void_cn
+  export search=$search_cn
+  export void_found=$void_found_cn
+  export try_download=$try_download_cn
+  export file_fail=$file_fail_cn
+  export firewall_fail=$firewall_fail_cn
+  export done_download=$done_download_cn
+  export unknow=$unknow_cn
+  export hook=$hook_cn
+  export done_setup=$done_setup_cn
+fi
+
 #主体(一扇区)
 if [[ $1 == "install" ]]; then
   ${search}
