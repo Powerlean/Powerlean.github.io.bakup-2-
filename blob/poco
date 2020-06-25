@@ -3,6 +3,7 @@
 #Website: https://powerlean.top
 #Owner: Powerlean (2020)
 ######################################
+export version="1.0"
 
 #目标地址#
 export site="powerlean.top/"
@@ -31,6 +32,8 @@ export done="\033[0m"
 
 #字符变量#
 #中文
+export error_remove_cn="echo -e ${red}无效操作 ${choice}${done}"
+export remove_cn="确定要移除此文件吗？"
 export void_cn="echo -e ${red}无效操作 ${1}${done}"
 export search_cn="echo -n -e  正在向${yellow}${site}${blob}${2}${done}核对报头"
 export void_found_cn="echo -e ${red} 此文件不存在或暂不提供下载，抱歉...${done}"
@@ -41,6 +44,11 @@ export done_download_cn="echo -e 文件${yellow}${2}${done}获取完成"
 export unknow_cn="echo -e 出现不明原因错误，若您觉得这个问题不该出现，请将其反馈至${yellow}https://powerlean.top/issues${done}"
 export hook_cn="echo -n 正在设定勾子函数"
 export done_setup_cn="echo -e ${yellow}${2}${done}设定完成"
+export error_found_cn="echo -e ${red}无法移除${2}：文件或目录不存在${done}"
+export install_info_cn="从目标地址获取指定文件"
+export remove_info_cn="删除指定的可执行文件"
+export help_info_cn="查询有效参数"
+export intro_info_cn="poco是Powerlean资源存储分发库附带的下载安装文件管理程序"
 #English
 export void="echo -e ${red}Invalid operation ${1}${done}"
 export search="echo -n -e  Checking header to ${yellow}${site}${blob}${2}${done}"
@@ -52,10 +60,18 @@ export done_download="echo -e File ${yellow}${2}${done} is downloaded"
 export unknow="echo -e Something wrong,if you think it is a problem,please send feedback to ${yellow}https://powerlean.top/issues${done}"
 export hook="echo -n Setting hook function"
 export done_setup="echo -e ${yellow}${2}${done} is already set done"
-
+export remove="Are you sure that you want to remove this file?"
+export error_remove="echo -e ${red}Invalid operation ${choice}${done}"
+export error_found="echo -e ${red}cannot remove $2: No such file or directory${done}"
+export install_info="Get a file"
+export remove_info="Delete a file which you don't need"
+export help_info="Get help for poco"
+export intro_info="POCO is a installation management script cluded with Powerlean Online Repository"
 #语言设定
 #LANG="zh_CN.UTF-8"#取消该注释将程序设定为中文
 if [ $LANG == "zh_CN.UTF-8" -o $LANG == "zh_TW.UTF-8" ]; then
+  export intro_info=$intro_info_cn
+  export error_found=$error_found_cn
   export void=$void_cn
   export search=$search_cn
   export void_found=$void_found_cn
@@ -66,10 +82,15 @@ if [ $LANG == "zh_CN.UTF-8" -o $LANG == "zh_TW.UTF-8" ]; then
   export unknow=$unknow_cn
   export hook=$hook_cn
   export done_setup=$done_setup_cn
+  export remove=$remove_cn
+  export error_remove=$error_remove_cn
+  export install_info=$install_info_cn
+  export remove_info=$remove_info_cn
+  export help_info=$help_info_cn
 fi
 
 #主体(一扇区)
-if [[ $1 == "install" ]]; then
+if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题改为一元运算符
   ${search}
   progress
   not_found=`curl ${site_404}`
@@ -103,6 +124,27 @@ ${setup}
 chmod +x $bin/$2
 ${done_setup}
   fi 
- else
+elif [ "$1" == "remove" -o "$1" == "r" ]; then
+  if [ -f $bin/$2 ]; then
+    read -p "$remove [Y/n]: " choice
+    if [ "$choice" == "y" -o "$choice" == "Y" ]; then
+      rm -rf $bin/$2 #因为不明文件属性，故强制递归
+    elif [ "$choice" == "n" -o "$choice" == "N" ]; then
+      exit 0
+    else
+      ${error_remove}
+      exit 1
+    fi
+  else
+    ${error_found}
+  fi
+elif [ "$1" == "help" -o "$1" == "h" ]; then
+  echo "poco       version:${version}"
+  echo "${intro_info}"
+  echo ""
+  echo -e "${yellow}i${done}nstall       ${install_info}"
+  echo -e "${yellow}r${done}emove        ${remove_info}"
+  echo -e "${yellow}h${done}elp          ${help_info}"
+else
   ${void}
   fi
