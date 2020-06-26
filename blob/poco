@@ -6,6 +6,7 @@
 export version="1.0"
 
 #目标地址#
+export list_url="powerlean.top/blob/source.list"
 export site="powerlean.top/"
 export site_404="powerlean.top/404"
 export bin=`which bash | sed 's/bash//g'`
@@ -177,6 +178,10 @@ elif [ "$1" == "remove" -o "$1" == "r" ]; then
   else
     ${error_found}
   fi
+elif [ "$1" == "list" -o "$1" == "l" ]; then
+  ${request}
+  progress
+  curl ${list_url}
 elif [ "$1" == "help" -o "$1" == "h" ]; then
   echo "poco       version:${version}"
   echo "${intro_info}"
@@ -184,6 +189,7 @@ elif [ "$1" == "help" -o "$1" == "h" ]; then
   echo -e "${yellow}i${done}nstall       ${install_info}"
   echo -e "${yellow}r${done}emove        ${remove_info}"
   echo -e "${yellow}h${done}elp          ${help_info}"
+  echo -e "${yellow}l${done}ist          ${list_info}"
 else
   ${void}
   fi
