@@ -3,7 +3,7 @@
 #Website: https://powerlean.top
 #Owner: Powerlean (2020)
 ######################################
-export version="1.2"
+export version="12"
 
 #目标地址#
 export test_update="powerlean.top/blob/poco.log"
@@ -119,7 +119,8 @@ if [ $LANG == "zh_CN.UTF-8" -o $LANG == "zh_TW.UTF-8" -o $LANG == "zh_HK.UTF-8" 
   export force_update=$force_update_cn
 fi
 #检测更新
-lastest_version=`curl ${test_update}`
+function update{
+lastest_version=`curl ${site}${blob}${0} | sed '/^export version=/!d;s/.*=//'`
 if [ "$version" -ne "$lastest_version" ]; then
   ${force_update}
   wget ${site}${blob}${0} 1>"$output" 2>&1 | progress
@@ -130,8 +131,11 @@ if [ "$version" -ne "$lastest_version" ]; then
   else
     ${unknow}
   fi
+fi
+}
 #主体(一扇区)
 if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算符
+  update
   if [ not"$2" == "not" ]; then
     ${not_input}
     exit 2
@@ -214,4 +218,4 @@ elif [ "$1" == "help" -o "$1" == "h" ]; then
   echo -e "${green}l${done}ist          ${list_info}"
 else
   ${void}
-  fi
+fi
