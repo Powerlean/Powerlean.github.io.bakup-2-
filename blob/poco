@@ -50,7 +50,13 @@ export remove_info_cn="删除指定的可执行文件"
 export help_info_cn="查询有效参数"
 export intro_info_cn="poco是Powerlean资源存储分发库附带的下载安装文件管理程序"
 export not_input_cn="echo -e ${red}请指定一个目标文件${done}"
+export come_cn="来自"
+export size_cn="总计大小"
+export install_cn="确定要获取此文件吗?"
+export error_get_cn="echo -e ${red}无效操作 ${choice}${done}"
 #English
+export install="Are you sure that you want to download this file?"
+export come="From"
 export void="echo -e ${red}Invalid operation ${1}${done}"
 export search="echo -n -e  Checking header from ${yellow}${site}${blob}${2}${done}"
 export void_found="echo -e ${red} No such file or cannot be collecting,sorry...${done}"
@@ -69,9 +75,13 @@ export remove_info="Delete a file which you don't need"
 export help_info="Get help for poco"
 export intro_info="POCO is a installation management script cluded with Powerlean Online Repository"
 export not_input="echo -e ${red}Please specify a file name${done}"
+export size="Total Size"
+export error_get="echo -e ${red}Invalid operation ${choice}${done}"
 #语言设定
 #LANG="zh_CN.UTF-8"#取消该注释将程序设定为中文
 if [ $LANG == "zh_CN.UTF-8" -o $LANG == "zh_TW.UTF-8" -o $LANG == "zh_HK.UTF-8" -o $LANG == "zh_SG.UTF-8" ]; then
+  export install=$install_cn
+  export come=$come_cn
   export intro_info=$intro_info_cn
   export error_found=$error_found_cn
   export void=$void_cn
@@ -90,6 +100,7 @@ if [ $LANG == "zh_CN.UTF-8" -o $LANG == "zh_TW.UTF-8" -o $LANG == "zh_HK.UTF-8" 
   export remove_info=$remove_info_cn
   export help_info=$help_info_cn
   export not_input=$not_input_cn
+  export error_get=$error_get_cn
 fi
 
 #主体(一扇区)
@@ -121,7 +132,6 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题改为一元运算
           ${error_get}
           exit 1
        fi
-    wget ${site}$blob/$2
     case $? in
       "8")
         ${file_fail}
