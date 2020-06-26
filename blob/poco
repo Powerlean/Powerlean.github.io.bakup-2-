@@ -3,15 +3,17 @@
 #Website: https://powerlean.top
 #Owner: Powerlean (2020)
 ######################################
-export version="1.0"
+export version="1.2"
 
 #目标地址#
+export test_update="powerlean.top/blob/poco.log"
 export list_url="powerlean.top/blob/source.list"
 export site="powerlean.top/"
 export site_404="powerlean.top/404"
 export bin=`which bash | sed 's/bash//g'`
 export blob="blob/"
 export setup="mv ${2} ${bin}"
+export output="/dev/null"
 #毫无作用的乐色#
 function progress {
   point="echo -n ."
@@ -58,6 +60,7 @@ export error_get_cn="echo -e ${red}无效操作 ${choice}${done}"
 export unit_cn="字符"
 export list_info_cn="列出所有可供下载的文件"
 export request_cn="正在从远端拉取请求"
+export force_update_cn="echo -e ${red}正在进行必要的强制更新,请勿终止程序${done}"
 #English
 export install="Are you sure that you want to download this file?"
 export come="From"
@@ -84,6 +87,7 @@ export error_get="echo -e ${red}Invalid operation ${choice}${done}"
 export unit="characters"
 export list_info="List all files which can be download"
 export request="To remote:Pulling request"
+export force_update="echo -e ${red}You are below the latest version,force update will start at moment${done}"
 #语言设定
 #LANG="zh_CN.UTF-8"#取消该注释将程序设定为中文
 if [ $LANG == "zh_CN.UTF-8" -o $LANG == "zh_TW.UTF-8" -o $LANG == "zh_HK.UTF-8" -o $LANG == "zh_SG.UTF-8" ]; then
@@ -112,8 +116,20 @@ if [ $LANG == "zh_CN.UTF-8" -o $LANG == "zh_TW.UTF-8" -o $LANG == "zh_HK.UTF-8" 
   export not_input=$not_input_cn
   export error_get=$error_get_cn
   export request=$request_cn
+  export force_update=$force_update_cn
 fi
-
+#检测更新
+lastest_version=`curl ${test_update}`
+if [ "$version" -ne "$lastest_version" ]; then
+  ${force_update}
+  wget ${site}${blob}${0} 1>"$output" 2>&1 | progress
+  if [ -f "$0" ]; then
+    mv $0 $bin
+    chmod +x $bin/$0
+    "$0 help"
+  else
+    ${unknow}
+  fi
 #主体(一扇区)
 if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算符
   if [ not"$2" == "not" ]; then
