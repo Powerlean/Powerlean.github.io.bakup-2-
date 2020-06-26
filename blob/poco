@@ -115,7 +115,7 @@ if [ $LANG == "zh_CN.UTF-8" -o $LANG == "zh_TW.UTF-8" -o $LANG == "zh_HK.UTF-8" 
 fi
 
 #主体(一扇区)
-if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题改为一元运算符
+if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算符
   if [ not"$2" == "not" ]; then
     ${not_input}
     exit 2
