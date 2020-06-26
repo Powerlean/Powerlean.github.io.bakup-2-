@@ -54,6 +54,7 @@ export come_cn="来自"
 export size_cn="总计大小"
 export install_cn="确定要获取此文件吗?"
 export error_get_cn="echo -e ${red}无效操作 ${choice}${done}"
+export unit_cn="字符"
 #English
 export install="Are you sure that you want to download this file?"
 export come="From"
@@ -77,9 +78,11 @@ export intro_info="POCO is a installation management script cluded with Powerlea
 export not_input="echo -e ${red}Please specify a file name${done}"
 export size="Total Size"
 export error_get="echo -e ${red}Invalid operation ${choice}${done}"
+export unit="characters"
 #语言设定
 #LANG="zh_CN.UTF-8"#取消该注释将程序设定为中文
 if [ $LANG == "zh_CN.UTF-8" -o $LANG == "zh_TW.UTF-8" -o $LANG == "zh_HK.UTF-8" -o $LANG == "zh_SG.UTF-8" ]; then
+  export unit=$unit_cn
   export size=$size_cn
   export install=$install_cn
   export come=$come_cn
@@ -121,7 +124,7 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题改为一元运算
     ${try_download}
     progress
     echo "───────────────────────────────"
-    echo -e "${2}         ${size}:${#try}"
+    echo -e "${2}         ${size}:${#try} ${unit}"
     echo ""
     echo -e "${come}:${yellow}${site}${blob}${2}${done}"
     echo "───────────────────────────────"
