@@ -120,7 +120,7 @@ if [ $LANG == "zh_CN.UTF-8" -o $LANG == "zh_TW.UTF-8" -o $LANG == "zh_HK.UTF-8" 
 fi
 #检测更新
   lastest_version=`curl -s ${site}${blob}${0}.log`
-if [ "$version" -ne "$lastest_version" ]; then
+if [[ "$version" -ne "$lastest_version" ]]; then
   ${force_update}
   wget ${site}${blob}${0} 1>"$output" 2>&1 | progress
   if [ -f "$0" ]; then
