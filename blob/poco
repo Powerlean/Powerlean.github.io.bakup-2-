@@ -56,6 +56,8 @@ export size_cn="总计大小"
 export install_cn="确定要获取此文件吗?"
 export error_get_cn="echo -e ${red}无效操作 ${choice}${done}"
 export unit_cn="字符"
+export list_info_cn="列出所有可供下载的文件"
+export request_cn="正在从远端拉取请求"
 #English
 export install="Are you sure that you want to download this file?"
 export come="From"
@@ -80,9 +82,12 @@ export not_input="echo -e ${red}Please specify a file name${done}"
 export size="Total Size"
 export error_get="echo -e ${red}Invalid operation ${choice}${done}"
 export unit="characters"
+export list_info="List all files which can be download"
+export request="To remote:Pulling request"
 #语言设定
 #LANG="zh_CN.UTF-8"#取消该注释将程序设定为中文
 if [ $LANG == "zh_CN.UTF-8" -o $LANG == "zh_TW.UTF-8" -o $LANG == "zh_HK.UTF-8" -o $LANG == "zh_SG.UTF-8" ]; then
+  export list_info=$list_info_cn
   export unit=$unit_cn
   export size=$size_cn
   export install=$install_cn
@@ -106,6 +111,7 @@ if [ $LANG == "zh_CN.UTF-8" -o $LANG == "zh_TW.UTF-8" -o $LANG == "zh_HK.UTF-8" 
   export help_info=$help_info_cn
   export not_input=$not_input_cn
   export error_get=$error_get_cn
+  export request=$request_cn
 fi
 
 #主体(一扇区)
@@ -179,17 +185,17 @@ elif [ "$1" == "remove" -o "$1" == "r" ]; then
     ${error_found}
   fi
 elif [ "$1" == "list" -o "$1" == "l" ]; then
-  ${request}
+  echo -n "${request}"
   progress
   curl ${list_url}
 elif [ "$1" == "help" -o "$1" == "h" ]; then
   echo "poco       version:${version}"
   echo "${intro_info}"
   echo ""
-  echo -e "${yellow}i${done}nstall       ${install_info}"
-  echo -e "${yellow}r${done}emove        ${remove_info}"
-  echo -e "${yellow}h${done}elp          ${help_info}"
-  echo -e "${yellow}l${done}ist          ${list_info}"
+  echo -e "${green}i${done}nstall       ${install_info}"
+  echo -e "${green}r${done}emove        ${remove_info}"
+  echo -e "${green}h${done}elp          ${help_info}"
+  echo -e "${green}l${done}ist          ${list_info}"
 else
   ${void}
   fi
