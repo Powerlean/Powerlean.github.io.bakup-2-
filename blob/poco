@@ -71,7 +71,7 @@ export intro_info="POCO is a installation management script cluded with Powerlea
 export not_input="echo -e ${red}Please specify a file name${done}"
 #语言设定
 #LANG="zh_CN.UTF-8"#取消该注释将程序设定为中文
-if [ $LANG == "zh_CN.UTF-8" -o $LANG == "zh_TW.UTF-8" ]; then
+if [ $LANG == "zh_CN.UTF-8" -o $LANG == "zh_TW.UTF-8" -o $LANG == "zh_HK.UTF-8" -o $LANG == "zh_SG.UTF-8" ]; then
   export intro_info=$intro_info_cn
   export error_found=$error_found_cn
   export void=$void_cn
@@ -108,6 +108,19 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题改为一元运算
   else
     ${try_download}
     progress
+    echo -e "${2}         ${size}${#try}"
+    echo ""
+    echo "${come}:${site}${blob}${2}"
+    echo "─────────────────────────────────"
+    read -p "$install [Y/n]: " choice
+        if [ "$choice" == "y" -o "$choice" == "Y" ]; then
+          wget ${site}$blob/$2
+        elif [ "$choice" == "n" -o "$choice" == "N" ]; then
+          exit 0
+        else
+          ${error_get}
+          exit 1
+       fi
     wget ${site}$blob/$2
     case $? in
       "8")
