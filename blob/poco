@@ -80,6 +80,7 @@ export error_get="echo -e ${red}Invalid operation ${choice}${done}"
 #语言设定
 #LANG="zh_CN.UTF-8"#取消该注释将程序设定为中文
 if [ $LANG == "zh_CN.UTF-8" -o $LANG == "zh_TW.UTF-8" -o $LANG == "zh_HK.UTF-8" -o $LANG == "zh_SG.UTF-8" ]; then
+  export size=$size_cn
   export install=$install_cn
   export come=$come_cn
   export intro_info=$intro_info_cn
@@ -119,10 +120,11 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题改为一元运算
   else
     ${try_download}
     progress
-    echo -e "${2}         ${size}${#try}"
+    echo "───────────────────────────────"
+    echo -e "${2}         ${size}:${#try}"
     echo ""
-    echo "${come}:${site}${blob}${2}"
-    echo "─────────────────────────────────"
+    echo -e "${come}:${yellow}${site}${blob}${2}${done}"
+    echo "───────────────────────────────"
     read -p "$install [Y/n]: " choice
         if [ "$choice" == "y" -o "$choice" == "Y" ]; then
           wget ${site}$blob/$2
