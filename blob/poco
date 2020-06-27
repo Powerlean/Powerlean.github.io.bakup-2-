@@ -141,7 +141,7 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
     echo "───────────────────────────────"
     read -p "$install [Y/n]: " choice
         if [ "$choice" == "y" -o "$choice" == "Y" ]; then
-          wget ${site}$blob/$2
+          curl -sOL ${site}$blob/$2
         elif [ "$choice" == "n" -o "$choice" == "N" ]; then
           exit 0
         else
