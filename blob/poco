@@ -89,7 +89,7 @@ export list_info="List all files which can be download"
 export request="To remote:Pulling request"
 export force_update="echo -e ${red}You are below the latest version,force update will start at moment${done}"
 #语言设定
-#LANG="zh_CN.UTF-8"#取消该注释将程序设定为中文
+#LANG="zh_CN.UTF-8" #取消该注释将程序设定为中文
 if [ $LANG == "zh_CN.UTF-8" -o $LANG == "zh_TW.UTF-8" -o $LANG == "zh_HK.UTF-8" -o $LANG == "zh_SG.UTF-8" ]; then
   export list_info=$list_info_cn
   export unit=$unit_cn
