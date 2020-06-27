@@ -127,7 +127,7 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
   ${search}
   progress
   not_found=`curl -s ${site_404}`
-  try=`curl -s ${site}${blob}${2}`
+  try="$(curl -s ${site}${blob}${2})"
   if [ "$try" == "$not_found" ]; then
     ${void_found}
     exit 2
