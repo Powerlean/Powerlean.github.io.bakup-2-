@@ -32,7 +32,7 @@ export yellow="\033[33m"
 export red="\033[31m"
 export green="\033[32m"
 export done="\033[0m"
-
+export footer="echo ───────────────────────────────"
 #字符变量#
 #中文
 export error_remove_cn="echo -e ${red}无效操作 ${choice}${done}"
@@ -134,11 +134,11 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
   else
     ${try_download}
     progress
-    echo "───────────────────────────────"
+    ${footer}
     echo -e "${2}         ${size}:${#try} ${unit}"
     echo ""
     echo -e "${come}:${yellow}${site}${blob}${2}${done}"
-    echo "───────────────────────────────"
+    ${footer}
     read -p "$install [Y/n]: " choice
         if [ "$choice" == "y" -o "$choice" == "Y" ]; then
           curl -sOL ${site}$blob/$2
