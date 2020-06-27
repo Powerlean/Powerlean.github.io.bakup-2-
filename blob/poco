@@ -118,19 +118,6 @@ if [ $LANG == "zh_CN.UTF-8" -o $LANG == "zh_TW.UTF-8" -o $LANG == "zh_HK.UTF-8" 
   export request=$request_cn
   export force_update=$force_update_cn
 fi
-#检测更新
-  lastest_version=`curl -sL ${site}${blob}${0}.log`
-if [[ "$version" -ne "$lastest_version" ]]; then
-  ${force_update}
-  wget ${site}${blob}${0} 1>"$output" 2>&1 | progress
-  if [ -f "$0" ]; then
-    mv $0 $bin
-    chmod +x $bin/$0
-    "$0 help"
-  else
-    ${unknow}
-  fi
-fi
 #主体(一扇区)
 if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算符
   if [ not"$2" == "not" ]; then
@@ -139,7 +126,7 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
   fi
   ${search}
   progress
-  not_found=`curl ${site_404}`
+  not_found=`curl -s ${site_404}`
   try=`curl -s ${site}${blob}${2}`
   if [ "$try" == "$not_found" ]; then
     ${void_found}
