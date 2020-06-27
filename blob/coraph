@@ -9,7 +9,7 @@
 #some path
 export bin="$PREFIX/bin/"
 export output="/dev/null/"
-export import_list="$PREFIX/etc/coraph.conf"
+export import_list="$PREFIX/bin/coraph.conf"
 export base="~/coraph/"
 
 
