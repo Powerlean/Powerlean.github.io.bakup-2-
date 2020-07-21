@@ -238,51 +238,6 @@ var _hmt = _hmt || [];
     <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
 
     <!-- City版安装代码已完成 -->
-
-
-
-{% endif %}
-
-
-
-{% if site.Gitment %}
-
-<section class="post-footer-item comment">
-
-  <div id="container"></div>
-
-</section>
-
-
-
-<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-
-<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-
-<script>
-
-var gitment = new Gitment({
-
-  id: '{{ page.id }}', // 可选。默认为 location.href
-
-  owner: '{{ site.Gitment_owner }}',
-
-  repo: '{{ site.Gitment_repo }}',
-
-  oauth: {
-
-    client_id: '{{ site.client_id }}',
-
-    client_secret: '{{ site.client_secret }}',
-
-  },
-
-})
-
-gitment.render('container')
-
-</script>
-
 {% endif %}
 
   <!--评论-->
