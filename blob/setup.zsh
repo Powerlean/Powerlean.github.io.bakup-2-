@@ -249,7 +249,7 @@ main() {
 
 	if [ -d "$ZSH" ]; then
 		cat <<-EOF
-			${YELLOW}You already have Oh My Zsh installed.${RESET}
+			${YELLOW}您的设备中已存在Oh My Zsh。${RESET}
 			 您将需要移除'$ZSH' 若您想重新安装。
 		EOF
 		exit 1
