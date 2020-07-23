@@ -274,6 +274,7 @@ main() {
 		• Discord伺服器: https://discord.gg/ohmyzsh
 		• 官方周边: https://shop.planetargon.com/collections/oh-my-zsh
                 • 中文翻译：https://powerlean.top
+		
 	EOF
 	printf "$RESET"
 
