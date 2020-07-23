@@ -1,4 +1,4 @@
-Ubuntu rootfs(1).sh0000660002373500234150000000746513626630603014270 0ustar  u0_a205everybody#!/bin/bash
+#!/bin/bash
 dir="/data/data/com.termux/files/home/ubufs"
 dirbd="/data/data/com.termux/files/home/ububd"
 url="http://mirrors.ustc.edu.cn/ubuntu-ports/"
