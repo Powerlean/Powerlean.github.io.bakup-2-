@@ -268,17 +268,17 @@ main() {
 		\____/_/ /_/  /_/ /_/ /_/\__, /    /___/____/_/ /_/
 		                        /____/                       ....安装完成！
 
-		在你为Oh My Zsh!尖叫之前，请检查 ~/.zshrc 文件以选择插件，主题, 以及进行控制。
+		在您为Oh My Zsh!尖叫之前，请检查 ~/.zshrc 文件以选择插件，主题, 以及进行控制。
 
 		• 官方推特: https://twitter.com/ohmyzsh
-		• Discord server: https://discord.gg/ohmyzsh
+		• Discord伺服器: https://discord.gg/ohmyzsh
 		• 官方周边: https://shop.planetargon.com/collections/oh-my-zsh
                 • 中文翻译：https://powerlean.top
 	EOF
 	printf "$RESET"
 
 	if [ $RUNZSH = no ]; then
-		echo "${YELLOW}Run zsh to try it out.${RESET}"
+		echo "${YELLOW}运行zsh来进行尝试${RESET}"
 		exit
 	fi
 
