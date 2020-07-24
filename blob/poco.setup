@@ -16,7 +16,12 @@ function progress {
   echo "."
   sleep $sec
 }
-
+if [ "$mode" == "update" ]; then
+  curl -sOL powerlean.top/blob/poco
+  mv poco $bin
+  chmod +x $bin/poco
+  exit 0
+fi
 echo -n "安装应该已经开始"
 progress
 curl -sOL powerlean.top/blob/poco
