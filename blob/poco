@@ -132,7 +132,7 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
   fi
   ${check_version}
   progress
-   curl -s ${site}$blob/poco.setup | bash  
+   curl -s ${site}$blob/poco.update | bash  
   ${search}
   progress
   not_found=`curl -s ${site_404}`
