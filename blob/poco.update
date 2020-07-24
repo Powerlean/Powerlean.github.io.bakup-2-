@@ -1,5 +1,5 @@
 #！/bin/bash
-lastest="1.3"
+lastest="13"
 if [ "$version" -ne "$lastest" ]; then
   ${force_update}
   export mode="update"
