@@ -142,7 +142,7 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
    ${check_file}
    progress
    origin=$(curl -s ${site}$blob/poco)
-   local=$(cat $bin/$0)
+   local=$(cat $bin/poco)
    if [[ "${#origin}" -ne "${#local}" ]]; then
      ${re_install}
      export mode="update"
