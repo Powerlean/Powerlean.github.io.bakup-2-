@@ -64,7 +64,7 @@ export request_cn="正在从远端拉取请求"
 export force_update_cn="echo -e ${red}正在进行必要的强制更新,请勿终止程序${done}"
 export check_version_cn="echo -n 正在校对版本信息"
 export check_file_cn="echo -n 正在校验程序完整性"
-export re-install="echo -e ${red}您的程序好像并不完整或被尝试修改过，正在尝试拉取线上文件进行修复${done}"
+export re_install_cn="echo -e ${red}您的程序好像并不完整或被尝试修改过，正在尝试拉取线上文件进行修复${done}"
 #English
 export install="Are you sure that you want to download this file?"
 export come="From"
@@ -95,7 +95,7 @@ export force_update="echo -e ${red}You are below the latest version,force update
 export bad_suffix="echo -e ${red}Invalid operation，do not enter multiple file names${done}"
 export check_version="echo -n Checking version information"
 export check_file="echo -n Checking program integrity"
-export re-install="echo -e ${red}Your program is incomplete,being repaired${done}"
+export re_install="echo -e ${red}Your program is incomplete,being repaired${done}"
 #语言设定
 #LANG="zh_CN.UTF-8" #取消该注释将程序设定为中文
 if [ $LANG == "zh_CN.UTF-8" -o $LANG == "zh_TW.UTF-8" -o $LANG == "zh_HK.UTF-8" -o $LANG == "zh_SG.UTF-8" ]; then
@@ -128,7 +128,7 @@ if [ $LANG == "zh_CN.UTF-8" -o $LANG == "zh_TW.UTF-8" -o $LANG == "zh_HK.UTF-8" 
   export force_update=$force_update_cn
   export check_version=$check_version_cn
   export check_file=$check_file_cn
-  export re-install=$re-install_cn
+  export re_install=$re_install_cn
 fi
 #主体(一扇区)
 if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算符
@@ -143,7 +143,7 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
    progress
    origin=$(curl -s ${site}$blob/poco)
    if [[ "${#origin}" -ne "${#0}" ]]; then
-     ${re-install}
+     ${re_install}
      export mode="update"
      curl -s ${site}$blob/poco.setup | bash
    fi
