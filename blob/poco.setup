@@ -16,12 +16,18 @@ function progress {
   echo "."
   sleep $sec
 }
+if [ not"$bin" == "not" ]; then
+  echo -e "${red}您缺少了一个至关重要的依赖程序：which ${done}"
+  exit 2
+fi
+#分区一
 if [ "$mode" == "update" ]; then
   curl -sOL powerlean.top/blob/poco
   mv poco $bin
   chmod +x $bin/poco
   exit 0
 fi
+#分区二
 echo -n "安装应该已经开始"
 progress
 curl -sOL powerlean.top/blob/poco
