@@ -64,7 +64,7 @@ export request_cn="正在从远端拉取请求"
 export force_update_cn="echo -e ${red}正在进行必要的强制更新,请勿终止程序${done}"
 export check_version_cn="echo -n 正在校对版本信息"
 export check_file_cn="echo -n 正在校验程序完整性"
-export re_install_cn="echo -e ${red}您的程序好像并不完整或被尝试修改过，正在尝试拉取线上文件进行修复${done}"
+export re_install_cn="echo -e ${red}您的程序好像并不完整或被尝试修改过，正在拉取线上文件进行修复${done}"
 #English
 export install="Are you sure that you want to download this file?"
 export come="From"
