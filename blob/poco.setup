@@ -16,6 +16,8 @@ function progress {
   echo "."
   sleep $sec
 }
+which &>/dev/null;
+if [ $? -ne 1 ];then echo -e "${red}您缺少了一个至关重要的依赖程序：which ${done}" ;exit 2 ;fi
 if [ not"$bin" == "not" ]; then
   echo -e "${red}您缺少了一个至关重要的依赖程序：which ${done}"
   exit 2
