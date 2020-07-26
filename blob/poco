@@ -141,6 +141,7 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
       curl -sOL ${site}$blob/$2
       ${setup}
       chmod +x $bin/$2
+      exit 0
     fi
   fi
   if [ not"$2" == "not" ]; then
