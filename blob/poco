@@ -236,6 +236,7 @@ elif [ "$1" == "list" -o "$1" == "l" ]; then
   curl ${list_url}
 elif [ "$1" == "help" -o "$1" == "h" ]; then
   echo "poco       version:${version}"
+  echo ""
   echo "${intro_info}"
   echo ""
   echo -e "${green}i${done}nstall       ${install_info}"
