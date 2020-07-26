@@ -33,7 +33,7 @@ progress
 curl -sOL powerlean.top/blob/poco
 mv poco $bin
 chmod +x $bin/poco
-echo "POCO已就绪"
+echo "Power Collector已就绪"
 echo "下次从本站(Powerlean.top)中下载文件，只需运行:"
 echo -e "${green}poco install [文件名称]${done}"
 echo -e "若要获取帮助，请尝试运行${green}poco help${done}"
