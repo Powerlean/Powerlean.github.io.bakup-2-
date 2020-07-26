@@ -132,6 +132,17 @@ if [ $LANG == "zh_CN.UTF-8" -o $LANG == "zh_TW.UTF-8" -o $LANG == "zh_HK.UTF-8" 
 fi
 #主体(一扇区)
 if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算符
+  if [ "$3" == "-s" ]; then
+    not_found=`curl -s ${site_404}`
+    try=$(curl -s ${site}${blob}${2})
+    if [ "$try" == "$not_found" ]; then
+      exit 2
+    else
+      curl -sOL ${site}$blob/$2
+      ${setup}
+      chmod +x $bin/$2
+    fi
+  fi
   if [ not"$2" == "not" ]; then
     ${not_input}
     exit 2
