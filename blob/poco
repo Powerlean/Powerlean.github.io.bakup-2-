@@ -3,7 +3,7 @@
 #Website: https://powerlean.top
 #Owner: Powerlean (2020)
 ######################################
-export version="27"
+export version="28"
 
 #目标地址#
 export test_update="powerlean.top/blob/poco.log"
@@ -244,4 +244,5 @@ elif [ "$1" == "help" -o "$1" == "h" ]; then
   echo -e "${green}l${done}ist          ${list_info}"
 else
   ${void}
+  poco help
 fi
