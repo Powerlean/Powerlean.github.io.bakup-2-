@@ -1,7 +1,10 @@
-以下应用可供下载
-poco         - Powerlean.top附带的文件下载工具 - 「Shell」
-pipe         - 包管理器简化脚本 - 「Shell」
-coraph       - Linux发行版本安装工具 - 「Shell」
-coraph.conf  - coraph附带的配置文件，需一并下载 - 「Config」
-net-checker  - 网络状态检测脚本 - 「Shell」
-nbnhhsh      - 一个转换缩写的工具 - 「Python」
+poco         - Powerlean.top附带的下载工具  「Shell」
+pipe         - 包管理器简化脚本             「Shell」
+coraph       - Linux发行版本安装工具        「Shell」
+coraph.conf  - coraph的配置文件，需一并下载  「Config」
+net-checker  - 网络状态检测脚本             「Shell」
+nbnhhsh      - 一个转换缩写的工具           「Python」
+which        - 检索可执行文件的所在位置      「Shell」
+cowsay       - 字符动物绘                   「Perl」
+
+
