@@ -29,7 +29,6 @@ SNS-icon: #['Facebook', 'weibo', 'qq', 'github', 'Twitter', 'instagram', 'weixin
   weixin: '' # 你的微信二维码存放的地址
   qq: 'https://powerlean.top/QQ' # 你的qq二维码存放的地址 or http://wpa.qq.com/msgrd?v=3&uin='你的QQ号'&site=qq&menu=yesa
   github: 'https://github.com/edges5352'
-  weibo: ''
   Facebook: ''
   Google: ''
 
