@@ -6,5 +6,5 @@ net-checker  - 网络状态检测脚本             「Shell」
 nbnhhsh      - 一个转换缩写的工具           「Python」
 which        - 检索可执行文件的所在位置      「Shell」
 cowsay       - 字符动物绘                   「Perl」
-
+ubuntu-arm   -Ubuntu 18.04 LTS安装脚本      「Shell」
 
