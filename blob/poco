@@ -7,7 +7,7 @@ export version="28"
 
 #目标地址#
 export test_update="powerlean.top/blob/poco.log"
-export list_url="powerlean.top/blob/source.list"
+export list_url="powerlean.top/blob/poco.list"
 export site="powerlean.top/"
 export site_404="powerlean.top/404"
 export bin=`which bash | sed 's/bash//g'`
