@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  选择合适的shell
-date:   2020-08-3 23:10:21 +0800
+date:   2020-08-03 23:10:21 +0800
 tags: Shell
 color: rgb(255,90,90)
 cover: 'https://ae02.alicdn.com/kf/H64eaa62f15cd4e32b264d70a4ccd65c4A.jpg'
