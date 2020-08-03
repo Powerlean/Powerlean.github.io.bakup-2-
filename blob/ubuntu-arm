@@ -1,4 +1,5 @@
 #!/bin/bash
+apt update
 dir="/data/data/com.termux/files/home/ubufs"
 dirbd="/data/data/com.termux/files/home/ububd"
 url="http://mirrors.ustc.edu.cn/ubuntu-ports/"
@@ -42,7 +43,7 @@ fi
 EOM
 chmod +x /data/data/com.termux/files/usr/bin/unubuntu
 cat > /data/data/com.termux/files/usr/bin/unubuntu <<- EOM
-rm -rf $HOME/ubu*; chmod 777 /data/data/com.termux/files/usr/bin/ubuntu; rm -rf /data/data/com.termux/files/usr/bin/ubuntu; chmod 777 /data/data/com.termux/files/usr/bin/unububtu; rm -rf /data/data/com.termux/files/usr/bin/unubuntu
+rm -rf $HOME/ubu*; chmod +x /data/data/com.termux/files/usr/bin/ubuntu; rm -rf /data/data/com.termux/files/usr/bin/ubuntu; chmod +x /data/data/com.termux/files/usr/bin/unububtu; rm -rf /data/data/com.termux/files/usr/bin/unubuntu
 EOM
 chmod +x /data/data/com.termux/files/usr/bin/unubuntu
 echo "运行ubuntu命令可启动Ubuntu 18.04 LTS，若要删除则运行unubuntu"
