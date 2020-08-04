@@ -218,7 +218,7 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
         ${unknow}
         exit 1
     esac
-download_size=`ls -sh ${2} | sed "s/${2}//g`
+download_size=`ls -sh ${2} | sed "s/${2}//g"`
 echo -e "${size_info}"
 ${hook}
 progress
