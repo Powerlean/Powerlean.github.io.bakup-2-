@@ -68,6 +68,7 @@ export re_install_cn="echo -e ${red}您的程序好像并不完整或被尝试�
 export suffix_cn="后缀"
 export y_info_cn="跳过确认环节"
 export s_info_cn="静默模式"
+export size_info_cn="总计下载${yellow}$download_size${done}"
 #English
 export install="Are you sure that you want to download this file?"
 export come="From"
@@ -102,6 +103,7 @@ export re_install="echo -e ${red}Your program is incomplete,being repaired${done
 export suffix="suffix"
 export y_info="Skip confirmation"
 export s_info="Silent mode"
+export size_info="A total of ${yellow}$download_size${done} was downloaded"
 #语言设定
 #LANG="zh_CN.UTF-8" #取消该注释将程序设定为中文
 if [ $LANG == "zh_CN.UTF-8" -o $LANG == "zh_TW.UTF-8" -o $LANG == "zh_HK.UTF-8" -o $LANG == "zh_SG.UTF-8" ]; then
@@ -138,6 +140,7 @@ if [ $LANG == "zh_CN.UTF-8" -o $LANG == "zh_TW.UTF-8" -o $LANG == "zh_HK.UTF-8" 
   export suffix=$suffix_cn
   export y_info=$y_info_cn
   export s_info=$s_info_cn
+  export size_info=$size_info_cn
 fi
 #主体(一扇区)
 if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算符
@@ -215,6 +218,8 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
         ${unknow}
         exit 1
     esac
+download_size=$(ls -sh ${2} | sed "s/${2}//g)
+echo -e "${size_info}"
 ${hook}
 progress
 ${setup}
