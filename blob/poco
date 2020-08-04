@@ -226,6 +226,7 @@ ${setup}
 chmod +x $bin/$2
 ${done_setup}
   fi 
+#主体(二扇区)
 elif [ "$1" == "remove" -o "$1" == "r" ]; then
   if [ not"$2" == "not" ]; then
     ${not_input}
@@ -244,10 +245,12 @@ elif [ "$1" == "remove" -o "$1" == "r" ]; then
   else
     ${error_found}
   fi
+#主体(三扇区)
 elif [ "$1" == "list" -o "$1" == "l" ]; then
   echo -n "${request}"
   progress
   curl -s ${list_url}
+#主体(四扇区)
 elif [ "$1" == "help" -o "$1" == "h" ]; then
   echo "poco       version:${version}"
   echo ""
@@ -261,7 +264,8 @@ elif [ "$1" == "help" -o "$1" == "h" ]; then
   echo "${suffix}"
   echo -e "-y            ${y_info}"
   echo -e "-s            ${s_info}"
-else
+  #主体(五扇区)
+  else
   ${void}
   poco help
 fi
