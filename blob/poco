@@ -103,7 +103,7 @@ export re_install="echo -e ${red}Your program is incomplete,being repaired${done
 export suffix="suffix"
 export y_info="Skip confirmation"
 export s_info="Silent mode"
-export size_info="A total of ${yellow}$download_size${done} was downloaded"
+export size_info="Total downloaded "
 #语言设定
 #LANG="zh_CN.UTF-8" #取消该注释将程序设定为中文
 if [ $LANG == "zh_CN.UTF-8" -o $LANG == "zh_TW.UTF-8" -o $LANG == "zh_HK.UTF-8" -o $LANG == "zh_SG.UTF-8" ]; then
