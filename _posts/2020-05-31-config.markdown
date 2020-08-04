@@ -5,7 +5,7 @@ date:   2020-05-27 16:05:21 +0800
 tags: Shell
 color: rgb(255,90,90)
 cover: 'https://ae02.alicdn.com/kf/H8537c948baf64f43bb745fd5a4e0c31d4.jpg'
-subtitle: '如何读取配置文件'
+subtitle: '更好的沟通'
 ---
 # 何谓配置文件?
 
