@@ -144,7 +144,7 @@ if [ $LANG == "zh_CN.UTF-8" -o $LANG == "zh_TW.UTF-8" -o $LANG == "zh_HK.UTF-8" 
 fi
 #主体(一扇区)
 if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算符
-  if [ "$3" == "-s" ]; then
+  if [ "$3" == "-s" ]; then #静默模式
     not_found=`curl -s ${site_404}`
     try=$(curl -s ${site}${blob}${2})
     if [ "$try" == "$not_found" ]; then
@@ -182,7 +182,7 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
   else
     ${try_download}
     progress
-    if [ "$3" == "-y" -o "$3" == "-Y" ]; then
+    if [ "$3" == "-y" -o "$3" == "-Y" ]; then #跳过确认环节
        curl -sOL ${site}$blob/$2
     elif [ not"$3" == "not" ]; then
      ${footer}
@@ -218,7 +218,7 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
         ${unknow}
         exit 1
     esac
-download_size=`ls -sh ${2} | sed "s/ ${2}//g"`
+download_size=`ls -sh ${2} | sed "s/ ${2}//g"` #统计文件大小
 echo -e "${size_info}${yellow}$download_size${done}"
 ${hook}
 progress
