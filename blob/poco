@@ -254,8 +254,8 @@ elif [ "$1" == "help" -o "$1" == "h" ]; then
   echo -e "${green}l${done}ist          ${list_info}"
   echo ""
   echo "${suffix}"
-  echo -e "   -y                        ${y_info}"
-  echo -e "   -s                        ${s_info}"
+  echo -e "-y                        ${y_info}"
+  echo -e "-s                        ${s_info}"
 else
   ${void}
   poco help
