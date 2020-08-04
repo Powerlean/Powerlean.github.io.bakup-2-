@@ -68,7 +68,7 @@ export re_install_cn="echo -e ${red}您的程序好像并不完整或被尝试�
 export suffix_cn="后缀"
 export y_info_cn="跳过确认环节"
 export s_info_cn="静默模式"
-export size_info_cn="总计下载${yellow}$download_size${done}"
+export size_info_cn="总计下载"
 #English
 export install="Are you sure that you want to download this file?"
 export come="From"
@@ -219,7 +219,7 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
         exit 1
     esac
 download_size=`ls -sh ${2} | sed "s/ ${2}//g"`
-echo -e "${size_info}"
+echo -e "${size_info}${yellow}$download_size${done}"
 ${hook}
 progress
 ${setup}
