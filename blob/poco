@@ -3,7 +3,7 @@
 #Website: https://powerlean.top
 #Owner: Powerlean (2020)
 ######################################
-export version="28"
+export version="29"
 
 #目标地址#
 export test_update="powerlean.top/blob/poco.log"
@@ -65,6 +65,9 @@ export force_update_cn="echo -e ${red}正在进行必要的强制更新,请勿�
 export check_version_cn="echo -n 正在校对版本信息"
 export check_file_cn="echo -n 正在校验程序完整性"
 export re_install_cn="echo -e ${red}您的程序好像并不完整或被尝试修改过，正在拉取线上文件进行修复${done}"
+export suffix_cn="后缀"
+export y_info_cn="跳过确认环节"
+export s_info_cn="静默模式"
 #English
 export install="Are you sure that you want to download this file?"
 export come="From"
@@ -96,6 +99,9 @@ export bad_suffix="echo -e ${red}Invalid operation，do not enter multiple file 
 export check_version="echo -n Checking version information"
 export check_file="echo -n Checking program integrity"
 export re_install="echo -e ${red}Your program is incomplete,being repaired${done}"
+export suffix="suffix"
+export y_info="Skip confirmation"
+export s_info="Silent mode"
 #语言设定
 #LANG="zh_CN.UTF-8" #取消该注释将程序设定为中文
 if [ $LANG == "zh_CN.UTF-8" -o $LANG == "zh_TW.UTF-8" -o $LANG == "zh_HK.UTF-8" -o $LANG == "zh_SG.UTF-8" ]; then
@@ -129,6 +135,9 @@ if [ $LANG == "zh_CN.UTF-8" -o $LANG == "zh_TW.UTF-8" -o $LANG == "zh_HK.UTF-8" 
   export check_version=$check_version_cn
   export check_file=$check_file_cn
   export re_install=$re_install_cn
+  export suffix=$suffix_cn
+  export y_info=$y_info_cn
+  export s_info=$s_info_cn
 fi
 #主体(一扇区)
 if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算符
@@ -243,6 +252,10 @@ elif [ "$1" == "help" -o "$1" == "h" ]; then
   echo -e "${green}r${done}emove        ${remove_info}"
   echo -e "${green}h${done}elp          ${help_info}"
   echo -e "${green}l${done}ist          ${list_info}"
+  echo ""
+  echo "${suffix}"
+  echo -e "   -y                        ${y_info}"
+  echo -e "   -s                        ${s_info}"
 else
   ${void}
   poco help
