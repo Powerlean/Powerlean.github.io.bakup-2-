@@ -92,7 +92,7 @@ export intro_info="POWER COLLECTOR is a installation management script cluded wi
 export not_input="echo -e ${red}Please specify a file name${done}"
 export size="Total Size"
 export error_get="echo -e ${red}Invalid operation ${choice}${done}"
-export unit="characters"
+export unit=" characters"
 export list_info="List all files which can be download"
 export request="To remote:Pulling request"
 export force_update="echo -e ${red}You are below the latest version,force update will start at moment${done}"
@@ -186,7 +186,7 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
        curl -sOL ${site}$blob/$2
     elif [ not"$3" == "not" ]; then
      ${footer}
-     echo -e "${2}         ${size}:${#try} ${unit}"
+     echo -e "${2}         ${size}:${#try}${unit}"
      echo ""
      echo -e "${come}:${yellow}${site}${blob}${2}${done}"
      ${footer}
