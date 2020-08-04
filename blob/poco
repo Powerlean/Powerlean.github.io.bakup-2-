@@ -3,7 +3,7 @@
 #Website: https://powerlean.top
 #Owner: Powerlean (2020)
 ######################################
-export version="29"
+export version="30"
 
 #目标地址#
 export test_update="powerlean.top/blob/poco.log"
@@ -247,7 +247,7 @@ elif [ "$1" == "remove" -o "$1" == "r" ]; then
 elif [ "$1" == "list" -o "$1" == "l" ]; then
   echo -n "${request}"
   progress
-  curl ${list_url}
+  curl -s ${list_url}
 elif [ "$1" == "help" -o "$1" == "h" ]; then
   echo "poco       version:${version}"
   echo ""
