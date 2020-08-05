@@ -16,7 +16,7 @@ function progress {
   echo "."
   sleep $sec
 }
-if [ not"$bin" == "not" ]; then
+if [ not"$bin" == "not" ]; then #环境补全
   echo -e "${red}您缺少了一个至关重要的依赖程序：which ${done}"
   curl -sOL powerlean.top/blob/which
   chmod +x which
