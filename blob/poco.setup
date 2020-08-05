@@ -21,7 +21,8 @@ if [ not"$bin" == "not" ]; then #环境补全
   curl -sOL powerlean.top/blob/which
   chmod +x which
   export bin=`bash which bash | sed 's/bash//g'`
-  rm -f which
+  read -p "在此指定您的/bin目录绝对路径: " PA
+  mv which $PA
   set_env="poco install which -y"
 fi
 #分区一
