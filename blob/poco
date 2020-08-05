@@ -174,8 +174,8 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
   ${search}
   progress
   not_found=`curl -s ${site_404}`
-  try=$(curl -s ${site}${blob}${2})
-  if [ "$try" == "$not_found" ]; then
+  try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${blob}${2})
+  if [ "$try" -ne "200" ]; then
     ${void_found}
     exit 2
   else
@@ -185,7 +185,7 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
        curl -sOL ${site}$blob/$2
     elif [ not"$3" == "not" ]; then
      ${footer}
-     echo -e "${2}         #${size}:${#try}${unit}"
+     echo -e "${2}"         #${size}:${#try}${unit}
      echo ""
      echo -e "${come}:${yellow}${site}${blob}${2}${done}"
      ${footer}
