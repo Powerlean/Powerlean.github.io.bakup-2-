@@ -20,10 +20,10 @@ echo "____________________________"
 echo "        1.完整键位"
 echo "        2.辅助键位"
 echo "____________________________"
-read -p "选择并输入一个适用的类型的序数: " var
-if [ "$var" == "1" ]; then
+read -p "选择并输入一个适用的类型的序数: " choice
+if [ "$choice" == "1" ]; then
   mkdir -p ~/.termux && curl -sL https://powerlean.top/blob/termux.properties.com > ~/.termux/termux.properties | pro
-elif [ "$var" == "2" ]; then
+elif [ "$choice" == "2" ]; then
   mkdir -p ~/.termux && curl -sL https://powerlean.top/blob/termux.properties > ~/.termux/termux.properties | pro
 else
   echo "序数无效"
