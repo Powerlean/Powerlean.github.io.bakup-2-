@@ -184,8 +184,9 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
     if [ "$3" == "-y" -o "$3" == "-Y" ]; then #跳过确认环节
        curl -sOL ${site}$blob/$2
     elif [ not"$3" == "not" ]; then
+     DATE=$(date)
      ${footer}
-     echo -e "${2}"         #${size}:${#try}${unit}
+     echo -e "${2}             $DATE"         #${size}:${#try}${unit}
      echo ""
      echo -e "${come}:${yellow}${site}${blob}${2}${done}"
      ${footer}
