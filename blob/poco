@@ -186,7 +186,7 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
     elif [ not"$3" == "not" ]; then
      DATE=$(date)
      ${footer}
-     echo -e "${2}             $DATE"         #${size}:${#try}${unit}
+     echo -e "${2}     $DATE"         #${size}:${#try}${unit}
      echo ""
      echo -e "${come}:${yellow}${site}${blob}${2}${done}"
      ${footer}
