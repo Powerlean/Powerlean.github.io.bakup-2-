@@ -18,7 +18,11 @@ function progress {
 }
 if [ not"$bin" == "not" ]; then
   echo -e "${red}您缺少了一个至关重要的依赖程序：which ${done}"
-  exit 2
+  curl -sOL powerlean.top/blob/which
+  chmod +x which
+  export bin=`bash which bash | sed 's/bash//g'`
+  rm -f which
+  set_env="poco install which -y"
 fi
 #分区一
 if [ "$mode" == "update" ]; then
@@ -33,6 +37,7 @@ progress
 curl -sOL powerlean.top/blob/poco
 mv poco $bin
 chmod +x $bin/poco
+${set_env}
 echo "Power Collector已就绪"
 echo "下次从本站(Powerlean.top)中下载文件，只需运行:"
 echo -e "${green}poco install [文件名称]${done}"
