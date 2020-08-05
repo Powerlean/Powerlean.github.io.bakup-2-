@@ -32,7 +32,7 @@ export yellow="\033[33m"
 export red="\033[31m"
 export green="\033[32m"
 export done="\033[0m"
-export footer="echo ───────────────────────────────"
+export footer="echo ──────────────────────────────────"
 #字符变量#
 #中文
 export bad_suffix_cn="echo -e ${red}无效操作：未定义的后缀或输入了多个文件名${done}"
