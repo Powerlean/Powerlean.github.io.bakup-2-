@@ -1,5 +1,5 @@
 #！/bin/bash
-lastest="30"
+lastest="31"
 if [[ "$version" -ne "$lastest" ]]; then
   ${force_update}
   export mode="update"
