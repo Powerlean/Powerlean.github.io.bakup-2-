@@ -184,7 +184,7 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
     if [ "$3" == "-y" -o "$3" == "-Y" ]; then #跳过确认环节
        curl -sOL ${site}$blob/$2
     elif [ not"$3" == "not" ]; then
-     intro_line="\'/^${2}         -/!d;s/.*-//\'"
+     intro_line="'/^${2}         -/!d;s/.*-//'"
      INTRO=$(curl -s  ${site}$blob/poco.list | sed $intro_line)
      DATE=$(date)
      ${footer}
