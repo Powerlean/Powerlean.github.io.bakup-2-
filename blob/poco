@@ -3,7 +3,7 @@
 #Website: https://powerlean.top
 #Owner: Powerlean (2020)
 ######################################
-export version="30"
+export version="31"
 
 #目标地址#
 export test_update="powerlean.top/blob/poco.log"
