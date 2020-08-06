@@ -4,13 +4,46 @@
 #Owner: Powerlean (2020)
 ######################################
 export version="31"
+export found="bash"
+
+WHICH() {
+for PROGRAM in "$found"; do
+ RET=1
+ IFS_SAVE="$IFS"
+ IFS=:
+ case $PROGRAM in
+  */*)
+   if [ -f "$PROGRAM" ] && [ -x "$PROGRAM" ]; then
+    echo "$PROGRAM"
+    RET=0
+   fi
+   ;;
+  *)
+   for ELEMENT in $PATH; do
+    if [ -z "$ELEMENT" ]; then
+     ELEMENT=.
+    fi
+    if [ -f "$ELEMENT/$PROGRAM" ] && [ -x "$ELEMENT/$PROGRAM" ]; then
+     echo "$ELEMENT/$PROGRAM"
+     RET=0
+     [[ "$ALLMATCHES" -eq 1 ]] || break
+    fi
+   done
+   ;;
+ esac
+ IFS="$IFS_SAVE"
+ if [ "$RET" -ne 0 ]; then
+  ALLRET=1
+ fi
+done
+}
 
 #目标地址#
 export test_update="powerlean.top/blob/poco.log"
 export list_url="powerlean.top/blob/poco.list"
 export site="powerlean.top/"
 export site_404="powerlean.top/404"
-export bin=`which bash | sed 's/bash//g'`
+export bin=`WHICH | sed 's/bash//g'`
 export blob="blob/"
 export setup="mv ${2} ${bin}"
 export output="/dev/null"
