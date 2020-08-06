@@ -240,6 +240,7 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
         fi
     else
       ${bad_suffix}
+      exit 2
     fi
     case $? in
       "8")
