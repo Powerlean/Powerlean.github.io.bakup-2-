@@ -47,6 +47,7 @@ export bin=`WHICH | sed 's/bash//g'`
 export blob="blob/"
 export setup="mv ${2} ${bin}"
 export output="/dev/null"
+
 #毫无作用的乐色#
 function progress {
   point="echo -n ."
@@ -66,6 +67,7 @@ export red="\033[31m"
 export green="\033[32m"
 export done="\033[0m"
 export footer="echo ────────────────────────────────────────────"
+
 #字符变量#
 #中文
 export bad_suffix_cn="echo -e ${red}无效操作：未定义的后缀或输入了多个文件名${done}"
@@ -103,6 +105,7 @@ export y_info_cn="跳过确认环节"
 export s_info_cn="静默模式"
 export size_info_cn="总计下载"
 export abort_cn="echo -e 终止"
+
 #English
 export install="Are you sure that you want to download this file?"
 export come="From"
@@ -139,6 +142,7 @@ export y_info="Skip confirmation"
 export s_info="Silent mode"
 export size_info="Total downloaded "
 export abort="echo -e Abort"
+
 #语言设定
 #LANG="zh_CN.UTF-8" #取消该注释将程序设定为中文
 if [ $LANG == "zh_CN.UTF-8" -o $LANG == "zh_TW.UTF-8" -o $LANG == "zh_HK.UTF-8" -o $LANG == "zh_SG.UTF-8" ]; then
@@ -178,6 +182,7 @@ if [ $LANG == "zh_CN.UTF-8" -o $LANG == "zh_TW.UTF-8" -o $LANG == "zh_HK.UTF-8" 
   export size_info=$size_info_cn
   export abort=$abort_cn
 fi
+
 #主体(一扇区)
 if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算符
   if [ "$3" == "-s" ]; then #静默模式
@@ -266,6 +271,7 @@ ${setup}
 chmod +x $bin/$2
 ${done_setup}
   fi 
+
 #主体(二扇区)
 elif [ "$1" == "remove" -o "$1" == "r" ]; then
   if [ not"$2" == "not" ]; then
@@ -285,11 +291,13 @@ elif [ "$1" == "remove" -o "$1" == "r" ]; then
   else
     ${error_found}
   fi
+
 #主体(三扇区)
 elif [ "$1" == "list" -o "$1" == "l" ]; then
   echo -n "${request}"
   progress
   curl -s ${list_url}
+
 #主体(四扇区)
 elif [ "$1" == "help" -o "$1" == "h" ]; then
   echo "poco       version:${version}"
@@ -304,8 +312,9 @@ elif [ "$1" == "help" -o "$1" == "h" ]; then
   echo "${suffix}"
   echo -e "-y            ${y_info}"
   echo -e "-s            ${s_info}"
-  #主体(五扇区)
-  else
+
+#主体(五扇区)
+else
   ${void}
   poco help
 fi
