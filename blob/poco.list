@@ -7,6 +7,5 @@ nbnhhsh      - 一个转换缩写的工具「Python」
 which        - 检索可执行文件的所在位置「Shell」
 cowsay       - 字符动物绘「Perl」
 ubuntu-arm   - Ubuntu 18.04 LTS安装脚本「Shell」
-clean-arm    - 清理无用文件和软件包,适用ARM「Go」
-clean-i386   - 清理无用文件和软件包,适用i386「Go」
-figlet       - 将普通终端文本转换为大字母「C」
+clean-arm    - 清理无用文件和软件包,适用ARM「Binary」
+clean-i386   - 清理无用文件和软件包,适用i386「Binary」
