@@ -1,7 +1,31 @@
 #！/bin/bash
-lastest="32"
+lastest="33"
 if [[ "$version" -ne "$lastest" ]]; then
   ${force_update}
   export mode="update"
   curl -s powerlean.top/blob/poco.setup | bash
+  function progress {
+  point="echo -e -n ${green}.${done}"
+  sec="0.3"
+  sleep $sec
+  $point
+  sleep $sec
+  $point
+  sleep $sec
+  $point
+  sleep $sec
+  $point
+  sleep $sec
+  $point
+  sleep $sec
+  $point
+  sleep $sec
+  echo "."
+  sleep $sec
+}
+  clear
+  ${update_note}
+  curl -s powerlean.top/blob/poco.note
+  progress
+  clear
 fi
