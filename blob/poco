@@ -334,7 +334,7 @@ elif [ "$1" == "search" -o "$1" == "s" ]; then
   else
      INTRO=$(curl -s powerlean.top/blob/poco.list | sed '/^'"$2"' *-/!d;s/.*- //')
      ${res}
-     echo "${yellow}${2}{done}   $INTRO"
+     echo "${yellow}${2}${done}   $INTRO"
      fi
 else
   ${void}
