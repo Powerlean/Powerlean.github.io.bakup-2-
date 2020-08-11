@@ -336,6 +336,7 @@ elif [ "$1" == "search" -o "$1" == "s" ]; then
      ${res}
      echo "${yellow}${2}${done}   $INTRO"
      fi
+#主体(六扇区)
 else
   ${void}
   poco help
