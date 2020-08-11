@@ -1,11 +1,11 @@
 ---
 layout: post
-title:  "定制Termux拓展键位"
+title:  "设制Termux拓展键位"
 date:   2020-05-24 16:05:21 +0800
 tags: Termux
 color: rgb(127,255,212)
 cover: 'https://ae01.alicdn.com/kf/H58b4de6998a848b9be5b8e9cd5556574E.jpg'
-subtitle: 'Termux拓展键位'
+subtitle: '拓展键位简略说明'
 ---
 # 如何配置Termux拓展键位?
 Termux拓展键的配置文件一般存放于`/data/data/com.termux/files/home/.termux`目录下，若系统中并不存在这个目录，则可运行`mkdir -p /data/data/com.termux/files/home/.termux`进行创建。
