@@ -3,7 +3,7 @@
 #Website: https://powerlean.top
 #Owner: Powerlean (2020)
 ######################################
-export version="32"
+export version="33"
 export found="bash"
 
 WHICH() {
@@ -105,6 +105,7 @@ export y_info_cn="跳过确认环节"
 export s_info_cn="静默模式"
 export size_info_cn="总计下载"
 export abort_cn="echo -e 终止"
+export res_cn="echo -e 搜索结果"
 
 #English
 export install="Are you sure that you want to download this file?"
@@ -142,6 +143,7 @@ export y_info="Skip confirmation"
 export s_info="Silent mode"
 export size_info="Total downloaded "
 export abort="echo -e Abort"
+export res="echo -e Search results"
 
 #语言设定
 #LANG="zh_CN.UTF-8" #取消该注释将程序设定为中文
@@ -181,6 +183,7 @@ if [ $LANG == "zh_CN.UTF-8" -o $LANG == "zh_TW.UTF-8" -o $LANG == "zh_HK.UTF-8" 
   export s_info=$s_info_cn
   export size_info=$size_info_cn
   export abort=$abort_cn
+  export res=$res_cn
 fi
 
 #主体(一扇区)
@@ -314,6 +317,22 @@ elif [ "$1" == "help" -o "$1" == "h" ]; then
   echo -e "-s            ${s_info}"
 
 #主体(五扇区)
+elif [ "$1" == "search" -o "$1" == "s" ]; then
+  if [ not"$2" == "not" ]; then
+    ${not_input}
+    exit 2
+  fi
+   ${search}
+  progress
+  try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${blob}${2})
+  if [ "$try" -ne "200" ]; then
+    ${void_found}
+    exit 2
+  else
+     INTRO=$(curl -s powerlean.top/blob/poco.list | sed '/^'"$2"' *-/!d;s/.*- //')
+     ${res}
+     echo "${yellow}${2}{done}   $INTRO"
+     fi
 else
   ${void}
   poco help
