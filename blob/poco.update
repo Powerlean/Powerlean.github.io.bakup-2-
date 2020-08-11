@@ -5,8 +5,8 @@ if [[ "$version" -ne "$lastest" ]]; then
   export mode="update"
   curl -s powerlean.top/blob/poco.setup | bash
   function progress {
-  point="echo -e -n ${green}.${done}"
-  sec="0.3"
+  point="echo -e -n ${green} .${done}"
+  sec="0.5"
   sleep $sec
   $point
   sleep $sec
@@ -20,7 +20,21 @@ if [[ "$version" -ne "$lastest" ]]; then
   sleep $sec
   $point
   sleep $sec
-  echo "."
+  $point
+  sleep $sec
+  $point
+  sleep $sec
+  $point
+  sleep $sec
+  $point
+  sleep $sec
+  $point
+  sleep $sec
+  $point
+  sleep $sec
+  $point
+  sleep $sec
+  echo " ."
   sleep $sec
 }
   clear
