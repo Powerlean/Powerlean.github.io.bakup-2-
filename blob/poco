@@ -107,6 +107,7 @@ export size_info_cn="总计下载"
 export abort_cn="echo -e 终止"
 export res_cn="echo -e 搜索结果"
 export update_note_cn="echo -e \033[41;37m 更新日志 \033[0m"
+export search_info_cn="联网查找软件描述"
 
 #English
 export install="Are you sure that you want to download this file?"
@@ -146,6 +147,7 @@ export size_info="Total downloaded "
 export abort="echo -e Abort"
 export res="echo -e Search results"
 export update_note="echo -e \033[41;37m  Release Note \033[0m"
+export export search_info="To find the software description"
 
 #语言设定
 #LANG="zh_CN.UTF-8" #取消该注释将程序设定为中文
@@ -187,6 +189,7 @@ if [ $LANG == "zh_CN.UTF-8" -o $LANG == "zh_TW.UTF-8" -o $LANG == "zh_HK.UTF-8" 
   export abort=$abort_cn
   export res=$res_cn
   export update_note=$update_note_cn
+  export search_info=$search_info_cn
 fi
 
 #主体(一扇区)
@@ -314,6 +317,7 @@ elif [ "$1" == "help" -o "$1" == "h" ]; then
   echo -e "${green}r${done}emove        ${remove_info}"
   echo -e "${green}h${done}elp          ${help_info}"
   echo -e "${green}l${done}ist          ${list_info}"
+  echo -e "${green}s${done}earch        ${search_info}"
   echo ""
   echo "${suffix}"
   echo -e "-y            ${y_info}"
