@@ -3,7 +3,7 @@
 #Website: https://powerlean.top
 #Owner: Powerlean (2020)
 ######################################
-export version="33"
+export version="34"
 export found="bash"
 
 WHICH() {
