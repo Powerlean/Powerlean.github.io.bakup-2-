@@ -35,7 +35,7 @@ if [[ "$version" -ne "$lastest" ]]; then
   $point
   sleep $sec
   echo " ."
-  sleep $sec
+  sleep 4
 }
   clear
   ${update_note}
