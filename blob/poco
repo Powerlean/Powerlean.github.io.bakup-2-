@@ -53,11 +53,13 @@ function progress {
   point="echo -n ."
   sec="0.2"
   loop=1
-while [ $loop -lt 4 ]; do
+while [ $loop -lt 3 ]; do
     sleep $sec
     $point
     loop=$(($loop+1))
 done
+sleep $sec
+echo "."
 }
 
 #特殊字符#
