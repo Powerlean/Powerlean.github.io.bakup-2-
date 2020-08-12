@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 #(C)Code by Solaris Eco 2020
 #blog:https://edges5352.github.io
 #Email:bluebreeze191.gmail.com
@@ -84,7 +84,7 @@ b=''
 for ((i=0;$i<=100;i+=2))
 do
   printf "   │%-50s│%d%%\r" $b $i
-  sleep 0."$RANDOM"
+  sleep 0.1"$RANDOM"
   b="|$b"
 done
 }
@@ -114,7 +114,8 @@ elif [ $1 == d ]; then
     exit 1
   else  
     echo -e "$LI 默认使用$PM安装软件包"
-    $install $2 -y 1>"$output" 2>&1 | progress
+    progress
+    $install $2 -y 1>"$output" 2>&1 
   fi
    if [ $? == 100 ]; then
      echo -e "\033[41;37m $EI1软件包$2不存在或未被当前软件源收录 \033[0m"
@@ -138,7 +139,8 @@ elif [ $1 == d ]; then
   fi
     if [ "$ask" == Y -o "$ask" == y ]; then
     echo -e "$LI 默认使用$PM移除软件包"
-    $remove $2 -y 1>"$output" 2>&1 | progress
+    progress
+    $remove $2 -y 1>"$output" 2>&1
     if [ "$?" == 0 -o "$?" == 1 ]; then
       echo -e "\033[47;30m $TI1移除完成 \033[0m"
     else
