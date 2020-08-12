@@ -3,7 +3,7 @@
 #Website: https://powerlean.top
 #Owner: Powerlean (2020)
 ######################################
-export version="34"
+export version=35
 export found="bash"
 
 WHICH() {
@@ -52,13 +52,12 @@ export output="/dev/null"
 function progress {
   point="echo -n ."
   sec="0.2"
-  sleep $sec
-  $point
-  sleep $sec
-  $point
-  sleep $sec
-  echo "."
-  sleep $sec
+  loop=1
+while [ $loop -lt 4 ]; do
+    sleep $sec
+    $point
+    loop=$(($loop+1))
+done
 }
 
 #特殊字符#
