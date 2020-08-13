@@ -5,7 +5,8 @@
 ######################################
 export version=36
 export found="bash"
-export vibrate="echo -en \007;sleep 0.1"
+export vibrate="echo -en \007"
+export stop="sleep 0.1"
 
 WHICH() {
 for PROGRAM in "$found"; do
@@ -36,6 +37,24 @@ for PROGRAM in "$found"; do
  if [ "$RET" -ne 0 ]; then
   ALLRET=1
  fi
+done
+}
+
+VIBRATE_DONE() {
+loop=1
+while [ $loop -lt 4 ]; do
+    $vibrate
+    $stop
+    loop=$(($loop+1))
+done
+}
+
+VIBRATE_ERROR() {
+loop=1
+while [ $loop -lt 2 ]; do
+    $vibrate
+    $stop
+    loop=$(($loop+1))
 done
 }
 
@@ -198,18 +217,19 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
   if [ "$3" == "-s" ]; then #静默模式
     try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${blob}${2})
     if [ "$try" -ne "200" ]; then
-      $vibrate;$vibrate
+      VIBRATE_ERROR
       exit 2
     else
       curl -sOL ${site}$blob/$2
       ${setup}
       chmod +x $bin/$2
+      VIBRATE_DONE
       exit 0
     fi
   fi
   if [ not"$2" == "not" ]; then
     ${not_input}
-    $vibrate;$vibrate
+    VIBRATE_ERROR
     exit 2
   fi
   ${check_version}
@@ -222,7 +242,7 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
    local=$(cat $bin/poco)
    if [[ "${#origin}" -ne "${#local}" ]]; then
      ${re_install}
-     $vibrate;$vibrate
+     VIBRATE_ERROR
      export mode="update"
      curl -s ${site}$blob/poco.setup | bash
    fi
@@ -233,7 +253,7 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
   try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${blob}${2})
   if [ "$try" -ne "200" ]; then
     ${void_found}
-    $vibrate;$vibrate
+    VIBRATE_ERROR
     exit 2
   else
     ${vibrate}
@@ -257,16 +277,16 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
           curl -sOL ${site}$blob/$2
         elif [ "$choice" == "n" -o "$choice" == "N" ]; then
           ${abort}
-          $vibrate;$vibrate;$vibrate
+          VIBRATE_DONE
           exit 0
         else
           ${error_get}
-          $vibrate;$vibrate
+          VIBRATE_ERROR
           exit 1
         fi
     else
       ${bad_suffix}
-      $vibrate;$vibrate
+      VIBRATE_ERROR
       exit 2
     fi
     case $? in
@@ -293,32 +313,32 @@ progress
 ${setup}
 chmod +x $bin/$2
 ${done_setup}
-$vibrate;$vibrate;$vibrate
+VIBRATE_DONE
   fi 
 
 #主体(二扇区)
 elif [ "$1" == "remove" -o "$1" == "r" ]; then
   if [ not"$2" == "not" ]; then
     ${not_input}
-    $vibrate;$vibrate
+    VIBRATE_ERROR
     exit 2
   fi
   if [ -f $bin/$2 ]; then
     read -p "$remove [Y/n]: " choice
     if [ "$choice" == "y" -o "$choice" == "Y" ]; then
       rm -rf $bin/$2 #因为不明文件属性，故强制递归
-      $vibrate;$vibrate;$vibrate
+      VIBRATE_DONE
     elif [ "$choice" == "n" -o "$choice" == "N" ]; then
-    $vibrate;$vibrate;$vibrate
+      VIBRATE_DONE
       exit 0
     else
       ${error_remove}
-      $vibrate;$vibrate
+      VIBRATE_ERROR
       exit 1
     fi
   else
     ${error_found}
-    $vibrate;$vibrate
+    VIBRATE_ERROR
   fi
 
 #主体(三扇区)
@@ -326,7 +346,7 @@ elif [ "$1" == "list" -o "$1" == "l" ]; then
   echo -n "${request}"
   progress
   curl -s ${list_url}
-  $vibrate;$vibrate;$vibrate
+  VIBRATE_DONE
 
 #主体(四扇区)
 elif [ "$1" == "help" -o "$1" == "h" ]; then
@@ -348,7 +368,7 @@ elif [ "$1" == "help" -o "$1" == "h" ]; then
 elif [ "$1" == "search" -o "$1" == "s" ]; then
   if [ not"$2" == "not" ]; then
     ${not_input}
-    $vibrate;$vibrate
+    VIBRATE_ERROR
     exit 2
   fi
    ${search}
@@ -357,17 +377,17 @@ elif [ "$1" == "search" -o "$1" == "s" ]; then
   ${vibrate}
   if [ "$try" -ne "200" ]; then
     ${void_found}
-    $vibrate;$vibrate
+    VIBRATE_ERROR
     exit 2
   else
      INTRO=$(curl -s powerlean.top/blob/poco.list | sed '/^'"$2"' *-/!d;s/.*- //')
      ${res}
      echo -e "${yellow}${2}${done}   $INTRO"
-     $vibrate;$vibrate;$vibrate
+     VIBRATE_DONE
      fi
 #主体(六扇区)
 else
   ${void}
   poco help
-  $vibrate;$vibrate
+  VIBRATE_ERROR
 fi
