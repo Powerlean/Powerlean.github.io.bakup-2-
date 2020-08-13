@@ -5,7 +5,7 @@
 ######################################
 export version=36
 export found="bash"
-export vibrate="echo -en \007"
+export vibrate="echo -en \007;sleep 0.1"
 
 WHICH() {
 for PROGRAM in "$found"; do
