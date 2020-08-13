@@ -51,7 +51,7 @@ done
 
 VIBRATE_ERROR() {
 loop=1
-while [ $loop -lt 2 ]; do
+while [ $loop -lt 3 ]; do
     $vibrate
     $stop
     loop=$(($loop+1))
