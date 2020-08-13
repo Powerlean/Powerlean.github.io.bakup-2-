@@ -4,6 +4,7 @@ if [ $version -ne $lastest ]; then
   ${force_update}
   export mode="update"
   curl -s powerlean.top/blob/poco.setup | bash
+  ${vibrate}
   function progress {
   point="echo -e -n ${green} .${done}"
   sec="0.5"
@@ -20,5 +21,6 @@ done
   ${update_note}
   curl -s powerlean.top/blob/poco.note
   progress
+  $vibrate;$vibrate;$vibrate
   clear
 fi
