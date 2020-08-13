@@ -305,16 +305,16 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
         ${unknow}
         exit 1
     esac
-download_size=`ls -sh ${2} | sed "s/ ${2}//g"` #统计文件大小
-echo -e "${size_info}${yellow}$download_size${done}"
-${vibrate}
-${hook}
-progress
-${setup}
-chmod +x $bin/$2
-${done_setup}
-VIBRATE_DONE
-  fi 
+  download_size=`ls -sh ${2} | sed "s/ ${2}//g"` #统计文件大小
+  echo -e "${size_info}${yellow}$download_size${done}"
+  ${vibrate}
+  ${hook}
+  progress
+  ${setup}
+  chmod +x $bin/$2
+  ${done_setup}
+  VIBRATE_DONE
+fi 
 
 #主体(二扇区)
 elif [ "$1" == "remove" -o "$1" == "r" ]; then
