@@ -3,8 +3,9 @@
 #Website: https://powerlean.top
 #Owner: Powerlean (2020)
 ######################################
-export version=35
+export version=36
 export found="bash"
+export vibrate="echo -en \007"
 
 WHICH() {
 for PROGRAM in "$found"; do
@@ -197,6 +198,7 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
   if [ "$3" == "-s" ]; then #静默模式
     try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${blob}${2})
     if [ "$try" -ne "200" ]; then
+      $vibrate;$vibrate
       exit 2
     else
       curl -sOL ${site}$blob/$2
@@ -207,32 +209,39 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
   fi
   if [ not"$2" == "not" ]; then
     ${not_input}
+    $vibrate;$vibrate
     exit 2
   fi
   ${check_version}
   progress
    curl -s ${site}$blob/poco.update | bash
+   ${vibrate}
    ${check_file}
    progress
    origin=$(curl -s ${site}$blob/poco)
    local=$(cat $bin/poco)
    if [[ "${#origin}" -ne "${#local}" ]]; then
      ${re_install}
+     $vibrate;$vibrate
      export mode="update"
      curl -s ${site}$blob/poco.setup | bash
    fi
+   ${vibrate}
   ${search}
   progress
   not_found=`curl -s ${site_404}`
   try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${blob}${2})
   if [ "$try" -ne "200" ]; then
     ${void_found}
+    $vibrate;$vibrate
     exit 2
   else
+    ${vibrate}
     ${try_download}
     progress
     if [ "$3" == "-y" -o "$3" == "-Y" ]; then #跳过确认环节
        curl -sOL ${site}$blob/$2
+       ${vibrate}
     elif [ not"$3" == "not" ]; then
     INTRO=$(curl -s powerlean.top/blob/poco.list | sed '/^'"$2"' *-/!d;s/.*- //')
      DATE=$(date)
@@ -242,14 +251,17 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
      echo ""
      echo -e "${come}:${yellow}${site}${blob}${2}${done}"
      ${footer}
+     ${vibrate}
      read -p "$install [Y/n]: " choice
         if [ "$choice" == "y" -o "$choice" == "Y" ]; then
           curl -sOL ${site}$blob/$2
         elif [ "$choice" == "n" -o "$choice" == "N" ]; then
           ${abort}
+          $vibrate;$vibrate;$vibrate
           exit 0
         else
           ${error_get}
+          $vibrate;$vibrate
           exit 1
         fi
     else
@@ -274,31 +286,38 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
     esac
 download_size=`ls -sh ${2} | sed "s/ ${2}//g"` #统计文件大小
 echo -e "${size_info}${yellow}$download_size${done}"
+${vibrate}
 ${hook}
 progress
 ${setup}
 chmod +x $bin/$2
 ${done_setup}
+$vibrate;$vibrate;$vibrate
   fi 
 
 #主体(二扇区)
 elif [ "$1" == "remove" -o "$1" == "r" ]; then
   if [ not"$2" == "not" ]; then
     ${not_input}
+    $vibrate;$vibrate
     exit 2
   fi
   if [ -f $bin/$2 ]; then
     read -p "$remove [Y/n]: " choice
     if [ "$choice" == "y" -o "$choice" == "Y" ]; then
       rm -rf $bin/$2 #因为不明文件属性，故强制递归
+      $vibrate;$vibrate;$vibrate
     elif [ "$choice" == "n" -o "$choice" == "N" ]; then
+    $vibrate;$vibrate;$vibrate
       exit 0
     else
       ${error_remove}
+      $vibrate;$vibrate
       exit 1
     fi
   else
     ${error_found}
+    $vibrate;$vibrate
   fi
 
 #主体(三扇区)
@@ -306,6 +325,7 @@ elif [ "$1" == "list" -o "$1" == "l" ]; then
   echo -n "${request}"
   progress
   curl -s ${list_url}
+  $vibrate;$vibrate;$vibrate
 
 #主体(四扇区)
 elif [ "$1" == "help" -o "$1" == "h" ]; then
@@ -327,21 +347,26 @@ elif [ "$1" == "help" -o "$1" == "h" ]; then
 elif [ "$1" == "search" -o "$1" == "s" ]; then
   if [ not"$2" == "not" ]; then
     ${not_input}
+    $vibrate;$vibrate
     exit 2
   fi
    ${search}
   progress
   try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${blob}${2})
+  ${vibrate}
   if [ "$try" -ne "200" ]; then
     ${void_found}
+    $vibrate;$vibrate
     exit 2
   else
      INTRO=$(curl -s powerlean.top/blob/poco.list | sed '/^'"$2"' *-/!d;s/.*- //')
      ${res}
      echo -e "${yellow}${2}${done}   $INTRO"
+     $vibrate;$vibrate;$vibrate
      fi
 #主体(六扇区)
 else
   ${void}
   poco help
+  $vibrate;$vibrate
 fi
