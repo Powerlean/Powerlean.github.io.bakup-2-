@@ -260,7 +260,7 @@ if [[ "$LANG" == zh_*.UTF-8 ]]; then
   export site_warn=$site_warn_cn
 fi
 
-if [[ "$site" -ne powerlean.top* ]]; then
+if [[ "$site" -ne "powerlean.top"* ]]; then
   ${site_warn}
 fi
 #主体(一扇区)
