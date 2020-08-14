@@ -60,6 +60,7 @@ done
 
 DEPENDS() {
 ${check_depends} #提示语
+progress
 curl -s ${site}${blob}${2}.tree | bash #生成输出变量
 for i in $depends
 do
@@ -69,6 +70,7 @@ do
    fi
 done
      ${depends_done} #提示语
+     ${vibrate} #震动一次
 }
 
 DEPENDS_SILENT() {
@@ -152,6 +154,9 @@ export abort_cn="echo -e 终止"
 export res_cn="echo -e 搜索结果："
 export update_note_cn="echo -e \033[41;37m 更新日志 \033[0m"
 export search_info_cn="联网查找软件描述"
+export check_depends_cn="echo -n 正在校验树状依赖"
+export depends_loaded_cn="echo -e 自动选定软件包${yellow}$i${done}"
+export depends_done_cn="echo 所有依赖均已加入哈希表"
 
 #English
 export install="Are you sure that you want to download this file?"
@@ -191,10 +196,13 @@ export size_info="Total downloaded "
 export abort="echo -e Abort"
 export res="echo -e Search results:"
 export update_note="echo -e \033[41;37m  Release Note \033[0m"
-export export search_info="To find the software description"
+export search_info="To find the software description"
+export check_depends="echo -n Building dependency tree"
+export depends_loaded="echo -e Auto-selected package ${yellow}$i${done}"
+export depends_done="echo Dependency were built done"
 
 #语言设定
-#LANG="zh_CN.UTF-8" #取消该注释将程序设定为中文
+#LANG="zh_CN.UTF-8" #取消该注释将程序设定为中文(在句尾另添一个"#")
 if [ $LANG == "zh_CN.UTF-8" -o $LANG == "zh_TW.UTF-8" -o $LANG == "zh_HK.UTF-8" -o $LANG == "zh_SG.UTF-8" ]; then
   export bad_suffix=$bad_suffix_cn
   export list_info=$list_info_cn
@@ -234,6 +242,9 @@ if [ $LANG == "zh_CN.UTF-8" -o $LANG == "zh_TW.UTF-8" -o $LANG == "zh_HK.UTF-8" 
   export res=$res_cn
   export update_note=$update_note_cn
   export search_info=$search_info_cn
+  export check_depends=$check_depends_cn
+  export depends_loaded=$depends_loaded_cn
+  export depends_done=$depends_done_cn
 fi
 
 #主体(一扇区)
