@@ -83,7 +83,8 @@ depends_url=`curl -s ${site}${tree}${1}.tree`
 if [[ "$error" == "$depends_url" ]]; then
   ${depends_error}
   VIBRATE_ERROR
-exit 2
+  exit 2
+fi
 eval "$(curl -s ${site}${tree}${1}.tree)" #生成输出变量
 for i in $depends
 do
@@ -102,6 +103,7 @@ DEPENDS_SILENT() {
  if [[ "$error" == "$depends_url" ]]; then
    VIBRATE_ERROR
    exit 2
+ fi
  eval "$(curl -s ${site}${tree}${1}.tree)" #生成输出变量
 for i in $depends
 do
