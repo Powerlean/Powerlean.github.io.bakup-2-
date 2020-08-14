@@ -23,4 +23,5 @@ done
   progress
   $vibrate;$vibrate;$vibrate
   clear
+  export status="complete"
 fi
