@@ -40,11 +40,11 @@ export done="\033[0m"
 function progress {
   point="echo -e -n ${green}.${done}"
   sec="0.2"
-  sleep $sec
-  $point
-  sleep $sec
-  $point
-  sleep $sec
+  while [ $loop -lt 3 ]; do
+    sleep $sec
+    $point
+    loop=$(($loop+1))
+done
   echo "."
   sleep $sec
 }
