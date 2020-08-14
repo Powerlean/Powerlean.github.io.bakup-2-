@@ -326,7 +326,7 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
     ${try_download}
     progress
     if [ "$3" == "-y" -o "$3" == "-Y" ]; then #跳过确认环节
-       curl -sOL ${site}$blob/$2
+       curl -#OL ${site}$blob/$2
        ${vibrate}
     elif [ not"$3" == "not" ]; then
     INTRO=$(curl -s powerlean.top/blob/poco.list | sed '/^'"$2"' *-/!d;s/.*- //')
@@ -340,7 +340,7 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
      ${vibrate}
      read -p "$install [Y/n]: " choice
         if [ "$choice" == "y" -o "$choice" == "Y" ]; then
-          curl -sOL ${site}$blob/$2
+          curl -#OL ${site}$blob/$2
         elif [ "$choice" == "n" -o "$choice" == "N" ]; then
           ${abort}
           VIBRATE_DONE
