@@ -396,7 +396,7 @@ elif [ "$1" == "list" -o "$1" == "l" ]; then
   VIBRATE_DONE
 
 #主体(四扇区)
-elif [ "$1" == "help" -o "$1" == "h" ]; then
+elif [ "$1" == "help" -o "$1" == "h" -o "$1" == "-h" ]; then
   echo "poco       version:${version}"
   echo ""
   echo "${intro_info}"
