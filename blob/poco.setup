@@ -55,16 +55,22 @@ fi
 #分区一
 if [ "$mode" == "update" ]; then
   curl -sOL powerlean.top/blob/poco
+  curl -sOL powerlean.top/blob/poco-rescue
   mv poco $bin
+  mv poco-rescue $bin
   chmod +x $bin/poco
+  chmod +x $bin/poco-rescue
   exit 0
 fi
 #分区二
 echo -n "安装应该已经开始"
 progress
 curl -sOL powerlean.top/blob/poco
+curl -sOL powerlean.top/blob/poco-rescue
 mv poco $bin
+mv poco-rescue $bin
 chmod +x $bin/poco
+chmod +x $bin/poco-rescue
 ${set_env}
 echo "Power Collector已就绪"
 echo "下次从本站(Powerlean.top)中下载文件，只需运行:"
