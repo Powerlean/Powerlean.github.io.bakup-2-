@@ -65,8 +65,8 @@ fi
 #分区二
 echo -n "安装应该已经开始"
 progress
-curl -sOL powerlean.top/blob/poco
-curl -sOL powerlean.top/blob/poco-rescue
+curl -#OL powerlean.top/blob/poco
+curl -#OL powerlean.top/blob/poco-rescue
 mv poco $bin
 mv poco-rescue $bin
 chmod +x $bin/poco
