@@ -165,7 +165,7 @@ export res_cn="echo -e 搜索结果："
 export update_note_cn="echo -e \033[41;37m 更新日志 \033[0m"
 export search_info_cn="联网查找软件描述"
 export check_depends_cn="echo -n 正在校验树状依赖"
-export depends_loaded_cn="echo -e 自动选定软件包${yellow}$i${done}"
+export depends_loaded_cn="echo -e 自动选定软件包${yellow}${i}${done}"
 export depends_done_cn="echo 所有依赖均已加入哈希表"
 
 #English
@@ -208,7 +208,7 @@ export res="echo -e Search results:"
 export update_note="echo -e \033[41;37m  Release Note \033[0m"
 export search_info="To find the software description"
 export check_depends="echo -n Building dependency tree"
-export depends_loaded="echo -e Auto-selected package ${yellow}$i${done}"
+export depends_loaded="echo -e Auto-selected package ${yellow}${i}${done}"
 export depends_done="echo Dependency were built done"
 
 #语言设定
