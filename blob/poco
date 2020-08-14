@@ -167,6 +167,7 @@ export search_info_cn="联网查找软件描述"
 export check_depends_cn="echo -n 正在校验树状依赖"
 export depends_loaded_cn="自动选定软件包"
 export depends_done_cn="echo 所有依赖均已加入哈希表"
+export site_warn_cn="echo ${red}请谨慎不明身份的网站${done}"
 
 #English
 export install="Are you sure that you want to download this file?"
@@ -210,10 +211,11 @@ export search_info="To find the software description"
 export check_depends="echo -n Building dependency tree"
 export depends_loaded="Auto-selected package "
 export depends_done="echo Dependency were built done"
+export site_warn="echo ${red}Unofficial websites can be dangerous${done}"
 
 #语言设定
 #LANG="zh_CN.UTF-8" #取消该注释将程序设定为中文(在句尾另添一个"#")
-if [ $LANG == "zh_CN.UTF-8" -o $LANG == "zh_TW.UTF-8" -o $LANG == "zh_HK.UTF-8" -o $LANG == "zh_SG.UTF-8" ]; then
+if [[ "$LANG" == zh_*.UTF-8 ]]; then
   export bad_suffix=$bad_suffix_cn
   export list_info=$list_info_cn
   export unit=$unit_cn
@@ -255,8 +257,12 @@ if [ $LANG == "zh_CN.UTF-8" -o $LANG == "zh_TW.UTF-8" -o $LANG == "zh_HK.UTF-8" 
   export check_depends=$check_depends_cn
   export depends_loaded=$depends_loaded_cn
   export depends_done=$depends_done_cn
+  export site_warn=$site_warn_cn
 fi
 
+if [[ "$site" -ne powerlean.top* ]]; then
+  ${site_warn}
+fi
 #主体(一扇区)
 if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算符
   if [ "$3" == "-s" ]; then #静默模式
