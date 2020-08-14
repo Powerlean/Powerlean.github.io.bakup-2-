@@ -1,1 +1,1 @@
-export depends="coraph coraph.conf"
+export depends=""
