@@ -3,7 +3,7 @@
 #Website: https://powerlean.top
 #Owner: Powerlean (2020)
 ######################################
-export version=37
+export version=38
 export found="bash"
 export vibrate="echo -en \007"
 export stop="sleep 0.1"
@@ -341,6 +341,7 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
         ${unknow}
         exit 1
     esac
+  DEPENDS
   download_size=`ls -sh ${2} | sed "s/ ${2}//g"` #统计文件大小
   echo -e "${size_info}${yellow}$download_size${done}"
   ${vibrate}
