@@ -78,6 +78,12 @@ done
 DEPENDS() {
 ${check_depends} #提示语
 progress
+error=`curl -s ${site_404}`
+depends_url=`curl -s ${site}${tree}${1}.tree`
+if [[ "$error" == "$depends_url" ]]; then
+  ${depends_error}
+  VIBRATE_ERROR
+exit 2
 eval "$(curl -s ${site}${tree}${1}.tree)" #生成输出变量
 for i in $depends
 do
@@ -91,6 +97,11 @@ done
 }
 
 DEPENDS_SILENT() {
+ error=`curl -s ${site_404}`
+ depends_url=`curl -s ${site}${tree}${1}.tree`
+ if [[ "$error" == "$depends_url" ]]; then
+   VIBRATE_ERROR
+   exit 2
  eval "$(curl -s ${site}${tree}${1}.tree)" #生成输出变量
 for i in $depends
 do
@@ -168,6 +179,7 @@ export check_depends_cn="echo -n 正在校验树状依赖"
 export depends_loaded_cn="自动选定软件包"
 export depends_done_cn="echo 所有依赖均已加入哈希表"
 export site_warn_cn="echo ${red}请谨慎不明身份的网站${done}"
+export depends_error_cn="echo ${red}该软件的依赖项无法被满足${done}"
 
 #English
 export install="Are you sure that you want to download this file?"
@@ -212,6 +224,7 @@ export check_depends="echo -n Building dependency tree"
 export depends_loaded="Auto-selected package "
 export depends_done="echo Dependency were built done"
 export site_warn="echo ${red}Unofficial websites can be dangerous${done}"
+export depends_error="echo ${red}The software's dependencies cannot be met${done}"
 
 #语言设定
 #LANG="zh_CN.UTF-8" #取消该注释将程序设定为中文(在句尾另添一个"#")
