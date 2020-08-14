@@ -302,6 +302,8 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
   progress
    curl -s ${site}$blob/poco.update | bash
    ${vibrate}
+   
+   CHECK_FILE() {
    ${check_file}
    progress
    origin=$(curl -s ${site}$blob/poco)
@@ -313,6 +315,16 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
      curl -s ${site}$blob/poco.setup | bash
    fi
    ${vibrate}
+   }
+   
+   #若版本更新被触发，则跳过文件校验
+ check_status="CHECK_FILE"
+ if [ "$status" == "complete" ]; then
+  unset check_status
+ fi
+  
+   #文件校验环节
+  ${check_status}
   ${search}
   progress
   not_found=`curl -s ${site_404}`
