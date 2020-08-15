@@ -450,20 +450,22 @@ elif [ "$1" == "search" -o "$1" == "s" ]; then
     VIBRATE_ERROR
     exit 2
   fi
-   ${search}
-  progress
-  try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${blob}${2})
+  looking="${@##s*}"
+  ifs=1
+  for i in $looking
+  do
+  try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${blob}${i})
   ${vibrate}
-  if [ "$try" -ne "200" ]; then
-    ${void_found}
-    VIBRATE_ERROR
-    exit 2
-  else
-     INTRO=$(curl -s powerlean.top/blob/poco.list | sed '/^'"$2"' *-/!d;s/.*- //')
+  if [ "$try" == "200" ]; then
+     INTRO=$(curl -s powerlean.top/blob/poco.list | sed '/^'"$i"' *-/!d;s/.*- //')
+     echo -n "$ifs."
      ${res}
-     echo -e "${yellow}${2}${done}   $INTRO"
-     VIBRATE_DONE
+     echo -e "${yellow}${i}${done}   $INTRO"
+     ifs=$(($ifs+1))
   fi
+  done
+  VIBRATE_DONE
+
 #主体(六扇区)
 else
   ${void}
