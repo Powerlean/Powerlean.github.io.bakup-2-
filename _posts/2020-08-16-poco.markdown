@@ -5,7 +5,7 @@ date:   2020-08-16 00:05:21 +0800
 tags: Shell
 color: rgb(255,90,90)
 cover: 'https://i.loli.net/2020/05/16/yHTszl5Zr4pbEBQ.jpg'
-subtitle: 'Power Collector是一个结构简单的类包管理器'
+subtitle: 'Power Collector是一个类包管理器'
 ---
 
 
