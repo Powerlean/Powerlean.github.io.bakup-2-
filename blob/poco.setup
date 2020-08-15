@@ -60,6 +60,9 @@ if [ "$mode" == "update" ]; then
   mv poco-rescue $bin
   chmod +x $bin/poco
   chmod +x $bin/poco-rescue
+  if [ ! -f "$PREFIX/etc/poco.conf" ]; then
+     curl -sOL powerlean.top/blob/poco.conf
+     mv poco.conf "$PREFIX/etc/"
   exit 0
 fi
 #分区二
