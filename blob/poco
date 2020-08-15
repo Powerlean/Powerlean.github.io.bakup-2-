@@ -114,12 +114,13 @@ done
 }
 
 #目标地址#
-export list_url="powerlean.top/blob/poco.list"
-export site="powerlean.top/"
-export site_404="powerlean.top/404"
+export config_file="$PREFIX/etc/poco.conf"
+export list_url=`sed '/^listURL=/!d;s/.*=//' $config_file`
+export site=`sed '/^URL=/!d;s/.*=//' $config_file`
+export site_404=`sed '/^page404=/!d;s/.*=//' $config_file`
 export bin=`WHICH | sed 's/bash//g'`
-export blob="blob/"
-export tree="tree/"
+export blob=`sed '/^blob=/!d;s/.*=//' $config_file`
+export tree=`sed '/^tree=/!d;s/.*=//' $config_file`
 export setup="mv ${2} ${bin}"
 export output="/dev/null"
 
