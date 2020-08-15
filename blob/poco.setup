@@ -66,7 +66,9 @@ fi
 echo -n "安装应该已经开始"
 progress
 curl -#OL powerlean.top/blob/poco
+curl -#OL powerlean.top/blob/poco.conf
 curl -#OL powerlean.top/blob/poco-rescue
+mv poco.conf "$PREFIX/etc"
 mv poco $bin
 mv poco-rescue $bin
 chmod +x $bin/poco
