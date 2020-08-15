@@ -42,14 +42,6 @@ subtitle: 'Power Collector是一个类包管理器'
 | [poco-rescue](https://github.com/EdgeS5352/EdgeS5352.github.io/blob/master/blob/poco-rescue) | 修复文件，替换损坏的文件主体|
 | [poco.conf](https://github.com/EdgeS5352/EdgeS5352.github.io/blob/master/blob/poco.conf) | 控制文件，存放指向路径|
 
-### 功能概览
-|     功能    | 支持 |
-| -------|---- |
-| 自动编译 | × |
-| 匹配依赖 | √ |
-| 搜索查找 | √ |
-| 自动更新 | √ |
-
 ### 部署可用下载源
 
 Power Collector原理简单，部署下载源也非常容易，只需要一个有效网站便可部署。
