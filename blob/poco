@@ -338,10 +338,10 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
     ${try_download}
     progress
     if [ "$3" == "-y" -o "$3" == "-Y" ]; then #跳过确认环节
-       curl -#OL ${site}$blob/$2
+       curl -#OL ${site}/$blob/$2
        ${vibrate}
     elif [ not"$3" == "not" ]; then
-    INTRO=$(curl -s powerlean.top/blob/poco.list | sed '/^'"$2"' *-/!d;s/.*- //')
+    INTRO=$(curl -s ${site}/${blob}/poco.list | sed '/^'"$2"' *-/!d;s/.*- //')
      DATE=$(date)
      ${footer}
      echo -e "${2}  ${DATE}" #${size}:${#try}${unit}
@@ -457,7 +457,7 @@ elif [ "$1" == "search" -o "$1" == "s" ]; then
   try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${blob}${i})
   ${vibrate}
   if [ "$try" == "200" ]; then
-     INTRO=$(curl -s powerlean.top/blob/poco.list | sed '/^'"$i"' *-/!d;s/.*- //')
+     INTRO=$(curl -s ${site}/${blob}/poco.list | sed '/^'"$i"' *-/!d;s/.*- //')
      echo -n "$ifs."
      ${res}
      echo -e "${yellow}${i}${done}   $INTRO"
