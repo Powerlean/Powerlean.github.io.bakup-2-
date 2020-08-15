@@ -1,1 +1,1 @@
-export depends="coraph"
+export depends="coraph pipe"
