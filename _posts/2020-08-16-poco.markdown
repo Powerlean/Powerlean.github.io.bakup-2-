@@ -1,3 +1,14 @@
+---
+layout: post
+title:  Power Collector用法简述
+date:   2020-05-21 14:05:21 +0800
+tags: Shell
+color: rgb(255,90,90)
+cover: 'https://ae01.alicdn.com/kf/Hb0be877146b14ec09a1fa2fa438bc208W.jpg'
+subtitle: ''
+---
+
+
 ![](https://i.loli.net/2020/05/16/yHTszl5Zr4pbEBQ.jpg)
 
 #### Power Collector是一个结构简单，易操作的类包管理器
