@@ -463,7 +463,7 @@ elif [ "$1" == "search" -o "$1" == "s" ]; then
      ${res}
      echo -e "${yellow}${2}${done}   $INTRO"
      VIBRATE_DONE
-     fi
+  fi
 #主体(六扇区)
 else
   ${void}
