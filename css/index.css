@@ -1,0 +1,57 @@
+body ,.b{
+    background-image: url(../img/1010655.jpg);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    font-family: "楷体";
+}
+ul, li{
+    margin: 0;
+    padding: 0;
+}
+.a{
+    height: 50px;
+    border-bottom: 2px  solid rgba(225,225,225,.6);
+    box-shadow: 0px 2px 1px rgba(0,0,0,.5);
+    position: relative;    
+}
+.b{
+    height: 50px;
+    width: 100%;
+    filter: blur(4px);
+    position: absolute;
+}
+.c{
+    height: 50px;
+    width: 100%;
+    position: absolute;
+/*    background-color: black;*/
+    
+}
+.c ul li{
+    height: 50px;
+    list-style-type: none;
+    float: left;
+    margin-left: 20px;
+    line-height: 50px;
+    font-size: 21px;
+}
+.c ul{
+    margin-left:100px ;
+}
+.c  li>a{
+    text-decoration: none;
+    color: dodgerblue;
+    text-align: center;
+}
+.c ul li:hover{
+transform: scale(1.5);
+transition: transform  .5s ;
+text-shadow: 4px 6px 5px rgba(100,100,100,.8);
+
+}
+/*.d{
+    height: 1000px;
+}*/
