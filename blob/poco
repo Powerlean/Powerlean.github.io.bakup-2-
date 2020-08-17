@@ -141,7 +141,7 @@ echo "."
 
 #字符变量#
 #中文
-null_search_cn="echo -e ${yellow}未搜索到可匹配的内容${done}"
+null_search_cn="echo -e ${yellow}未搜索到可匹配内容${done}"
 export bad_suffix_cn="echo -e ${red}无效操作：未定义的后缀或输入了多个文件名${done}"
 export error_remove_cn="echo -e ${red}无效操作 ${choice}${done}"
 export remove_cn="确定要移除此文件吗？"
