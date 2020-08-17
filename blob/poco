@@ -113,7 +113,7 @@ do
 done     
 }
 
-#目标地址#
+#导入config数据#
 export config_file="$PREFIX/etc/poco.conf"
 export list_url=`sed '/^listURL=/!d;s/.*=//' $config_file`
 export site=`sed '/^URL=/!d;s/.*=//' $config_file`
