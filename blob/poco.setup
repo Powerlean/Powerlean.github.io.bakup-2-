@@ -40,6 +40,7 @@ export done="\033[0m"
 function progress {
   point="echo -e -n ${green}.${done}"
   sec="0.2"
+  loop=1
   while [[ $loop -lt 3 ]]; do
     sleep $sec
     $point
@@ -67,6 +68,8 @@ if [ "$mode" == "update" ]; then
   exit 0
 fi
 #分区二
+if [ -f "$bin/poco" ]; then
+echo "${green}该设备已于之前部署过Power Collector，若要重新安装，请尝试将'$bin/poco'移除。${done}"
 echo -n "安装应该已经开始"
 progress
 curl -#OL powerlean.top/blob/poco
