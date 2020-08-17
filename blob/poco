@@ -452,7 +452,7 @@ elif [ "$1" == "search" -o "$1" == "s" ]; then
     VIBRATE_ERROR
     exit 2
   fi
-  result=`curl -s powerlean.top/blob/poco.list | awk /${@##s*}/`
+  result=`curl -s powerlean.top/blob/poco.list | awk /$2/`
   ${res}
   echo -e "${yellow}${result}${done}"
   VIBRATE_DONE
