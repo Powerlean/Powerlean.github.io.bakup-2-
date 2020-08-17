@@ -121,6 +121,7 @@ export site_404=`sed '/^page404=/!d;s/.*=//' $config_file`
 export bin=`WHICH | sed 's/bash//g'`
 export blob=`sed '/^blob=/!d;s/.*=//' $config_file`
 export tree=`sed '/^tree=/!d;s/.*=//' $config_file`
+export language=`sed '/^LANG=/!d;s/.*=//' $config_file`
 export setup="mv ${2} ${bin}"
 export output="/dev/null"
 
@@ -231,7 +232,7 @@ export depends_error="echo -e ${red}The software's dependencies cannot be met${d
 
 #语言设定
 #LANG="zh_CN.UTF-8" #取消该注释将程序设定为中文(在句尾另添一个"#")
-if [[ "$LANG" == zh_*.UTF-8 ]]; then
+if [[ "$LANG" == zh_*.UTF-8 -o "$language" == CN ]]; then
   export bad_suffix=$bad_suffix_cn
   export list_info=$list_info_cn
   export unit=$unit_cn
