@@ -290,6 +290,7 @@ if [[ "$LANG" == zh_*.UTF-8 || "$language" == CN ]]; then
   export depends_error=$depends_error_cn
   export null_search=$null_search_cn
   export  group_install=$group_install_cn
+  export group_done=$group_done_cn
 fi
 
 
