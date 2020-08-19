@@ -289,7 +289,7 @@ if [[ "$LANG" == zh_*.UTF-8 || "$language" == CN ]]; then
   export site_warn=$site_warn_cn
   export depends_error=$depends_error_cn
   export null_search=$null_search_cn
-  export  group_install=$ group_install_cn
+  export  group_install=$group_install_cn
 fi
 
 
@@ -521,7 +521,7 @@ elif [ "$1" == "group" -o "$1" == "g" ]; then
     exit 2
   else
     type=`curl -s ${site}/${blob}/${2} | sed '/^type=/!d;s/.*=//'`
-    if [ "$type" ! == "group" ]; then
+    if [ "$type" != "group" ]; then
       ${void_group}
       VIBRATE_ERROR 
       exit 2
@@ -529,6 +529,7 @@ elif [ "$1" == "group" -o "$1" == "g" ]; then
     ${group_install}
     progress
     curl -s ${site}/${blob}/${2} | bash
+    ${vibrate}
     ${group_done}
   fi
     
