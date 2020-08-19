@@ -1,0 +1,1021 @@
+<!DOCTYPE HTML>
+<html class="no-js" >
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="renderer" content="webkit">
+<meta name="HandheldFriendly" content="true">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
+<meta http-equiv="x-dns-prefetch-control" content="on">
+<title>LoveEmpathy</title>
+<meta property="og:title" content="LoveEmpathy" />
+<meta property="og:site_name" content="LoveEmpathy" />
+<meta property="og:type" content="website" />
+<meta property="og:description" content="一个在前端匍匐前进的人" />
+<meta property="og:url" content="https://loveempathy.com" /><meta property="og:image" content="http://cdn.loveempathy.com/67342794_p1.jpg?imageView2/2/w/640/q/75" /><meta name="description" content="一个在前端匍匐前进的人" />
+<meta name="keywords" content="typecho,php,blog" />
+<meta name="template" content="Mirages" />
+<link rel="pingback" href="https://loveempathy.com/action/xmlrpc" />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://loveempathy.com/action/xmlrpc?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://loveempathy.com/action/xmlrpc?wlw" />
+<link rel="alternate" type="application/rss+xml" title="LoveEmpathy &raquo; RSS 2.0" href="https://loveempathy.com/feed/" />
+<link rel="alternate" type="application/rdf+xml" title="LoveEmpathy &raquo; RSS 1.0" href="https://loveempathy.com/feed/rss/" />
+<link rel="alternate" type="application/atom+xml" title="LoveEmpathy &raquo; ATOM 1.0" href="https://loveempathy.com/feed/atom/" />
+<style type="text/css">
+        /* Lora */
+    @font-face {
+        font-family: 'Lora';
+        font-style: normal;
+        font-weight: 400;
+        font-display: fallback;
+        src:
+                local('Lora Regular'),
+                local('Lora-Regular'),
+                url(https://loveempathy.com/usr/themes/Mirages/fonts/Lora/400.woff2) format('woff2'),
+                url(https://loveempathy.com/usr/themes/Mirages/fonts/Lora/400.woff) format('woff');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    @font-face {
+        font-family: 'Lora';
+        font-style: normal;
+        font-weight: 700;
+        font-display: fallback;
+        src:
+                local('Lora Bold'),
+                local('Lora-Bold'),
+                url(https://loveempathy.com/usr/themes/Mirages/fonts/Lora/700.woff2) format('woff2'),
+                url(https://loveempathy.com/usr/themes/Mirages/fonts/Lora/700.woff) format('woff');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+</style>
+<link rel="stylesheet" href="https://loveempathy.com/usr/themes/Mirages/css/7.10.1/mirages.min.css">
+<script type="text/javascript">
+    window['LocalConst'] = {
+        THEME_VERSION: "7.10.1",
+        BUILD: 1365,
+        BASE_SCRIPT_URL: "https://loveempathy.com/usr/themes/Mirages/",
+        IS_MOBILE: false,
+        IS_PHONE: false,
+        IS_TABLET: false,
+        HAS_LOGIN: false,
+        IS_HTTPS: true,
+        ENABLE_PJAX: true,
+        ENABLE_WEBP: false,
+        SHOW_TOC: false,
+        ENABLE_IMAGE_SIZE_OPTIMIZE: false,
+        THEME_COLOR: '#000000',
+        DISQUS_SHORT_NAME: '',
+        COMMENT_SYSTEM: 0,
+        OWO_API: 'https://loveempathy.com/usr/themes/Mirages/js/7.10.1/OwO.json',
+        COMMENT_SYSTEM_DISQUS: 1,
+        COMMENT_SYSTEM_DUOSHUO: 2,
+        COMMENT_SYSTEM_EMBED: 0,
+        PJAX_LOAD_STYLE: 1,
+        PJAX_LOAD_STYLE_SIMPLE: 0,
+        PJAX_LOAD_STYLE_CIRCLE: 1,
+        AUTO_NIGHT_SHIFT_FROM: 22,
+        AUTO_NIGHT_SHIFT_TO: 5,
+        USE_MIRAGES_DARK: false,
+        PREFERS_DARK_MODE: false,
+        LIGHT_THEME_CLASS: "theme-white",
+        TOC_AT_LEFT: false,
+        SERIF_LOAD_NOTICE: '加载 Serif 字体可能需要 10 秒钟左右，请耐心等待',
+        ROOT_FONT_SIZE: '100',
+        BIAOQING_PAOPAO_PATH: '',
+        BIAOQING_ARU_PATH: '',
+        CDN_TYPE_OTHERS: -1,
+        CDN_TYPE_QINIU: 1,
+        CDN_TYPE_UPYUN: 2,
+        CDN_TYPE_LOCAL: 3,
+        CDN_TYPE_ALIYUN_OSS: 4,
+        CDN_TYPE_QCLOUD_CI: 5,
+        KEY_CDN_TYPE: '',
+        UPYUN_SPLIT_TAG: '!',
+        COMMENTS_ORDER: 'ASC',
+        ENABLE_MATH_JAX: false,
+        MATH_JAX_USE_DOLLAR: true,
+        ENABLE_FLOW_CHART: false,
+        ENABLE_MERMAID: false,
+        HIDE_CODE_LINE_NUMBER: false,
+        TRIM_LAST_LINE_BREAK_IN_CODE_BLOCK: true    };
+    var Mlog = function (message) {
+            };
+                    LocalConst.BIAOQING_PAOPAO_PATH = 'https://loveempathy.com/usr/plugins/Mirages/biaoqing/paopao/';
+        LocalConst.BIAOQING_ARU_PATH = 'https://loveempathy.com/usr/plugins/Mirages/biaoqing/aru/';
+        var BIAOQING_PAOPAO_PATH = LocalConst.BIAOQING_PAOPAO_PATH;
+        var BIAOQING_ARU_PATH = LocalConst.BIAOQING_ARU_PATH;
+                LocalConst.KEY_CDN_TYPE = 'mirages-cdn-type';
+        LocalConst.UPYUN_SPLIT_TAG = '!';
+    </script>
+    <script>
+        var hour = new Date().getHours();
+        if (hour <= LocalConst.AUTO_NIGHT_SHIFT_TO || hour >= LocalConst.AUTO_NIGHT_SHIFT_FROM) {
+            LocalConst.USE_MIRAGES_DARK = true;
+        }
+    </script>
+
+    <link rel="shortcut icon" href="https://loveempathy.com/favicon.ico">
+
+
+
+<script type="text/javascript">
+    var autoHideElements = {};
+    var CSS = function (css) {
+        var link = document.createElement('link');
+        link.setAttribute('rel', 'stylesheet');
+        link.href = css;
+        document.head.appendChild(link);
+    };
+    var STYLE = function (style, type) {
+        type = type || 'text/css';
+        var s = document.createElement('style');
+        s.type = type;
+        s.textContent = style;
+        document.head.appendChild(s);
+    };
+    var JS = function (js, async) {
+        async = async || false;
+        var sc = document.createElement('script'), s = document.scripts[0];
+        sc.src = js; sc.async = async;
+        s.parentNode.insertBefore(sc, s);
+    };
+    var registAutoHideElement = function (selector) {
+        var tmp = autoHideElements[selector];
+        if (typeof(tmp) !== 'undefined') {
+            return;
+        }
+        var element = document.querySelector(selector);
+        if (element && typeof(Headroom) !== "undefined") {
+            var headroom = new Headroom(element, {
+                tolerance: 5,
+                offset : 5,
+                classes: {
+                    initial: "show",
+                    pinned: "show",
+                    unpinned: "hide"
+                }
+            });
+            headroom.init();
+            autoHideElements[selector] = headroom;
+        }
+    };
+    var getImageAddon = function (cdnType, width, height) {
+        if (!LocalConst.ENABLE_IMAGE_SIZE_OPTIMIZE) {
+            return "";
+        }
+        if (cdnType == LocalConst.CDN_TYPE_LOCAL || cdnType == LocalConst.CDN_TYPE_OTHERS) {
+            return "";
+        }
+        var addon = "?";
+        if (cdnType == LocalConst.CDN_TYPE_UPYUN) {
+            addon = LocalConst.UPYUN_SPLIT_TAG;
+        }
+        var ratio = window.devicePixelRatio || 1;
+        width = width || window.innerWidth;
+        height = height || window.innerHeight;
+        width = width || 0;
+        height = height || 0;
+        if (width == 0 && height == 0) {
+            return "";
+        }
+        var format = "";
+        if (LocalConst.ENABLE_WEBP) {
+            if (cdnType == LocalConst.CDN_TYPE_ALIYUN_OSS) {
+                format = "/format,webp"
+            } else {
+                format = "/format/webp";
+            }
+        }
+        if (width >= height) {
+            if (cdnType == LocalConst.CDN_TYPE_UPYUN) {
+                addon += "/fw/" + parseInt(width * ratio) + "/quality/75" + format;
+            } else if(cdnType == LocalConst.CDN_TYPE_ALIYUN_OSS) {
+                addon += "x-oss-process=image/resize,w_" + parseInt(width * ratio) + "/quality,Q_75" + format;
+            } else {
+                addon += "imageView2/2/w/" + parseInt(width * ratio) + "/q/75" + format;
+            }
+        } else {
+            if (cdnType == LocalConst.CDN_TYPE_UPYUN) {
+                addon += "/fh/" + parseInt(width * ratio) + "/quality/75" + format;
+            } else if(cdnType == LocalConst.CDN_TYPE_ALIYUN_OSS) {
+                addon += "x-oss-process=image/resize,h_" + parseInt(width * ratio) + "/quality,Q_75" + format;
+            } else {
+                addon += "imageView2/2/h/" + parseInt(height * ratio) + "/q/75" + format;
+            }
+        }
+        return addon;
+    };
+    var getBgHeight = function(windowHeight, bannerHeight, mobileBannerHeight){
+        windowHeight = windowHeight || 560;
+        if (windowHeight > window.screen.availHeight) {
+            windowHeight = window.screen.availHeight;
+        }
+        bannerHeight = bannerHeight.trim();
+        mobileBannerHeight = mobileBannerHeight.trim();
+        if (window.innerHeight > window.innerWidth) {
+            bannerHeight = parseFloat(mobileBannerHeight);
+        } else {
+            bannerHeight = parseFloat(bannerHeight);
+        }
+        bannerHeight = Math.round(windowHeight * bannerHeight / 100);
+        return bannerHeight;
+    };
+    var registLoadBanner = function () {
+        if (window.asyncBannerLoadNum >= 0) {
+            window.asyncBannerLoadNum ++;
+            Mlog("Loading Banner: " + window.asyncBannerLoadNum);
+        }
+    };
+    var remove = function (element) {
+        if (element) {
+            if (typeof element['remove'] === 'function') {
+                element.remove();
+            } else if (element.parentNode) {
+                element.parentNode.removeChild(element);
+            }
+        }
+    };
+    var loadBannerDirect = function (backgroundImage, backgroundPosition, wrap, cdnType, width, height) {
+        var background = wrap.querySelector('.blog-background');
+        var imageSrc = backgroundImage + getImageAddon(cdnType, width, height);
+
+        Mlog("Start Loading Banner Direct... url: " + imageSrc + "  cdnType: " + cdnType);
+
+        if (typeof(backgroundPosition) === 'string' && backgroundPosition.length > 0) {
+            background.style.backgroundPosition = backgroundPosition;
+        }
+
+        background.style.backgroundImage = 'url("' + imageSrc + '")';
+    };
+    var loadBanner = function (img, backgroundImage, backgroundPosition, wrap, cdnType, width, height, blured) {
+        var background = wrap.querySelector('.blog-background');
+        var container = wrap.querySelector('.lazyload-container');
+
+        if (!background) {
+            console.warn("background is null", background);
+            return;
+        }
+        if (!container) {
+            console.warn("container is null", container);
+            return;
+        }
+
+        var imageSrc = backgroundImage + getImageAddon(cdnType, width, height);
+
+        Mlog("Start Loading Banner... url: " + imageSrc + "  cdnType: " + cdnType);
+
+
+        background.classList.add("loading");
+
+        remove(img);
+        if (typeof(backgroundPosition) === 'string' && backgroundPosition.length > 0) {
+            container.style.backgroundPosition = backgroundPosition;
+            background.style.backgroundPosition = backgroundPosition;
+        }
+        container.style.backgroundImage = 'url("' + img.src + '")';
+        container.classList.add('loaded');
+
+        blured = blured || false;
+        if (blured) {
+            return;
+        }
+
+        // load Src background image
+        var largeImage = new Image();
+        largeImage.src = imageSrc;
+        largeImage.onload = function() {
+            remove(this);
+            if (typeof imageLoad !== 'undefined' && imageLoad >= 1) {
+                background.classList.add('bg-failed');
+            } else {
+                background.style.backgroundImage = 'url("' + imageSrc + '")';
+                background.classList.remove('loading');
+                container.classList.remove('loaded');
+            }
+            setTimeout(function () {
+                remove(container);
+                if (window.asyncBannerLoadCompleteNum >= 0) {
+                    window.asyncBannerLoadCompleteNum ++;
+                    Mlog("Loaded Banner: " + window.asyncBannerLoadCompleteNum);
+                    if (window.asyncBannerLoadCompleteNum === window.asyncBannerLoadNum) {
+                        window.asyncBannerLoadNum = -1170;
+                        window.asyncBannerLoadCompleteNum = -1170;
+                        $('body').trigger("ajax-banner:done");
+                    } else if (window.asyncBannerLoadCompleteNum > window.asyncBannerLoadNum) {
+                        console.error("loaded num is large than load num.");
+                        setTimeout(function () {
+                            window.asyncBannerLoadNum = -1170;
+                            window.asyncBannerLoadCompleteNum = -1170;
+                            $('body').trigger("ajax-banner:done");
+                        }, 1170);
+                    }
+                }
+            }, 1001);
+        };
+    };
+    var loadPrefersDarkModeState = function () {
+        if (typeof window.matchMedia === 'function') {
+            LocalConst.PREFERS_DARK_MODE = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        }
+    };
+</script>
+<style type="text/css">
+    body, button, input, optgroup, select, textarea {
+        font-family: 'Mirages Custom', 'Merriweather', 'Open Sans', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei', 'WenQuanYi Micro Hei',  'Segoe UI Emoji', 'Segoe UI Symbol', Helvetica, Arial, sans-serif;
+    }
+    .github-box, .github-box .github-box-title h3 {
+        font-family: 'Mirages Custom', 'Merriweather', 'Open Sans', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei', 'WenQuanYi Micro Hei',  'Segoe UI Emoji', 'Segoe UI Symbol', Helvetica, Arial, sans-serif !important;
+    }
+    .aplayer {
+        font-family: 'Mirages Custom', 'Myriad Pro', 'Myriad Set Pro', 'Open Sans', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei', 'WenQuanYi Micro Hei',  Helvetica, arial, sans-serif !important;
+    }
+    /* Serif */
+    body.content-lang-en.content-serif .post-content {
+        font-family: 'Lora', 'PT Serif', 'Source Serif Pro', Georgia, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei', 'WenQuanYi Micro Hei',  serif;
+    }
+    body.content-lang-en.content-serif.serif-fonts .post-content {
+        font-family: 'Lora', 'PT Serif', 'Source Serif Pro', 'Noto Serif CJK SC', 'Noto Serif CJK', 'Noto Serif SC', 'Source Han Serif SC', 'Source Han Serif', 'source-han-serif-sc', 'PT Serif', 'SongTi SC', 'MicroSoft Yahei',  serif;
+    }
+    body.serif-fonts .post-content, body.serif-fonts .blog-title {
+        font-family: 'Noto Serif CJK SC', 'Noto Serif CJK', 'Noto Serif SC', 'Source Han Serif SC', 'Source Han Serif', 'source-han-serif-sc', 'PT Serif', 'SongTi SC', 'MicroSoft Yahei',  Georgia, serif;
+    }
+</style>
+<style type="text/css">
+    /** 页面样式调整 */
+        .post-buttons a {
+        width: -webkit-calc(100% / 2 - .3125rem);
+        width: calc(100% / 2 - .3125rem);
+    }
+    
+    </style>
+<!-- 主题主色调 -->
+<style type="text/css">
+    /* Color - Custom */
+    body.color-custom a {
+        color: #000000;
+    }
+    body.color-custom *::selection {
+        background: #000000;
+        color: #fff;
+    }
+    body.color-custom #index article a, body.color-custom #post article a, body.color-custom #archive article a {
+        color: #000000;
+    }
+    body.color-custom #footer a:after, body.color-custom #header .nav li a:after, body.color-custom #post .post-meta a:after, body.color-custom #index .comments a:after, body.color-custom #index .post-content a:after, body.color-custom #post .post-content a:after, body.color-custom #archive .post-content a:after, body.color-custom #archive .comments a:after, body.color-custom #comments a:after {
+        border-color: #000000;
+    }
+    body.color-custom .post-content a {
+        color: #000000;
+    }
+    body.color-custom .post-near {
+        color: #000000;
+    }
+    body.color-custom #nav .search-box .search{
+        color: #000000;
+    }
+    body.color-custom #comments .comment-list a, body.color-custom #comments .respond a  {
+        color: #000000;
+    }
+    body.color-custom #comments .widget-title {
+        color: #000000;
+    }
+    body.color-custom .color-main {
+        color: #000000 !important;
+    }
+    body.color-custom #disqus_thread a {
+        color: #000000;
+    }
+    body.color-custom #footer a {
+        color: #000000;
+    }
+    body.color-custom .github-box .github-box-download .download:hover{
+        border-color: #000000 !important;
+        background-color: rgba(0, 0, 0, 0.4) !important;
+    }
+    body.color-custom .sp-progress {
+        background: linear-gradient(45deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1) 25%, rgba(0, 0, 0, 0.35) 50%, rgb(0, 0, 0) 75%, rgba(0, 0, 0, 0.1));
+    }
+
+    li.index-menu-item.current>a.index-menu-link, body.color-custom li.index-menu-item.current>a.index-menu-link{
+        color: #000000;
+        border-left: .125rem solid #000000;
+    }
+
+    body.color-custom .post-content .content-file:hover .content-file-icon,
+    body.color-custom .post-content .content-file:hover .content-file-filename,
+    body.color-custom .comment-content .content-file:hover .content-file-icon,
+    body.color-custom .comment-content .content-file:hover .content-file-filename,
+    body.color-custom.theme-sunset .post-content .content-file:hover .content-file-icon,
+    body.color-custom.theme-sunset .post-content .content-file:hover .content-file-filename,
+    body.color-custom.theme-sunset .comment-content .content-file:hover .content-file-icon,
+    body.color-custom.theme-sunset .comment-content .content-file:hover .content-file-filename {
+        color: #000000;
+    }
+
+    body.color-custom .post-content .content-file:hover,
+    body.color-custom .comment-content .content-file:hover,
+    body.color-custom.theme-sunset .post-content .content-file:hover,
+    body.color-custom.theme-sunset .comment-content .content-file:hover {
+        border-color: #000000;
+    }
+
+    /* Color - Custom Dark */
+    body.theme-dark a {
+        color: #000000;
+    }
+    body.theme-dark.color-custom *::selection {
+        background: #000000;
+        color: #fff;
+    }
+    body.theme-dark.color-custom #index article a, body.theme-dark.color-custom #post article a, body.theme-dark.color-custom #archive article a {
+        color: #000000;
+    }
+    body.theme-dark.color-custom #footer a:after,
+    body.theme-dark.color-custom #header .nav li a:after,
+    body.theme-dark.color-custom #post .post-meta a:after,
+    body.theme-dark.color-custom #index .comments a:after,
+    body.theme-dark.color-custom #index .post-content a:after,
+    body.theme-dark.color-custom #post .post-content a:after,
+    body.theme-dark.color-custom #archive .post-content a:after,
+    body.theme-dark.color-custom #archive .comments a:after,
+    body.theme-dark.color-custom #comments a:after
+    {
+        border-color: #000000;
+    }
+    body.theme-dark.color-custom .post-content a {
+        color: #000000;
+    }
+    body.theme-dark.color-custom .post-near {
+        color: #000000;
+    }
+    body.theme-dark.color-custom #nav .search-box .search {
+        color: #000000;
+    }
+    body.theme-dark.color-custom #comments .comment-list a, body.theme-dark.color-custom #comments .respond a  {
+        color: #000000;
+    }
+    body.theme-dark.color-custom #comments .widget-title {
+        color: #000000;
+    }
+    body.theme-dark.color-custom .color-main {
+        color: #000000 !important;
+    }
+    body.theme-dark.color-custom #disqus_thread a {
+        color: #000000;
+    }
+    body.theme-dark.color-custom #footer a {
+        color: #000000;
+    }
+    body.theme-dark.color-custom .github-box .github-box-download .download:hover{
+        border-color: #000000 !important;
+        background-color: rgba(0, 0, 0, 0.4) !important;
+    }
+    body.color-custom.theme-dark #index .post-content a:not(.no-icon), body.color-custom.theme-dark #archive .post-content a:not(.no-icon),body.color-custom.theme-dark #post .post-content a:not(.no-icon) {
+        color: #000000;
+    }
+    body.color-custom.theme-dark li.index-menu-item.current>a.index-menu-link {
+        color: #000000;
+        border-left: .125rem solid #000000;
+    }
+    body.color-custom.theme-dark .sp-progress {
+        background: linear-gradient(45deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1) 25%, rgba(0, 0, 0, 0.35) 50%, rgb(0, 0, 0) 75%, rgba(0, 0, 0, 0.1));
+    }
+
+    body.color-custom.theme-dark .post-content .content-file:hover .content-file-icon,
+    body.color-custom.theme-dark .post-content .content-file:hover .content-file-filename,
+    body.color-custom.theme-dark .comment-content .content-file:hover .content-file-icon,
+    body.color-custom.theme-dark .comment-content .content-file:hover .content-file-filename {
+        color: #000000;
+    }
+    body.color-custom.theme-dark .post-content .content-file:hover,
+    body.color-custom.theme-dark .comment-content .content-file:hover {
+        border-color: #000000;
+    }
+
+    /*桌面端*/
+    body.color-custom #index .post .post-title:hover,body.color-custom #archive .post .post-title:hover {
+        color: #000000;
+    }
+    body.color-custom.theme-dark #index .post .post-title:hover,body.color-custom.theme-dark #archive .post .post-title:hover {
+        color: #000000;
+    }
+</style>
+<script>
+    var _czc = _czc || [];
+    var _hmt = _hmt || [];
+</script>
+</head>
+<body class="theme-white color-custom card  desktop windows chrome not-safari open use-navbar">
+    <script>
+        loadPrefersDarkModeState();
+        if (LocalConst.USE_MIRAGES_DARK || LocalConst.PREFERS_DARK_MODE) {
+            var body = document.querySelector("body");
+            body.classList.remove('theme-white');
+            body.classList.add('theme-dark');
+            body.classList.add('dark-mode');
+
+            if (LocalConst.USE_MIRAGES_DARK) {
+                body.classList.remove('dark-mode');
+            } else if (LocalConst.PREFERS_DARK_MODE) {
+                body.classList.add('os-dark-mode');
+            }
+        }
+    </script>
+<!--[if lt IE 9]>
+<div class="browse-happy" role="dialog">当前网页 <strong>不支持</strong> 你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.</div>
+<![endif]-->
+<div class="sp-progress"></div>
+<div id="wrap">
+    <span id="backtop" class="waves-effect waves-button"><i class="fa fa-angle-up"></i></span>
+    <header>
+    <a id="toggle-nav" class="btn btn-primary" href="javascript:void(0);"><span>MENU</span></a>
+<nav id="site-navigation" class="sidebar no-user-select" role="navigation">
+    <div id="nav">
+        <div class="author navbar-header">
+            <a href="https://loveempathy.com/about.html">
+                <img src="http://cdn.loveempathy.com/icon.jpg" alt="Avatar" width="100" height="100"/>
+            </a>
+        </div>
+        <div class="search-box navbar-header">
+            <form class="form" id="search-form" action="https://loveempathy.com/"  role="search">
+                <input id="search" type="text" name="s" required placeholder="搜索..." class="search search-form-input">
+                <button id="search_btn" type="submit" class="search-btn"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+        <ul id="menu-menu-1" class="menu navbar-nav" data-content="656">
+                        <li class="menu-item" style="margin-bottom: 30px;"><a href="https://loveempathy.com/admin/" target="_blank">控制台</a></li>
+                        <li class="menu-item"><a href="https://loveempathy.com">首页</a></li>
+            <li>
+                <a class="slide-toggle">分类</a>
+                <div class="category-list hide">
+                                        <ul class="list"><li class="category-level-0 category-parent"><a href="https://loveempathy.com/category/default/">微信小程序</a></li><li class="category-level-0 category-parent"><a href="https://loveempathy.com/category/technique_sharing/">技术分享</a></li><li class="category-level-0 category-parent"><a href="https://loveempathy.com/category/we7/">微擎模块</a></li></ul>                </div>
+            </li>
+                                    <li class="menu-item"><a class="" href="https://loveempathy.com/Archive.html" title="归档">归档</a></li>
+                        <li class="menu-item"><a class="" href="https://loveempathy.com/links.html" title="友链">友链</a></li>
+                        <li class="menu-item"><a class="" href="https://loveempathy.com/about.html" title="关于">关于</a></li>
+                    </ul>
+    </div>
+                <div id="nav-toolbar">
+            <div class="side-toolbar">
+                <ul class="side-toolbar-list">
+                                            <li><a id="side-toolbar-rss" href="https://loveempathy.com/feed" title="RSS"><i class="fa fa-feed"></i></a></li>
+                                        <li><a id="side-toolbar-github" href="https://github.com/loveempathy" title="Github" target="_blank"><i class="fa fa-github"></i></a></li>                                            <li><a id="side-toolbar-read-settings" href="javascript:void(0);" title="阅读设置"><i class="fa fa-font"></i></a></li>
+                                    </ul>
+                <div class="read-settings-container animated">
+                    <div class="read-settings animated">
+                        <div class="font-size-controls animated">
+                            <button type="button" class="font-size-control control-btn-smaller waves-effect waves-button" data-mode="smaller">A</button>
+                            <button type="button" class="font-size-display" disabled>100%</button>
+                            <button type="button" class="font-size-control control-btn-larger waves-effect waves-button" data-mode="larger">A</button>
+                        </div>
+                        <div class="background-color-controls animated">
+                            <ul>
+                                <li><a href="javascript:void(0)" title="自动模式" class="background-color-control auto selected" data-mode="auto"><i class="fa fa-adjust"></i></a></li>
+                                <li><a href="javascript:void(0)" title="日间模式" class="background-color-control white " data-mode="white"><i class="fa fa-check-circle"></i></a></li>
+                                <li><a href="javascript:void(0)" title="日落模式" class="background-color-control sunset " data-mode="sunset"><i class="fa fa-check-circle"></i></a></li>
+                                <li><a href="javascript:void(0)" title="夜间模式" class="background-color-control dark " data-mode="dark"><i class="fa fa-check-circle"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="font-family-controls">
+                            <button type="button" class="font-family-control  control-btn-serif" data-mode="serif">Serif</button>
+                            <button type="button" class="font-family-control selected control-btn-sans-serif" data-mode="sans-serif">Sans Serif</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+<!-- Fixed navbar -->
+<nav id="navbar" class="navbar navbar-expand-md navbar-color navbar-md fixed-top no-user-select">
+    <div class="container-fluid">
+                <a class="navbar-brand " href="https://loveempathy.com"><img src="http://cdn.loveempathy.com/blog.png" alt="Logo" height="40"/></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                                                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dashboard-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        分类                    </a>
+                                        <ul class="dropdown-menu"><li class="dropdown-item category-level-0 category-parent"><a href="https://loveempathy.com/category/default/">微信小程序</a></li><li class="dropdown-item category-level-0 category-parent"><a href="https://loveempathy.com/category/technique_sharing/">技术分享</a></li><li class="dropdown-item category-level-0 category-parent"><a href="https://loveempathy.com/category/we7/">微擎模块</a></li></ul>                </li>
+                                                                                        <li class="nav-item"><a class="nav-link" href="https://loveempathy.com/Archive.html" title="归档">归档</a></li>
+                                                        <li class="nav-item"><a class="nav-link" href="https://loveempathy.com/links.html" title="友链">友链</a></li>
+                                                        <li class="nav-item"><a class="nav-link" href="https://loveempathy.com/about.html" title="关于">关于</a></li>
+                                            </ul>
+
+                        <ul class="navbar-nav side-toolbar-list">
+                <li class="navbar-search-container">
+                    <a id="navbar-search" class="search-form-input" href="javascript:void(0);" title="搜索..."><i class="fa fa-search"></i></a>
+                    <form class="search-form" action="https://loveempathy.com/" role="search">
+                        <input type="text" name="s" required placeholder="搜索..." class="search">
+                    </form>
+                </li>
+                <li><a id="nav-side-toolbar-github" href="https://github.com/loveempathy" title="Github" target="_blank"><i class="fa fa-github"></i></a></li>                                    <li>
+                        <a id="nav-side-toolbar-read-settings"  href="javascript:void(0);" title="阅读设置"><i class="fa fa-font"></i></a>
+                        <div class="read-settings-container animated">
+                            <div class="read-settings animated">
+                                <div class="font-size-controls animated">
+                                    <button type="button" class="font-size-control control-btn-smaller waves-effect waves-button" data-mode="smaller">A</button>
+                                    <button type="button" class="font-size-display" disabled>100%</button>
+                                    <button type="button" class="font-size-control control-btn-larger waves-effect waves-button" data-mode="larger">A</button>
+                                </div>
+                                <div class="background-color-controls animated">
+                                    <ul>
+                                        <li><a href="javascript:void(0)" title="自动模式" class="background-color-control auto selected" data-mode="auto"><i class="fa fa-adjust"></i></a></li>
+                                        <li><a href="javascript:void(0)" title="日间模式" class="background-color-control white " data-mode="white"><i class="fa fa-check-circle"></i></a></li>
+                                        <li><a href="javascript:void(0)" title="日落模式" class="background-color-control sunset " data-mode="sunset"><i class="fa fa-check-circle"></i></a></li>
+                                        <li><a href="javascript:void(0)" title="夜间模式" class="background-color-control dark " data-mode="dark"><i class="fa fa-check-circle"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="font-family-controls">
+                                    <button type="button" class="font-family-control  control-btn-serif" data-mode="serif">Serif</button>
+                                    <button type="button" class="font-family-control selected control-btn-sans-serif" data-mode="sans-serif">Sans Serif</button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                            </ul>
+        </div>
+    </div>
+</nav>    </header>
+    
+    <div id="body">
+        <style type="text/css">
+    /** 页面样式调整 */
+        @media(max-width: 767px) {
+        body.card #index, body.card #archive {
+            padding: 4rem 3rem 3.5rem;
+        }
+        body.card .container {
+            max-width: 710px;
+        }
+        body.card #index article, body.card #archive article {
+            padding: .9375rem 0 1.25rem;
+        }
+        body.card #index article .post-card-mask, body.card #archive article .post-card-mask {
+            height: 12.5rem;
+        }
+        body.card #index article .post-card-container, body.card #archive article .post-card-container {
+            padding: 1rem 1rem;
+        }
+        .page-navigator {
+            margin-top: 2rem;
+        }
+    }
+    @media(max-width: 336px) {
+        body.card #index article .post-card-mask, body.card #archive article .post-card-mask {
+            height: 10.5rem;
+        }
+        a.btn, .btn>a {
+            padding: .4375rem 2.25rem;
+        }
+        .page-navigator {
+            margin-top: 1.5rem;
+        }
+    }
+    @media screen and (min-width: 768px) and (max-width: 1301px) {
+        body.card .container {
+            max-width: 720px;
+        }
+    }
+    @media screen and (min-width: 1302px) and (max-width: 1599px) {
+        body.card .container {
+            max-width: 864px;
+        }
+    }
+    @media screen and (min-width: 1600px) and (max-width: 1799px){
+        body.card .container {
+            max-width: 896px;
+        }
+    }
+    @media screen and (min-width: 1800px) and (max-width: 1999px){
+        body.card .container {
+            max-width: 960px;
+        }
+    }
+    @media screen and (min-width: 2000px) and (max-width: 2399px) {
+        body.card .container {
+            max-width: 992px;
+        }
+    }
+    @media screen and (min-width: 2400px) {
+        body.card .container {
+            max-width: 1024px;
+        }
+    }
+                    #qr-box {
+        background-color: transparent;
+    }
+            .post-buttons, #qr-box {
+        display: none;
+    }
+    #body-bottom {
+        margin-top: 0;
+    }
+            
+                .inner {
+        background-color: rgba(0,0,0,0.25);
+    }
+        #masthead {
+        min-height: 12.5rem;
+    }
+                </style>
+<style type="text/css">
+    </style>        <script type="text/javascript">
+            var wrap = document.querySelector('#wrap');
+            var navbar = document.querySelector('#navbar');
+            wrap.classList.remove('display-menu-tree');
+            var body = document.querySelector('body');
+            body.classList.remove('display-menu-tree');
+            LocalConst.TOC_AT_LEFT = false;
+            LocalConst.ENABLE_MATH_JAX = true;
+            LocalConst.ENABLE_FLOW_CHART = true;
+            LocalConst.ENABLE_MERMAID = true;
+            
+                        if (body.classList.contains('no-banner')) {
+                body.classList.remove('no-banner');
+            }                        if (body.classList.contains('content-lang-en')) {
+                body.classList.remove('content-lang-en');
+            }                        if (body.classList.contains('content-serif')) {
+                body.classList.remove('content-serif');
+            }            LocalConst.SHOW_TOC = false;
+                    </script>
+                                <header id="masthead" class="align-center align-middle " style="
+            height:
+        100;">
+            <div class="blog-background"></div>
+                        <script type="text/javascript">
+                var head = document.querySelector("#masthead");
+                var bgHeight = getBgHeight(window.innerHeight, '100', '40');
+                head.style.height = bgHeight + "px";
+                                var banner = 'http://cdn.loveempathy.com/67342794_p1.jpg' + getImageAddon("-1", window.screen.availWidth, window.screen.availHeight);
+                head.querySelector(".blog-background").style.backgroundImage = 'url("' + banner + '")';
+                            </script>
+                        <div class="inner">
+                <div class="container">
+                    <h1 class="blog-title" style="">LoveEmpathy</h1>
+                    <h2 class="blog-description" style="">一个在前端匍匐前进的人</h2>
+                </div>
+            </div>
+                    </header>
+                    <div class="container">
+            <div class="row">
+
+
+
+<div id="index" role="main">
+    	                                <article itemscope itemtype="http://schema.org/BlogPosting" class="">
+                    <div class="display-none" itemscope itemprop="author" itemtype="http://schema.org/Person">
+                        <meta itemprop="name" content="LoveEmpathy"/>
+                        <meta itemprop="url" content="http://www.typecho.org"/>
+                    </div>
+                    <div class="display-none" itemscope itemprop="publisher" itemtype="http://schema.org/Organization">
+                        <meta itemprop="name" content="LoveEmpathy"/>
+                        <div itemscope itemprop="logo" itemtype="http://schema.org/ImageObject">
+                            <meta itemprop="url" content="https://secure.gravatar.com/avatar/8dacc88212fe13e26eb2566235ffbd05?s=50&amp;r=G&amp;d=">
+                        </div>
+                    </div>
+                    <meta itemprop="url mainEntityOfPage" content="https://loveempathy.com/archives/29/" />
+                    <meta itemprop="dateModified" content="2020-06-03T17:39:02+08:00">
+
+                    <a href="https://loveempathy.com/archives/29/">
+                                                <div class="post-card" id="post-card-29" >
+                                                                                                <div class="blog-background"></div>
+                                    <script type="text/javascript">
+                                        loadBannerDirect('https://loveempathy.com/usr/uploads/2020/06/3961415241.png', '', document.querySelector('#post-card-29'), '3', document.querySelector('#post-card-29').offsetWidth, document.querySelector('#post-card-29').offsetHeight);
+                                    </script>
+                                                                                        <div class="post-card-mask">
+                                <div class="post-card-container">
+                                    <h2 class="post-card-title" itemprop="headline">WxappForTypecho</h2>
+                                    <div class="post-card-info">
+                                        <span itemprop="author" itemscope itemtype="http://schema.org/Person">LoveEmpathy • </span>                                        <span itemprop="datePublished" content="2019-12-29T11:25:00+08:00">2019 年 12 月 29 日 • </span>
+                                        <span>微信小程序</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+                                                <article itemscope itemtype="http://schema.org/BlogPosting" class="">
+                    <div class="display-none" itemscope itemprop="author" itemtype="http://schema.org/Person">
+                        <meta itemprop="name" content="LoveEmpathy"/>
+                        <meta itemprop="url" content="http://www.typecho.org"/>
+                    </div>
+                    <div class="display-none" itemscope itemprop="publisher" itemtype="http://schema.org/Organization">
+                        <meta itemprop="name" content="LoveEmpathy"/>
+                        <div itemscope itemprop="logo" itemtype="http://schema.org/ImageObject">
+                            <meta itemprop="url" content="https://secure.gravatar.com/avatar/8dacc88212fe13e26eb2566235ffbd05?s=50&amp;r=G&amp;d=">
+                        </div>
+                    </div>
+                    <meta itemprop="url mainEntityOfPage" content="https://loveempathy.com/archives/10/" />
+                    <meta itemprop="dateModified" content="2019-12-28T09:38:09+08:00">
+
+                    <a href="https://loveempathy.com/archives/10/">
+                                                <div class="post-card" id="post-card-10" >
+                                                                                                <div class="blog-background"></div>
+                                    <script type="text/javascript">
+                                        loadBannerDirect('https://cdn.loveempathy.com/2019-8-30%2016.54.png', '', document.querySelector('#post-card-10'), '-1', document.querySelector('#post-card-10').offsetWidth, document.querySelector('#post-card-10').offsetHeight);
+                                    </script>
+                                                                                        <div class="post-card-mask">
+                                <div class="post-card-container">
+                                    <h2 class="post-card-title" itemprop="headline">小程序如何实现AOP</h2>
+                                    <div class="post-card-info">
+                                        <span itemprop="author" itemscope itemtype="http://schema.org/Person">LoveEmpathy • </span>                                        <span itemprop="datePublished" content="2019-08-30T18:43:00+08:00">2019 年 08 月 30 日 • </span>
+                                        <span>微信小程序</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+                                                <article itemscope itemtype="http://schema.org/BlogPosting" class="">
+                    <div class="display-none" itemscope itemprop="author" itemtype="http://schema.org/Person">
+                        <meta itemprop="name" content="LoveEmpathy"/>
+                        <meta itemprop="url" content="http://www.typecho.org"/>
+                    </div>
+                    <div class="display-none" itemscope itemprop="publisher" itemtype="http://schema.org/Organization">
+                        <meta itemprop="name" content="LoveEmpathy"/>
+                        <div itemscope itemprop="logo" itemtype="http://schema.org/ImageObject">
+                            <meta itemprop="url" content="https://secure.gravatar.com/avatar/8dacc88212fe13e26eb2566235ffbd05?s=50&amp;r=G&amp;d=">
+                        </div>
+                    </div>
+                    <meta itemprop="url mainEntityOfPage" content="https://loveempathy.com/archives/9/" />
+                    <meta itemprop="dateModified" content="2020-06-18T21:07:15+08:00">
+
+                    <a href="https://loveempathy.com/archives/9/">
+                                                <div class="post-card" id="post-card-9" >
+                                                                                                <div class="blog-background"></div>
+                                    <script type="text/javascript">
+                                        loadBannerDirect('https://loveempathy.com/usr/uploads/2019/12/3204157316.png', '', document.querySelector('#post-card-9'), '3', document.querySelector('#post-card-9').offsetWidth, document.querySelector('#post-card-9').offsetHeight);
+                                    </script>
+                                                                                        <div class="post-card-mask">
+                                <div class="post-card-container">
+                                    <h2 class="post-card-title" itemprop="headline">仿酷安app发布按钮动效</h2>
+                                    <div class="post-card-info">
+                                        <span itemprop="author" itemscope itemtype="http://schema.org/Person">LoveEmpathy • </span>                                        <span itemprop="datePublished" content="2019-08-28T18:22:00+08:00">2019 年 08 月 28 日 • </span>
+                                        <span>微信小程序</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+                                                <article itemscope itemtype="http://schema.org/BlogPosting" class="">
+                    <div class="display-none" itemscope itemprop="author" itemtype="http://schema.org/Person">
+                        <meta itemprop="name" content="LoveEmpathy"/>
+                        <meta itemprop="url" content="http://www.typecho.org"/>
+                    </div>
+                    <div class="display-none" itemscope itemprop="publisher" itemtype="http://schema.org/Organization">
+                        <meta itemprop="name" content="LoveEmpathy"/>
+                        <div itemscope itemprop="logo" itemtype="http://schema.org/ImageObject">
+                            <meta itemprop="url" content="https://secure.gravatar.com/avatar/8dacc88212fe13e26eb2566235ffbd05?s=50&amp;r=G&amp;d=">
+                        </div>
+                    </div>
+                    <meta itemprop="url mainEntityOfPage" content="https://loveempathy.com/archives/8/" />
+                    <meta itemprop="dateModified" content="2019-12-28T09:43:57+08:00">
+
+                    <a href="https://loveempathy.com/archives/8/">
+                                                <div class="post-card" id="post-card-8" >
+                                                                                                <div class="blog-background"></div>
+                                    <script type="text/javascript">
+                                        loadBannerDirect('http://cdn.loveempathy.com/7.jpg', '', document.querySelector('#post-card-8'), '-1', document.querySelector('#post-card-8').offsetWidth, document.querySelector('#post-card-8').offsetHeight);
+                                    </script>
+                                                                                        <div class="post-card-mask">
+                                <div class="post-card-container">
+                                    <h2 class="post-card-title" itemprop="headline">微信小程序如何绕过业务域名的验证(首先要保证有自己的服务器和备案成功的域名)，亲测可用！</h2>
+                                    <div class="post-card-info">
+                                        <span itemprop="author" itemscope itemtype="http://schema.org/Person">LoveEmpathy • </span>                                        <span itemprop="datePublished" content="2019-08-28T17:56:00+08:00">2019 年 08 月 28 日 • </span>
+                                        <span>微信小程序</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+                                                <article itemscope itemtype="http://schema.org/BlogPosting" class="">
+                    <div class="display-none" itemscope itemprop="author" itemtype="http://schema.org/Person">
+                        <meta itemprop="name" content="LoveEmpathy"/>
+                        <meta itemprop="url" content="http://www.typecho.org"/>
+                    </div>
+                    <div class="display-none" itemscope itemprop="publisher" itemtype="http://schema.org/Organization">
+                        <meta itemprop="name" content="LoveEmpathy"/>
+                        <div itemscope itemprop="logo" itemtype="http://schema.org/ImageObject">
+                            <meta itemprop="url" content="https://secure.gravatar.com/avatar/8dacc88212fe13e26eb2566235ffbd05?s=50&amp;r=G&amp;d=">
+                        </div>
+                    </div>
+                    <meta itemprop="url mainEntityOfPage" content="https://loveempathy.com/archives/7/" />
+                    <meta itemprop="dateModified" content="2020-06-18T21:05:55+08:00">
+
+                    <a href="https://loveempathy.com/archives/7/">
+                                                <div class="post-card" id="post-card-7" >
+                                                                                                <div class="blog-background"></div>
+                                    <script type="text/javascript">
+                                        loadBannerDirect('https://loveempathy.com/usr/uploads/2019/12/4258853753.png', '', document.querySelector('#post-card-7'), '3', document.querySelector('#post-card-7').offsetWidth, document.querySelector('#post-card-7').offsetHeight);
+                                    </script>
+                                                                                        <div class="post-card-mask">
+                                <div class="post-card-container">
+                                    <h2 class="post-card-title" itemprop="headline">微信小程序纯css下雨下雪效果</h2>
+                                    <div class="post-card-info">
+                                        <span itemprop="author" itemscope itemtype="http://schema.org/Person">LoveEmpathy • </span>                                        <span itemprop="datePublished" content="2019-08-28T17:50:00+08:00">2019 年 08 月 28 日 • </span>
+                                        <span>微信小程序</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+                            <ol class="page-navigator"><li class="current"><a href="https://loveempathy.com/page/1/">1</a></li><li><a href="https://loveempathy.com/page/2/">2</a></li><li class="btn btn-primary next"><a href="https://loveempathy.com/page/2/">下一页</a></li></ol></div>
+</div>
+</div>
+<div id="body-bottom">
+</div>
+    </div><!-- end #body -->
+</div><!-- end #wrap -->
+<footer id="footer" role="contentinfo">
+    <div class="container"  data-index="253">
+        <p>Copyright &copy; 2020 <a href="https://loveempathy.com/">LoveEmpathy</a></p><p><a href="http://beian.miit.gov.cn" target='_blank'> 辽ICP备19009565号</a> • Powered by <a href="http://typecho.org" target="_blank">Typecho</a> • Theme <a href="https://get233.com/archives/mirages-intro.html" target="_blank">Mirages</a></p>    </div>
+</footer>
+
+<div id="loader-wrapper">
+    <div class="sk-circle">
+        <div class="sk-circle1 sk-child"></div>
+        <div class="sk-circle2 sk-child"></div>
+        <div class="sk-circle3 sk-child"></div>
+        <div class="sk-circle4 sk-child"></div>
+        <div class="sk-circle5 sk-child"></div>
+        <div class="sk-circle6 sk-child"></div>
+        <div class="sk-circle7 sk-child"></div>
+        <div class="sk-circle8 sk-child"></div>
+        <div class="sk-circle9 sk-child"></div>
+        <div class="sk-circle10 sk-child"></div>
+        <div class="sk-circle11 sk-child"></div>
+        <div class="sk-circle12 sk-child"></div>
+    </div>
+</div>
+
+    <script src="https://loveempathy.com/usr/themes/Mirages/static/jquery/2.2.4/jquery.min.js" type="text/javascript"></script>
+<script src="https://loveempathy.com/usr/themes/Mirages/js/7.10.1/mirages.main.min.js" type="text/javascript"></script>
+<script type="text/javascript">(function(w){var t=function(){var i=new Image();i.src='https://loveempathy.com/access/log/track.gif?u='+location.pathname+location.search+location.hash+'&cid=&mid=0&rand='+new Date().getTime()};t();var a={};a.track=t;w.Access=a})(this);</script><script type="text/javascript">Mirages.highlightCodeBlock();</script>
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+                    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+                    skipStartupTypeset: true
+        });
+    </script>
+    <script src="https://loveempathy.com/usr/themes/Mirages/static/mathjax/2.7.5/MathJax.js" type="text/javascript"></script>
+    <script src="https://loveempathy.com/usr/themes/Mirages/static/mathjax/2.7.5/config/TeX-AMS-MML_SVG.js" type="text/javascript"></script>
+
+<script type="text/javascript">pangu.spacingElementByClassName('container');</script>
+<script type="text/javascript">Waves.init();</script>
+    <script src="https://loveempathy.com/usr/themes/Mirages/static/raphael/2.2.7/raphael.min.js"></script>
+    <script src="https://loveempathy.com/usr/themes/Mirages/static/flowchart/1.10.0/flowchart.min.js"></script>
+    <script type="text/javascript">Mirages.renderFlowChart();</script>
+
+    <script src="https://loveempathy.com/usr/themes/Mirages/static/mermaid/8.0.0/mermaid.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            Mirages.renderMermaid();
+        });
+    </script>
+<script type="text/javascript">
+    (function ($) {
+                if (typeof registCommentEvent === 'function') {
+            registCommentEvent();
+        }
+                                Mirages.setupPage();
+                $('body').pjax('a[href^="https://loveempathy.com"]:not(a[target="_blank"], a[no-pjax])', {
+                container: '#body',
+                fragment: '#body',
+                timeout: 8000
+            }
+        ).on('pjax:click', function() {
+            window.asyncBannerLoadNum = 0;
+            window.asyncBannerLoadCompleteNum = 0;
+            Mirages.doPJAXClickAction();
+                    }).on('pjax:send', function() {
+            Mirages.doPJAXSendAction();
+                    }).on('pjax:complete', function() {
+                        if (typeof registCommentEvent === 'function') {
+                registCommentEvent();
+            }
+                        Mirages.doPJAXCompleteAction();
+                    });
+            })(jQuery);
+        function ExSearchCall(item){
+        if (item && item.length) {
+            // 关闭搜索框
+            $('.ins-close').click();
+            $.pjax({
+                url: item.attr('data-url'),
+                container: '#body',
+                fragment: '#body',
+                timeout: 8000
+            });
+        }
+    }
+    </script>
+
+</body>
+</html>
+
