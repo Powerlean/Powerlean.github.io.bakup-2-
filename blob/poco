@@ -514,13 +514,13 @@ elif [ "$1" == "group" -o "$1" == "g" ]; then
   progress
   not_found=`curl -s ${site_404}`
   try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${blob}${2})
-  if [type -ne "200" ]; then
+  if [ "$try" -ne "200" ]; then
     ${void_found}
     VIBRATE_ERROR 
     exit 2
   else
     type=`curl -s ${site}/${blob}/${2} | sed '/^type=/!d;s/.*=//'`
-    if [ "$type" -ne "group" ]; then
+    if [[ "$type" -ne "group" ]]; then
       ${void_group}
       VIBRATE_ERROR 
       exit 2
