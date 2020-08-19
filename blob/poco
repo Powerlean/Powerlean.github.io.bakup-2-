@@ -185,8 +185,14 @@ export depends_loaded_cn="自动选定软件包"
 export depends_done_cn="echo 所有依赖均已加入哈希表"
 export site_warn_cn="echo ${red}请谨慎不明身份的网站${done}"
 export depends_error_cn="echo -e ${red}该软件的依赖项无法被满足${done}"
+export group_info_cn="自定义的引导安装"
+export void_group_cn="echo -e 所选中${yellow}${2}${done}不是group引导文件，但您可以使用${yellow}poco install ${2}${done}来将其安装"
+export group_install_cn="echo -n 拉取所选中的group引导"
+export group_done_cn="echo 进程结束"
 
 #English
+export group_install="echo -n Pulling the group index file"
+export void_group="echo -e ${yellow}${2}${done} is not a group index file,but can be installed with ${yellow}poco install ${2}"
 export install="Are you sure that you want to download this file?"
 export come="From"
 export void="echo -e ${red}Invalid operation ${1}${done}"
@@ -231,10 +237,14 @@ export depends_done="echo Dependency were built done"
 export site_warn="echo ${red}Unofficial websites can be dangerous${done}"
 export depends_error="echo -e ${red}The software's dependencies cannot be met${done}"
 export null_search="echo -e ${yellow}NULL${done}"
+export group_info="Custom installation"
+export group_done="echo Process done"
 
 #语言设定
 #LANG="zh_CN.UTF-8" #取消该注释将程序设定为中文(在句尾另添一个"#")
 if [[ "$LANG" == zh_*.UTF-8 || "$language" == CN ]]; then
+  export group_info=$group_info_cn
+  export void_group=$void_group_cn
   export bad_suffix=$bad_suffix_cn
   export list_info=$list_info_cn
   export unit=$unit_cn
@@ -443,6 +453,7 @@ elif [ "$1" == "help" -o "$1" == "h" -o "$1" == "-h" ]; then
   echo -e "${green}h${done}elp          ${help_info}"
   echo -e "${green}l${done}ist          ${list_info}"
   echo -e "${green}s${done}earch        ${search_info}"
+  echo -e "${green}g${done}roup         ${group_info}"
   echo ""
   echo "${suffix}"
   echo -e "-y            ${y_info}"
@@ -466,6 +477,62 @@ elif [ "$1" == "search" -o "$1" == "s" ]; then
   VIBRATE_DONE
 
 #主体(六扇区)
+elif [ "$1" == "group" -o "$1" == "g" ]; then
+  if [ not"$2" == "not" ]; then
+    ${not_input}
+    VIBRATE_ERROR
+    exit 2
+  fi
+  ${check_version}
+  progress
+   curl -s ${site}$blob/poco.update | bash
+   ${vibrate}
+   
+   CHECK_FILE() {
+   ${check_file}
+   progress
+   origin=$(curl -s ${site}$blob/poco)
+   local=$(cat $bin/poco)
+   if [[ "${#origin}" -ne "${#local}" ]]; then
+     ${re_install}
+     VIBRATE_ERROR
+     export mode="update"
+     curl -s ${site}$blob/poco.setup | bash
+   fi
+   ${vibrate}
+   }
+   
+   #若版本更新被触发，则跳过文件校验
+ check_status="CHECK_FILE"
+ if [ "$status" == "complete" ]; then
+  unset check_status
+ fi
+  
+   #文件校验环节
+  ${check_status}
+  ${search}
+  progress
+  not_found=`curl -s ${site_404}`
+  try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${blob}${2})
+  if [type -ne "200" ]; then
+    ${void_found}
+    VIBRATE_ERROR 
+    exit 2
+  else
+    type=`curl -s ${site}/${blob}/${2} | sed '/^type=/!d;s/.*=//'`
+    if [ "$type" -ne "group" ]; then
+      ${void_group}
+      VIBRATE_ERROR 
+      exit 2
+    fi
+    ${group_install}
+    progress
+    curl -s ${site}/${blob}/${2} | bash
+    ${group_done}
+  fi
+    
+    
+#主体(七扇区)
 else
   ${void}
   poco help
