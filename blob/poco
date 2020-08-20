@@ -443,7 +443,7 @@ elif [ "$1" == "remove" -o "$1" == "r" ]; then
   
   for i in $@
   do
-  if [ "$i" -ne "r" ] || [ "$i" -ne "remove" ]; then
+  if [ "$i" != "r" -o "$i" i= "remove" ]; then
     if [ -f $bin/$i ]; then
       ${file_remove}
       rm -rf $bin/$i #因为不明文件属性，故强制递归
