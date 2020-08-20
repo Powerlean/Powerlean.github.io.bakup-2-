@@ -114,13 +114,13 @@ done
 DEPENDS_REMOVE() {
 ${check_depends} #提示语
 progress
-try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${blob}${2})
+try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${blob}${i})
 if [ "$try" -ne "200" ]; then
   group_done
   VIBRATE_DONE
   exit 0
 fi
-eval "$(curl -s ${site}${tree}${1}.tree)" #生成输出变量
+eval "$(curl -s ${site}${tree}${i}.tree)" #生成输出变量
 for i in $depends
 do
    if [ -f $bin/$i ]; then #递归检查依赖
@@ -443,16 +443,13 @@ elif [ "$1" == "remove" -o "$1" == "r" ]; then
   
   for i in $@
   do
-  if [ "$i" != "r" -o "$i" != "remove" ]; then
+  if [ "$i" -ne "r" || "$i" -ne "remove" ]; then
     if [ -f $bin/$i ]; then
       ${file_remove}
       rm -rf $bin/$i #因为不明文件属性，故强制递归
       DEPENDS_REMOVE
       VIBRATE_DONE
       ${group_done}
-    else
-      ${error_found}
-      VIBRATE_ERROR
     fi
   fi
 done
