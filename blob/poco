@@ -124,7 +124,7 @@ eval "$(curl -s ${site}${tree}${i}.tree)" #生成输出变量
 for i in $depends
 do
    if [ -f $bin/$i ]; then #递归检查依赖
-     ${file_remove} #提示语
+     echo -e "${files}${yellow}${i}${done}${remove_tip}" #提示语
      poco remove $i
      ${vibrate} #震动一次
    fi
@@ -207,7 +207,9 @@ export group_info_cn="自定义的引导安装"
 export void_group_cn="echo -e 所选中${yellow}${2}${done}不是group引导文件，但您可以使用${yellow}poco install ${2}${done}来将其安装"
 export group_install_cn="echo -n 拉取所选中的group引导"
 export group_done_cn="echo 进程结束"
-export file_remove_cn="echo -e 所选中${yellow}${i}${done}将被移除"
+export file_remove_cn="所选中${yellow}${i}${done}将被移除"
+export files_cn="所选中"
+export remove_tip_cn="将被移除"
 
 #English
 export file_remove="echo -e File ${yellow}${i}${done} will be remove"
@@ -259,6 +261,8 @@ export depends_error="echo -e ${red}The software's dependencies cannot be met${d
 export null_search="echo -e ${yellow}NULL${done}"
 export group_info="Custom installation"
 export group_done="echo Process done"
+export files="File "
+export remove_tip=" will be removed"
 
 #语言设定
 #LANG="zh_CN.UTF-8" #取消该注释将程序设定为中文(在句尾另添一个"#")
@@ -312,6 +316,7 @@ if [[ "$LANG" == zh_*.UTF-8 || "$language" == CN ]]; then
   export  group_install=$group_install_cn
   export group_done=$group_done_cn
   export file_remove=$file_remove_cn
+  export remove_tip=$remove_tip_cn
 fi
 
 
@@ -445,14 +450,14 @@ elif [ "$1" == "remove" -o "$1" == "r" ]; then
   do
   if [ "$i" != "r" -o "$i" i= "remove" ]; then
     if [ -f $bin/$i ]; then
-      ${file_remove}
+      echo -e "${files}${yellow}${i}${done}${remove_tip}"
       rm -rf $bin/$i #因为不明文件属性，故强制递归
       DEPENDS_REMOVE
-      VIBRATE_DONE
-      ${group_done}
     fi
   fi
 done
+ VIBRATE_DONE
+ ${group_done}
 
 #主体(三扇区) LIST
 elif [ "$1" == "list" -o "$1" == "l" ]; then
