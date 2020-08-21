@@ -116,7 +116,7 @@ ${check_depends} #提示语
 progress
 try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${blob}${i})
 if [ "$try" -ne "200" ]; then
-  group_done
+  ${group_done}
   VIBRATE_DONE
   exit 0
 fi
