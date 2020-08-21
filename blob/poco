@@ -317,6 +317,7 @@ if [[ "$LANG" == zh_*.UTF-8 || "$language" == CN ]]; then
   export group_done=$group_done_cn
   export file_remove=$file_remove_cn
   export remove_tip=$remove_tip_cn
+  export files=$files_cn
 fi
 
 
