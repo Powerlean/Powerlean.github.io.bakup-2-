@@ -147,13 +147,13 @@ function progress {
   point="echo -n ."
   sec="0.2"
   loop=1
-while [ $loop -lt 3 ]; do
+while [ $loop -lt 4 ]; do
     sleep $sec
     $point
     loop=$(($loop+1))
 done
-sleep $sec
-echo "."
+#sleep $sec
+#echo "."
 }
 
 #字符变量#
@@ -209,8 +209,10 @@ export group_done_cn="echo 进程结束"
 export file_remove_cn="所选中${yellow}${i}${done}将被移除"
 export files_cn="所选中"
 export remove_tip_cn="将被移除"
+export done_tip_cn="echo -e [完成]"
 
 #English
+export done_tip="echo -e [Done]"
 export file_remove="echo -e File ${yellow}${i}${done} will be remove"
 export group_install="echo -n Pulling the group index file"
 export void_group="echo -e ${yellow}${2}${done} is not a group index file,but can be installed with ${yellow}poco install ${2}"
@@ -266,6 +268,7 @@ export remove_tip=" will be removed"
 #语言设定
 #LANG="zh_CN.UTF-8" #取消该注释将程序设定为中文(在句尾另添一个"#")
 if [[ "$LANG" == zh_*.UTF-8 || "$language" == CN ]]; then
+  export done_tip=$done_tip_cn
   export group_info=$group_info_cn
   export void_group=$void_group_cn
   export bad_suffix=$bad_suffix_cn
