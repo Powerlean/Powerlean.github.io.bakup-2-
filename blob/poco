@@ -209,10 +209,10 @@ export group_done_cn="echo 进程结束"
 export file_remove_cn="所选中${yellow}${i}${done}将被移除"
 export files_cn="所选中"
 export remove_tip_cn="将被移除"
-export done_tip_cn="echo -e [完成]"
+export done_tip_cn="echo -e 完成"
 
 #English
-export done_tip="echo -e [Done]"
+export done_tip="echo -e Done"
 export file_remove="echo -e File ${yellow}${i}${done} will be remove"
 export group_install="echo -n Pulling the group index file"
 export void_group="echo -e ${yellow}${2}${done} is not a group index file,but can be installed with ${yellow}poco install ${2}"
