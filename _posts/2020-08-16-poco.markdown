@@ -4,11 +4,11 @@ title:  Power Collector用法简述
 date:   2020-08-16 00:05:21 +0800
 tags: Shell
 color: rgb(245,70,90)
-cover: 'https://powerlean.gitee.io/images/QQ%E5%9B%BE%E7%89%8720200816120219.jpg'
+cover: 'https://ae01.alicdn.com/kf/Hec54846cf57c4cbfa0bff6cae6090ff1E.jpg'
 subtitle: 'Power Collector是一个类包管理器'
 ---
 
-![](https://powerlean.gitee.io/images/QQ%E5%9B%BE%E7%89%8720200816120219.jpg)
+![](https://ae01.alicdn.com/kf/Hec54846cf57c4cbfa0bff6cae6090ff1E.jpg)
 
 #### Power Collector是一个结构简单，易操作的类包管理器
 * 访问我的[博客](https://powerlean.top)
