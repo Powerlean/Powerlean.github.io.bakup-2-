@@ -52,54 +52,7 @@ var _hmt = _hmt || [];
 <!--加载动画-->
 <a href="#top" id="toTop"></a><div id="loading"> <ul class="bokeh"> <li></li> <li></li> <li></li> <li></li> </ul></div>
 <!--加载动画-->
-<header id="index-header">
-  <div class="top-center">
-      <div class="logo">
-        <a href="/"><img src="https://powerlean.top/images/powblack.png" width="126" height="45" align ="center">
-        </a>
-      </div>
-      <nav class="top-nav">
-          <ul>
-              
-                <li><a href="/">首页</a></li>
-              
-                <li><a href="/tags.html">标签</a></li>
-              
-                <li><a href="/timeline.html">足迹</a></li>
-              
-                <li><a href="/about.html">关于</a></li>
-              
-                <li><a href="/friendLink.html">链接</a></li>
-              
-                <li><a href="/blob">存储</a></li>
-              
-          </ul>
-      </nav>
-      <div id="top-boot">
-        <a href="javascript:;" id="boot1" style="display:block;" onclick="document.getElementById('boot-area').style.display='block';document.getElementById('boot1').style.display='none';document.getElementById('boot2').style.display='block';"><img src="/assets/boot.png" alt=""></a>
-        <a href="javascript:;" id="boot2" style="display: none;" onclick="document.getElementById('boot-area').style.display='none';document.getElementById('boot1').style.display='block';document.getElementById('boot2').style.display='none';"><img src="/assets/boot.png" alt=""></a>
-      </div>
-  </div>
-
-</header>
-
-<div id="boot-area">
-    <ul>
-        
-          <a href="/"><li>首页</li></a>
-        
-          <a href="/tags.html"><li>标签</li></a>
-        
-          <a href="/timeline.html"><li>足迹</li></a>
-        
-          <a href="/about.html"><li>关于</li></a>
-        
-          <a href="/friendLink.html"><li>链接</li></a>
-        
-          <a href="/blob"><li>存储</li></a>
-        
-    </ul>
-</div>
+{% include header.html %}
 
 <main>
     <div class="wow fadeIn top" data-wow-duration="3.5s" >
