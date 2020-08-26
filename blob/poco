@@ -386,7 +386,6 @@ ${done_tip}
   else
     ${vibrate}
     ${try_download}
-    progress
     if [ "$3" == "-y" -o "$3" == "-Y" ]; then #跳过确认环节
        curl -#OL ${site}/$blob/$2
        ${done_tip}
@@ -467,7 +466,6 @@ elif [ "$1" == "remove" -o "$1" == "r" ]; then
   fi
 done
  VIBRATE_DONE
- ${group_done}
 
 #主体(三扇区) LIST
 elif [ "$1" == "list" -o "$1" == "l" ]; then
