@@ -127,6 +127,10 @@ do
    if [ -f $bin/$i ]; then #递归检查依赖
      poco remove $i
      ${vibrate} #震动一次
+   else
+      ${group_done}
+      VIBRATE_DONE
+      exit 0
    fi
 done
 }
