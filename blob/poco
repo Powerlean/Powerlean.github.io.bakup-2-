@@ -392,7 +392,6 @@ ${done_tip}
     ${try_download}
     if [ "$3" == "-y" -o "$3" == "-Y" ]; then #跳过确认环节
        curl -#OL ${site}/$blob/$2
-       ${done_tip}
        ${vibrate}
     elif [ not"$3" == "not" ]; then
     ${done_tip}
