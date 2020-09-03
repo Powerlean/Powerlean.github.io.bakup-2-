@@ -353,7 +353,7 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
   progress
    curl -s ${site}$blob/poco.update | bash
    ${vibrate}
-${done_tip}
+   ${done_tip}
    
    CHECK_FILE() {
    ${check_file}
@@ -383,12 +383,12 @@ ${done_tip}
   not_found=`curl -s ${site_404}`
   try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${blob}${2})
   if [ "$try" -ne "200" ]; then
-    echo "${red}${try}${done}"
+    echo -e "${red}${try}${done}"
     ${void_found}
     VIBRATE_ERROR
     exit 2
   else
-    echo "${green}${try}OK${done}"
+    echo -e "${green}${try}OK${done}"
     ${vibrate}
     ${try_download}
     if [ "$3" == "-y" -o "$3" == "-Y" ]; then #跳过确认环节
@@ -552,12 +552,12 @@ elif [ "$1" == "group" -o "$1" == "g" ]; then
   not_found=`curl -s ${site_404}`
   try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${blob}${2})
   if [ "$try" -ne "200" ]; then
-    echo "${red}${try}${done}"
+    echo -e "${red}${try}${done}"
     ${void_found}
     VIBRATE_ERROR 
     exit 2
   else
-    echo "${green}${try}OK${done}"
+    echo -e "${green}${try}OK${done}"
     type=`curl -s ${site}/${blob}/${2} | sed '/^type=/!d;s/.*=//'`
     if [ "$type" != "group" ]; then
       ${void_group}
