@@ -382,12 +382,13 @@ ${done_tip}
   progress
   not_found=`curl -s ${site_404}`
   try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${blob}${2})
-  ${done_tip}
   if [ "$try" -ne "200" ]; then
+    echo "${red}${try}${done}
     ${void_found}
     VIBRATE_ERROR
     exit 2
   else
+    echo "${green}${try}OK${done}"
     ${vibrate}
     ${try_download}
     if [ "$3" == "-y" -o "$3" == "-Y" ]; then #跳过确认环节
