@@ -112,6 +112,35 @@ do
 done     
 }
 
+CHECK_UPDATE() {
+lastest=$(curl -s powerlean.top/blob/poco | sed '/^export version=/!d;s/.*=//')
+if [ $version -ne $lastest ]; then
+  ${force_update}
+  export mode="update"
+  curl -s powerlean.top/blob/poco.setup | bash
+  ${vibrate}
+  function progress_strong {
+  point="echo -e -n ${green} .${done}"
+  sec="0.5"
+  loop=1
+while [ $loop -lt 15 ]; do
+    sleep $sec
+    $point
+    loop=$(($loop+1))
+done
+  echo " ."
+  sleep 5
+}
+  clear
+  ${update_note}
+  curl -s powerlean.top/blob/poco.note
+  progress_strong
+  $vibrate;$vibrate;$vibrate
+  clear
+  export status="complete"
+fi
+}
+
 DEPENDS_REMOVE() {
 ${check_depends} #提示语
 progress
@@ -351,9 +380,9 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
   fi
   ${check_version}
   progress
-   curl -s ${site}$blob/poco.update | bash
-   ${vibrate}
-   ${done_tip}
+  CHECK_UPDATE
+  ${vibrate}
+  ${done_tip}
    
    CHECK_FILE() {
    ${check_file}
@@ -521,7 +550,7 @@ elif [ "$1" == "group" -o "$1" == "g" ]; then
   fi
   ${check_version}
   progress
-  curl -s ${site}$blob/poco.update | bash
+  CHECK_UPDATE
   ${done_tip}
   ${vibrate}
    
