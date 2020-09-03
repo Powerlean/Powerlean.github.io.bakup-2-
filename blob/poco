@@ -78,7 +78,7 @@ done
 DEPENDS() {
 ${check_depends} #提示语
 progress
-try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${blob}${2})
+try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${blob}${2}) #调取HTTP代码
  ${done_tip}
  if [ "$try" -ne "200" ]; then
   ${depends_error}
