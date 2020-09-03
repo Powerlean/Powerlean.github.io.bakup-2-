@@ -393,7 +393,7 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
    if [[ "${#origin}" -ne "${#local}" ]]; then
      ${re_install}
      VIBRATE_ERROR
-     export mode="update"
+     export mode="update" #输出模式
      curl -s ${site}$blob/poco.setup | bash
    fi
    ${vibrate}
