@@ -521,14 +521,16 @@ elif [ "$1" == "group" -o "$1" == "g" ]; then
   fi
   ${check_version}
   progress
-   curl -s ${site}$blob/poco.update | bash
-   ${vibrate}
+  curl -s ${site}$blob/poco.update | bash
+  ${done_tip}
+  ${vibrate}
    
    CHECK_FILE() {
    ${check_file}
    progress
    origin=$(curl -s ${site}$blob/poco)
    local=$(cat $bin/poco)
+   ${done_tip}
    if [[ "${#origin}" -ne "${#local}" ]]; then
      ${re_install}
      VIBRATE_ERROR
@@ -548,7 +550,6 @@ elif [ "$1" == "group" -o "$1" == "g" ]; then
   ${check_status}
   ${search}
   progress
-  not_found=`curl -s ${site_404}`
   try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${blob}${2})
   if [ "$try" -ne "200" ]; then
     echo -e "${red}${try}[ERROR]${done}"
