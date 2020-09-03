@@ -383,7 +383,7 @@ ${done_tip}
   not_found=`curl -s ${site_404}`
   try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${blob}${2})
   if [ "$try" -ne "200" ]; then
-    echo "${red}${try}${done}
+    echo "${red}${try}${done}"
     ${void_found}
     VIBRATE_ERROR
     exit 2
@@ -552,10 +552,12 @@ elif [ "$1" == "group" -o "$1" == "g" ]; then
   not_found=`curl -s ${site_404}`
   try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${blob}${2})
   if [ "$try" -ne "200" ]; then
+    echo "${red}${try}${done}"
     ${void_found}
     VIBRATE_ERROR 
     exit 2
   else
+    echo "${green}${try}OK${done}"
     type=`curl -s ${site}/${blob}/${2} | sed '/^type=/!d;s/.*=//'`
     if [ "$type" != "group" ]; then
       ${void_group}
@@ -564,6 +566,7 @@ elif [ "$1" == "group" -o "$1" == "g" ]; then
     fi
     ${group_install}
     progress
+    echo ""
     curl -s ${site}/${blob}/${2} | bash
     ${vibrate}
     ${group_done}
