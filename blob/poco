@@ -169,7 +169,9 @@ RESCUE() {
   export mode="update"
   curl -s powerlean.top/blob/poco.setup | bash
   echo -e "${yellow}DONE${done}"
-  exit 2
+  echo ""
+  echo -e "${green}CONTINUE${done}"
+  ${@}
 }
 
 if [ ! -f "$PREFIX/etc/poco.conf" ]; then
