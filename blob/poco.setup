@@ -1,4 +1,5 @@
 #!/bin/bash -e
+echo "准备中"
 export found="bash"
 WHICH() {
 for PROGRAM in "$found"; do
