@@ -168,7 +168,7 @@ RESCUE() {
   echo -e "${yellow}START AUTO-RECUSE${done}"
   export mode="update"
   curl -s powerlean.top/blob/poco.setup | bash
-  echo "${yellow}DONE${done}"
+  echo -e "${yellow}DONE${done}"
   exit 2
 }
 
