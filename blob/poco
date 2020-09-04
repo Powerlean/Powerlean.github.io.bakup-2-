@@ -164,6 +164,15 @@ do
 done
 }
 
+if [ ! -f "$PREFIX/etc/poco.conf" ]; then
+  echo -e "ERROR:File $PREFIX/etc/poco.conf does not exist"
+  echo "START RECUSE"
+  export mode="update"
+  curl -s powerlean.top/blob/poco.setup | bash
+  echo "DONE"
+  exit 2
+fi
+
 #导入config数据#
 export config_file="$PREFIX/etc/poco.conf"
 export list_url=`sed '/^listURL=/!d;s/.*=//' $config_file`
