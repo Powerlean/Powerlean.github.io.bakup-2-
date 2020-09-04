@@ -531,7 +531,7 @@ elif [ "$1" == "search" -o "$1" == "s" ]; then
     VIBRATE_ERROR
     exit 2
   fi
-  result=`curl -s powerlean.top/blob/poco.list | awk /$2/`
+  result=`curl -s ${list_url} | awk /$2/`
   ${res}
   if [ not"$result" == not ]; then
     ${null_search}
