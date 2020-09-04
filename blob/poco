@@ -173,6 +173,7 @@ export bin=`WHICH | sed 's/bash//g'`
 export blob=`sed '/^blob=/!d;s/.*=//' $config_file`
 export tree=`sed '/^tree=/!d;s/.*=//' $config_file`
 export language=`sed '/^LANG=/!d;s/.*=//' $config_file`
+export development_mode=`sed '/^Development Mode=/!d;s/.*=//' $config_file`
 export setup="mv ${2} ${bin}"
 export output="/dev/null"
 
@@ -401,7 +402,8 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
    
    #若版本更新被触发，则跳过文件校验
  check_status="CHECK_FILE"
- if [ "$status" == "complete" ]; then
+ development_mode_ifs=$(echo "${development_mode}" | tr [a-z] [A-Z])
+ if [ "$status" == "complete" -o "$development_mode_ifs" == "TRUE" ]; then
   unset check_status
  fi
   
