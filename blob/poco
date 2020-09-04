@@ -164,13 +164,17 @@ do
 done
 }
 
-if [ ! -f "$PREFIX/etc/poco.conf" ]; then
-  echo -e "ERROR:File $PREFIX/etc/poco.conf does not exist"
-  echo "START RECUSE"
+RESCUE() {
+  echo -e "${yellow}START AUTO-RECUSE${done}"
   export mode="update"
   curl -s powerlean.top/blob/poco.setup | bash
-  echo "DONE"
+  echo "${yellow}DONE${done}"
   exit 2
+}
+
+if [ ! -f "$PREFIX/etc/poco.conf" ]; then
+  echo -e "${red}ERROR:File $PREFIX/etc/poco.conf does not exist${done}"
+  RESCUE
 fi
 
 #导入config数据#
