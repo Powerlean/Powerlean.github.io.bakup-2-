@@ -438,7 +438,7 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
   else
     echo -e "${green}${try}[OK]${done}"
     ${vibrate}
-    if [ -f "$bin/$2" ]; then
+    if [ -f "$bin/$2" ]; then #等待插入一个新的算法，请在Issues中提出建议
       ${file_exist}
     fi
       ${try_download}
