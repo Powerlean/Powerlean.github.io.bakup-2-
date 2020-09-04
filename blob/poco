@@ -433,7 +433,7 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
      echo -e "${come}:${yellow}${site}${blob}${2}${done}"
      ${footer}
      ${vibrate}
-     read -p "$install [Y/n]: " choice
+     read -n1 -p "$install [Y/n]: " choice
         if [ "$choice" == "y" -o "$choice" == "Y" ]; then
           curl -#OL ${site}$blob/$2
         elif [ "$choice" == "n" -o "$choice" == "N" ]; then
