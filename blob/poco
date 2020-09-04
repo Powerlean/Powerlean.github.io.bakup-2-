@@ -438,6 +438,7 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
           echo ""
           curl -#OL ${site}$blob/$2
         elif [ "$choice" == "n" -o "$choice" == "N" ]; then
+          echo ""
           ${abort}
           VIBRATE_DONE
           exit 0
