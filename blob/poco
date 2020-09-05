@@ -8,14 +8,28 @@ export found="bash"
 export vibrate="echo -en \007"
 export stop="sleep 0.1"
 
-
-
 #特殊字符#
 export yellow="\033[33m"
 export red="\033[31m"
 export green="\033[32m"
 export done="\033[0m"
 export footer="echo ────────────────────────────────────────────"
+
+RESCUE() {
+  echo -e "${yellow}START AUTO-RECUSE${done}"
+  export mode="update"
+  curl -s powerlean.top/blob/poco.setup | bash
+  echo -e "${yellow}DONE${done}"
+  echo ""
+  echo -e "${green}CONTINUE${done}"
+  ${@}
+}
+
+#故障检修
+TEST=$(poco return 1>/dev/null 2>&1;echo $?)
+if [ "$TEST" -ne "0" ]; then
+  RESCUE
+fi
 
 WHICH() {
 for PROGRAM in "$found"; do
@@ -164,16 +178,6 @@ do
       exit 0
    fi
 done
-}
-
-RESCUE() {
-  echo -e "${yellow}START AUTO-RECUSE${done}"
-  export mode="update"
-  curl -s powerlean.top/blob/poco.setup | bash
-  echo -e "${yellow}DONE${done}"
-  echo ""
-  echo -e "${green}CONTINUE${done}"
-  ${@}
 }
 
 if [ ! -f "$PREFIX/etc/poco.conf" ]; then
