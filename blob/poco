@@ -8,6 +8,8 @@ export found="bash"
 export vibrate="echo -en \007"
 export stop="sleep 0.1"
 
+
+
 #特殊字符#
 export yellow="\033[33m"
 export red="\033[31m"
@@ -626,8 +628,15 @@ elif [ "$1" == "group" -o "$1" == "g" ]; then
     ${group_done}
   fi
     
-    
-#主体(七扇区) COMMAND_NOT_FOUND
+#主体(七扇区) TEST_RETURN
+elif [ "$1" == "return" ]; then
+  if [ not"$2" == not ]; then
+    exit 0
+  else
+    exit $2
+  fi    
+
+#主体(八扇区) COMMAND_NOT_FOUND
 else
   ${void}
   poco help
