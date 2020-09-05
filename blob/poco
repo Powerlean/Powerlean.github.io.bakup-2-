@@ -26,10 +26,19 @@ RESCUE() {
 }
 
 #故障检修
+fix=AUTO_FIX
+AUTO_FIX() {
 TEST=$(poco return 1>/dev/null 2>&1;echo $?)
 if [ "$TEST" -ne "0" ]; then
   RESCUE
 fi
+}
+if [ "$fix_status" == "done" ]; then
+  unset fix
+fi
+export fix_status="done"
+${fix}
+
 
 WHICH() {
 for PROGRAM in "$found"; do
