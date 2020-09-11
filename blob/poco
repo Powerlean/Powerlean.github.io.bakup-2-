@@ -276,6 +276,8 @@ export file_remove_cn="所选中${yellow}${i}${done}将被移除"
 export files_cn="所选中"
 export remove_tip_cn="将被移除"
 export done_tip_cn="echo -e 完成"
+export ERROR_cn="误差"
+export OK_cn="正常"
 
 #English
 export file_exist="echo -e ${yellow}${2}${done} is already exist"
@@ -286,7 +288,7 @@ export void_group="echo -e ${yellow}${2}${done} is not a group index file,but ca
 export install="Are you sure that you want to download this file?"
 export come="From"
 export void="echo -e ${red}Invalid operation ${1}${done}"
-export search="echo -n -e  Checking headers from ${yellow}${site}${blob}${2}${done}"
+export search="echo -n -e  Waiting for response:${yellow}${site}${blob}${2}${done}"
 export void_found="echo -e ${red} No such file or cannot be collecting,sorry...${done}"
 export try_download="echo -e Getting ready,start collecting"
 export file_fail="echo -e ${red}Something error:file${yellow}${2}${done} is not exist or progress interruption${done}"
@@ -331,10 +333,14 @@ export group_info="Custom installation"
 export group_done="echo Process done"
 export files="File "
 export remove_tip=" will be removed"
+export ERROR="ERROR"
+export OK="OK"
 
 #语言设定
 #LANG="zh_CN.UTF-8" #取消该注释将程序设定为中文(在句尾另添一个"#")
 if [[ "$LANG" == zh_*.UTF-8 || "$language" == CN ]]; then
+  export OK=$OK_cn
+  export ERROR=$ERROR_cn
   export file_exist=$file_exist_cn
   export done_tip=$done_tip_cn
   export group_info=$group_info_cn
@@ -446,12 +452,12 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
   progress
   try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${blob}${2})
   if [ "$try" -ne "200" ]; then
-    echo -e "${red}${try}[ERROR]${done}"
+    echo -e "${red}${try}[${ERROR}]${done}"
     ${void_found}
     VIBRATE_ERROR
     exit 2
   else
-    echo -e "${green}${try}[OK]${done}"
+    echo -e "${green}${try}[${OK}]${done}"
     ${vibrate}
     if [ -f "$bin/$2" ]; then #等待插入一个新的算法，请在Issues中提出建议
       ${file_exist}
@@ -621,12 +627,12 @@ elif [ "$1" == "group" -o "$1" == "g" ]; then
   progress
   try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${blob}${2})
   if [ "$try" -ne "200" ]; then
-    echo -e "${red}${try}[ERROR]${done}"
+    echo -e "${red}${try}[${ERROR}]${done}"
     ${void_found}
     VIBRATE_ERROR 
     exit 2
   else
-    echo -e "${green}${try}[OK]${done}"
+    echo -e "${green}${try}[${OK}]${done}"
     type=`curl -s ${site}/${blob}/${2} | sed '/^type=/!d;s/.*=//'`
     if [ "$type" != "group" ]; then
       ${void_group}
