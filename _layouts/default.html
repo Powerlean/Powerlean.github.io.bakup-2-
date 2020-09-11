@@ -13,7 +13,7 @@ function flash_title()
 {
 step++
 if (step==3) {step=1}
-if (step==1) {document.title='Beautiful things never ask for attention.'}
+if (step==1) {document.title='{{ page.title }}'}
 if (step==2) {document.title='biographies'}
 setTimeout("flash_title()",1121);
 }
