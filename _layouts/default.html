@@ -1,6 +1,10 @@
 <!-- 首页及其他页面的布局-Layout -->
 <!DOCTYPE html>
 <html>
+<head>
+<!-- 引入head标签 -->
+{% include head.html %}
+</head>
 <body bgcolor="#ffffff" onload="newtext()">
 <script language=javascript >
 var text=document.title
@@ -13,10 +17,6 @@ function newtext() {
 }
 newtext();
 </script>
-<!-- 引入head标签 -->
-{% include head.html %}
-</head>
-<body>
 <!-- 页面主体 -->
 {{ content }}
 
