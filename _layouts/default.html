@@ -6,17 +6,22 @@
 {% include head.html %}
 </head>
 <body>
+<!-- 引入title闪动 -->
 <script>
-var text=document.title
-var timerId
-function newtext() {
-    clearTimeout(timerId)                  
-    document.title=text.substring(1,text.length)+text.substring(0,1)
-    text=document.title.substring(0,text.length)
-    timerId = setTimeout("newtext()", 500)
+step=0
+function flash_title()
+{
+step++
+if (step==3) {step=1}
+if (step==1) {document.title='Beautiful things never ask for attention.'}
+if (step==2) {document.title='biographies'}
+setTimeout("flash_title()",1121);
 }
-newtext();
+flash_title()
 </script>
+
+<!-- 引入title闪动 -->
+    
 <!-- 页面主体 -->
 {{ content }}
 
