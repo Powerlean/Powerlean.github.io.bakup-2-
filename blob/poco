@@ -223,7 +223,7 @@ done
 
 #字符变量#
 #中文
-export file_exist_cn="echo -e ${yellow}${2}${done}已经存在"
+export file_exist_cn="echo -e ${yellow}警告：${done}目标文件已经存在"
 export null_search_cn="echo -e ${yellow}未搜索到可匹配内容${done}"
 export bad_suffix_cn="echo -e ${red}无效操作：未定义的后缀或输入了多个文件名${done}"
 export error_remove_cn="echo -e ${red}无效操作 ${choice}${done}"
@@ -280,7 +280,7 @@ export ERROR_cn="误差"
 export OK_cn="正常"
 
 #English
-export file_exist="echo -e ${yellow}${2}${done} is already exist"
+export file_exist="echo -e ${yellow}Warning:${done}target file is already exist"
 export done_tip="echo -e Done"
 export file_remove="echo -e File ${yellow}${i}${done} will be remove"
 export group_install="echo -n Pulling the group index file"
