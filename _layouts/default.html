@@ -21,8 +21,7 @@ flash_title()
 </script>
 
 <!-- 引入title闪动 -->
-    <marquee  direction="left"  behavior="scroll"  scrollamount="25"  loop="1">
-	<font  face="思源黑体Regula"  color="black"  size="5">踏破芒鞋 烟雨任平生,慧行坚勇 究畅恒无极</font>
+    <marquee onMouseOver="this.stop()" loop="1" onMouseOut="this.start()";>当前滚动页处于测试状态，仅展示预览，不用于主页。</marquee> 
     
 <!-- 页面主体 -->
 {{ content }}
