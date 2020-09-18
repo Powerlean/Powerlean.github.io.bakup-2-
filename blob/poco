@@ -661,3 +661,11 @@ else
   poco help
   VIBRATE_ERROR
 fi
+export log_file="$PREFIX/etc/poco.log"
+if [ ! -f "$log_file" ];  then
+  mkdir $log_file
+fi
+DATE=$(date)
+PWD=$(pwd)
+echo "Date:$DATE  PID:$$  Operation:$@  Return code:$?  Site:$site  Path:$PWD" >> "$log_file"
+echo " " >> "$log_file"
