@@ -667,5 +667,5 @@ if [ ! -f "$log_file" ];  then
 fi
 DATE=$(date)
 PWD=$(pwd)
-echo "Date:$DATE  PID:$$  Operation:$@  Return code:$?  Site:$site  Path:$PWD" >> "$log_file"
-echo " " >> "$log_file"
+echo "Date:$DATE  PID:$$  Operation:$@  Return code:$?  Site:$site  Path:$PWD" >> $log_file
+echo " " >> $log_file
