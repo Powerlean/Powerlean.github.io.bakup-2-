@@ -669,9 +669,7 @@ echo "Date:$DATE  PID:$$  Operation:$@  Return code:$?  Site:$site  Path:$PWD" >
 echo " " >> $log_file
 }
 export log_file="$PREFIX/etc/poco.log"
-if [ -f "$log_file" ]; then
-  WRITE
-else
-  mkdir $log_file
-  WRITE
+if [ ! -f "$log_file" ]; then
+  touch $log_file
 fi
+WRITE
