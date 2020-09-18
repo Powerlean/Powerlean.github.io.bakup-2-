@@ -666,7 +666,7 @@ fi
 WRITE() {
 DATE=$(date)
 PWD=$(pwd)
-echo "Date:$DATE  PID:$$  Operation:$operation  Return code:$?  Site:$site  Path:$PWD" >> $log_file
+echo "Operation:$operation  Date:$DATE  PID:$$  Return code:$?  Site:$site  Path:$PWD" >> $log_file
 echo " " >> $log_file
 }
 export log_file="$PREFIX/etc/poco.log"
