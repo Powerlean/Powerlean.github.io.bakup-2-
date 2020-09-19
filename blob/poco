@@ -571,7 +571,7 @@ elif [ "$1" == "help" -o "$1" == "h" -o "$1" == "-h" ]; then
   echo -e "-y            ${y_info}"
   echo -e "-s            ${s_info}"
   echo ""
-  echo "PowerCollector@${version} ${0}
+  echo "PowerCollector@${version} ${0}"
 #主体(五扇区) SEARCH
 elif [ "$1" == "search" -o "$1" == "s" ]; then
   if [ not"$2" == "not" ]; then
