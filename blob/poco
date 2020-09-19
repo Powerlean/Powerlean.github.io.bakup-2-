@@ -661,7 +661,7 @@ elif [ "$1" == "return" ]; then
 
 #主体(八扇区) HISTORY
 elif [ "$1" == "history" -o "$1" == "hi" ]; then
-  export result=(cat $log_file | awk /$2/)
+  export result=$(cat $log_file | awk /$2/)
   echo -e ${yellow}$result${done}
 
 #主体(九扇区) COMMAND_NOT_FOUND
