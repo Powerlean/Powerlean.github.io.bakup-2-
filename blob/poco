@@ -660,7 +660,7 @@ elif [ "$1" == "return" ]; then
   fi    
 
 #主体(八扇区) HISTORY
-elif [ "$1" == "history -o "$1" == "hi" ]; then
+elif [ "$1" == "history" -o "$1" == "hi" ]; then
   export result=(cat $log_file | awk /$2/)
   echo -e ${yellow}$result${done}
 
