@@ -340,6 +340,9 @@ export OK="OK"
 
 #语言设定
 #LANG="zh_CN.UTF-8" #取消该注释将程序设定为中文(在句尾另添一个"#")
+if [ "$language" == EN ]; then
+  export LANG="en.UTF-8"
+fi
 if [[ "$LANG" == zh_*.UTF-8 || "$language" == CN ]]; then
   export OK=$OK_cn
   export ERROR=$ERROR_cn
