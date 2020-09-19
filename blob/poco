@@ -661,6 +661,9 @@ elif [ "$1" == "return" ]; then
 
 #主体(八扇区) HISTORY
 elif [ "$1" == "history" -o "$1" == "hi" ]; then
+  if [ ! -f "$log_file" ]; then
+    touch $log_file
+  fi
   export result=$(cat $log_file | awk /$2/)
   if [ not"$result" == not ]; then
     ${null_search}
