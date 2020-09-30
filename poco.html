@@ -18,16 +18,15 @@
 <body bgcolor="black">
  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
  <span id="busuanzi_container_site_pv">
- <script>
+<script>
 step=0
 function flash_title()
 {
 step++
-if (step==4) {step=1}
-if (step==1) {document.title='PowerCollector'}
-if (step==2) {document.title='A simple PM'}
- if (step==3) {document.title='View:'busuanzi_value_site_pv}
-setTimeout("flash_title()",11221);
+if (step==3) {step=1}
+if (step==1) {document.title='{{ page.title }}'}
+if (step==2) {document.title='Powerlean'}
+setTimeout("flash_title()",1121);
 }
 flash_title()
 </script>
