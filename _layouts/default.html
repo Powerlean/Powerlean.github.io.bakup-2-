@@ -2,12 +2,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-     <script>
-        window.document.oncontextmenu = function(){
-
-            return false;
-        }
-    </script>
+ oncontextmenu="return false;"
+ondragstart="return false;" 
+onselectstart="return false;"
+onselect="document.selection.empty();"
 <!-- 引入head标签 -->
 {% include head.html %}
 </head>
