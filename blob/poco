@@ -105,7 +105,7 @@ done
 DEPENDS() {
 ${check_depends} #提示语
 progress
-try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${blob}${2}) #调取HTTP代码
+try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${tree}${1}.tree) #调取HTTP代码
  ${done_tip}
  if [ "$try" -ne "200" ]; then
   ${depends_error}
@@ -125,7 +125,7 @@ done
 }
 
 DEPENDS_SILENT() {
- try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${blob}${2})
+ try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${tree}${1}.tree)
  if [ "$try" -ne "200" ]; then
    VIBRATE_ERROR
    exit 2
