@@ -1,109 +1,75 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<title>JS实现bai自定义右键菜单</title>
-<meta http-equiv="content-type" content="text/html; charset=gbk">
-<script src="http://api.51ditu.com/js/ajax.js"></script>
-<style type="text/css">
-#container {
-text-align : center;
-width : 500px;
-height : 500px;
-border : 1px solid blue;
-margin : 0 auto;
-}
-.skin {
-width : 100px;
-border : 1px solid gray;
-padding : 2px;
-visibility : hidden;
-position : absolute;
-}
-div.menuitems {
-margin : 1px 0;
-}
-div.menuitems a {
-text-decoration : none;
-}
-div.menuitems:hover {
-background-color : #c0c0c0;
-}
-</style>
-<script>
-window.onload = function() {
-var container = document.getElementById('container');
-var menu = document.getElementById('menu');
-/*显示du菜单*/
-function showMenu() {
-var evt = window.event |zhi| arguments[0];
-/*获取当前鼠标右键按下后dao的位置，据此定义菜单显示的位置*/
-var rightedge = container.clientWidth-evt.clientX;
-var bottomedge = container.clientHeight-evt.clientY;
-/*如果从鼠标位置到容器右边的空间小于菜单的宽度，就定位菜单的左坐标（Left）为当前鼠标位置向左一个菜单宽度*/
-if (rightedge < menu.offsetWidth)
-menu.style.left = container.scrollLeft + evt.clientX - menu.offsetWidth + "px";
-else
-/*否则，就定位菜单的左坐标为当前鼠标位置*/
-menu.style.left = container.scrollLeft + evt.clientX + "px";
-/*如果从鼠标位置到容器下边的空间小于菜单的高度，就定位菜单的上坐标（Top）为当前鼠标位置向上一个菜单高度*/
-if (bottomedge < menu.offsetHeight)
-menu.style.top = container.scrollTop + evt.clientY - menu.offsetHeight + "px";
-else
-/*否则，就定位菜单的上坐标为当前鼠标位置*/
-menu.style.top = container.scrollTop + evt.clientY + "px";
-/*设置菜单可见*/
-menu.style.visibility = "visible";
-LTEvent.addListener(menu,"contextmenu",LTEvent.cancelBubble);
-}
-/*隐藏菜单*/
-function hideMenu() {
-menu.style.visibility = 'hidden';
-}
-LTEvent.addListener(container,"contextmenu",LTEvent.cancelBubble);
-LTEvent.addListener(container,"contextmenu",showMenu);
-LTEvent.addListener(document,"click",hideMenu);
-}
-</script>
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>鼠标事件</title>
+    <style>
+        div{
+            height:100%;width:100%;
+            position:fixed;
+        }
+        #menu-div {
+            width: 140px;
+            height: 200px;
+            background-color: #DEDEDE;
+            display: none;
+            position: fixed;
+        }
+        li {
+            margin-left: -10px;
+            line-height: 35px;
+        }
+
+    </style>
+    <script>
+        window.document.oncontextmenu = function(){
+
+            return false;
+        }
+    </script>
+    <script>
+        function popMenu(event) {
+            var mymenu = document.getElementById('menu-div');
+            mymenu.style.left = event.clientX + "px";   // 获取鼠标位置
+            mymenu.style.top = event.clientY + "px";
+            mymenu.style.display='block';
+            return false;   // 该行代码确保系统自带的右键菜单不会被调出
+        }
+        function hideMenu() {
+            document.getElementById('menu-div').style.display='none';
+        }
+        document.addEventListener("click", function(event){
+            var mymenu = document.getElementById('menu-div');
+            mymenu.style.display = "none";
+        });
+    </script>
 </head>
 <body>
-<div id="menu" class="skin">
-<div class="menuitems">
-<a href="javascript:history.back();">后退</a>
+<div oncontextmenu="return popMenu(event);">
+<a href="http://baidu.com/" >百度</a>
 </div>
-<div class="menuitems">
-<a href="javascript:history.back();">前进</a>
-</div>
-<hr>
-<div class="menuitems">
-<a href="http://api.51ditu.com/" target="_blank">地图api</a>
-</div>
-<div class="menuitems">
-<a href="http://www.51ditu.com/traffic/index.html" target="_blank">实时交通</a>
-</div>
-<div class="menuitems">
-<a href="http://www.51ditu.com" target="_blank">地图搜索</a>
-</div>
-<div class="menuitems">
-<a href="http://nav.51ditu.com" target="_blank">驾驶导航</a>
-</div>
-<hr>
-<div class="menuitems">
-<a href="http://uu.51ditu.com" target="_blank">灵图UU</a>
-</div>
-<div class="menuitems">
-<a href="http://lushu.51ditu.com" target="_blank">路书下载</a>
-</div>
-<hr>
-<div class="menuitems">
-<a href="http://www.lingtu.com" target="_blank">关于本站</a>
-</div>
-<div class="menuitems">
-<a href="http://emap.51ditu.com/link/link.html" target="_bland">友情链接</a>
-</div>
-</div>
-<div id="container">
-<p>右键此区域</p>
+<div id="menu-div">
+    <ul>
+     <li><a href="/">首页</a></li>
+              
+                <li><a href="/tags">标签</a></li>
+              
+                <li><a href="/timeline">足迹</a></li>
+              
+                <li><a href="/about">关于</a></li>
+              
+                <li><a href="/friendLink">链接</a></li>
+              
+                <li><a href="/blob">存储</a></li>
+              
+                <li><a href="/copyright">版权</a></li>
+              
+                <li><a href="https://space.powerlean.top">登记</a></li>
+              
+                <li><a href="https://powerlean.gitee.io">分站</a></li>
+              
+                <li><a href="https://blog.itforweb.cn">ITFORWEB</a></li>
+    </ul>
 </div>
 </body>
 </html>
-
