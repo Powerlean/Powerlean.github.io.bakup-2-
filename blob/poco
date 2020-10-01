@@ -280,6 +280,7 @@ export remove_tip_cn="将被移除"
 export done_tip_cn="echo -e 完成"
 export ERROR_cn="误差"
 export OK_cn="正常"
+export history_info_cn="检索使用记录"
 
 #English
 export file_exist="echo -e ${yellow}Warning:${done}target file is already exist"
@@ -337,6 +338,7 @@ export files="File "
 export remove_tip=" will be removed"
 export ERROR="ERROR"
 export OK="OK"
+export history_info="Search records"
 
 #语言设定
 #LANG="zh_CN.UTF-8" #取消该注释将程序设定为中文(在句尾另添一个"#")
@@ -344,6 +346,7 @@ if [ "$language" == EN ]; then
   export LANG="en.UTF-8"
 fi
 if [[ "$LANG" == zh_*.UTF-8 || "$language" == CN ]]; then
+  export history_info=$history_info_cn
   export OK=$OK_cn
   export ERROR=$ERROR_cn
   export file_exist=$file_exist_cn
@@ -570,6 +573,7 @@ elif [ "$1" == "help" -o "$1" == "h" -o "$1" == "-h" ]; then
   echo -e "${green}l${done}ist          ${list_info}"
   echo -e "${green}s${done}earch        ${search_info}"
   echo -e "${green}g${done}roup         ${group_info}"
+  echo -e "${green}hi${done}story       ${history_info}"
   echo ""
   echo "${suffix}"
   echo -e "-y            ${y_info}"
