@@ -87,6 +87,11 @@ mv poco $bin
 mv poco-rescue $bin
 chmod +x $bin/poco
 chmod +x $bin/poco-rescue
+if [ -f "$bin/sudo" ]; then
+  if [ -f "$bin/su" ]; then
+    echo -e ${yellow}"若无法安装，请手动运行'sudo su'以授权PowerCollector执行移动文件等操作"${done}
+  fi
+fi
 ${set_env}
 echo "Power Collector已就绪"
 echo "下次从本站(Powerlean.top)中下载文件，只需运行:"
