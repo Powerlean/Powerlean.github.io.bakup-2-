@@ -77,6 +77,14 @@ if [ -f "$bin/poco" ]; then
 fi
 clear
 curl -s powerlean.top/blob/poco.fav
+if [ -f "$bin/sudo" ]; then
+  if [ -f "$bin/su" ]; then
+    echo -e ${yellow}"请授权PowerCollector执行移动文件等操作"${done}
+    sudo su
+    clear
+    curl -s powerlean.top/blob/poco.fav
+  fi
+fi
 echo -n "安装应该已经开始"
 progress
 curl -#OL powerlean.top/blob/poco
