@@ -281,6 +281,7 @@ export done_tip_cn="echo -e 完成"
 export ERROR_cn="误差"
 export OK_cn="正常"
 export history_info_cn="检索使用记录"
+export not_intro_cn="无描述"
 
 #English
 export file_exist="echo -e ${yellow}Warning:${done}target file is already exist"
@@ -339,6 +340,7 @@ export remove_tip=" will be removed"
 export ERROR="ERROR"
 export OK="OK"
 export history_info="Search records"
+export not_intro="No description"
 
 #语言设定
 #LANG="zh_CN.UTF-8" #取消该注释将程序设定为中文(在句尾另添一个"#")
@@ -346,6 +348,7 @@ if [ "$language" == EN ]; then
   export LANG="en.UTF-8"
 fi
 if [[ "$LANG" == zh_*.UTF-8 || "$language" == CN ]]; then
+  export not_intro=$not_intro_cn
   export history_info=$history_info_cn
   export OK=$OK_cn
   export ERROR=$ERROR_cn
@@ -477,6 +480,9 @@ if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算
        ${vibrate}
     elif [ not"$3" == "not" ]; then
     INTRO=$(curl -s ${site}/${blob}/poco.list | sed '/^'"$2"' *-/!d;s/.*- //')
+    if [ not"$INTRO" == "not" ]; then
+      export INTRO="$not_intro"
+    fi
      DATE=$(date)
      ${footer}
      echo -e "${2}  ${DATE}" #${size}:${#try}${unit}
