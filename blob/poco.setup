@@ -69,9 +69,13 @@ if [ "$mode" == "update" ]; then
 fi
 #分区二
 if [ -f "$bin/poco" ]; then
+  clear
+  curl -s powerlean.top/blob/poco.fav
+  echo ""
   echo -e "${green}该设备已于之前部署过Power Collector，若要重新安装，请尝试将'${bin}poco'移除。${done}"
   exit 0
 fi
+clear
 curl -s powerlean.top/blob/poco.fav
 echo -n "安装应该已经开始"
 progress
