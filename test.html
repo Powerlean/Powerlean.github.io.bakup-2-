@@ -1,19 +1,68 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>鼠标事件</title>
-    <script>
-        window.document.oncontextmenu = function(){
+---
+layout: default
+title: Powerlean
+page-title: Powerlean
+home-title: 
+description: 
+---
 
-            return false;
-        }
-    </script>
-</head>
-<body>
-<div oncontextmenu="return popMenu(event);">
-<a href="http://baidu.com/" >百度</a>
+{% include header.html %}
+{% include boot.html %}
+<main>
+    {% include title.html %}
+    <ul class="post-list">
+      {% include posts_paginator.html %}
+    </ul>
+</main>
+{% include pageNav.html %}
+<footer id="bottom">
+  <br>
+  <center><a href="/"><img src="https://powerlean.top/images/logo.png" width="150" height="53" align ="center"></a></center>
+  <span>{{ site.title }} ©
+  {% assign current = "now" | date: "%Y" | plus: 0%}
+  {% unless site.footer.since and site.footer.since == current %}
+    {{ site.footer.since }}
+    -
+  {% endunless %}
+  {{ current }}
+  <br>
+  <div>
+
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+            <span id="busuanzi_container_site_pv">
+
+                      <sup style="color:grey">总访问量<span id="busuanzi_value_site_pv"></span>次</sup>
+
+                          </span>
+
+                              <sup><span style="color:grey" class="post-meta-divider">·</span></sup>
+
+                                  <span id="busuanzi_container_site_uv">
+
+                                            <sup style="color:grey">访问人数<span id="busuanzi_value_site_uv" ></span>位</sup>
+
+                                                </span>
+    <br>
+   
+    <!-- Begin Mailchimp Signup Form -->
+<form action="https://gitee.us17.list-manage.com/subscribe/post?u=d9ddd8a0cbf74cc978f6848d5&id=cb4b18e940
+"method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+<div id="mc_embed_signup_scroll_footer">
+    <label for="mce-EMAIL_footer"></label>
+    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL_footer" placeholder="邮箱地址" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true">
+        <input type="text" name="b_50bab1c85eae24ecfb0f68361_3a2dd721d0" tabindex="-1" value="">
+    </div><br />
+  <div class="clear">
+      <input class="button" type="submit" value="订阅" data-dojo-attach-point="submitButton">
+    </div>
 </div>
-
-</body>
-</html>
+<!--End mc_embed_signup-->
+<br>
+  </div>
+</footer>
+<!--加载动画-->
+<script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script><script type="text/javascript" src="https://powerlean.top/blob/common.js"></script>
+<!--加载动画-->
