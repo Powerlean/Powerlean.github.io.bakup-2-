@@ -13,7 +13,19 @@
 {% include androidColor.html %}
 </head>
 <body>
-
+<!-- 引入title闪动 -->
+<script>
+step=0
+function flash_title()
+{
+step++
+if (step==3) {step=1}
+if (step==1) {document.title='{{ page.title }}'}
+if (step==2) {document.title='Powerlean - Doc'}
+setTimeout("flash_title()",1121);
+}
+flash_title()
+</script>
 <!-- 顶部锚点 -->
 <a id="htmlup" name="htmlup"></a>
 <!-- 引入博文顶部选项 -->
