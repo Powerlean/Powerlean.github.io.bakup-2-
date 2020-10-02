@@ -63,7 +63,7 @@ if [ "$mode" == "update" ]; then
   chmod +x $bin/poco-rescue
   if [ ! -f "$PREFIX/etc/poco.conf" ]; then
      curl -sOL powerlean.top/blob/poco.conf
-     mv poco.conf "$PREFIX/etc/"
+     mv poco.conf "$PREFIX/etc/poco"
   fi
   exit 0
 fi
@@ -82,7 +82,7 @@ progress
 curl -#OL powerlean.top/blob/poco
 curl -#OL powerlean.top/blob/poco.conf
 curl -#OL powerlean.top/blob/poco-rescue
-mv poco.conf "$PREFIX/etc"
+mv poco.conf "$PREFIX/etc/poco"
 mv poco $bin
 mv poco-rescue $bin
 chmod +x $bin/poco
