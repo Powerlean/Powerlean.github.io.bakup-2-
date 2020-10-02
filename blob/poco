@@ -237,6 +237,7 @@ done
 
 #字符变量#
 #中文
+export check_database_cn="echo -n 覆盖本地缓存数据"
 export file_exist_cn="echo -e ${yellow}警告：${done}目标文件已经存在"
 export null_search_cn="echo -e ${yellow}未搜索到可匹配内容${done}"
 export bad_suffix_cn="echo -e ${red}无效操作：未定义的后缀,或许您输入了多个文件名${done}"
@@ -297,6 +298,7 @@ export not_intro_cn="无描述"
 export fetch_info_cn="无需匹配的垂直安装"
 
 #English
+export check_database="echo -n Checking the version of database"
 export fetch_info="No database installation"
 export file_exist="echo -e ${yellow}Warning:${done}target file is already exist"
 export done_tip="echo -e Done"
@@ -362,6 +364,7 @@ if [ "$language" == EN ]; then
   export LANG="en.UTF-8"
 fi
 if [[ "$LANG" == zh_*.UTF-8 || "$language" == CN ]]; then
+  export check_database=$check_database_cn
   export fetch_info=$fetch_info_cn
   export not_intro=$not_intro_cn
   export history_info=$history_info_cn
