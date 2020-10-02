@@ -368,6 +368,7 @@ if [ "$language" == EN ]; then
   export LANG="en.UTF-8"
 fi
 if [[ "$LANG" == zh_*.UTF-8 || "$language" == CN ]]; then
+  export reles_version=$reles_version_cn
   export check_database=$check_database_cn
   export fetch_info=$fetch_info_cn
   export not_intro=$not_intro_cn
