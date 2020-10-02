@@ -297,10 +297,10 @@ export history_info_cn="检索使用记录"
 export not_intro_cn="无描述"
 export fetch_info_cn="无需匹配的垂直安装"
 export exist_database_cn="echo -e ${yellow}${2}${done}的最新版本已经存在，将不会被再次安装"
-export reles_version_cn="echo 核验版本序数"
+export reles_version_cn="echo -n 核验版本序数"
 
 #English
-export reles_version="echo Inspecting native release"
+export reles_version="echo -n Inspecting native release"
 export check_database="echo -n Checking the version of database"
 export fetch_info="No database installation"
 export file_exist="echo -e ${yellow}Warning:${done}target file is already exist"
