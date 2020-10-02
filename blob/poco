@@ -282,8 +282,10 @@ export ERROR_cn="误差"
 export OK_cn="正常"
 export history_info_cn="检索使用记录"
 export not_intro_cn="无描述"
+export fetch_info_cn="无需匹配的垂直安装"
 
 #English
+export fetch_info="No database installation"
 export file_exist="echo -e ${yellow}Warning:${done}target file is already exist"
 export done_tip="echo -e Done"
 export file_remove="echo -e File ${yellow}${i}${done} will be remove"
@@ -408,8 +410,8 @@ if [[ "$LANG" == zh_*.UTF-8 || "$language" == CN ]]; then
 fi
 
 
-#主体(一扇区) INSTALL
-if [ "$1" == "install" -o "$1" == "i" ]; then #因玄学问题取消一元运算符
+#主体(一扇区) FETCH
+if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算符
   if [ "$3" == "-s" ]; then #静默模式
     try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${blob}${2})
     if [ "$try" -ne "200" ]; then
@@ -574,6 +576,7 @@ elif [ "$1" == "help" -o "$1" == "h" -o "$1" == "-h" ]; then
   echo "${intro_info}"
   echo ""
   echo -e "${green}i${done}nstall       ${install_info}"
+  echo -e "${green}f${done}etch         ${fetch_info}"
   echo -e "${green}r${done}emove        ${remove_info}"
   echo -e "${green}h${done}elp          ${help_info}"
   echo -e "${green}l${done}ist          ${list_info}"
