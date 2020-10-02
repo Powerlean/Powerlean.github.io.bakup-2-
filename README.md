@@ -1,4 +1,4 @@
-![](http://powerlean.top/images/powerlean.top.ico)
+![](http://www.powerlean.top/images/powerlean.top.ico)
 
 [单击此处](https://powerlean.top/)以跳转至网址首页
 
