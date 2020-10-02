@@ -65,6 +65,10 @@ if [ "$mode" == "update" ]; then
      curl -sOL powerlean.top/blob/poco.conf
      mv poco.conf "$PREFIX/etc/poco"
   fi
+  if [ ! -f "$PREFIX/etc/poco/poco.data" ]; then
+     curl -sOL powerlean.top/blob/poco.data
+     mv poco.conf "$PREFIX/etc/poco"
+  fi
   exit 0
 fi
 #分区二
