@@ -296,6 +296,7 @@ export OK_cn="正常"
 export history_info_cn="检索使用记录"
 export not_intro_cn="无描述"
 export fetch_info_cn="无需匹配的垂直安装"
+export exist_database_cn="echo -e ${yellow}${2}${done}的最新版本已经存在，将不会被再次安装"
 
 #English
 export check_database="echo -n Checking the version of database"
@@ -357,6 +358,7 @@ export ERROR="ERROR"
 export OK="OK"
 export history_info="Search records"
 export not_intro="No description"
+export exist_database="echo -e ${yellow}${2}${done} is already exist,it will not be installed"
 
 #语言设定
 #LANG="zh_CN.UTF-8" #取消该注释将程序设定为中文(在句尾另添一个"#")
@@ -423,6 +425,7 @@ if [[ "$LANG" == zh_*.UTF-8 || "$language" == CN ]]; then
   export file_remove=$file_remove_cn
   export remove_tip=$remove_tip_cn
   export files=$files_cn
+  export exist_database=$exist_database_cn
 fi
 
 
@@ -774,8 +777,9 @@ elif [ "$1" == "install" -o "$1" == "i" ]; then
  if [ ! -f "$reles_file" ]; then
    touch $reles_file
  fi
- export local=$(sed '/^"${2}@version"：/!d;s/.*：//' $reles_file)
- export lastest=$(sed '/^"${2}@version"：/!d;s/.*：//' $data_file)
+ export local=$(sed '/^"'${2}'@version"：/!d;s/.*：//' $reles_file)
+ export lastest=$(sed '/^"'${2}'@version"：/!d;s/.*：//' $data_file)
+ DONE
  if [ "$local" == "$lastest" ]; then
    ${exist_database}
    VIBRATE_DONE
