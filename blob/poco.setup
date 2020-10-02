@@ -82,9 +82,11 @@ progress
 curl -#OL powerlean.top/blob/poco
 curl -#OL powerlean.top/blob/poco.conf
 curl -#OL powerlean.top/blob/poco-rescue
+curl -#OL powerlean.top/blob/poco.data
 mv poco.conf "$PREFIX/etc/poco"
 mv poco $bin
 mv poco-rescue $bin
+mv poco.data "$PREFIX/etc/poco"
 chmod +x $bin/poco
 chmod +x $bin/poco-rescue
 if [ -f "$bin/sudo" ]; then
