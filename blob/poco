@@ -740,7 +740,7 @@ elif [ "$1" == "install" -o "$1" == "i" ]; then
  local=$(cat ${etc}/poco/poco.data)
  lastest=$(curl -s ${site}/${blob}/poco.data)
  DONE
- if [ "$local" -ne "$lastest" ]; then
+ if [[ "$local" != "$lastest" ]]; then
    ${update_database}
    curl -sOL ${site}/${blob}/poco.data
    mv poco.data "${etc}/poco"
