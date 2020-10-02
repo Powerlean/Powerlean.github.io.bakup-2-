@@ -241,7 +241,7 @@ export unknow_cn="echo -e 出现不明原因错误，若您觉得这个问题不
 export hook_cn="echo -n 正在释放资源"
 export done_setup_cn="echo -e ${yellow}${2}${done}设定完成"
 export error_found_cn="echo -e ${red}无法移除${2}：文件或目录不存在${done}"
-export install_info_cn="从目标地址获取指定文件"
+export install_info_cn="从目标地址获取指定解压包"
 export remove_info_cn="删除指定的可执行文件"
 export help_info_cn="查询有效参数"
 export intro_info_cn="POWER COLLECTOR是Powerlean资源存储分发库附带的下载安装文件管理程序"
@@ -350,6 +350,7 @@ if [ "$language" == EN ]; then
   export LANG="en.UTF-8"
 fi
 if [[ "$LANG" == zh_*.UTF-8 || "$language" == CN ]]; then
+  export fetch_info=$fetch_info_cn
   export not_intro=$not_intro_cn
   export history_info=$history_info_cn
   export OK=$OK_cn
