@@ -737,13 +737,13 @@ elif [ "$1" == "install" -o "$1" == "i" ]; then
  fi
  ${check_database}
  progress
- local=$(cat ${etc}/poco.data)
+ local=$(cat ${etc}/poco/poco.data)
  lastest=$(curl -s ${site}/${blob}/poco.data)
  DONE
  if [ "$local" -ne "$lastest" ]; then
    ${update_database}
    curl -sOL ${site}/${blob}/poco.data
-   mv poco.data "${etc}"
+   mv poco.data "${etc}/poco"
  fi
  ${search_database}
  export result=$(sed '/^"${2}"：/!d;s/.*：//' $data_file)
