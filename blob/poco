@@ -746,7 +746,7 @@ elif [ "$1" == "install" -o "$1" == "i" ]; then
    mv poco.data "${etc}/poco"
  fi
  ${search_database}
- export result=$(sed '/^"${2}"：/!d;s/.*：//' $data_file)
+ export result=$(sed '/^'${2}'：/!d;s/.*：//' $data_file)
  if [ not"$result" == not ]; then
    ${void_found}
    VIBRATE_ERROR
