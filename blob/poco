@@ -802,10 +802,6 @@ elif [ "$1" == "install" -o "$1" == "i" ]; then
           VIBRATE_ERROR
           exit 1
         fi
-      ${bad_suffix}
-      VIBRATE_ERROR
-      exit 2
-    fi
  }
   confirm="FOOTER"
  if [ "$3" == "-y" -o "$3" == "-Y" ]; then #跳过确认环节
