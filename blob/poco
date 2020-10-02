@@ -802,7 +802,6 @@ elif [ "$1" == "install" -o "$1" == "i" ]; then
           VIBRATE_ERROR
           exit 1
         fi
-    else
       ${bad_suffix}
       VIBRATE_ERROR
       exit 2
