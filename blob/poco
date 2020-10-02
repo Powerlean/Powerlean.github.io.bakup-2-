@@ -3,12 +3,15 @@
 #Website: https://powerlean.top
 #Owner: Powerlean (2020)
 ######################################
-export version=43
+export version=44
 export found="bash"
 export vibrate="echo -en \007"
 export stop="sleep 0.1"
 export operation="$@"
-export log_file="$PREFIX/etc/poco.log"
+export log_file="$PREFIX/etc/poco/poco.log"
+export etc="$PREFIX/etc/"
+export data_file="$PREFIX/etc/poco/poco.data"
+export reles_file="$PREFIX/etc/poco/poco.reles"
 
 #特殊字符#
 export yellow="\033[33m"
@@ -16,6 +19,15 @@ export red="\033[31m"
 export green="\033[32m"
 export done="\033[0m"
 export footer="echo ────────────────────────────────────────────"
+
+if [ ! -d "$PREFIX/etc/poco" ]; then
+  mkdir -p "$PREFIX/etc/poco"
+fi
+
+DONE() {
+  ${done_tip}
+  ${vibrate}
+}
 
 RESCUE() {
   echo -e "${yellow}START AUTO-RECUSE${done}"
@@ -197,7 +209,7 @@ if [ ! -f "$PREFIX/etc/poco.conf" ]; then
 fi
 
 #导入config数据#
-export config_file="$PREFIX/etc/poco.conf"
+export config_file="$PREFIX/etc/poco/poco.conf"
 export list_url=`sed '/^listURL：/!d;s/.*：//' $config_file`
 export site=`sed '/^URL：/!d;s/.*：//' $config_file`
 export site_404=`sed '/^page404：/!d;s/.*：//' $config_file`
@@ -689,7 +701,139 @@ elif [ "$1" == "history" -o "$1" == "hi" ]; then
   fi
 VIBRATE_DONE
 
-#主体(九扇区) COMMAND_NOT_FOUND
+#主体(九扇区) INSTALL
+elif [ "$1" == "install" -o "$1" == "i" ]; then
+ if [ not"$2" == "not" ]; then
+    ${not_input}
+    VIBRATE_ERROR
+    exit 2
+  fi
+  ${check_version}
+  progress
+  CHECK_UPDATE
+  ${vibrate}
+  ${done_tip}
+   
+   CHECK_FILE() {
+   ${check_file}
+   progress
+   origin=$(curl -s ${site}$blob/poco)
+   local=$(cat $bin/poco)
+   DONE
+   if [[ "${#origin}" -ne "${#local}" ]]; then
+     ${re_install}
+     VIBRATE_ERROR
+     export mode="update" #输出模式
+     curl -s ${site}$blob/poco.setup | bash
+   fi
+   ${vibrate}
+   }
+   
+   #若版本更新被触发，则跳过文件校验
+ check_status="CHECK_FILE"
+ development_mode_ifs=$(echo "${development_mode}" | tr [a-z] [A-Z])
+ if [ "$status" == "complete" -o "$development_mode_ifs" == "TRUE" ]; then
+  unset check_status
+ fi
+ ${check_database}
+ progress
+ local=$(cat ${etc}/poco.data)
+ lastest=$(curl -s ${site}/${blob}/poco.data)
+ DONE
+ if [ "$local" -ne "$lastest" ]; then
+   ${update_database}
+   curl -sOL ${site}/${blob}/poco.data
+   mv poco.data "${etc}"
+ fi
+ ${search_database}
+ export result=$(sed '/^"${2}"：/!d;s/.*：//' $data_file)
+ if [ not"$result" == not ]; then
+   ${void_found}
+   VIBRATE_ERROR
+   exit 2
+ fi
+ ${check_status}
+  ${search}
+  progress
+  try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${blob}${2})
+  if [ "$try" -ne "200" ]; then
+    echo -e "${red}${try}[${ERROR}]${done}"
+    ${void_found}
+    VIBRATE_ERROR
+    exit 2
+  else
+    echo -e "${green}${try}[${OK}]${done}"
+    ${vibrate}
+  fi
+ ${try_download}
+ ${check_version}
+ progress
+ export local=$(sed '/^"${2}@version"：/!d;s/.*：//' $reles_file)
+ export lastest=$(sed '/^"${2}@version"：/!d;s/.*：//' $data_file)
+ if [ "$local" == "$lastest" ]; then
+   ${exist_database}
+   VIBRATE_DONE
+   exit 0
+ fi
+ FOOTER() {
+ INTRO=$(curl -s ${site}/${blob}/poco.list | sed '/^'"$2"' *-/!d;s/.*- //')
+    if [ not"$INTRO" == "not" ]; then
+      export INTRO="$not_intro"
+    fi
+     DATE=$(date)
+     ${footer}
+     echo -e "${result}  ${DATE}" #${size}:${#try}${unit}
+     echo " ${INTRO}"
+     echo ""
+     echo -e "${come}:${yellow}${site}${blob}${result}${done}"
+     ${footer}
+     ${vibrate}
+     read -n1 -p "$install [Y/n]: " choice
+        if [ "$choice" == "y" -o "$choice" == "Y" ]; then
+          echo ""
+          curl -#OL ${site}$blob/$result
+        elif [ "$choice" == "n" -o "$choice" == "N" ]; then
+          echo ""
+          ${abort}
+          VIBRATE_DONE
+          exit 0
+        else
+          ${error_get}
+          VIBRATE_ERROR
+          exit 1
+        fi
+    else
+      ${bad_suffix}
+      VIBRATE_ERROR
+      exit 2
+    fi
+ }
+  confirm="FOOTER"
+ if [ "$3" == "-y" -o "$3" == "-Y" ]; then #跳过确认环节
+   unset confirm
+ fi
+ ${confirm}
+ if [ not"$confirm" == not ]; then
+  curl -#OL ${site}$blob/$result
+ fi
+ download_size=`ls -sh ${reslut} | sed "s/ ${2}//g"` #统计文件大小
+ ${unpack}
+ progress
+ tar -xf ${reslut}
+ DONE
+ ${config_fun}
+ progress
+ export reslut=${reslut%.*}
+ cd "$reslut"
+ cmd=$(cat RELEASE)
+ $cmd
+ DONE
+ ${remove_dash}
+ rm -rf "$reslut"
+ ${done_setup}
+ VIBRATE_DONE
+
+#主体(十扇区) COMMAND_NOT_FOUND
 else
   ${void}
   poco help
