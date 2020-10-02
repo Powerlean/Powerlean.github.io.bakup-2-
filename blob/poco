@@ -771,6 +771,9 @@ elif [ "$1" == "install" -o "$1" == "i" ]; then
  ${try_download}
  ${check_version}
  progress
+ if [ ! -f "$reles_file" ]; then
+   touch $reles_file
+ fi
  export local=$(sed '/^"${2}@version"：/!d;s/.*：//' $reles_file)
  export lastest=$(sed '/^"${2}@version"：/!d;s/.*：//' $data_file)
  if [ "$local" == "$lastest" ]; then
