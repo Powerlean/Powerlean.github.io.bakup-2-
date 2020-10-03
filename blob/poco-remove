@@ -2,7 +2,7 @@
 export red="\033[31m"
 done="\033[0m"
 
-echo -e "${red}ARE YOU SURE THAT YOU WANT TO REMOVE POCO?${done}"
+echo -e "${red}ARE YOU SURE THAT YOU WANT TO REMOVE THE POCO?${done}"
 echo -ne "${red}TYPE [DELETE] TO REMOVE: ${done}"
 read cmd
 if [ "$cmd" == "DELETE" ] then
