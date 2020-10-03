@@ -59,6 +59,9 @@ if [ "$mode" == "update" ]; then
   mv poco-rescue $bin
   chmod +x $bin/poco
   chmod +x $bin/poco-rescue
+  if [ ! -d "$PREFIX/etc/poco/" ]; then
+    mkdir "$PREFIX/etc/poco/"
+  fi
   if [ ! -f "$PREFIX/etc/poco/poco.conf" ]; then
      curl -sOL www.powerlean.top/blob/poco.conf
      mv poco.conf "$PREFIX/etc/poco"
@@ -97,12 +100,18 @@ clear
 curl -s www.powerlean.top/blob/poco.fav
 echo -n "设定中"
 progress
+if [ ! -d "$PREFIX/etc/poco/" ]; then
+    mkdir "$PREFIX/etc/poco/"
+fi
 mv poco.conf "$PREFIX/etc/poco"
 mv poco $bin
 mv poco-rescue $bin
 mv poco.data "$PREFIX/etc/poco"
 chmod +x $bin/poco
 chmod +x $bin/poco-rescue
+if [ ! -d "$PREFIX/etc/poco" ]; then
+  mkdir -p "$PREFIX/etc/poco"
+fi
 echo "完成"
 if [ -f "$bin/sudo" ]; then
   if [ -f "$bin/su" ]; then
