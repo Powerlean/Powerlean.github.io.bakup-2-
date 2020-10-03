@@ -55,18 +55,18 @@ if [ not"$bin" == "not" ]; then
 fi
 #分区一
 if [ "$mode" == "update" ]; then
-  curl -sOL powerlean.top/blob/poco
-  curl -sOL powerlean.top/blob/poco-rescue
+  curl -sOL www.powerlean.top/blob/poco
+  curl -sOL www.powerlean.top/blob/poco-rescue
   mv poco $bin
   mv poco-rescue $bin
   chmod +x $bin/poco
   chmod +x $bin/poco-rescue
   if [ ! -f "$PREFIX/etc/poco/poco.conf" ]; then
-     curl -sOL powerlean.top/blob/poco.conf
+     curl -sOL www.powerlean.top/blob/poco.conf
      mv poco.conf "$PREFIX/etc/poco"
   fi
   if [ ! -f "$PREFIX/etc/poco/poco.data" ]; then
-     curl -sOL powerlean.top/blob/poco.data
+     curl -sOL www.powerlean.top/blob/poco.data
      mv poco.conf "$PREFIX/etc/poco"
   fi
   exit 0
@@ -74,25 +74,43 @@ fi
 #分区二
 if [ -f "$bin/poco" ]; then
   clear
-  curl -s powerlean.top/blob/poco.fav
+  logo="curl -s www.powerlean.top/blob/poco.fav"
+  ${logo}
   echo ""
   echo -e "${green}该设备已于之前部署过Power Collector，若要重新安装，请尝试将'${bin}poco'移除。${done}"
   exit 0
 fi
 clear
-curl -s powerlean.top/blob/poco.fav
+curl -s www.powerlean.top/blob/poco.fav
 echo -n "安装应该已经开始"
 progress
-curl -#OL powerlean.top/blob/poco
-curl -#OL powerlean.top/blob/poco.conf
-curl -#OL powerlean.top/blob/poco-rescue
-curl -#OL powerlean.top/blob/poco.data
+clear
+${logo}
+echo "下载主体"
+curl -#OL www.powerlean.top/blob/poco
+clear
+${logo}
+echo "下载控制组件"
+curl -#OL www.powerlean.top/blob/poco.conf
+clear
+${logo}
+echo "下载修复程式"
+curl -#OL www.powerlean.top/blob/poco-rescue
+clear
+${logo}
+echo "更新数据缓存"
+curl -#OL www.powerlean.top/blob/poco.data
+clear
+${logo}
+echo -n "设定中"
+progress
 mv poco.conf "$PREFIX/etc/poco"
 mv poco $bin
 mv poco-rescue $bin
 mv poco.data "$PREFIX/etc/poco"
 chmod +x $bin/poco
 chmod +x $bin/poco-rescue
+echo "完成"
 if [ -f "$bin/sudo" ]; then
   if [ -f "$bin/su" ]; then
     echo -e ${yellow}"若无法安装，请手动运行'sudo su'以授权PowerCollector执行移动文件等操作"${done}
