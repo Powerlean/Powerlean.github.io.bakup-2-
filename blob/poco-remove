@@ -5,7 +5,7 @@ done="\033[0m"
 echo -e "${red}ARE YOU SURE THAT YOU WANT TO REMOVE THE POCO?${done}"
 echo -ne "${red}TYPE [DELETE] TO REMOVE: ${done}"
 read cmd
-if [ "$cmd" == "DELETE" ] then
+if [ "$cmd" == "DELETE" ]; then
   rm -f "$PREFIX/bin/poco"
   rm -rf "$PREFIX/etc/poco"
 else 
