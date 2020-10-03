@@ -20,10 +20,6 @@ export green="\033[32m"
 export done="\033[0m"
 export footer="echo ────────────────────────────────────────────"
 
-if [ ! -d "$PREFIX/etc/poco" ]; then
-  mkdir -p "$PREFIX/etc/poco"
-fi
-
 DONE() {
   ${done_tip}
   ${vibrate}
