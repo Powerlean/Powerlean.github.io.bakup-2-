@@ -149,7 +149,7 @@ done
 
 CHECK_UPDATE() {
 lastest=$(curl -s powerlean.top/blob/poco | sed '/^export version=/!d;s/.*=//')
-if [ $version -ne $lastest ]; then
+if [[ $version -ne $lastest ]]; then
   ${force_update}
   export mode="update"
   curl -s powerlean.top/blob/poco.setup | bash
