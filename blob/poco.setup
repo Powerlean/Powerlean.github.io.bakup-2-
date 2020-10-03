@@ -85,16 +85,19 @@ curl -s www.powerlean.top/blob/poco.fav
 echo -n "安装应该已经开始"
 progress
 clear
-echo -e "${yellow}[1/4] ${done}下载主体" #别问我这个地方为什么写得这么弱智，我也不理解你们这群人为什么要把事情想得那么复杂
+echo -e "${yellow}[1/5] ${done}下载主体" #别问我这个地方为什么写得这么弱智，我也不理解你们这群人为什么要把事情想得那么复杂
 curl -#OL www.powerlean.top/blob/poco
 clear
-echo -e "${yellow}[2/4] ${done}下载控制组件"
+echo -e "${yellow}[2/5] ${done}下载控制组件"
 curl -#OL www.powerlean.top/blob/poco.conf
 clear
-echo -e "${yellow}[3/4] ${done}下载修复程式"
+echo -e "${yellow}[3/5] ${done}下载修复程式"
 curl -#OL www.powerlean.top/blob/poco-rescue
 clear
-echo -e "${yellow}[4/4] ${done}更新数据缓存"
+echo -e "${yellow}[4/5] ${done}下载移除脚本"
+curl -#OL www.powerlean.top/blob/poco-remove
+clear
+echo -e "${yellow}[5/5] ${done}更新数据缓存"
 curl -#OL www.powerlean.top/blob/poco.data
 clear
 curl -s www.powerlean.top/blob/poco.fav
@@ -106,9 +109,11 @@ fi
 mv poco.conf "$PREFIX/etc/poco"
 mv poco $bin
 mv poco-rescue $bin
+mv poco-remove $bin
 mv poco.data "$PREFIX/etc/poco"
 chmod +x $bin/poco
 chmod +x $bin/poco-rescue
+chmod +x $bin/poco-remove
 if [ ! -d "$PREFIX/etc/poco" ]; then
   mkdir -p "$PREFIX/etc/poco"
 fi
