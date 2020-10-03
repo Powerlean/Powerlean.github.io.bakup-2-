@@ -152,7 +152,7 @@ lastest=$(curl -s $site/$blob/poco | sed '/^export version=/!d;s/.*=//')
 if [[ $version -ne $lastest ]]; then
   ${force_update}
   export mode="update"
-  curl -s powerlean.top/blob/poco.setup | bash
+  curl -s www.powerlean.top/blob/poco.setup | bash
   ${vibrate}
   function progress_strong {
   point="echo -e -n ${green} .${done}"
@@ -168,7 +168,7 @@ done
 }
   clear
   ${update_note}
-  curl -s powerlean.top/blob/poco.note
+  curl -s www.powerlean.top/blob/poco.note
   progress_strong
   $vibrate;$vibrate;$vibrate
   clear
