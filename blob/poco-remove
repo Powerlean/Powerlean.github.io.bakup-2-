@@ -10,8 +10,8 @@ if [ "$cmd" == "DELETE" ]; then
   rm -rf "$PREFIX/etc/poco"
   rm -rf "$PREFIX/bin/poco-rescue"
   rm -rf "$PREFIX/bin/poco-remove"
-  echo -e "${red}DONE${done}
+  echo -e "${red}DONE${done}"
 else 
-  echo -e "${red}ERROR:INVALID OPERATION,RETURN STATUS [2]"
+  echo -e "${red}ERROR:INVALID OPERATION,RETURN STATUS [2]${done}"
   exit 2
 fi
