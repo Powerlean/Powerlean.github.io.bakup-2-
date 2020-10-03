@@ -85,16 +85,16 @@ curl -s www.powerlean.top/blob/poco.fav
 echo -n "安装应该已经开始"
 progress
 clear
-echo "下载主体"
+echo -ne "${yellow}[1/4] ${done}下载主体" #别问我这个地方为什么写得这么弱智，我也不理解你们这群人为什么要把事情想得那么复杂
 curl -#OL www.powerlean.top/blob/poco
 clear
-echo "下载控制组件"
+echo -ne "${yellow}[2/4] ${done}下载控制组件"
 curl -#OL www.powerlean.top/blob/poco.conf
 clear
-echo "下载修复程式"
+echo -ne "${yellow}[3/4] ${done}下载修复程式"
 curl -#OL www.powerlean.top/blob/poco-rescue
 clear
-echo "更新数据缓存"
+echo -ne "${yellow}[4/4] ${done}更新数据缓存"
 curl -#OL www.powerlean.top/blob/poco.data
 clear
 curl -s www.powerlean.top/blob/poco.fav
