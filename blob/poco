@@ -199,8 +199,8 @@ do
 done
 }
 
-if [ ! -f "$PREFIX/etc/poco.conf" ]; then
-  echo -e "${red}ERROR:File $PREFIX/etc/poco.conf does not exist${done}"
+if [ ! -f "$PREFIX/etc/poco/poco.conf" ]; then
+  echo -e "${red}ERROR:File $PREFIX/etc/poco/poco.conf does not exist${done}"
   RESCUE
 fi
 
