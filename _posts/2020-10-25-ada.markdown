@@ -1,0 +1,207 @@
+---
+layout: post
+title:  Ada Tutorial
+date:   2020-10-25 14:05:21 +0800
+tags: Main
+color: rgb(255,90,90)
+cover: 'https://pic2.zhimg.com/50/d510846f71f640a2997fa04c7849015f_720w.jpg?source=54b3c3a5'
+subtitle: 'Version 2.5 - February 1, 1998'
+---
+<CENTER><B><FONT SIZE=+3>A</FONT><FONT SIZE=+2>DA</FONT><FONT SIZE=+3>
+95 T</FONT><FONT SIZE=+2>UTORIAL</FONT></B></CENTER>
+
+
+<P>本教程将教与你95种ada编程语言语法。其由33章组成，务必按主题顺序学习,其内容是按逻辑顺序介绍的，并建立在前面介绍的主题之基础上。
+请下载示例程序的源代码，然后编译并执行每个程序。勤奋的学生将尝试修改示例程序，然后重新编译并执行它，以了解该程序所研究的材料。这将为学生使用他们的编译器提供宝贵的经验。
+
+<P>我们推荐的研究方法是打印一章或两章的文本，下载示例程序，并在编译器和编辑器中运行示例程序进行学习。成功完成每章后，可下载其他章节作为衍生。
+
+<P>请注意，完成本教程的第一部分将使学生能够在Ada中编写基本的程序，但完成第二部分将使学生能够使用Ada的所有功能。
+
+<P><B>英文原文 Version 2.5 - February 1, 1998</B>
+
+<P>The original for this page is located at <A HREF="http://www.swcp.com/~dodrill/a95doc/a95list.htm">http://www.swcp.com/~dodrill/a95doc/a95list.htm</A>
+and is the only fully authorized site for distribution of this tutorial.
+Many persons have downloaded one or more of our tutorials for redistribution
+without our consent, and occasionally do not include all of the components
+needed for the complete package. You can be assured that the tutorial will
+be complete and up to date only at the home site, since we have no control
+over the actions of other web site operators.
+
+<P>This tutorial is distributed as shareware which means that you do not
+have to pay to use it. However, the author spent a good deal of time and
+financial resources to develop this tutorial and requests that you share
+in the financial burden in a very small way, but only if you felt the tutorial
+was valuable to you as an aid in learning to program in Ada. If you wish
+to remit a small payment to the author, full instructions for doing so
+will be given by clicking the link below. I hope you find programming in
+Ada to be rewarding and profitable. I personally think Ada is the best
+language to use for a large project with more than a single programmer
+because of the careful interface checking done by the compiler.
+
+<P><A HREF="order.htm">How to Remit Payment For this Tutorial!</A>
+
+<P><B>Part 1 - Beginning Ada 95 Tutorial</B>
+<DL>
+<DT>
+<A HREF="intro.htm">Introduction</A> - What is Ada and why study it?</DT>
+
+<DT>
+<A HREF="chap01.htm">Chapter 1</A> - Getting Started</DT>
+
+<DT>
+<A HREF="chap02.htm">Chapter 2</A> - Program Structure</DT>
+
+<DT>
+<A HREF="chap03.htm">Chapter 3</A> - The Integer Type Variable</DT>
+
+<DT>
+<A HREF="chap04.htm">Chapter 4</A> - Logical Compares &amp; precedence</DT>
+
+<DT>
+<A HREF="chap05.htm">Chapter 5</A> - Control Structures</DT>
+
+<DT>
+<A HREF="chap06.htm">Chapter 6</A> - Additional Scalar Types</DT>
+
+<DT>
+<A HREF="chap07.htm">Chapter 7</A> - Derived Types</DT>
+
+<DT>
+<A HREF="chap08.htm">Chapter 8</A> - Subprograms</DT>
+
+<DT>
+<A HREF="chap09.htm">Chapter 9</A> - Blocks and Scope of variables</DT>
+
+<DT>
+<A HREF="chap10.htm">Chapter 10</A> - Arrays</DT>
+
+<DT>
+<A HREF="chap11.htm">Chapter 11</A> - The Character &amp; String Type</DT>
+
+<DT>
+<A HREF="chap12.htm">Chapter 12</A> - Records</DT>
+
+<DT>
+<A HREF="chap13.htm">Chapter 13</A> - The Access Type Variable</DT>
+
+<DT>
+<A HREF="chap14.htm">Chapter 14</A> - Input/Output</DT>
+
+<DT>
+<A HREF="chap15.htm">Chapter 15</A> - Packages</DT>
+
+<DT>
+<A HREF="chap16.htm">Chapter 16</A> - Example Programs</DT>
+
+
+<P><B>Part 2 - Advanced Ada 95 Tutorial</B>
+<DT>
+<A HREF="chap17.htm">Chapter 17</A> - Exceptions</DT>
+
+<DT>
+<A HREF="chap18.htm">Chapter 18</A> - Advanced Subprogram Topics</DT>
+
+<DT>
+<A HREF="chap19.htm">Chapter 19</A> - Advanced Array Topics</DT>
+
+<DT>
+<A HREF="chap20.htm">Chapter 20</A> - Advanced Record Topics</DT>
+
+<DT>
+<A HREF="chap21.htm">Chapter 21</A> - Advanced Packages &amp; Private Types</DT>
+
+<DT>
+<A HREF="chap22.htm">Chapter 22</A> - Object Oriented Programming</DT>
+
+<DT>
+<A HREF="chap23.htm">Chapter 23</A> - More Object Oriented Programming</DT>
+
+<DT>
+<A HREF="chap24.htm">Chapter 24</A> - Binary Input/Output</DT>
+
+<DT>
+<A HREF="chap25.htm">Chapter 25</A> - Dynamic Allocation</DT>
+
+<DT>
+<A HREF="chap26.htm">Chapter 26</A> - Tasking</DT>
+
+<DT>
+<A HREF="chap27.htm">Chapter 27</A> - The Simple Rendezvous</DT>
+
+<DT>
+<A HREF="chap28.htm">Chapter 28</A> - The Conditional Rendezvous</DT>
+
+<DT>
+<A HREF="chap29.htm">Chapter 29</A> - Additional Tasking Topics</DT>
+
+<DT>
+<A HREF="chap30.htm">Chapter 30</A> - Generic Subprograms</DT>
+
+<DT>
+<A HREF="chap31.htm">Chapter 31</A>- Generic Packages</DT>
+
+<DT>
+<A HREF="chap32.htm">Chapter 32</A> - Control of Representation</DT>
+
+<DT>
+<A HREF="chap33.htm">Chapter 33</A> - More Example Programs</DT>
+</DL>
+The source code and the answers for part 1 should be kept in a separate
+directory from those given for part 2 because some of the file names are
+repeated. This is done to illustrate evolution of software techniques as
+additional constructs are studied. All of the HTML documentation, however,
+should be placed in a single directory.
+
+<P><A HREF="ftp://ftp.swcp.com/pub/users/dodrill/a95htm1.zip">Download
+HTML Documentation for Ada 95 Part 1</A> - (a95html.zip) Download the Introduction
+and Chapters 1 to 16 in one packed file. This file (about 132k) contains
+the 17 files mentioned (plus the diagrams) which can be downloaded and
+unpacked for use locally. The content of this file is identical to the
+content of those 17 files. There are no executable files in this group
+of files.
+
+<P><A HREF="ftp://ftp.swcp.com/pub/users/dodrill/a95src1.zip">Source Code
+for Ada 95 Part 1</A> - (a95src1.zip) Download all example programs. This
+file (about 48k) contains 86 source files which are all explained in the
+16 chapters of text. There are no executable files in this group of files.
+
+<P><A HREF="ftp://ftp.swcp.com/pub/users/dodrill/a95ans1.zip">Answers to
+Exercises for Ada 95 Part 1</A>- (a95ans1.zip) Download the authors answers
+to all of the programming exercises. This file (about 20k) contains 37
+source files. There are no executable files in this group of files.
+
+<P><A HREF="ftp://ftp.swcp.com/pub/users/dodrill/a95htm2.zip">Download
+HTML Documentation for Ada 95 Part 2</A>- (a95htm2.zip) Download the Introduction
+and Chapters 17 to 33 in one packed file. This file (about 144k) contains
+the 17 files mentioned (plus the diagrams) which can be downloaded and
+unpacked for use locally. The content of this file is identical to the
+content of those 17 files. There are no executable files in this group
+of files. These files when unpacked, should be placed in the same directory
+as the documentation files from Part 1 of this tutorial.
+
+<P><A HREF="ftp://ftp.swcp.com/pub/users/dodrill/a95src2.zip">Source Code
+for Ada 95 Part 2</A>- (a95src2.zip) Download all example programs. This
+file (about 67k) contains 100 source files which are all explained in the
+15 chapters of text. There are no executable files in this group of files.
+
+<P><A HREF="ftp://ftp.swcp.com/pub/users/dodrill/a95ans2.zip">Answers to
+Exercises for Ada 95 Part 2</A>- (a95ans2.zip) Download the authors answers
+to all of the programming exercises. This file (about 29k) contains 39
+source files. There are no executable files in this group of files.
+
+<P><A HREF="ftp://ftp.swcp.com/pub/users/dodrill/pkunzip.exe">pkunzip executable</A>
+- (pkunzip.exe) Download pkunzip.exe version 2.04 to unzip the source code.
+This executable is pre-registered for your use in unzipping any Coronado
+Enterprises tutorial files. It will unpack and generate the zipped files
+in the current directory and all will be ASCII source code files. To unzip
+the source code files for Ada 95 part 1, execute the following DOS command;
+<PRE>&nbsp;&nbsp;&nbsp;&nbsp; pkunzip a95src1.zip</PRE>
+Or, to unzip the answers to programming exercises for Ada 95 part 1, execute
+the following DOS command;
+<PRE>&nbsp;&nbsp;&nbsp;&nbsp; pkunzip a95ans1.zip</PRE>
+
+<HR width="100%"><I><FONT SIZE=-1>Copyright &copy; 1988-1998 Coronado Enterprises
+- Last update, February 1, 1998</FONT></I>
+<BR><FONT SIZE=-1><I>Gordon Dodrill - dodrill@swcp.com - </I><A HREF="mailto:dodrill@swcp.com">Please
+email any comments or suggestions.</A></FONT>
