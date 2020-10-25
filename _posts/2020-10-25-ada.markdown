@@ -1,15 +1,13 @@
 ---
 layout: post
-title:  Ada Tutorial
-date:   2020-10-25 14:05:21 +0800
+title: Ada Tutorial
+date: 2020-10-25 14:05:21 +0800
 tags: Main
 color: rgb(255,90,90)
 cover: 'https://pic2.zhimg.com/50/d510846f71f640a2997fa04c7849015f_720w.jpg?source=54b3c3a5'
 subtitle: 'Version 2.5 - February 1, 1998'
 ---
-<CENTER><B><FONT SIZE=+3>A</FONT><FONT SIZE=+2>DA</FONT><FONT SIZE=+3>
-95 T</FONT><FONT SIZE=+2>UTORIAL</FONT></B></CENTER>
-
+# Ada Tutorial #
 
 <P>本教程将教与你95种ada编程语言语法。其由33章组成，务必按主题顺序学习,其内容是按逻辑顺序介绍的，并建立在前面介绍的主题之基础上。
 请下载示例程序的源代码，然后编译并执行每个程序。勤奋的学生将尝试修改示例程序，然后重新编译并执行它，以了解该程序所研究的材料。这将为学生使用他们的编译器提供宝贵的经验。
@@ -201,7 +199,7 @@ Or, to unzip the answers to programming exercises for Ada 95 part 1, execute
 the following DOS command;
 <PRE>&nbsp;&nbsp;&nbsp;&nbsp; pkunzip a95ans1.zip</PRE>
 
-<HR width="100%"><I><FONT SIZE=-1>Copyright &copy; 1988-1998 Coronado Enterprises
-- Last update, February 1, 1998</FONT></I>
-<BR><FONT SIZE=-1><I>Gordon Dodrill - dodrill@swcp.com - </I><A HREF="mailto:dodrill@swcp.com">Please
-email any comments or suggestions.</A></FONT>
+<HR width="100%"><I>Copyright &copy; 1988-1998 Coronado Enterprises
+- Last update, February 1, 1998</I>
+<BR><I>Gordon Dodrill - dodrill@swcp.com - </I><A HREF="mailto:dodrill@swcp.com">Please
+email any comments or suggestions.</A>
