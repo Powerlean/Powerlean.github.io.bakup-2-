@@ -1,0 +1,382 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Author" CONTENT="Gordon Dodrill">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (Win95; I) [Netscape]">
+   <TITLE>Ada Tutorial - Chapter 26</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<B>Ada Tutorial - Chapter 26</B>
+
+<P><B><FONT SIZE=+3>S</FONT><FONT SIZE=+2>IMPLE</FONT><FONT SIZE=+3> T</FONT><FONT SIZE=+2>ASKING</FONT></B>
+
+<P><B>WHAT IS TASKING?</B>
+
+<P>The topic of tasking is probably new to you regardless of what programming
+experience you have, because tasking is a relatively new technique which
+is not available with most programming languages. If you need some kind
+of a parallel operation with most other languages, you are required to
+use some rather tricky techniques or write a driver in assembly language.
+With Ada, however, tasking is designed into the language and is very easy
+to use.
+
+<P><B>BUT NOT TRULY PARALLEL IN ADA</B>
+
+<P>Tasking is the ability of the computer to appear to be doing two or
+more things at once even though it only has one processor. True parallel
+operation occurs when there actually are multiple processors available
+in the hardware, but since most modern computers have only one processor,
+we must make the system appear to have more than one by sharing the processor
+between two or more tasks. We will have much more to say about this later,
+but we must discuss another topic first.
+
+<P><B>REAL-TIME REQUIRES TIMING</B>
+
+<P>Example program ------> <B><A HREF="e_c26_p1.ada">e_c26_p1.ada</A></B>
+
+<P>In the initial design of the Ada programming language, a requirement
+was included that it be capable of operating in a real-time environment.
+This requires that we have some control of time. We at least need the ability
+to read the current time and know when we arrive at some specified time.
+The example program named e_c26_p1.ada will illustrate how we can do just
+that.
+
+<P>The program begins in our usual way except for the addition of the new
+package listed in line 5, the <B>Ada.Calendar </B>package which must be
+supplied with your compiler if you have a validated Ada compiler. The specification
+package for <B>Ada.Calendar </B>is listed in section 9.6 of the Ada 95
+reference Manual (ARM) and is probably listed somewhere in your compiler
+documentation. This package gives you the ability to read the system time
+and date, and allows you to set up a timed delay. Refer to a listing of
+the specification package of <B>Ada.Calendar </B>and follow along in the
+discussion in the next paragraph.
+
+<P><B>THE CLOCK FUNCTION</B>
+
+<P>You will notice that the type <B>TIME </B>is <B>private</B>, so you
+cannot see how it is implemented, but you won't need to see it. A call
+to the function <B>Clock </B>returns the current time and date to a variable
+of type <B>TIME</B>, and other functions are provided to get the individual
+elements of the date or the number of seconds since midnight. You cannot
+read the individual elements directly, because some may change between
+subsequent reads leading to erroneous data. A procedure named <B>Split
+</B>is provided to split up the type <B>TIME </B>variable and return all
+four fields at once, and another is provided named <B>Time_Of</B> which
+will combine the individual elements into a <B>TIME </B>type variable when
+it is given the four elements as inputs.
+
+<P>Finally, you are provided with several overloadings of the addition,
+subtraction, and some compare operators in order to effectively use the
+<B>Ada.Calendar </B>package. A single exception is declared which will
+be raised if you attempt to use one of these subprograms wrong.
+
+<P><B>THE delay STATEMENT</B>
+
+<P>The reserved word <B>delay </B>is used to indicate to the computer that
+you wish to include a delay at some point in the program. The delay is
+given in seconds as illustrated in line 19 of the program under study,
+and is declared as a fixed point number, which is defined by each implementation.
+The value of the delay is of type <B>DAY_DURATION</B>, but in this case,
+the universal_real type is used. The exact definition of the delay is given
+in Annex M of your compiler. It must allow a range of at least 0.0 to 86,400.0,
+which is the number of seconds in a day, and it must allow a <B>delta </B>of
+not more than 20 milliseconds. Refer to Annex M of your compiler documentation
+to see the exact declaration for this type for your particular compiler.
+The ARM requires that when the <B>delay </B>statement is encountered, the
+system must delay at the point of occurrence for at least the period specified
+in the delay statement, but does not say how much longer the system can
+delay. This leads to some inaccuracy in the delay which will be up to you
+to take care of. We will see how later in this example program.
+
+<P>A fixed point variable is used for the delay variable so that addition
+of times can be done with no loss in accuracy, and fixed point numbers
+have a fixed accuracy.
+
+<P>When you execute this program, you will see the first line displayed
+on the monitor, then a pause before the second message is displayed due
+to the delay statement in line 19. In fact, the pause will be at least
+3.14 seconds according to the Ada specification.
+
+<P><B>USING THE CLOCK FUNCTION</B>
+
+<P>In line 22, the <B>Clock </B>function is used to return the current
+time and date and assign it to the variable named <B>Time_And_Date</B>.
+In the next line we use the procedure named <B>Split </B>to split the time
+and date, which is contained in the composite variable named <B>Time_And_Date,</B>
+into its various components. Although the only component we are interested
+in is the <B>Seconds </B>field, we must provide a variable for each of
+the other fields simply because of the nature of the procedure call. Within
+the function call, we assign the value of <B>Seconds </B>to <B>Start </B>for
+later use. This is a record of the time when we started the loop which
+we will use later. The time is in the form of the number of seconds that
+have elapsed since midnight according to the definition of the calendar
+package.
+
+<P>We execute a loop in lines 25 through 38 where we read the time and
+date, split it into its component parts, and display each of the components.
+Instead of displaying the time since midnight, we subtract the <B>Start
+</B>time from the current time in line 35, where we are actually using
+one of the overloadings from the <B>Ada.Calendar </B>package. We display
+the elapsed time since we executed line 22 of this program. Finally, we
+put in a total delay of one second each time we pass through the loop so
+we can see the delays accumulate.
+
+<P><B>WE ARE ACCUMULATING ERRORS IN THIS LOOP</B>
+
+<P>You will recall that the delay statement requires a delay of at least
+the amount listed, but says nothing of extra delay allowed when returning
+to the program, in order to give the compiler writers leeway in how to
+implement the <B>delay </B>statement. In addition, we will require some
+time to execute the other statements in the loop, so it should not be surprising
+to you that when you compile and execute this program, the time will not
+advance by exactly one second for each pass through the loop, but will
+precess slightly as time passes.
+
+<P><B>A LOOP WITHOUT ERRORS</B>
+
+<P>In lines 42 through 51, we essentially repeat the loop but with a slight
+difference. Instead of delaying for one second in each loop, we delay the
+amount needed to get to the desired point in time. In line 50, we convert
+the type of <B>Index </B>to <B>DAY_DURATION</B> with an explicit type conversion,
+then subtract the current elapsed time to calculate the desired time of
+the delay. This prevents an accumulation of error, and when you run the
+program you will see only the digitizing error introduced by the fixed
+point number. However, there is a potential problem with this method.
+
+<P><B>WHAT IF A NEGATIVE DELAY IS REQUESTED?</B>
+
+<P>When calculating delay times like this, it is possible for the required
+delay time to result in a negative number. The Ada designers had enough
+foresight to see that in most applications, you would desire to simply
+push forward, so they defined the delay such that a negative value for
+the delay time would be construed as a zero, and no error would be raised.
+If a negative time should be considered an error condition for your application,
+it is up to you to detect it and issue an appropriate error message, or
+raise an exception.
+
+<P>The final point to be made about this example program is the <B>delay
+until</B> statement illustrated in line 56. The system delays here until
+the absolute time given which is of type <B>Time</B>. If the time given
+is previous to the time when this statement is executed, there will be
+no delay. The rest of this loop is trivial, so you can study it on your
+own.
+
+<P>Be sure to compile and execute this program and observe the output.
+Due to the delays in the first loop, the data output to the monitor is
+somewhat irregular and can be seen when the program is executed.
+
+<P><B>THE delay IS NOT PART OF CALENDAR</B>
+
+<P>One final point must be made before we leave this program. The <B>Ada.Calendar
+</B>package and the <B>delay </B>statement were both introduced here, and
+even though they work well together, they are completely separate. The
+<B>delay </B>statement is not a part of the <B>Ada.Calendar </B>package
+as will be evidenced in the example programs later in this chapter.
+
+<P><B>OUR FIRST TASKING EXAMPLE</B>
+
+<P>Example program ------> <B><A HREF="e_c26_p2.ada">e_c26_p2.ada</A></B>
+
+<P>Examine the file named e_c26_p2.ada for an example program containing some
+tasking. The first thing you should examine is the main program consisting
+of a single executable statement in line 38 that outputs a line of text
+to the monitor. It may seem strange that it doesn't call any of the code
+in the declaration part, but it doesn't have to as we shall see.
+
+<P>An Ada task is composed of a task specification and a task body, the
+former being illustrated in line 7, and the latter being illustrated in
+lines 8 through 15. This is the first task and both parts begin with the
+reserved word <B>task</B>. The structure of a task is very similar to the
+structure of a subprogram or package. This first example is a very simple
+task which executes a <B>for </B>loop containing output statements. The
+end result consists of four lines of text being displayed on the monitor.
+
+<P><B>THE TASK SPECIFICATION</B>
+
+<P>The task specification can be much more involved than this one, but
+this is a good first example. The general structure for the task specification
+is given by;
+<PRE>&nbsp;&nbsp; <B>task </B>&lt;task-name> <B>is
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </B>&lt;entry-points>;
+&nbsp;&nbsp; <B>end </B>&lt;task-name>;</PRE>
+but if there are no entry points, then only the reserved word <B>task </B>is
+needed followed by the task name. As with the package, the task specification
+must come before the task body.
+
+<P><B>THE TASK BODY</B>
+
+<P>The task body begins with the reserved words <B>task </B>and <B>body</B>,
+followed by the task name, and the remainder of the structure is identical
+to that of a procedure. There is a declarative part where types, variables,
+subprograms, packages, and even other tasks can be declared, followed by
+the executable part which follows the same rules as those for a main program.
+In this case, there is no declarative part, only an executable part. When
+this task is executed, it will output four lines to the monitor and stop.
+We will say a little more about this task when it gets executed in a few
+minutes.
+
+<P><B>TWO MORE TASKS</B>
+
+<P>It should be clear to you that there are two additional tasks in this
+program, one in lines 17 through 25 and another in lines 27 through 35,
+each with its own respective task specification and task body. There are
+actually four tasks, because the main program is itself another task that
+will run in parallel with the three explicitly declared here. Since it
+is very critical that you understand the order of execution of the various
+tasks, we will spend some time defining it in detail.
+
+<P>Ada always uses linear declaration and when it loads any program, it
+loads things in the order given in the listing. Therefore when it finds
+the task body beginning in line 8, it elaborates all of its declarations,
+although there are none in this case, then loads the executable part of
+the task, but does not begin execution yet. It effectively makes the task
+wait at the <B>begin </B>in line 9 until the other tasks are ready to begin
+execution. It does the same for the task named <B>Second_Task</B>, and
+also for <B>Third_Task.</B> When all declarations are elaborated it arrives
+at the <B>begin </B>of the main program in line 37. At this point, all
+four tasks are waiting at their respective <B>begin </B>statements, and
+all four tasks are permitted to begin execution at the same time. All are
+of equal priority, but a strange thing happens when they begin execution.
+
+<P><B>ORDER OF EXECUTION IS UNDEFINED BY ADA</B>
+
+<P>The rules of execution, as defined by the ARM, give no requirements
+that any form of time slicing be done, nor is it illegal for an implementation
+to allow starving to occur. Starving is where one task uses all of the
+available time and the other task or tasks are allowed to starve because
+they receive no time for operation. In addition, there is no required order
+of execution concerning which of the four tasks in our example will execute
+first, because we have not included any form of priority. Because of these
+rules, we cannot predict exactly what your implementation will do, but
+can only give the results of executing this program on one particular validated
+Ada compiler. As indicated by the results of execution listed following
+the program, this particular compiler allows the task named <B>Third_Task</B>
+to utilize all computing power until it runs to completion, then <B>Second_Task</B>
+uses all of the resources, followed by <B>First_Task</B>, and finally the
+main program runs. Your particular compiler may execute these statements
+in a different order, but that is still correct. The only requirement is
+that all 17 lines be output in any order. Of course the order of output
+is defined within any task according to the rules of sequential operation.
+For example, pass number 2 of <B>Third_Task</B> must follow pass 1 of the
+same task.
+
+<P><B>HOW DOES TASKING END?</B>
+
+<P>When the task named <B>Third_Task</B> arrived at its <B>end </B>statement
+in line 35, it had executed all of its required statements and had nothing
+else to do, so it simply waited there until the other tasks were completed.
+When all four tasks, including the main program task, had arrived at their
+respective <B>end </B>statements, the Ada system knew there was nothing
+else to do, so it returned to the operating system as it does at any normal
+program completion.
+
+<P>Because of the way this program operates, it is not clear that all four
+tasks are operating in parallel, but they actually are, as we will see
+in the next example program. Compile and execute this program and study
+the output from your compiler to see if it is different from that obtained
+as output from our compiler.
+
+<P><B>ADDING DELAYS ADDS TO THE CLARITY OF OPERATION</B>
+
+<P>Example program ------> <B><A HREF="e_c26_p3.ada">e_c26_p3.ada</A></B>
+
+<P>Examine the next example program named e_c26_p3.ada and you will notice
+that <B>delay </B>statements are added within each of the loops. The delays
+were chosen to illustrate that each loop is actually operating in parallel.
+The main program is identical to the previous program if you ignore the
+commented out statements, and since the main program has no delay prior
+to its output statement, it will be the first to output to the monitor.
+The main program will also be the first to complete its operation and will
+then patiently wait at its <B>end </B>statement until the other three tasks
+complete their jobs.
+
+<P>Because of the differences in the delays, the three tasks will each
+complete their delays at different times and the output should be very
+predictable. If you examine the result of execution given at the end of
+the program, you will see that the three tasks actually are running in
+parallel as we stated earlier. It would be profitable for you to compile
+and execute this program so you can observe the output firsthand.
+
+<P><B>WHAT ABOUT THE MAIN PROGRAM?</B>
+
+<P>Return once again to the program named e_c26_p3.ada so we can examine the
+main program. You should remove the comment marks from the three statements
+in the main program so that it also contains a <B>loop </B>and a <B>delay
+</B>within each pass through the loop. When you compile and execute the
+program as modified, it will execute a delay prior to the first output,
+and will output a total of five lines to the monitor interlaced with the
+outputs of the other tasks. This should be a good indication to you that
+the main program is acting just like another task. Compile and execute
+this program, as modified, to see that the main program acts just like
+another task.
+
+<P><B>A BLOCK CAN HAVE TASKS WITHIN IT</B>
+
+<P>Example program ------> <B><A HREF="e_c26_p4.ada">e_c26_p4.ada</A></B>
+
+<P>Examine the program named e_c26_p4.ada for an example of a main program
+with tasks embedded within it. There is a block declared in the main program
+in lines 11 through 44 which is executed inline just like any other block.
+This block however, has the same three tasks we have used in the previous
+programs embedded within it. You will notice that the order of declaration
+is different here, since the three task specifications are given together
+in lines 12 through 14, but this is perfectly legal and would be legal
+in the last two programs also. The only requirement is that the task specification
+must be given before the task body for each declared task.
+
+<P><B>WHAT GOOD IS A DELAY OF ZERO?</B>
+
+<P>You will notice that all of the delays are of zero time, which may lead
+you to ask why we should even bother to include the delays. Each time the
+system encounters a delay of any kind, it must look at each task to see
+if any of them have timed out and need to be exercised. When it does that,
+it may advance to the next task in order, but it is not required to. Which
+task will be selected as the next task is undefined by the ARM, so any
+task can be executed next, including the one that is presently executing.
+The end result is that all four tasks, including the one in the executable
+part of the block, may be executed in a round robin fashion, and none of
+the tasks are starved. It would be perfectly legal for a single task to
+starve the others, according to the ARM, so if your compiler allows this,
+it is not an error. Tasking, as used in a real programming situation will
+not have this problem since additional constructs will be included as we
+will discuss in the next few chapters of this tutorial.
+
+<P>In a manner similar to that in the other example programs, when all
+four tasks are at their end points, the block is completed, and the remaining
+statement is executed in the main program. Note carefully that the main
+program did not enter into the tasking that was executed within the block.
+The inline block was executed as another sequential statement as part of
+the main program. Thus line 9 was executed, then the block in lines 11
+through 44 was executed. When all four tasks including the one within the
+block body were completed, the output statement in line 46 was allowed
+to execute.
+
+<P>Compile and execute this program and study the results. Use the results
+to prove to yourself that the statements in lines 9 and 46 of the main
+program did not enter into the tasking.
+
+<P><B>PROGRAMMING EXERCISES</B>
+<OL>
+<LI>
+Write a procedure that can be called from anywhere in the program named
+e_c26_p1.ada that will use the <B>Seconds </B>field returned from the procedure
+named <B>Split</B>, and display the time of day in hours, minutes, and
+seconds. Call this procedure from a few places within the program.<A HREF=" a_c26_p1.ada">(Solution)</A></LI>
+
+<LI>
+Modify the program named e_c26_p4.ada to include the executable statements
+in lines 9 and 46 within loops, with delays, to prove that the statements
+are executed in a sequential fashion and do not enter into the tasking
+which is restricted to the block in lines 11 through 44.<A HREF=" a_c26_p2.ada">(Solution)</A></LI>
+</OL>
+<A HREF="chap27.htm">Advance to Chapter 27</A>
+
+<P><A HREF="a95list.htm">Return to the Table of Contents</A>
+
+<P>
+<HR width="100%"><I><FONT SIZE=-1>Copyright &copy; 1988-1998 Coronado Enterprises
+- Last update, February 1, 1998</FONT></I>
+<BR><I><FONT SIZE=-1>Gordon Dodrill - dodrill@swcp.com - </FONT></I><FONT SIZE=-1><A HREF="mailto:dodrill@swcp.com">Please
+email any comments or suggestions.</A></FONT>
+</BODY>
+</HTML>

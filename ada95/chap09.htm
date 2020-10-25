@@ -1,0 +1,275 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Author" CONTENT="Gordon Dodrill">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (Win95; I) [Netscape]">
+   <TITLE>Ada Tutorial - Chapter 9</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<B>Ada Tutorial - Chapter 9</B>
+
+<P><B><FONT SIZE=+3>B</FONT><FONT SIZE=+2>LOCKS</FONT><FONT SIZE=+3> A</FONT><FONT SIZE=+2>ND</FONT><FONT SIZE=+3>
+S</FONT><FONT SIZE=+2>COPE</FONT><FONT SIZE=+3> O</FONT><FONT SIZE=+2>F</FONT><FONT SIZE=+3>
+V</FONT><FONT SIZE=+2>ARIABLES</FONT></B>
+
+<P><B>LARGE PROJECT DECOMPOSITION</B>
+
+<P>Since Ada is a highly structured language, it has the means to divide
+a large project into many smaller projects through use of procedures and
+functions. Because procedures and functions can be nested within other
+procedures and functions, we have the problem of visibility and scope of
+types, variables, constants, and subprograms.
+
+<P><B>WHAT IS THE SCOPE OF A VARIABLE?</B>
+
+<P>Example program ------> <B><A HREF="e_c09_p1.ada">e_c09_p1.ada</A></B>
+
+<P>Examine the program named e_c09_p1.ada for several examples of variables
+with different scopes. You should spend a few minutes familiarizing yourself
+with the structure of the program which contains the main program, or procedure,
+and four procedures embedded within it. We will begin with the variable
+named <B>Count </B>declared in line 4, and state that it has a scope which
+extends from the semicolon at the end of its declaration to the end of
+the entire program in line 32. Its scope extends to the end of the program
+because it is declared in the declaration part of the main program. It
+is commonly referred to as a global variable.
+
+<P><B>WHERE IS A VARIABLE VISIBLE?</B>
+
+<P>The variable named <B>Count</B>, declared in line 4, is visible anyplace
+in the range of its scope, except for one small area of the program. Since
+another variable with the same name is defined in line 10, the first one
+is effectively hidden from view within the range of the newer, local variable.
+Note that it is the local variable that takes precedence and hides the
+global variable, rather than the other way. The variable named <B>Count
+</B>from line 4, is not visible from the end of line 10 through the end
+of line 13. It should be clear that the scope of the local variable extends
+to the end of the executable portion of the subprogram in which it is declared.
+
+<P>In like manner, the variable named <B>Index</B>, defined in line 7,
+has a scope that extends from the end of line 7 to the end of its procedure
+which ends in line 23. The variable named <B>Index </B>is visible throughout
+its range, because there are no other variables of the same name in a lower
+level subprogram. The variable named <B>Data </B>is visible throughout
+its range which extends from the end of line 16 through the end of line
+19.
+
+<P><B>THAT WAS ACTUALLY A LIE</B>
+
+<P>The global variable <B>Count </B>is not visible from lines 10 through
+13, but there is a way to use it in spite of its hidden nature. This will
+be the topic of the next example program, but you should compile and run
+the present program to see that it really will compile as given. There
+is no output, so execution will be uninteresting.
+
+<P><B>USING THE DOT NOTATION</B>
+
+<P>Example program ------> <B><A HREF="e_c09_p2.ada">e_c09_p2.ada</A></B>
+
+<P>Examine the program named e_c09_p2.ada for some examples of making an
+invisible variable visible. The careful observer will notice that this
+is the structure of the last program with additional variables declared,
+and some added assignment statements.
+
+<P>We will consider three variables of the same name, <B>Count</B>, and
+see that we can use all three variables in a single statement if we so
+desire. Assume we are at line 12 in the program where we wish to use the
+local variable named <B>Count</B>, the one that was declared in line 10.
+By the definition of Ada, the innermost variable will take precedence and
+by simply using the name <B>Count</B>, we are using the desired one. If
+however, we would like to use the one declared in line 4, we can do so
+by using the "dot" notation illustrated in line 13. We are giving the compiler
+a complete map on where to find the variable. The dot notation can be read
+as follows, "Go to the outer level, <B>Scope2</B>, dot, and the variable
+named <B>Count</B>." Line 13 is therefore referring to the variable declared
+in line 4. Using the notation <B>Scope2.Level1.Count</B> would refer to
+the variable declared in line 7.
+
+<P>Additional examples of the use of dot notation to use otherwise invisible
+variables are given in lines 21 through 30. This is also called the expanded
+name of the variable or the expanded naming convention.
+
+<P><B>RENAMING A VARIABLE</B>
+
+<P>In order to reduce the number of keystrokes used and to improve the
+clarity of some programs, Ada provides a renaming capability. Line 18 illustrates
+this by renaming the triple component combination to the much simpler name,
+<B>Outer_Index</B>. Anyplace in the procedure where it is permissible to
+use the longer name, it is also legal to use the new shorter name, because
+they are simply synonyms for the same actual variable. This is a construct
+that could easily be abused in a program and make a program unnecessarily
+complicated, so it should be used sparingly.
+
+<P>Compile and run this program, even though it has no output, to assure
+yourself that it actually will compile. The dot notation will be used in
+many other places in Ada, so you should become familiar with it.
+
+<P><B>AN ADA BLOCK</B>
+
+<P>Example program ------> <B><A HREF="e_c09_p3.ada">e_c09_p3.ada</A></B>
+
+<P>Examine the program named e_c09_p3.ada for an example of the use of an
+Ada block. Just as you can define a procedure and jump to it, by calling
+it of course, Ada allows you to define the equivalent of a procedure and
+execute it as inline code. Such a section of code is called a block and
+is constructed by using three reserved words, <B>declare</B>, <B>begin</B>,
+and <B>end</B>, with declarations between the <B>declare </B>and <B>begin</B>,
+and executable statements between the <B>begin </B>and <B>end</B>. Any
+new types, subtypes, variables, constants, and even subprograms can be
+declared in the declaration part of the block and used in the executable
+part. The scope of the declarations begin where they are declared, and
+end at the end of the block.
+
+<P><B>A BLOCK IS A SINGLE STATEMENT</B>
+
+<P>A block is a single statement and because it is, it can be put anywhere
+that it is legal to put any other executable statement. It could be used
+within a <B>loop</B>, in one branch of an <B>if </B>statement, or even
+as one of the cases of a <B>case </B>statement. The example program contains
+two such blocks, the first in lines 17 through 27, and the second in lines
+34 through 47. The only real difference is that the second block is a named
+block, with the name <B>Who</B>, the use of which will be defined shortly.
+
+<P>Study the program and you will see that even though there are several
+variables defined in the block, and at least one is a repeat of a global
+variable, all are actually available through use of the dot notation defined
+during our study of the last program. In the first block, the local variables
+are the default variables when there is a repeated name, but in the second
+block, the variables can be specifically named by using the dot notation.
+This is possible because the block is named, the name being <B>Who </B>in
+this particular case. The name is mentioned just prior to the block followed
+by a colon, and the name is repeated following the <B>end </B>of the block.
+In this case, the name does nothing for you, but if there were two nested
+blocks, either or both could be named, and you would be able to select
+which variable you were interested in. There is no limit to the number
+of blocks that can be nested.
+
+<P>Note that the name used for a block is not a label to which you can
+jump in order to execute a <B>goto </B>statement. The name is used only
+to name the block.
+
+<P>If no declarations are needed, you can declare a block without the reserved
+word <B>declare</B>, using only the execution block delimiters <B>begin
+</B>and <B>end</B>. Without the declaration part, there is little reason
+to declare the block until we come to the topic of exception handling where
+it will be extremely useful to have this capability. Compile and execute
+this program and study the results. Be sure you understand where each of
+the displayed values come from.
+
+<P>Examine section 5.6 of the Ada 95 Reference Manual (ARM) to gain a little
+more experience in working with the ARM. You may be quite surprised at
+the brevity of this section about the block.
+
+<P><B>WHAT ARE AUTOMATIC VARIABLES?</B>
+
+<P>Example program ------> <B><A HREF="e_c09_p4.ada">e_c09_p4.ada</A></B>
+
+<P>This is a good time to discuss a very important topic that can have
+a significant effect on how you write some of your programs in the future.
+The topic is automatic variables, what they are and what they do for you.
+The best way to define them is to examine another program, and the program
+named e_c09_p4.ada is written just to illustrate this point.
+
+<P>The program is actually very simple since it is merely one big loop
+in which the variable <B>Index </B>covers the range from 1 through 10.
+Each time we pass through the loop, the block in lines 16 through 26 is
+executed and contains another loop to output some integer type data. Take
+careful notice of the constants and the way they are used, and you will
+see something that is a little strange. Each time we enter the block, we
+enter with a larger value for the loop variable, in this case named <B>Index</B>,
+and therefore the constants are different each time through the block.
+During each pass, however, they are constant, and will be treated as such.
+This behavior is perfectly normal and will be clearly understood when we
+define an automatic variable.
+
+<P>Prior to entering the block, the two constants, and the variable named
+<B>Count_Stuff</B> do not exist. When the block is entered, the constants
+are generated by the system, initialized to their constant values, and
+available for use within the block. Since the constants are generated each
+time the block is entered, it is possible to initialize them to a different
+value each time, which is exactly what is being done here. The process
+of assigning the constants their values is called elaboration.
+
+<P>The variable is also generated, and made available for use within the
+block where it is assigned a nonsense value for illustrative purposes,
+then never used. When program control leaves the block, in this case dropping
+out the bottom, the two constants and the variable disappear from existence
+entirely and are no longer available for use anywhere in the program. They
+are said to have a limited lifetime, their lifetime being from the time
+they are elaborated until we leave the block in which they are declared.
+The scope and lifetime of a variable or constant is therefore very important
+for you to understand.
+
+<P>It should be clear to you that the outer loop variable, <B>Index</B>,
+is visible from lines 12 through 29 except for lines 23 through 25. Within
+the region of lines 23 through 25, the outer loop variable cannot be used,
+even by using the expanded naming convention (i.e. - the dot notation),
+because there is no name for the outer loop. Naming the outer loop would
+make the outer loop variable available.
+
+<P><B>WHERE ELSE IS THIS USED?</B>
+
+<P>This concept of the automatic variable is very important because it
+is used in so many places throughout an Ada program. It is used in four
+different places in the present example program, once in the block, as
+we have just mentioned, once in the main program itself, where the four
+variables with animal names are automatically generated, and twice in the
+<B>for </B>loops. The variables named <B>Index </B>in each of the <B>for
+</B>loops are automatic variables that are generated when the loop is entered,
+and discarded when the loop is completed. As you can see, there is a very
+good reason why the loop control variable is not available after you leave
+the loop.
+
+<P>Each time you call a procedure or function, the formal parameters are
+generated, as are the defined variables and constants. The process of variable
+generation and constant initialization is called elaboration. They are
+then used within the subprograms, and discarded when the procedure or function
+is completed and control is returned to the calling program.
+
+<P>Since the main program is itself a procedure, its variables are handled
+the same way.
+
+<P><B>THE STACK STORES THE AUTOMATIC ENTITIES</B>
+
+<P>The generated constants and variables are stored on an internal stack,
+the definition of which is beyond the scope of this tutorial. If you understand
+what a stack is, it should be clear to you how the system can generate
+items, place them on the stack, use them, and discard them. Also, due to
+the nature of a stack, it should be clear to you how additional variables
+can be placed on the stack as calls are made to more deeply nested procedures
+and functions. Finally, it is only because of this use of automatic variables
+that recursive subprograms can be used. Ada requires that all subprograms
+be re-entrant and use of the stack makes this possible.
+
+<P>If the last paragraph is too technical for you, don't worry about it,
+because it is only mentioned for general information, and is not needed
+to understand Ada programming.
+
+<P>Compile and run e_c09_p4.ada and study the output. Be sure you understand
+the concept of the automatic variable because some of the advanced programming
+techniques in Ada will require this knowledge.
+
+<P><B>PROGRAMMING EXERCISES</B>
+<OL>
+<LI>
+Modify e_c09_p3.ada to include a procedure in the declaration part of the
+first block. The procedure should output a line of text to the monitor
+when called from the executable part of the block. Why can't this procedure
+be called from outside of the block?<A HREF=" a_c09_p1.ada">(Solution)</A></LI>
+
+<LI>
+Name the block in e_c09_p4.ada and output the value of the outer <B>Index
+</B>in the loop using the dot notation. It will output the same number
+six times since the outer <B>Index </B>is invariant in the inner loop.<A HREF=" a_c09_p2.ada">(Solution)</A></LI>
+</OL>
+<A HREF="chap10.htm">Advance to Chapter 10</A>
+
+<P><A HREF="a95list.htm">Return to the Table of Contents</A>
+
+<P>
+<HR width="100%"><I><FONT SIZE=-1>Copyright &copy; 1988-1998 Coronado Enterprises
+- Last update, February 1, 1998</FONT></I>
+<BR><I><FONT SIZE=-1>Gordon Dodrill - dodrill@swcp.com - </FONT></I><FONT SIZE=-1><A HREF="mailto:dodrill@swcp.com">Please
+email any comments or suggestions.</A></FONT>
+</BODY>
+</HTML>

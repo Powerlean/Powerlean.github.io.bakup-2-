@@ -1,0 +1,521 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Author" CONTENT="Gordon Dodrill">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (Win95; I) [Netscape]">
+   <TITLE>Ada Tutorial - Chapter 27</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<B>Ada Tutorial - Chapter 27</B>
+
+<P><B><FONT SIZE=+3>T</FONT><FONT SIZE=+2>HE</FONT><FONT SIZE=+3> S</FONT><FONT SIZE=+2>IMPLE</FONT><FONT SIZE=+3>
+R</FONT><FONT SIZE=+2>ENDEZVOUS</FONT></B>
+
+<P><B>COMMUNICATION BETWEEN TASKS</B>
+
+<P>In the last chapter, we ran a few programs with tasking, but they all
+used simple tasking with no form of synchronization. In a real situation
+using tasking, some form of communication between tasks will be required
+so we will study the simple rendezvous in this chapter.
+
+<P>Example program ------> <B><A HREF="e_c27_p1.ada">e_c27_p1.ada</A></B>
+
+<P>Examine the program named e_c27_p1.ada which will illustrate the simple
+rendezvous. This program consists of two tasks, the one in lines 7 through
+22 and the main program itself.
+
+<P><B>THE entry STATEMENT</B>
+
+<P>The task specification is a little more complicated here than it was
+in any of the example programs in the previous chapter because we have
+an entry point declared in the task. The reserved word <B>entry </B>begins
+the entry declaration and is followed by the entry name, which is <B>Make_A_Hot_Dog</B>
+in this case. The <B>entry </B>statement defines the interface to the outside
+of a task in much the same way as the procedure header defines the external
+interface to a package in the package specification. Unlike a package,
+no types, variables, or constants are allowed to be declared in the task
+specification, but there is no limit to the number of entry points allowed.
+An entry can have formal parameters declared as part of the entry name,
+(we will have an example in the next example program), but it cannot have
+a return parameter similar to a function. One or more of the formal parameters
+is permitted to have a parameter of mode <B>out </B>or<B> in out</B> however,
+so data can be passed both ways while a synchronization is effected. The
+<B>in </B>mode is also permitted. We will have more to say about this topic
+later in this chapter.
+
+<P><B>THE accept STATEMENT</B>
+
+<P>The task body is a very simple sequence of statements in which a message
+is output to the monitor, a loop is executed four times, and another message
+is output. The thing that is new here is the <B>accept </B>statement within
+the loop. The <B>accept </B>statement begins with the reserved word <B>accept
+</B>and has the following general form;
+<PRE>&nbsp;&nbsp;&nbsp; <B>accept</B> &lt;entry-name> <B>do</B>&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;executable statements>&nbsp;
+&nbsp;&nbsp;&nbsp; <B>end</B> &lt;entry-name>;</PRE>
+and any legal Ada statements can be contained within it. When execution
+of the task reaches the <B>accept </B>statement, the task "goes to sleep"
+until some other task makes a call to this particular <B>accept </B>statement.
+The term "goes to sleep" means that the task does not simply sit there
+and execute a do nothing loop while it is waiting, effectively wasting
+the resources of the system. Instead, it is actually doing nothing until
+it is awakened by an entry call. It is also possible to have an <B>accept
+</B>statement with no statements contained within it. It will have the
+following form;
+<PRE>&nbsp;&nbsp;&nbsp;&nbsp; <B>accept</B> &lt;entry-name>;</PRE>
+This statement will only be used for task synchronization since there is
+no data passed to the entered task.
+
+<P><B>THE ENTRY CALL</B>
+
+<P>The main part of the program is another loop with four iterations followed
+by a statement to display a line of text on the monitor. The only thing
+unusual about the loop is the statement in line 26 which is an entry call
+to the entry named <B>Make_A_Hot_Dog</B> in the task named <B>Gourmet</B>.
+Keep in mind that these are two tasks that are operating in parallel and
+we will carefully explain what is happening.
+
+<P>The entry call is executed at line 26 which wakes up the sleeping task
+at line 15, and the task named <B>Gourmet </B>continues from where it went
+to sleep. Notice that the calling program is not controlling the execution
+of <B>Gourmet</B>, but <B>Gourmet </B>itself is in control now that it
+has been allowed to continue operation. The entry call is not like a procedure
+call where the sequence of operation continues in the procedure, but is
+instead only a synchronization call that allows <B>Gourmet </B>to continue
+what it was doing prior to being put to sleep.
+
+<P><B>WHAT IS THE CALLING PROGRAM DOING NOW?</B>
+
+<P>During the time that the called task is executing statements within
+its <B>accept </B>block, the calling task is effectively put to sleep,
+and must wait until the called task completes its <B>accept </B>block.
+When <B>Gourmet </B>reaches line 19, both tasks are allowed to operate
+in parallel again until one or both reach their point of rendezvous again.
+If the main program reaches its entry call before <B>Gourmet </B>is ready
+to accept the call, then the main program will wait until <B>Gourmet </B>is
+ready. The <B>accept </B>statement, and the corresponding entry call, are
+therefore used to synchronize the two tasks.
+
+<P>If you were to move the end of <B>Make_A_Hot_Dog</B> to the line immediately
+after the <B>accept </B>statement, including a <B>null </B>of course, the
+output statements would then be running in parallel. The delays have been
+selected in such a way that after making this change, the hot dog would
+be eaten before it was made. This is one of the programming exercises at
+the end of this chapter.
+
+<P><B>A COUPLE OF FINE POINTS MUST BE MADE HERE</B>
+
+<P>Although the entry call looks very much like a procedure call, it is
+different because it is not legal to use a <B>use </B>clause for a task.
+It is required therefore that every entry call must use the extended naming
+convention, or the "dotted" notation. Renaming can be used to reduce the
+size of the names used and will be illustrated in the next program.
+
+<P>You will notice that the two tasks were composed of exactly four calls
+and four executions of the <B>accept </B>statement. This was done on purpose
+in order to simplify the problem of task termination at this point in our
+study. The study of task termination will be covered in detail in the next
+chapter. Until then, you should see what happens when the two loops are
+different. Change the loop in the <B>Gourmet task </B>to 5 iterations and
+see what happens if it waits to <B>accept </B>a call that never comes,
+then make the loop in the main program bigger to see what happens when
+there is nothing to <B>accept </B>its call. We will study tasking exceptions
+in a later chapter of this tutorial.
+
+<P>The execution of a <B>return </B>statement (not illustrated here), within
+an <B>accept </B>statement corresponds to reaching the final <B>end </B>and
+effectively terminates the rendezvous.
+
+<P><B>SERVERS AND USERS</B>
+
+<P>Tasks are categorized into two rather loosely defined groups, server
+tasks and user tasks. A server task is one that accepts calls from other
+tasks, and a user task is one that makes calls to one or more server tasks.
+In the present example program, <B>Gourmet </B>is a server task, and the
+main program is a user task. Some tasks both accept calls and make calls,
+and they are referred to as intermediate tasks. This terminology, or some
+other fairly self defining terminology may be used in the literature about
+Ada, so you should be aware that such classifications may exist.
+
+<P>Be sure to compile and execute this program making the changes suggested
+earlier and observe the results.
+
+<P><B>MULTIPLE ENTRY POINTS</B>
+
+<P>Example program ------> <B><A HREF="e_c27_p2.ada">e_c27_p2.ada</A></B>
+
+<P>Examine the program named e_c27_p2.ada for a few added tasking topics
+beginning with multiple <B>accept </B>statements. You will notice that
+there are three <B>accept </B>statements in the task body corresponding
+to a single entry point declared in the task specification. There is no
+limit to the number of <B>accept </B>statements and they are executed when
+the logic causes execution to arrive at each one in turn. Remember that
+the task is executed in the logical order as defined in the sequence of
+statements, except that each time the logic causes execution to arrive
+at an <B>accept </B>statement, the task will "go to sleep" until an entry
+call is made to the waiting <B>accept </B>statement. Moreover, the logic
+does not care where the entry call comes from, nor does it know where it
+came from, it only cares that the entry call is made. Thus it is possible
+for several different tasks to be calling this entry point and allowing
+the task to progress through its logic. Because there is only one other
+task in this program, we know exactly where the entry call is being generated.
+
+<P>Careful study of the logic will reveal that the <B>accept </B>statement
+in line 18 must be called, followed by four calls to line 26, and another
+call to line 36. After six calls to this entry point, the task will reach
+the end of its execution and will be completed. You will notice that we
+make exactly six calls to this entry point by the task which is the main
+program, so everything will come out right.
+
+<P><B>RENAMING A TASK ENTRY</B>
+
+<P>The alternate name, which is declared in line 11, is used in the main
+program task to illustrate the use of the renaming facility. Note that
+the dotted notation is not required in this case. Once again, you can change
+either the number of calls or the number of accepts to see the exception
+error or a deadlock condition.
+
+<P><B>ENTRY PARAMETERS</B>
+
+<P>You should have noticed by now that each of the accept statements has
+a formal parameter associated with it in the same manner that a subprogram
+can have. In fact, it is permissible to have as many parameters as you
+desire to transfer data either from the calling task to the called task
+or back the other way. All three modes of parameter passing are legal for
+use and the <B>in </B>mode will be used if none is specified as is done
+here. There is one difference in a task however, you are not permitted
+to have a return parameter like a function has, but you can return a value
+by using an <B>out </B>or an <B>in out</B> parameter.
+
+<P>Since you can pass parameters both ways, the task appears to be executed
+just like a procedure, but there is a very definite difference as mentioned
+earlier. A procedure is actually executed by the calling program, but the
+task is simply let free to run on its own in parallel with the calling
+program. The task is not a subservient program but is running its own logic
+as it is coded to do.
+
+<P>Be sure to compile and execute this program after you understand what
+it is supposed to do.
+
+<P><B>MULTIPLE CALLING TASKS</B>
+
+<P>Example program ------> <B><A HREF="e_c27_p3.ada">e_c27_p3.ada</A></B>
+
+<P>Examine the program named e_c27_p3.ada for an example of two tasks calling
+a third task's entry point. The task named <B>Gourmet </B>has a single
+entry point, but this time there are two formal parameters declared in
+the task specification and the same two declared in the <B>accept </B>statement.
+These must agree of course. The entry point named <B>Make_A_Hot_Dog</B>
+in line 16 contains some text to display and a delay of 0.8 second, because
+it takes a little time to make a hot dog. You will notice that sometimes
+mustard is added, and sometimes it is not, depending on who is eating the
+result. We will say more about this later.
+
+<P>We have two additional tasks in lines 35 through 53 named <B>Bill </B>and
+<B>John</B>, each of which executes in parallel, and each of which requests
+a number of hot dogs and consumes them in zero time, since there is no
+delay prior to their next request. You will also notice that once again
+the numbers come out right because <B>Bill </B>requests three hot dogs
+and <B>John </B>asks for two while the task that supplies them makes exactly
+five. We will discuss better methods of task termination later. For the
+time being, simply accept the utopian situation depicted here.
+
+<P><B>ENTRIES STACK UP AT THE ENTRY POINT</B>
+
+<P>Considering all that we have said so far about tasking, you should understand
+that all three of these tasks begin execution at the same time and <B>Bill
+</B>and <B>John </B>both request a hot dog immediately. Since there is
+only one entry point, only one can be served at a time, and the Ada definition
+does not specify which will be serviced first. It does specify that both
+will ultimately be served, so there is an implicit queue at the entry point
+where requests can be stored until they can be serviced in turn. All requests
+are serviced on a First In First Out (FIFO) basis with no concern for priority
+of tasks (to be defined later). This queue is a "hidden" queue as far as
+you, the programmer, are concerned because you have no access to it. You
+cannot therefore, sort through the entries and redefine the order of execution
+of the various entry requests. The attribute named <B>COUNT </B>is available
+which will return the number of requests pending on any entry queue. Its
+use will be illustrated in the program named e_c29_p6.ada in chapter 29 of
+this tutorial.
+
+<P>After we study some of the advanced tasking topics, you will have the
+ability to define several queues with different priorities and set up your
+own priorities as needed.
+
+<P><B>THE ORDER OF OUTPUT IS SORT OF ODD</B>
+
+<P>Back to the program at hand. Examining the result of execution will
+reveal that for some unknown reason, the task named <B>John </B>made the
+first request and the task named <B>Gourmet </B>made a hot dog with mustard
+first, because <B>John</B>'s task was the one requesting a hot dog with
+mustard. However, before <B>John </B>was allowed to continue execution,
+the <B>Gourmet </B>task continued and serviced the next call in its entry
+queue for <B>Make_A_Hot_Dog</B>, and made a hot dog without mustard for
+<B>Bill</B>. At this point <B>Gourmet </B>had completed all of its entry
+calls and allowed one of the other tasks to run. The task named <B>John
+</B>was then allowed to continue execution. <B>John </B>ate his hot dog
+and requested another. Once again, by some undefined method, the task named
+<B>Gourmet </B>was allowed to run and make a second hot dog for <B>John</B>,
+with mustard, when <B>Bill </B>still hasn't been allowed to eat his first
+one. This continues until all conditions have been satisfied, which means
+that five hot dogs have been made, and all five have been consumed. Both
+consuming tasks declare their lack of hunger, and the task named <B>Gourmet
+</B>declares that it is out of hot dogs. The program has finally run to
+completion.
+
+<P><B>WHAT ABOUT THE FUNNY ORDER OF RESULTS?</B>
+
+<P>Even though the results seemed to come out in a funny order, they did
+follow all the rules we set down for them to follow. Remember that as an
+experienced programmer, you are accustomed to seeing everything come out
+in a very well defined precise order, because you have spent your programming
+career writing sequential programs. If you look at this output from the
+point of view of each task, you will see that the output from each task
+is perfectly sequential, as defined by the logic of the task. Additionally,
+you will see that the order of execution has been preserved as defined
+by the various rendezvous, because nobody eats a hot dog before it is made,
+and there are no hot dogs made too early. The synchronization of the tasks
+has been done exactly as we requested.
+
+<P>Spend enough time studying the logic here to completely understand what
+is happening, then compile and execute this program to see if your compiler
+does anything in a different order.
+
+<P><B>THE select STATEMENT</B>
+
+<P>Example program ------> <B><A HREF="e_c27_p4.ada">e_c27_p4.ada</A></B>
+
+<P>Examine the program named e_c27_p4.ada for our first example program
+using a <B>select </B>statement. The <B>select </B>statement is used to
+allow a task to select between two or more alternative entry points. In
+effect, a task can be waiting at two or more entry points for an entry
+call to be made, and can act on the first occurring entry call. The structure
+of the select statement is given by;
+<PRE>&nbsp;&nbsp;&nbsp; <B>select</B>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <B>accept</B> ...;&nbsp;&nbsp;&nbsp; -- Complete entry point logic
+&nbsp;&nbsp;&nbsp; <B>or
+</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <B>accept</B> ...;&nbsp;&nbsp;&nbsp; -- Complete entry point logic
+&nbsp;&nbsp;&nbsp; <B>or
+</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <B>accept</B> ...;&nbsp;&nbsp;&nbsp; -- Complete entry point logic
+&nbsp;&nbsp;&nbsp; <B>end select</B>;</PRE>
+and is illustrated in lines 23 through 33 of the present example program.
+In this case there are two select alternatives, but there is no limit to
+the number of selections that can be included. Each additional branch is
+delimited by the reserved word <B>or</B>. When program control of the task
+arrives at the select statement in line 23, either entry call can be accepted
+and acted upon immediately.
+
+<P><B>THE OVERALL PROGRAM</B>
+
+<P>Common sense tells us that we cannot deliver a hot dog until we stock
+the shelf with a hot dog, so the program has been written to reflect this.
+The task requires an entry call to <B>Stock_With_A_Hot_Dog</B> before it
+begins the loop with the <B>select </B>in it to assure that at least one
+hot dog will be available. After that, it doesn't care what the order of
+entry calls is because the <B>select </B>statement in the loop will allow
+them to occur in any order. This is a very simplistic approach to setting
+up a precedence requirement in an Ada task, but it is too simple to really
+be effective which we shall see when we examine some of the problems that
+can occur.
+
+<P>In the first place, if the main program, or task, fails to call <B>Stock_With_A_Hot_Dog</B>
+first, the system will simply lock up with the calling program demanding
+a delivered hot dog and steadfastly refusing to continue until it does,
+and the called task refusing to deliver one until it has been stocked with
+one in line 16. The system is in deadlock with both tasks refusing to do
+anything. You can simulate this condition by reversing the two calls in
+lines 39 and 40. Your compiler will probably give a message indicating
+deadlock has occurred and terminate operation of the program. Another problem
+has to do with the inflexibility of this program, since we have once again
+counted the number of calls required to complete the two tasks and programmed
+compatible numbers in the two tasks.
+
+<P>A further problem involves the fact that, after one hot dog has been
+stocked, there is nothing to prevent us from taking delivery of hundreds
+of hot dogs without adding any more to the shelves.
+
+<P>When you think you understand this program, compile and execute it,
+then we will go on to the next program where we will solve two of the three
+problems mentioned in connection with the present program.
+
+<P><B>SELECT STATEMENTS WITH GUARDS</B>
+
+<P>Example program ------> <B><A HREF="e_c27_p5.ada">e_c27_p5.ada</A></B>
+
+<P>Examine the program named e_c27_p5.ada for an example of a select statement
+with guards. The guards are used to guard the entry points of the <B>select
+</B>statement to prevent the kinds of silly things that happened in the
+last program. The task body <B>Retail_Hot_Dogs</B> has been modified in
+this program to include guards in lines 26 and 34 for the <B>select </B>statement
+in lines 25 through 39. A guard is simply a <B>BOOLEAN </B>condition that
+must be satisfied before that particular entry point can be accepted and
+its logic executed. The general form of the select statement with guards
+is given as;
+<PRE>&nbsp;&nbsp;&nbsp; <B>select</B>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <B>when</B> &lt;BOOLEAN condition> =>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <B>accept</B> ...;&nbsp;&nbsp;&nbsp; -- Complete entry point logic&nbsp;
+&nbsp;&nbsp;&nbsp; <B>or</B>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <B>when</B> &lt;BOOLEAN condition> =>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <B>accept</B> ...;&nbsp;&nbsp;&nbsp; -- Complete entry point logic&nbsp;
+&nbsp;&nbsp;&nbsp; <B>or</B>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <B>when</B> &lt;BOOLEAN condition> =>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <B>accept</B> ...;&nbsp;&nbsp;&nbsp; -- Complete entry point logic&nbsp;
+&nbsp;&nbsp;&nbsp; <B>end select</B>;</PRE>
+and there is no limit to the number of permissible selections, each being
+separated by the reserved word <B>or</B>. In fact, one or more of the selections
+can have no guard, in which case it is similar to having a guard which
+always evaluates to <B>TRUE</B>. When the <B>select </B>statement is encountered,
+each of the guards is evaluated for <B>TRUE </B>or <B>FALSE</B>, and those
+conditions that evaluate to <B>TRUE </B>are allowed to enter into the active
+wait state for an entry, while those that have guards evaluating to <B>FALSE
+</B>are not. Those with guards evaluating to <B>FALSE </B>are treated as
+if they didn't exist for this pass through the loop. Once the guards are
+evaluated upon entering the select statement, they are not reevaluated
+until the next time the <B>select </B>statement is encountered, but remain
+static.
+
+<P><B>LIMITING THE NUMBER OF HOT DOGS ON THE SHELF</B>
+
+<P>In this program, when the <B>select </B>statement is entered in line
+25, the guard at line 26 is evaluated and if the number of hot dogs on
+the shelf is less than 8, then the <B>accept </B>statement in line 27 is
+enabled and we are permitted to stock the shelf with one more hot dog.
+If the number of hot dogs is greater than zero, as the guard at line 34
+tests for us, then the <B>accept </B>statement in line 35 is enabled and
+we are allowed to deliver a hot dog. Even though we may be allowed to either
+stock the shelf with a hot dog, or deliver a hot dog, we must wait until
+some other task requests us to do so before we actually do one of the operations.
+It should be clear to you that in this particular case we will always be
+permitted to do at least one of the operations, and in many cases both
+will be permitted. If none of the guards evaluate to <B>TRUE</B>, then
+none of the selections can be taken, and the program is therefore effectively
+deadlocked and the exception named <B>Tasking_Error</B> will be raised.
+You, the programmer, can trap this exception in much the same way that
+you can trap any other exception and handle it in your own manner, but
+the rules are a little different for tasking exceptions than for exceptions
+raised during sequential operation. We will cover tasking exceptions in
+detail later.
+
+<P>It should be pointed out that, even if a guard evaluates to <B>FALSE</B>,
+entries can be added to the entry queue and serviced during subsequent
+executions of the select statement when the guard may become <B>TRUE</B>.
+Because of this method of defining the entry queue, no calls to the entry
+are lost, and the operation is predictable.
+
+<P>This program contains four tasks, counting the main program, with one
+named <B>Five_Dogs</B> stocking the shelf very quickly with five hot dogs,
+because of the short delay, and another removing five hot dogs a little
+slower. The main program stocks and retrieves four hot dogs rather slowly
+due to the relatively long time delay built into the loop.
+
+<P><B>WATCH THE GUARDS DO THEIR JOB</B>
+
+<P>When you run this program you will see very little action with the guards
+because of the selection of the guard limits. The five hot dogs are put
+on the shelf very quickly, but the upper limit of 8 is never reached, and
+there are always hot dogs on the shelf to supply the limited demands. In
+fact, as listed in the result of execution, there are never more than 5
+on the shelf, and always more than zero. You should compile and execute
+the program to see if your compiler does the same thing as the one used
+for this execution.
+
+<P>Change line 26 so that the limit is 3, and recompile and execute the
+resulting program. In this case, you will very clearly see that the first
+guard prevents more than three hot dogs from being placed on the shelf.
+In effect it builds up the entry queue for the <B>Stock_With_A_Hot_Dog</B>
+entry point and requires the suppliers to wait for shelf space.
+
+<P>Reverse the delays in lines 46 and 54, as your next exercise, so that
+the hot dogs are consumed much faster than they are stocked so that the
+guard on the entry point named <B>Deliver_A_Hot_Dog </B>will be needed
+to protect the delivery of too many hot dogs. In this case, the queue to
+this entry point will build up a list of requests to be satisfied as hot
+dogs are delivered.
+
+<P><B>THIS PROGRAM IS MUCH BETTER</B>
+
+<P>This program solved two of the three problems listed concerning the
+last program but we still must use the method of counting the required
+entry calls and providing the proper number of entries. As promised before,
+this problem will be remedied soon. Be sure you compile and execute this
+program three times, once unmodified, and twice with the suggested changes,
+then study the output to assure yourself that you understand it completely.
+
+<P><B>A PROTECTED AREA OF MEMORY</B>
+
+<P>Example program ------> <B><A HREF="e_c27_p6.ada">e_c27_p6.ada</A></B>
+
+<P>The example program named e_c27_p6.ada gives a very simple example of
+data protection. If you have several tasks writing to the same record,
+it is conceivable that before one is finished writing, another task gets
+control and begins writing to the same record. This would result in corrupted
+data and is a major problem when writing programs with multiple tasks.
+The <B>protected </B>area in lines 8 through 39 defines three procedures
+that operate just like any other procedures we have worked with in this
+tutorial, with the exception that they are <B>protected </B>from multiple
+entry. It is impossible for more than one task to be executing code within
+these three procedures at once because that is their purpose. If more than
+one task requests a call into these three procedures, one will enter the
+procedure it called, and the others will be made to wait outside of the
+procedure they called until the first one leaves the procedure it called.
+This prevents data corruption.
+
+<P>The remainder of the program is trivial, being composed of three tasks
+plus the main program that work together to simply add and subtract animals
+from the common pool. Note that all data must be in the <B>private </B>part
+of the specification, none is allowed in the <B>protected body</B> of the
+protected code.
+
+<P><B>FUNCTIONS ARE A LITTLE DIFFERENT</B>
+
+<P>The procedures are allowed to read or write to the <B>private </B>data,
+but a function is only allowed to have <B>in </B>mode parameters and it
+is only allowed to read the data in the private section. Since they are
+only allowed to read data, multiple tasks are permitted to read the <B>private
+</B>data at the same time, but not while another task is executing code
+in a procedure, since it may be writing to the internal data. This permits
+multiple calls to read which solves the classic problem of readers and
+writers.
+
+<P>The protected section has a lot more flexibility than we are covering
+here, but this will give you a good start in understanding what it is used
+for.
+
+<P><B>ONE MORE RESERVED WORD</B>
+
+<P>The reserved word <B>requeue </B>is used within a <B>protected </B>block
+to call another subprogram on behalf of the calling program. The conditions
+may not yet exist for execution of the desired code, so it is <B>requeue</B>'d
+until the conditions are right. This is a very advanced technique that
+you can study on your own when you need it. It will probably be a long
+time before you reach the level of expertise needed to effectively use
+this technique.
+
+<P><B>PROGRAMMING EXERCISES</B>
+<OL>
+<LI>
+Move the end of the accept statement in e_c27_p1.ada to the line immediately
+after the <B>accept </B>statement itself to see that it is possible to
+eat the hot dog before it is made because the tasks are both running at
+the same time.<A HREF=" a_c27_p1.ada">(Solution)</A></LI>
+
+<LI>
+Add another task to e_c27_p5.ada that executes a loop 10 times with a 0.3
+second delay that outputs the current number of hot dogs on the shelf.<A HREF=" a_c27_p2.ada">(Solution)</A></LI>
+
+<LI>
+Using the package <B>Ada.Calendar</B>, output the elapsed time each time
+the new procedure defined in exercise 2 outputs the number of hot dogs
+on the shelf.<A HREF=" a_c27_p3.ada">(Solution)</A></LI>
+</OL>
+<A HREF="chap28.htm">Advance to Chapter 28</A>
+
+<P><A HREF="a95list.htm">Return to the Table of Contents</A>
+
+<P>
+<HR width="100%"><I><FONT SIZE=-1>Copyright &copy; 1988-1998 Coronado Enterprises
+- Last update, February 1, 1998</FONT></I>
+<BR><I><FONT SIZE=-1>Gordon Dodrill - dodrill@swcp.com - </FONT></I><FONT SIZE=-1><A HREF="mailto:dodrill@swcp.com">Please
+email any comments or suggestions.</A></FONT>
+</BODY>
+</HTML>

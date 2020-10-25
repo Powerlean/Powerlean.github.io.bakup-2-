@@ -1,0 +1,411 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Author" CONTENT="Gordon Dodrill">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (Win95; I) [Netscape]">
+   <TITLE>Ada Tutorial - Chapter 30</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<B>Ada Tutorial - Chapter 30</B>
+
+<P><B><FONT SIZE=+3>G</FONT><FONT SIZE=+2>ENERIC</FONT><FONT SIZE=+3> S</FONT><FONT SIZE=+2>UBPROGRAMS</FONT></B>
+
+<P><B>GENERIC UNITS ADD TO ADA'S FLEXIBILITY</B>
+
+<P>The concept of packages along with generic units gives Ada the capability
+to be used for general purpose software components. Utility routines can
+be written once and used in several programs eliminating the need to rewrite
+and debug the utility again and again. This ability would be greatly diminished
+without the generic capability of Ada.
+
+<P><B>WHAT IS A GENERIC UNIT?</B>
+
+<P>Example program ------> <B><A HREF="e_c30_p1.ada">e_c30_p1.ada</A></B>
+
+<P>A generic unit is a template for a subprogram or a package, but it cannot
+be executed directly. A copy of the generic unit can be instantiated, and
+the resulting unit can be executed just as any other subprogram or package.
+As with all other topics in this course, the best way to learn how to use
+this new technique is through use of an example, so examine the program
+named e_c30_p1.ada.
+
+<P><B>A SIMPLE GENERIC PROCEDURE</B>
+
+<P>The generic specification is given in lines 2 through 4 and the generic
+body is given in lines 6 through 12. A careful inspection of this procedure
+will reveal that there is no actual type defined for the type listed as
+type <B>ITEM</B>. The purpose of using a generic procedure is to allow
+you to use the procedure for any type you desire, within reasonable limits,
+without being forced to rewrite the procedure for each specific type. In
+order to use this procedure in a program, we will supply a type which will
+be substituted in the procedure each place where the type <B>ITEM </B>appears
+when we instantiate a copy of the procedure.
+
+<P>The reserved word <B>generic </B>is used to mark the beginning of a
+generic unit, which may be a package, a procedure, or a function. Between
+the reserved words, in this case <B>generic </B>and <B>procedure</B>, we
+include a list of formal generic parameters which define the optional types,
+variables, and other entities which will be used in the body of the procedure.
+In this case there is only one formal generic parameter named <B>ITEM</B>,
+and it is constrained to be any type of the integer class of types. An
+explanation will be given soon to define why the type of <B>ITEM </B>is
+constrained to be of the integer class of types. For the time being, simply
+accept the statement as true.
+
+<P>The procedure specification in line 4 and the procedure body in lines
+6 through 12 are no different than any of the other procedures we have
+used throughout this tutorial, except for the fact that the type named
+<B>ITEM </B>is undefined throughout the procedure. Since the type <B>ITEM
+</B>is undefined, the procedure is unusable in its present form.
+
+<P><B>HOW DO WE USE THE GENERIC PROCEDURE?</B>
+
+<P>In order to use the generic procedure, we must first tell the system
+to get a copy of it which we do in line 18 using the <B>with </B>clause.
+
+<P>Referring to the main program, we declare a derived type of the integer
+class named <B>MY_INT</B> in line 24. In line 26 we declare a procedure
+named <B>SwapInt </B>and since we are using the reserved word <B>new </B>after
+the declaration, it is defining an instantiation of the generic package
+named <B>Exchange_Data</B> for use with type <B>INTEGER</B>. You will recall
+that instantiating the procedure means we create an instance of the generic
+procedure, and in this case we are defining a procedure that can swap <B>INTEGER
+</B>types of variables.
+
+<P>The type <B>INTEGER </B>is used in the resulting executable procedure
+each time the generic word <B>ITEM </B>is used in the original generic
+procedure. The result would be exactly the same as making a copy of the
+generic procedure, changing its name to <B>SwapInt</B>, then substituting
+the type <B>INTEGER </B>for each appearance of the word <B>ITEM</B>. A
+call to <B>SwapInt </B>with any two <B>INTEGER </B>type variables will
+result in exchanging their values.
+
+<P><B>WHAT GOOD DID THIS DO US?</B>
+
+<P>Admittedly, we could have simply defined the procedure <B>SwapInt </B>in
+the first place and everything would have been just fine. The real benefit
+comes from the next line of the program where we instantiate another copy
+of the generic procedure named <B>Exchange_Data</B>, name it <B>SwapNew</B>,
+and tell the system to use the type <B>MY_INT</B> as the replacement for
+the formal generic type named <B>ITEM</B>. Line 27 is therefore equivalent
+to writing out the generic procedure once again for the new type we declared
+earlier.
+
+<P>If we had a large number of different types of the integer class of
+variables, we could instantiate a copy of this procedure for each with
+a single line for each, so the benefit would be very significant.
+
+<P><B>REUSABLE SOFTWARE</B>
+
+<P>Once this procedure is written and debugged, it can be used in any number
+of programs because it does not have to be modified for each new type we
+make up. Different programmers can use the procedure in different packages
+once it is tested thoroughly, so each programmer does not have to write
+it anew. There is a new industry developing in the software community.
+This industry specializes in writing reusable software components in Ada
+that are written with the flexibility afforded by the generic units.
+
+<P>The remainder of the program should pose no problem for your understanding,
+so you will be left on your own to study it, then compile and execute it.
+
+<P><B>A FEW NOTES ABOUT GENERIC UNITS</B>
+
+<P>This program could be split into two separate files with the first including
+the generic procedure in lines 1 through 12, and the second including the
+using program in lines 16 through 56. The files can be compiled separately,
+and once the generic procedure has been compiled, it never needs to be
+compiled again, but can be included in the Ada library in compiled form.
+The generic procedure and the main program were combined here for the sake
+of convenience.
+
+<P><B>ANOTHER NOTE ON COMPILATION UNITS</B>
+
+<P>In some cases, the generic part can be split once again into two separate
+files, the first being the generic specification in lines 2 through 4 and
+the other being the procedure body in lines 6 through 12. If they are split
+in this manner, the order of compilation must be maintained so that the
+type checking can be done as described earlier in this tutorial. The Ada
+definition allows a compiler writer to require the generic specification
+and body be included in the same file for his convenience, so it depends
+on the particular compiler you are using to define whether or not you can
+split the generic procedure into two parts.
+
+<P>Of course, with such a simple procedure, it is difficult to grasp the
+magnitude of the benefits of this new Ada construct, but in a real programming
+situation, many cases of reusability will become apparent and the benefits
+will be appreciated.
+
+<P><B>ADDITIONAL FORMAL GENERIC TYPES</B>
+
+<P>Example program ------> <B><A HREF="e_c30_p2.ada">e_c30_p2.ada</A></B>
+
+<P>Examine the program named e_c30_p2.ada for two additional examples of
+generic subprograms. You will notice that the first is a generic procedure
+and the second is a generic function, indicating to you that either form
+of subprogram can be written as a generic unit. The first subprogram is
+nearly identical to the one in the last example program, the only difference
+being in the declaration of the formal generic type in line 3 which we
+will discuss shortly. The second subprogram, the function in lines 16 through
+25, will be simple for you to comprehend if you substitute, in your mind,
+the type <B>INTEGER </B>for each occurrence of the type <B>ANOTHER_ITEM</B>.
+In fact, it averages the two values given to it and returns the result.
+
+<P><B>WHY THE DIFFERENT TYPES?</B>
+
+<P>In line 3, we declare the type <B>ITEM </B>as <B>private</B>, and in
+the function named <B>Average </B>we declare the type <B>ANOTHER_ITEM </B>as
+a type of the integer class of types (we will show you how shortly, just
+be a little patient). As with so many things, the type selected is the
+result of a compromise. If we restrict the type to only the integer class,
+then in the generic subprogram, we can perform any operations that are
+defined for the integer class of variables, such as arithmetic operations,
+all six comparisons, and logical operations. On the other hand, we are
+restricted in the number of types that the generic subprogram can be used
+for, since it cannot be used for any real types, records, or arrays. In
+a sense, we have restricted the usage of the generic procedure by allowing
+more freedom of use within the procedure.
+
+<P>The first subprogram declares the formal generic type to be of type
+<B>private </B>which severely limits the operations that can be performed
+on the data within the procedure. The generic procedure is limited to assignment,
+and compares for equality and inequality. No other operations are allowed
+within the generic procedure. However, by limiting the type to <B>private
+</B>within the generic procedure, we allow a much greater flexibility in
+the calling program. This generic procedure can be instantiated with any
+type that can be assigned or compared for equality or inequality, which
+is essentially any type. By limiting the operations allowed within the
+generic procedure, we have made it much more usable to the caller.
+
+<P><B>HOW FLEXIBLE ARE THE GENERIC SUBPROGRAMS?</B>
+
+<P>Jumping ahead to the main program for a few moments, we see that the
+generic procedure <B>Exchange_Data</B> is successfully instantiated for
+the type <B>INTEGER</B>, <B>MY_RECORD</B>, and <B>FLOAT</B>, in addition
+to a few others. This procedure is extremely flexible because it was declared
+with a very restrictive (restrictive within the generic procedure itself)
+generic formal type. In addition, it makes sense to be able to swap two
+elements of record types, or two integers, or two real variables.
+
+<P>Continuing in the main program, you will see in lines 57 and 58 that
+there are not nearly as many uses for the function which was declared with
+the much more liberal (liberal within the generic function itself) type.
+Since arithmetic operations on integers were permitted in the function,
+a record type cannot be used in an instantiation of this generic procedure,
+because it makes no sense to add two records together.
+
+<P><B>A SEEMINGLY UNNECESSARY LIMITATION</B>
+
+<P>You will note that because of the way we declared the generic formal
+type, real types cannot be used in an instantiation of the function. It
+would make sense to be able to take the average of two real numbers, but
+it cannot be done with this function because of the definition of Ada.
+The reason is because there is no generalized scalar type that can be of
+either integer or real. The addition of one would add lots of extra baggage
+to the language and would not add much to the utility of Ada. The language
+is already big enough without adding another burden to it.
+
+<P><B>AN INEFFICIENT THING TO DO</B>
+
+<P>Lines 52 through 55 each instantiate a copy of the generic procedure
+<B>Exchange_Data</B>, and each uses the same type for its instantiation,
+namely <B>CHARACTER</B>. This will result in four sections of code that
+each do the same thing, the only difference being in the name by which
+the procedure will be called. If there is in fact a basis for using different
+names for the same procedure the renaming facility should be used because
+it will only create an alias for each new name. Only one section of code
+will be required.
+
+<P><B>A REALLY DUMB THING TO DO</B>
+
+<P>Line 59 contains an instantiation of the generic function <B>Average
+</B>that uses type <B>INTEGER </B>and names it <B>Swap</B>, a name that
+has already been overloaded five times in lines 48 through 52. The Ada
+system is smart enough to figure out what you really want to do by comparing
+types and recognizing the fact that this is a function call, and it will
+do exactly what you want it to do. It would be very poor practice to use
+a nondescriptive name for a function in any Ada program, but it would be
+especially bad to use a name that has already been used for a different
+purpose. The Ada compiler would handle this correctly, but you could have
+a really hard time deciphering it later.
+
+<P>As discussed earlier, this file could be separated into at least three
+different files and compiled separately, and with some compilers, it could
+be separated into five files.
+
+<P><B>A QUICK REVIEW</B>
+
+<P>Remember that when selecting the types for the generic formal parameters,
+if you select a type that is very restrictive within the subprogram, the
+subprogram can be used with many types by the user. If you select a type
+that is rather permissive within the subprogram, the resulting generic
+subprogram cannot be used with as many types by the user. Be sure to compile
+and execute this program after you understand the details of its operation.
+
+<P><B>WHAT ARE THE FORMAL GENERIC TYPES?</B>
+
+<P>Example program ------> <B><A HREF="e_c30_p3.ada">e_c30_p3.ada</A></B>
+
+<P>Examine the program named e_c30_p3.ada for an example of nearly all
+of the available formal generic types. We will study each one in succession
+in some amount of detail. Beginning with the <B>limited private</B> type
+illustrated in line 3, we have no freedom within the subprogram, but it
+can be used with any type in the calling program. The <B>private </B>type
+is very limited within the generic subprogram, but allows nearly any type
+in the calling program.
+
+<P><B>THE DISCRETE FORMAL PARAMETER TYPE</B>
+
+<P>The discrete formal parameter type is declared with the reserved word
+<B>type </B>followed by the type name, the reserved word <B>is</B>, and
+the box "&lt;>" within parentheses as illustrated. The type name used here
+can be matched with any actual type which is of a discrete class. These
+types are integer class types, enumeration types, the <B>BOOLEAN</B>, and
+the <B>CHARACTER </B>type. Within the generic subprogram, any operation
+can be used which can be done to an enumerated variable. This explains
+why it was necessary for the <B>POS </B>and <B>ORD </B>attributes to be
+defined for integer type variables as mentioned in an earlier lesson. Because
+these attributes are available, the integer types can be used with this
+formal generic type.
+
+<P><B>THE INTEGER CLASS FORMAL PARAMETER TYPE</B>
+
+<P>The integer formal parameter type, as illustrated in line 6, is declared
+with the reserved word <B>type </B>followed by the type name, the reserved
+words <B>is </B>and <B>range</B>, and the "box" as illustrated. The type
+name used here can be matched with any actual type that is of the integer
+class. Within the generic subprogram, the arithmetic operations are available,
+in addition to all of those operations available with the discrete generic
+formal parameter. But as you may expect, a generic subprogram using this
+generic formal parameter can not be instantiated with an enumerated type.
+
+<P><B>THE REAL FORMAL PARAMETER TYPES</B>
+
+<P>The real formal parameter types are declared as illustrated in lines
+7 and 8, with the reserved words <B>digits </B>or <B>delta </B>indicating
+the floating or fixed variety of real types. Only operations permitted
+for those types are permitted within the generic subprogram, and only the
+respective real types can be used by the calling program when instantiating
+a copy of the generic unit.
+
+<P>A procedure that actually uses none of the types is given in line 9.
+The body for the procedure is given in lines 11 through 14, but it is not
+very interesting because it doesn't do anything. The second procedure,
+named <B>ManyUsed</B>, lists all of the types in a similar manner but declares
+a procedure that uses all six for formal parameters as an illustration.
+The program itself uses little of the declared interface.
+
+<P>The details of this program will be left for your study after which
+you should compile it. Because this is composed of only generic subprograms,
+it is not executable.
+
+<P><B>THE ARRAY TYPE FORMAL GENERIC PARAMETER</B>
+
+<P>Example program ------> <B><A HREF="e_c30_p4.ada">e_c30_p4.ada</A></B>
+
+<P>Examine the program named e_c30_p4.ada for examples of array type generic
+formal parameters. The specification and body of a procedure with a constrained
+array type generic formal parameter are given in lines 3 through 17. There
+are actually three generic formal parameters listed here, one on each of
+the three lines numbered 4 through 6.
+
+<P>To define how this procedure is used, we will refer to the instantiation
+call in line 49 of this file which happens to be within the declaration
+part of the main program. The generic formal name <B>SUBSCRIPT </B>must
+be replaced with an actual parameter that is of any discrete type because
+the type mark contains a "&lt;>" in parentheses. Furthermore, the first
+element in the actual parameter list will be substituted for this parameter
+because it is first in the formal parameter list. To begin our instantiation
+requested in line 49, we can replace every occurrence of the word <B>SUBSCRIPT
+</B>in lines 4 through 17 with the word <B>LIMIT_RANGE </B>and we are on
+our way to creating a usable procedure.
+
+<P>The second parameter of the actual parameter list is the type named
+<B>MY_FLOAT</B>, and it will be used to replace every occurrence of the
+generic formal type named <B>FLOAT_TYPE</B> listed in the second line of
+the generic formal parameters. You will notice that the required type is
+any floating point type because of the occurrence of the reserved word
+<B>digits </B>in line 5. The type of the actual parameter, as listed in
+line 50, and defined in line 46 is a floating point type.
+
+<P><B>CONSTRAINED ARRAY GENERIC PARAMETER</B>
+
+<P>The third line of the formal parameters, which is line 6, declares the
+constrained array with which a given instantiation can be used. You will
+notice that this formal parameter depends on both formal parameters declared
+previously, but since there is only one new parameter in this line, the
+Ada compiler can properly assign the actual type <B>FLOAT_ARRAY</B> as
+the replacement for the formal parameter named <B>CONSTRAINED_ARRAY</B>.
+If you actually make a copy of this generic procedure, and replace the
+formal parameters with their corresponding actual parameters, then change
+the name of the procedure to <B>Sum_Array</B>, you could replace the instantiation
+in lines 49 and 50 with the resulting procedure and the program operation
+would be identical. Lines 64 and 65 give examples of using the instantiated
+procedure and will be left to your study.
+
+<P><B>UNCONSTRAINED ARRAY GENERIC PARAMETER</B>
+
+<P>Lines 22 through 34 give an example of use of an unconstrained array
+as a generic formal parameter, and is nearly identical to the last example
+except that the index type is declared to be of type <B>POSITIVE </B>rather
+than being flexible as in the last example. The type of the index variable
+could be declared as a generic type parameter with another line added prior
+to line 24, and the instantiating statement would require three types instead
+of only two. Line 60 is the example instantiating statement and lines 67
+and 68 give examples of use of the resulting function.
+
+<P>As mentioned several times before, each of these subprograms could be
+separated into separate files and compiled separately, then used by any
+calling program. Be sure to compile and execute this program.
+
+<P><B>THE ACCESS FORMAL GENERIC PARAMETER</B>
+
+<P>Example program ------> <B><A HREF="e_c30_p5.ada">e_c30_p5.ada</A></B>
+
+<P>Examine the program named e_c30_p5.ada for our first look at the last
+generic formal parameter type, the <B>access </B>type. The first procedure,
+in lines 2 through 14 use an <B>access </B>type that matches only an access
+type which accesses an <B>INTEGER</B>, resulting in little or no flexibility
+since an access type to an <B>INTEGER </B>type variable is used infrequently.
+A copy of this generic procedure is instantiated in line 45 of the main
+program, and the procedure is exercised in line 76 as an example for your
+study.
+
+<P>The second procedure, given in lines 19 through 32 illustrates a much
+more useful procedure because this procedure can be used for any access
+type, including the composite types of arrays and records. Three copies
+of the generic procedure are instantiated in lines 64 through 68 and all
+three are exercised in the main program. Note that the more general procedure
+is used in line 77 to transpose the <B>INTEGER </B>type variables back
+to their original positions.
+
+<P>The details of this program should be simple for you to follow, so no
+additional comment needs to be made. Be sure to compile and execute this
+program.
+
+<P><B>PROGRAMMING EXERCISES</B>
+<OL>
+<LI>
+Add a subtype of <B>INTEGER </B>to e_c30_p1.ada and determine what happens
+if you instantiate a copy of <B>Exchange_Data</B> for the subtype in addition
+to the instantiation for <B>INTEGER</B>. Add statements to the main program
+to swap values of the new type.<A HREF=" a_c30_p1.ada">(Solution)</A></LI>
+
+<LI>
+Attempt to instantiate a copy of <B>Average </B>that uses type <B>FLOAT
+</B>in e_c30_p1.ada.<A HREF=" a_c30_p2.ada">(Solution)</A></LI>
+
+<LI>
+Attempt to perform an addition in the body of <B>Exchange_Data</B> in violation
+of the <B>private </B>type.<A HREF=" a_c30_p3.ada">(Solution)</A></LI>
+</OL>
+<A HREF="chap31.htm">Advance to Chapter 31</A>
+
+<P><A HREF="a95list.htm">Return to the Table of Contents</A>
+
+<P>
+<HR width="100%"><I><FONT SIZE=-1>Copyright &copy; 1988-1998 Coronado Enterprises
+- Last update, February 1, 1998</FONT></I>
+<BR><I><FONT SIZE=-1>Gordon Dodrill - dodrill@swcp.com - </FONT></I><FONT SIZE=-1><A HREF="mailto:dodrill@swcp.com">Please
+email any comments or suggestions.</A></FONT>
+</BODY>
+</HTML>

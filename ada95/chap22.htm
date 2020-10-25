@@ -1,0 +1,439 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Author" CONTENT="Gordon Dodrill">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (Win95; I) [Netscape]">
+   <TITLE>Ada Tutorial - Chapter 22</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<B>Ada Tutorial - Chapter 22</B>
+
+<P><B><FONT SIZE=+3>O</FONT><FONT SIZE=+2>BJECT </FONT><FONT SIZE=+3>O</FONT><FONT SIZE=+2>RIENTED
+</FONT><FONT SIZE=+3>P</FONT><FONT SIZE=+2>ROGRAMMING</FONT></B>
+
+<P>In recent years, object oriented programming has seen a tremendous rise
+in popularity. It seems like the term has been applied to every programming
+language and marketing scheme regardless of whether it is actually a part
+of the product. There are probably very few persons that really understand
+what it is and know how to properly use object oriented programming, but
+that will not prevent us from digging in and learning how to use some of
+the technique in our programs. We will devote the next two chapters to
+this subject.
+
+<P>It is beyond the scope of this tutorial to define and illustrate such
+topics as object oriented analysis and object oriented design. There are
+lots of books available that cover those topics quite well, so we will
+spend our time showing how the various constructs available in Ada 95 help
+us to build a more reliable program.
+
+<P>The three terms that are usually applied to object oriented programming
+are encapsulation, inheritance, and polymorphism or dynamic binding. We
+have already covered a good bit of encapsulation, which can properly be
+called information hiding, in chapter 21 of this tutorial, and we will
+defer our discussion of polymorphism until chapter 23. This leaves us with
+inheritance which we will cover at this time.
+
+<P><B>INHERITANCE AND EXTENSION</B>
+
+<P>Inheritance involves making a copy of some existing entity and adding
+to it to define an entity with all of the properties of the original, but
+with added properties. Most other programming languages approach this topic
+with the emphasis on the inheritance portion of the previous statement,
+with little emphasis on the extension operation. Ada writers, however,
+place the emphasis on the extension portion of that statement, so we will
+too. In this chapter we will illustrate how to begin with an entity and
+extend it such that it has additional capability. As usual we will start
+with a simple example program.
+
+<P><B>THE SIMPLEST INHERITANCE</B>
+
+<P>Example program ------> <B><A HREF="e_c22_p1.ada">e_c22_p1.ada</A></B>
+
+<P>This program has nothing to do with object oriented programming as usually
+applied to programming languages, but it illustrates simple extension of
+a few Ada types. Line 4 declares that the type <B>MY_INTEGER</B> will have
+all of the properties of the type <B>INTEGER </B>but with a more limited
+range, so it is actually inheriting all of its properties from the parent
+type. The same statement can be said about the type <B>MY_FLOAT</B> in
+line 6. This inheritance is not very interesting however, so we will go
+on to a more complex type.
+
+<P>We define a type in lines 8 through 13 named <B>WOODEN_BOX</B> which
+is composed of three simple components and has several predefined operations
+which all records have, such as assignment, compare for equality, and compare
+for inequality. We add another primitive operation, the ability to add
+two objects of this type by overloading the + operator in line 15. In line
+17, we derive a new type named <B>STEEL_BOX</B> which will have all of
+the components and operations that its parent type has, including the overloading
+of the + operator. The interesting part is in line 19 where we extend the
+<B>STEEL_BOX</B> type by overloading the - operator. It should be clear
+that we have "inherited" all of the functionality of the <B>WOODEN_BOX</B>
+type, and extended the operation of the <B>STEEL_BOX</B> by the additional
+operator.
+
+<P>This is inheritance and extension, but it is very limited because we
+cannot add components to the inherited capability, only operations. We
+will add components in example programs later in this chapter, but this
+program fragment was given to illustrate a very basic form of inheritance.
+
+<P><B>MORE SIMPLE TYPE EXTENTION</B>
+
+<P>Example program ------> <B><A HREF="e_c22_p2.ada">e_c22_p2.ada</A></B>
+
+<P>The example program e_c22_p2.ada illustrates a little more extension.
+It begins with a definition of a very simple record named <B>TRANSPORT</B>,
+with two components and three explicitly declared subprograms in addition
+to the operators that are generated automatically by the system such as
+assignment and compare for equality. There is nothing magic or unusual
+about this record. It can be used to define data and used according to
+the rules of Ada just like any other record we have studied in this tutorial.
+In fact we will use it in the next example program.
+
+<P>The next record, named <B>CAR</B>, is a little more interesting because
+it is declared as a derived type of the <B>TRANSPORT </B>record. This means
+that it has all of the components and functionality of its parent. In fact,
+we can use this new type as if it has the three functions declared in lines
+11 through 15 redefined with the first parameter of type <B>CAR</B>. All
+three of these subprograms can be called directly with a variable of type
+<B>CAR </B>as the first parameter, without doing any type conversion on
+the variable. We extend <B>CAR </B>by adding a function named <B>Tire_Loading</B>
+to give it more capability than its parent type. This truly is inheritance
+and extension in the fullest sense of the terms, but we still do not have
+the ability to add components to the new type, only functionality. We will
+be able to extend components shortly.
+
+<P>The implementation in the <B>package body</B> is very simple and you
+should have no difficulty understanding it with the knowledge of Ada that
+you have gained already. Note that the three subprograms for the <B>TRANSPORT
+</B>type are available for the <B>CAR </B>type just as if they were redefined
+here, but they are not, because they are inherited automatically from the
+parent type. All operators and primitive subprograms are automatically
+inherited when we derive a new record from an old record.
+
+<P><B>WHAT ARE THE PRIMITIVE OPERATIONS?</B>
+
+<P>The primitive operations of a type are;
+<UL>
+<LI>
+all intrinsic operations predefined by the compiler such as assignment,
+compare for equality, and attributes</LI>
+
+<LI>
+all primitive operations inherited from a parent, when using inheritance
+or derivation</LI>
+
+<LI>
+subprograms with one or more parameters and/or a return value of the type,
+which are declared in the package specification along with the type declaration
+itself</LI>
+</UL>
+The <B>CAR </B>type in the present example has some of each category. It
+has a few intrinsic operators such as assignment. It inherits three operations
+from its parent class which are declared in lines 11 through 15. Finally,
+it has an operation that is unique to itself declared in line 21, the <B>Tire_Loading</B>
+function. If the <B>CAR </B>type were inherited into another type, such
+as a <B>SPORTS_CAR</B> type, it would inherit all four of the functions
+declared in lines 11 through 21 since they are all within its ancestor
+types.
+
+<P><B>USING THE TYPE EXTENSION PACKAGE</B>
+
+<P>Example program ------> <B><A HREF="e_c22_p3.ada">e_c22_p3.ada</A></B>
+
+<P>Examine the file named e_c22_p3.ada for an example of using the two
+types we defined in the last example program. You will notice that the
+package named <B>Conveyance1 </B>is <B>with</B>'ed and <B>use</B>'ed in
+lines 3 and 4 to make them available for use in the program. We define
+two variables in lines 8 and 9, one each of the two types which we will
+use in the program.
+
+<P>Lines 13 through 18 are rather simple, with nothing new, so you can
+study those on your own. The same is true of lines 20 through 23, except
+that we will return to this group of statements shortly.
+
+<P>The first really interesting statement is given in line 25 where we
+call <B>Set_Values</B> with the first parameter being of type <B>CAR</B>,
+even though we have no explicitly defined function with that type. This
+proves that the system truly generated a function with the type <B>CAR
+</B>as the first parameter that is identical to the same function with
+the type <B>TRANSPORT </B>as the first parameter. Since we didn't write
+the code twice, we only have a single function to maintain that operates
+on both of the types, but if we wanted to have them do different things,
+we could write a specification and a body for <B>CAR</B>'s own <B>Set_Values</B>
+function.
+
+<P>Type extension is therefore illustrated in this example program in line
+25 as well as line 28, where the function <B>Get_Wheels</B> is called,
+which was inherited from the parent type. Line 30 however, illustrates
+type extension since we wrote a completely new function to retrieve the
+<B>Tire_Loading</B> from <B>CAR </B>type variables. You will notice that
+because of the clear definition of Ada, it is impossible to tell in this
+program which functions were inherited and which were extended. The <B>TRANSPORT
+</B>type has no <B>Tire_Loading</B> function.
+
+<P>Object oriented programming includes the concept of information hiding
+which we are not practicing with this example program. If you refer back
+to line 21, you will see that we are accessing the number of <B>Wheels
+</B>on the <B>Hummer </B>directly. This is bad practice, because one of
+the most error prone operations in computer programming is providing direct
+access to data over a large range. The principle of information hiding
+requires that the data for an object be hidden within the object and unavailable
+to the outside world as discussed in the previous chapter of this tutorial.
+We will completely hide the data within the object in the next example
+program.
+
+<P>Be sure to compile and execute this program to be sure you understand
+what it does before going on to the next example program.
+
+<P><B>TYPE EXTENSION WITH A PRIVATE SECTION</B>
+
+<P>Example program ------> <B><A HREF="e_c22_p4.ada">e_c22_p4.ada</A></B>
+
+<P>The example program named e_c22_p4.ada is very similar to the previous
+program with the exception that the two record types are declared to be
+<B>private</B>. This was done to prevent the user from seeing into the
+objects and directly manipulating the contained data. However, with each
+improvement we add to our code, there is the possibility that something
+else will not work as conveniently, and there is a bit of a penalty to
+be paid here.
+
+<P>Because the <B>TRANSPORT </B>type is <B>private</B>, it does not provide
+full functionality to objects outside of itself. In fact, the only operations
+it permits are assignment and compare for equality or inequality. The three
+subprograms defined for the <B>TRANSPORT </B>type in lines 6 through 10
+are not available to be inherited into the <B>CAR </B>type because there
+is no indication that <B>CAR </B>inherits from <B>TRANSPORT </B>at this
+point. It is necessary to declare them explicitly for the <B>CAR </B>type
+as is done in lines 14 through 18. It is also necessary to provide a full
+implementation for these three functions as is illustrated in lines 58
+through 74. It is clear that this form of inheritance is lacking in elegance.
+
+<P>As with all <B>private </B>types, the actual definitions are given within
+the <B>private </B>section in lines 21 through 29 where it is clear that
+<B>CAR </B>inherits all of <B>TRANSPORT</B>. This example is very similar
+to the last example, so you will be left to study the package body on your
+own.
+
+<P><B>USING THE TYPE EXTENSION</B>
+
+<P>Example program ------> <B><A HREF="e_c22_p5.ada">e_c22_p5.ada</A></B>
+
+<P>The example program named <B>Vehicle2 </B>is in the file named e_c22_p5.ada
+and gives a very limited example of using the <B>TRANSPORT </B>and the
+<B>CAR </B>class. There is nothing new here except for the fact that the
+direct access of the <B>Wheels </B>component is not used here since it
+is now hidden from view.
+
+<P>The next example program will finally provide full inheritance and extension
+of both components and operations. This is what is usually meant when inheritance
+is referred to in articles on object oriented programming.
+
+<P><B>REAL TYPE EXTENSION</B>
+
+<P>Example program ------> <B><A HREF="e_c22_p6.ada">e_c22_p6.ada</A></B>
+
+<P>The example program named e_c22_p6.ada contains our first example of
+real inheritance and extension and is a good example of the way it is actually
+used in practice. The last few example programs, even though they are valid
+Ada programs, do not illustrate real inheritance, but were intended to
+show that there are more subtle forms of inheritance built into the Ada
+language.
+
+<P>We begin by declaring a <B>private TRANSPORT </B>type in line 5, but
+with an extra reserved word added, namely <B>tagged</B>. The word <B>tagged
+</B>indicates to the Ada compiler that this type may be extended with additional
+components and/or operations to define a completely new type. The actual
+definition is given in lines 35 through 39 and should look very familiar
+by now except for the reserved word <B>tagged </B>which is added here also.
+Three subprograms are declared in lines 7 through 11 in much the same manner
+that they have been added in previous programs in this chapter. Except
+for the addition of the word <B>tagged</B>, this package is identical to
+the previous example package.
+
+<P><B>NOW FOR THE REAL DIFFERENCE</B>
+
+<P>When we define the <B>CAR </B>type, things look a lot different than
+they did in the last program. This time the parent type is mentioned in
+the declaration along with a new use of the reserved word <B>with</B>.
+We have been using this word to <B>with </B>packages into our various programs
+but now it is used to indicate that something new is going to be added
+to the parent type to generate the new type. Lines 41 through 44 contain
+the full declaration of the new type <B>CAR. </B>It says to create a new
+derived type of <B>TRANSPORT </B>with some additions because of the reserved
+word <B>with </B>being used here. The component named <B>Passenger_Count
+</B>is included in the <B>CAR </B>type along with the two components from
+<B>TRANSPORT, </B>giving the <B>CAR </B>type three variables. We have finally
+found a way to extend the number of components in an inherited type. Note
+that you can only add components. It is not possible to remove components
+or to override components.
+
+<P>The <B>CAR </B>type also inherits the three subprograms from <B>TRANSPORT,</B>
+but it provides its own <B>Set_Values</B> procedure which only sets the
+value of the <B>Passenger_Count</B> component. Presumably, objects of the
+<B>CAR </B>type will be required to use the <B>Set_Values</B> procedure
+provided by the parent class in order to set the values of the two inherited
+components. This is what will actually be done in the next example program.
+The <B>CAR </B>type also provides a new subprogram named <B>Get_Passenger_Count</B>
+to return the number of passengers. Overall, the <B>CAR </B>type consists
+of three components and provides five subprograms which can be used to
+manipulate objects of this type.
+
+<P>It is possible to extend a type by adding subprograms, and it is possible
+to modify the functionality of a type by overriding one or more subprograms,
+but it is not possible to eliminate subprograms from the new type which
+are part of the parent type. Even though the <B>TRANSPORT </B>type is <B>private</B>,
+the <B>CAR </B>inherits all of the primitive operations of the <B>TRANSPORT
+</B>type because the <B>TRANSPORT </B>type is tagged. This is true inheritance
+because all of the entities are inherited.
+
+<P><B>WHAT DOES IT MEAN TO FREEZE A TYPE?</B>
+
+<P>We can add all of the functionality we desire to a type until we use
+that type to define a variable or inherit it into a new type. After it
+is used, we are not allowed to add functionality to the type because we
+would have two variants of the type, the one where it was used and the
+newer changed version. The two would be incompatible even though they had
+the same type name. For this reason, the type is "frozen", which means
+you cannot add more primitive operations to it.
+
+<P><B>ANOTHER NEW TYPE</B>
+
+<P>Since the <B>TRUCK </B>type is very similar to the <B>CAR </B>type,
+little needs to be said except that it adds two components to those inherited,
+and it adds two subprograms to those inherited from the parent. The <B>TRUCK
+</B>type is a little different because it provides initialization data
+for all four variables in its procedure named <B>Set_Values</B>, so it
+has no need for the procedure of the same name in the parent type.
+
+<P>The <B>BICYCLE </B>type is declared in line 31 in exactly the same manner
+as the <B>CAR </B>and the <B>TRUCK. </B>When we get to line 52 where the
+private type is actually defined, it looks a little different than the
+other two new types. The <B>with null record</B> at the end of the line
+tells the system that the <B>BICYCLE </B>type will have all of the components
+of the parent type and no more. It is necessary to explicitly tell the
+system that none will be added.
+
+<P>We now have the ability to add components and subprograms to an inherited
+type. We can add subprograms without adding any components. We can also
+add components without adding any additional subprograms, but that would
+not be very useful because we would have no way to use the new components
+since they would be hidden in the object.
+
+<P><B>WHAT IS A CLASS IN ADA?</B>
+
+<P>A class in Ada 95 is a group of types with a common ancestor, and the
+name of that class is the type name of the highest ancestor. The present
+example program contains the class named <B>TRANSPORT </B>which consists
+of the types <B>TRANSPORT</B>, <B>CAR</B>, <B>TRUCK</B>, and <B>BICYCLE</B>.
+It would also be correct to say that it contains the class named <B>CAR
+</B>that consists of only the type <B>CAR</B>. Any hierarchy of types compose
+a class with the class name being the name of the highest class in the
+hierarchy. The class concept is not very important at this time, but it
+will become important when we study dynamic dispatching in the next chapter.
+
+<P><B>THE PACKAGE BODY</B>
+
+<P>The package body, given in lines 58 through 121, is nothing more than
+the same implementations we have been using in this chapter. All of the
+inheritance and extension constructs are in the specification part of the
+code.
+
+<P>There is one small detail that the student should take note of in line
+104 and 105, where the components inherited from the parent class are initialized.
+Nothing new there, but in line 108 the procedure named <B>Set_Values</B>
+from the parent class is used to initialize the same two variables. Since
+the types are different, it is necessary to perform a type transformation
+from the <B>TRUCK </B>type to the <B>TRANSPORT </B>type to get the compiler
+to accept it. Note that either method of initialization can be used. The
+two methods were given here only as an example.
+
+<P><B>USING THE REAL TYPE EXTENSION</B>
+
+<P>Example program ------> <B><A HREF="e_c22_p7.ada">e_c22_p7.ada</A></B>
+
+<P>Examine the file named e_c22_p7.ada which serves as an illustration
+of how to use these new types we have just generated. As expected, the
+new package is both <B>with</B>'ed and <B>use</B>'ed into this program,
+and the four new types are available for use as needed. There is nothing
+special about the new types, except for the fact that three are descendants
+of the fourth. They are used just like any other types would be used as
+can be seen by inspecting this example program. You will notice that two
+procedure calls are necessary to set all of the values in the <B>CAR </B>type
+objects, but only one call is necessary to set all of the values in the
+<B>TRUCK </B>type objects. This is only because of the way we declared
+them in the package. In a real program it would be best to declare them
+both in a similar manner to make the code easier to understand.
+
+<P>Be sure to compile and execute this program.
+
+<P><B>INITIALIZERS AND FINALIZERS - CONTROLLED</B>
+
+<P>Example program ------> <B><A HREF="e_c22_p8.ada">e_c22_p8.ada</A></B>
+
+<P>The example program named e_c22_p8.ada illustrates automatic object initialization
+and automatic cleaning up when the object is about to be destroyed. We
+include the <B>Ada.Finalization</B> package for use here, and declare a
+type named <B>WIDGET </B>which inherits from the type named <B>CONTROLLED</B>.
+We override three procedures from <B>CONTROLLED </B>with the predefined
+names <B>Initialize</B>, <B>Adjust</B>, and <B>Finalize</B>, each with
+one parameter of the type of record we just declared. The package body
+contains the definitions of the three procedures which are trivial because
+they each output only a single line of text to the monitor.
+
+<P>In the main program, we include the <B>Component </B>package in the
+<B>with </B>list, and we write a trivial program that does nothing but
+output a few lines of text. When we execute this program, we get a bit
+of a surprise because the three procedures in the <B>Component </B>package
+are executed even though we never called them, the system did. They are
+very special because they each have a special job to do.
+
+<P><B>Initialize</B> - When any object of this type is defined, this procedure
+is run automatically, without the programmer calling it explicitly. This
+is the place to initialize the components of the class or include any other
+initialization code that needs to be executed for each object of this type.
+
+<P><B>Adjust</B> - Following an assignment, you may have some cleaning
+up of the data within the new copy. This procedure is called automatically
+for the new object after the new data has been assigned to it.
+
+<P><B>Finalize</B> - When you assign something to a variable, the data
+contained in that variable is overwritten and lost forever. You may wish
+to do something special with the data before it is overwritten, and that
+is one of the jobs for this procedure. When you are finished with an object
+and you wish to destroy it, or it goes out of scope, you will need to do
+some cleaning up if it has an access variable to something on the heap
+that you are finished with, or some other job that must be done prior to
+destroying the object. This procedure is called automatically by the system.
+
+<P>You will notice that the <B>Initialize </B>procedure is executed twice
+prior to the beginning of the program, because there are two variables.
+The <B>Finalize </B>and the <B>Adjust </B>procedures are both executed
+for each of the two assignment operations as is evident from the listing.
+The <B>Finalize </B>procedure is called once for each of the two objects
+when they go out of scope at the end of the program.
+
+<P>These three procedures can be a great aid when you are using types that
+are rather complex.
+
+<P><B>PROGRAMMING EXERCISES</B>
+<OL>
+<LI>
+Add a BICYCLE object to e_c22_p7.ada and exercise it to prove to yourself
+that you can use the inherited objects correctly.<A HREF=" a_c22_p1.ada">(Solution)</A></LI>
+
+<LI>
+Add a new function to the BICYCLE class in e_c22_p6.ada to retrieve the
+weight in ounces. Name the new function Number_Of_Ounces. One pound is
+16 ounces.<A HREF=" a_c22_p2.ada">(Solution)</A></LI>
+</OL>
+<A HREF="chap23.htm">Advance to Chapter 23</A>
+
+<P><A HREF="a95list.htm">Return to the Table of Contents</A>
+
+<P>
+<HR width="100%"><I><FONT SIZE=-1>Copyright &copy; 1988-1998 Coronado Enterprises
+- Last update, February 1, 1998</FONT></I>
+<BR><I><FONT SIZE=-1>Gordon Dodrill - dodrill@swcp.com - </FONT></I><FONT SIZE=-1><A HREF="mailto:dodrill@swcp.com">Please
+email any comments or suggestions.</A></FONT>
+</BODY>
+</HTML>

@@ -1,0 +1,293 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Author" CONTENT="Gordon Dodrill">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (Win95; I) [Netscape]">
+   <TITLE>Ada Tutorial - Chapter 7</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<B>Ada Tutorial - Chapter 7</B>
+
+<P><B><FONT SIZE=+3>D</FONT><FONT SIZE=+2>ERIVED</FONT><FONT SIZE=+3> T</FONT><FONT SIZE=+2>YPES</FONT></B>
+
+<P><B>LET'S TALK ABOUT TYPES</B>
+
+<P>We have been talking about types throughout this tutorial, but we've
+been sort of working our way around them rather than carefully defining
+the various kinds of types available in Ada. This chapter will be devoted
+to a full discussion of types. It was not possible to discuss types in
+full until we covered a bit of material about the various scalar types
+and how they are used, but with that material behind us, we will give a
+full treatment to the topic of types.
+
+<P>There are four different ways to declare a type. You can probably guess
+that we will discuss each of the ways in detail in this chapter. They are
+listed as follows;
+<OL>
+<LI>
+Predefined types. These are provided for us by the compiler writer as defined
+in the Ada 95 Reference Manual (ARM). We have already used several of these.</LI>
+
+<LI>
+User defined types. We have already defined a few new types in some of
+the earlier programs.</LI>
+
+<LI>
+Derived types. These get their name because they are defined in part based
+on a previously defined type and derive some of their characteristics from
+those types. We have not yet encountered the derived type.</LI>
+
+<LI>
+Subtypes. These are usually a subset of another type upon which they are
+based. We encountered subtypes in the last chapter.</LI>
+</OL>
+A type defines a set of values and a set of primitive operations. The primitive
+operations of a type are;
+<UL>
+<LI>
+The intrinsic predefined operations such as assignment, addition, subtraction,
+etc.</LI>
+
+<LI>
+Any operations inherited from a parent in the case of derived types. We
+will study derived types in this chapter.</LI>
+
+<LI>
+Subprograms with one or more parameters or a result of the type that are
+declared within the same package as the type.</LI>
+</UL>
+<B>PREDEFINED TYPES IN ADA</B>
+
+<P>The ARM requires every Ada compiler to provide several predefined types,
+including <B>INTEGER</B>, <B>NATURAL</B>, <B>POSITIVE</B>, <B>FLOAT</B>,
+<B>CHARACTER</B>, and <B>STRING</B>. Several other types are optional and
+include <B>LONG_INTEGER</B>, <B>SHORT_INTEGER</B>, <B>LONG_FLOAT</B>, and
+<B>SHORT_FLOAT</B>. It will be left to you to study the documentation that
+came with your compiler and see which of the optional types are included
+with your compiler package. You will find this information in Annex M.
+The actual definition of these types is given in the package named <B>Standard</B>.
+
+<P>The predefined types can be used as the basis of the declaration of
+new types for your specific application and is the topic of this chapter.
+
+<P><B>USER DEFINED TYPES</B>
+
+<P>Example program ------> <B><A HREF="e_c07_p1.ada">e_c07_p1.ada</A></B>
+
+<P>Examine the program named e_c07_p1.ada for several examples of user
+defined types. Lines 7 through 9 each declare an entirely new type. Considering
+only the predefined type <B>INTEGER </B>and these three, we have four types
+to use in the program, and each type has nothing to do with the other three.
+Variables of these types cannot be intermixed in any way without the proper
+type conversion explicitly stated by the programmer. Moreover, variables
+declared with one of these types cannot be assigned a value that is outside
+of its declared range. The structure for declaring a user defined integer
+class type is given as,
+<PRE><B>type</B> &lt;type-name> <B>is range</B> &lt;lower-limit>..&lt;upper-limit>;</PRE>
+As stated earlier, the word <B>range </B>is a reserved word, and its presence
+indicates to the compiler that you wish to have a type of the integer class.
+
+<P>Use of the three new types is not illustrated in this example program,
+but the diligent student will have no trouble using these new types to
+declare a few variables, then use them in some mathematical statements.
+
+<P><B>DERIVED TYPES ARE RELATIVELY NEW</B>
+
+<P>Derived types are an entirely new subject, since they are not available
+in any of the more popular languages that you may have been programming
+in. Derived types get their name because they are derived from an existing
+type rather than being an entirely new creation. A derived type has all
+of the operations available that are available with the parent type but
+it may have a more limited range than the range of the parent type. The
+example program has an illustration of this in line 10 where the type <B>TINY_POS
+</B>is derived from the user defined type <B>POS_INT</B> but with a slightly
+tighter allowable range. Any operation that is legal to be performed on
+a variable of type <B>POS_INT</B> is legal for a variable of type <B>TINY_POS</B>.
+
+<P>The key to a derived type is the use of the reserved word <B>new </B>along
+with the type from which the new type will be derived. The structure for
+declaring a user defined derived type is given as,
+<PRE><B>type</B> &lt;type-name> <B>is new</B> &lt;existing-type>;</PRE>
+The derived type will be of the same class as the type from which it is
+derived.
+
+<P>We continue declaring new types in lines 11 through 13 and because these
+three are entirely new types, each derived from the parent type <B>INTEGER</B>,
+they cannot be added together, subtracted, compared or even assigned to
+each other without a bit of extra trouble. Each of the seven new types
+in lines 7 through 13 share all of the operations that are defined for
+<B>INTEGER</B>, including the arithmetic, logical, and assignment operations,
+but the operations can only be performed as long as the types of the objects
+are consistent. Of course, the explicit type conversion can be done to
+allow the combination of variables of any of these types.
+
+<P>The type <B>TREE_INT</B>, defined in line 13, is a derived type with
+a more limited range than the parent type so it has all of the characteristics
+of the parent type except that it cannot be assigned a value outside of
+its defined range.
+
+<P><B>HOW TO USE SOME OF THE NEW TYPES</B>
+
+<P>As an example of using the new types, consider the type <B>SALAD_INT</B>
+which is a derived type of the parent type <B>INTEGER</B>. Since three
+variables, <B>Salad</B>, <B>Lettuce</B>, and <B>Tomatoes</B>, are all of
+the same type, they can be freely added, compared, assigned to each other,
+or used in any way legal for integer class variables. They can be used
+as the range limits in a <B>for </B>loop. The three variables have the
+same range as the parent type <B>INTEGER</B>, namely -2,147,483,648 to
+2,147,483,647 on most 32 bit machines. Constants of type universal_integer
+can be added to, compared to, or assigned to these three variables.
+
+<P><B>HOW CAN THESE NEW TYPES HELP IN A PROGRAM?</B>
+
+<P>Everything that was said about type <B>SALAD_INT</B> in the last paragraph
+is true of type <B>ANIMAL_INT</B>, <B>TREE_INT</B>, or any of the other
+four types. Suppose somewhere in our program we tried to add the number
+of <B>Tomatoes </B>to the number of <B>Dogs </B>and assign the result to
+<B>Trees</B>. If the variable names are meaningful, we would probably not
+want to do such an operation in any practical program. The Ada compiler
+would give us a compile time error, so we would detect the error before
+we tried to run the program with such a silly statement. Careful assignment
+of types can be used to protect us from the silly little errors that we
+are all so prone to make. It would be much more efficient to let the compiler
+find these silly little errors and free us up to find the analysis errors
+we also make.
+
+<P><B>HOW DO YOU DO A TYPE TRANSFORMATION?</B>
+
+<P>Even though you set things up very carefully, you may need to perform
+some operations on the data where you actually do need to add the number
+of <B>Animals </B>to the total of <B>Oak </B>plus <B>Coconut</B>. Line
+30 illustrates how to do this. Enclosing the variable in parentheses and
+adding the desired type to the front of the grouping will change the type
+from the variable's actual type to the type in front of the parentheses,
+but only for that one place in the program.
+
+<P>In line 31, <B>Trees </B>and <B>Salad </B>are both transformed to type
+<B>INTEGER </B>before being summed and assigned to <B>Count</B>, a variable
+of type <B>INTEGER</B>. Line 33 illustrates the addition of many variables
+by first transforming each to type <B>SALAD_INT</B> then performing the
+addition. In line 40, the same variables are added together, but in this
+case, all variables are transformed into type <B>ANIMAL_INT</B> prior to
+summing, then the sum is transformed to type <B>SALAD_INT</B>. The two
+methods should result in the same answer, and you can verify that they
+do when you compile and run the program.
+
+<P><B>WHAT IS A SUBTYPE?</B>
+
+<P>A <B>subtype </B>is a new type based on a parent type but usually with
+a more restricted range. It inherits all of the characteristics of the
+parent type and in addition, it can be freely intermixed with the parent
+type in calculations and assignment statements. The reason for using a
+subtype is usually to declare a variable of the parent type but with a
+more limited range to take advantage of the range checking capability of
+Ada.
+
+<P><B>WE CAN ALSO HAVE SUBTYPES OF DERIVED TYPES</B>
+
+<P>Example program ------> <B><A HREF="e_c07_p2.ada">e_c07_p2.ada</A></B>
+
+<P>The program named e_c07_p2.ada gives an example of the definition and
+use of a subtype of a derived type, and a derived type of a subtype. In
+line 7 we declare a derived type and in line 10 we declare a subtype of
+the new derived type. The subtype of the derived type has the same characteristics
+as the derived type except that it has a more restricted range in this
+case. Variables of type <B>NEW_SUBTYPE</B> are compatible with variables
+of their parent type <B>NEW_INT</B>. This is illustrated in line 26.
+
+<P>In this case, <B>NEW_SUBTYPE</B> is as different from the type <B>INTEGER</B>,
+as <B>SALAD_INT</B> was in the last program.
+
+<P><B>WE CAN HAVE A DERIVED TYPE OF A SUBTYPE</B>
+
+<P>Line 12 illustrates the declaration of a derived type based on using
+a subtype for the parent type. Note that the new derived type has all of
+the characteristics of its parent type except for the more restricted range,
+but once again, it is an entirely new type as far as type checking is concerned.
+
+<P><B>A SUBTYPE CAN BE SIMPLY A SYNONYM</B>
+
+<P>Line 10 illustrates a subtype which covers the entire range of its parent
+type. Since variables of this subtype can be freely intermixed with variables
+of its parent type, the subtype name is simply a synonym for the parent
+type name.
+
+<P>With the discussion of the last program fresh in your mind, you should
+breeze through the remainder of this program. Be sure to compile and execute
+it.
+
+<P><B>USING OTHER PREDEFINED TYPES FOR THE PARENT</B>
+
+<P>Example program ------> <B><A HREF="e_c07_p3.ada">e_c07_p3.ada</A></B>
+
+<P>Examine the program named e_c07_p3.ada for examples of derived types
+and subtypes based on some of the other predefined types in Ada. We begin
+by declaring two user defined types in lines 8 and 9 which are of the floating
+point class of types because of the reserved word <B>digits </B>appearing
+in the definition. In line 10 we declare <B>DER_FLOAT</B> which has all
+of the characteristics of the predefined type <B>FLOAT</B>, except that
+the compiler will consider it to be an entirely different type and will
+not allow mixing of these two types. Of course, type conversion can be
+used if necessary.
+
+<P>The derived type <B>LIM_FLOAT</B> is declared with all the characteristics
+of <B>FLOAT </B>except that it has a limited range to allow for compiler
+checks. Line 12 contains the definition of a subtype based on <B>DER_FLOAT</B>
+with a more limited range. Variables of the type <B>SUB_FLOAT</B> can be
+freely intermixed with variables of type <B>DER_FLOAT,</B> but not with
+those declared with the types <B>FLOAT</B>, <B>NEW_FLOAT1</B>, <B>NEW_FLOAT2</B>,
+or <B>LIM_FLOAT</B>.
+
+<P>Lines 15 through 19 illustrate the same principles applied to fixed
+point types and should be self explanatory. The only difference is the
+use of the reserved word <B>delta </B>in the fixed point definitions.
+
+<P>Lines 22 through 29 illustrate the declaration of derived types and
+subtypes of the <B>CHARACTER </B>type and an enumerated type. These statements
+will be left to the students study since they are so similar to the example
+using <B>FLOAT </B>as the parent type. We will study the <B>CHARACTER </B>type
+in chapter 11.
+
+<P>A few variables are declared and some are initialized in lines 32 through
+35, and a nonsense calculation is given in line 39 to illustrate the type
+transformations that can be done with derived types.
+
+<P>Be sure to compile and execute this program even though it has no output.
+
+<P><B>WHAT IS A CLASS IN ADA?</B>
+
+<P>A class in Ada is the entire group of various concrete types that descend
+from a common ancestor, or a common root. The name of the root is used
+as the name of the class. Therefore in the program named e_c07_p3.ada,
+the <B>NEW_FIXED1</B> class consists of the types <B>NEW_FIXED1</B>, <B>DER_FIXED</B>,
+<B>LIM_FIXED</B>, and <B>SUB_FIXED</B>, because the last three are somehow
+derived from <B>NEW_FIXED1</B>. In a similar manner, the class named <B>DAY
+</B>consists of the types <B>DAY</B>, <B>WEEKDAY</B>, and <B>BOWLING_DAY</B>.
+
+<P><B>A WORD OF SUMMARY ABOUT TYPES</B>
+
+<P>We have seen that in addition to the predefined types, we can declare
+additional types for use in our programs. We can then use any of the predefined
+or user defined types as the parent type for either subtypes or derived
+types. The new subtype or derived type can be used as a parent type for
+additional subtypes or derived types and we find that we have a tremendous
+amount of flexibility in defining the data to solve any particular problem.
+
+<P><B>PROGRAMMING EXERCISE</B>
+<OL>
+<LI>
+Modify the program named e_c07_p1.ada to include a new instantiation of
+the package <B>Ada.Text_IO.Integer_IO</B> to output the variable named
+<B>Salad </B>in line 37 and 44 without the type conversion.<A HREF=" a_c07_p1.ada">(Solution)</A></LI>
+</OL>
+<A HREF="chap08.htm">Advance to Chapter 8</A>
+
+<P><A HREF="a95list.htm">Return to the Table of Contents</A>
+
+<P>
+<HR width="100%"><I><FONT SIZE=-1>Copyright &copy; 1988-1998 Coronado Enterprises
+- Last update, February 1, 1998</FONT></I>
+<BR><I><FONT SIZE=-1>Gordon Dodrill - dodrill@swcp.com - </FONT></I><FONT SIZE=-1><A HREF="mailto:dodrill@swcp.com">Please
+email any comments or suggestions.</A></FONT>
+</BODY>
+</HTML>

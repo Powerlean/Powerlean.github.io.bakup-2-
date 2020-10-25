@@ -1,0 +1,537 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Author" CONTENT="Gordon Dodrill">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (Win95; I) [Netscape]">
+   <TITLE>Ada Tutorial - Chapter 3</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<B>Ada Tutorial - Chapter 3</B>
+
+<P><B><FONT SIZE=+3>T</FONT><FONT SIZE=+2>HE</FONT><FONT SIZE=+3> I</FONT><FONT SIZE=+2>NTEGER</FONT><FONT SIZE=+3>
+T</FONT><FONT SIZE=+2>YPE</FONT><FONT SIZE=+3> V</FONT><FONT SIZE=+2>ARIABLE</FONT></B>
+
+<P><B>OUR FIRST INTEGER VARIABLE</B>
+
+<P>Example program ------> <B><A HREF="e_c03_p1.ada">e_c03_p1.ada</A></B>
+
+<P>Examine the program named e_c03_p1.ada for our first example program with
+a variable. Some programming languages do not require you to predefine
+a variable before you use it. Instead, you simply begin using it and the
+system has some mechanism by which it creates the variable and makes it
+ready for your use. Ada requires you to specifically define every variable
+before you use it. You must give the variable a name, which is any valid
+identifier, and you tell the compiler how you plan to use the variable
+by assigning a type to the variable.
+
+<P><B>WHAT IS A TYPE?</B>
+
+<P>The type defines a set of values which the variable can have assigned
+to it, and it also defines a set of operations that can be performed on
+the variable. Ada is a strongly typed language since it has very strict
+rules limiting how a variable can be used. The compiler will not give you
+a usable program unless you follow all of the rules very carefully. A major
+part of the study of Ada involves the study of types and how to use typing
+as a programming aid.
+
+<P><B>AN UNBROKEN RULE OF ADA, NEVER BROKEN</B>
+
+<P>Ada requires that anything you use must have been previously defined.
+This includes variables as well as constants, procedures, functions, and
+all other entities. At least one language, Pascal, makes this claim but
+breaks it in a few instances. Ada never breaks this rule.
+
+<P><B>THE with AND use STATEMENTS</B>
+
+<P>The <B>with </B>and <B>use </B>statements, in lines 2 and 3 of this
+program, contain <B>Ada.Integer_Text_IO</B> in addition to <B>Ada.Text_IO</B>
+and a few comments are in order at this point, event though they will be
+completely defined later in this tutorial. The term <B>Ada.Text_IO</B>
+refers to an Ada package of the same name that provides us with the ability
+to output text to the monitor including characters, strings, carriage returns,
+and various other entities so that we can generate some formatted text
+output to the monitor. It also gives us the ability to input text from
+the keyboard, and it provides some file input/output capabilities.
+
+<P>The term <B>Ada.Integer_Text_IO </B>refers to another Ada package of
+that name which gives us the ability to output <B>INTEGER</B> type variables
+to the monitor in a well formatted way since it gives us control over how
+many columns are used, and what base to use for the numbering system, such
+as binary, decimal, hexadecimal, and other options. The <B>with </B>statement,
+because it mentions both of these library packages, provides us with the
+ability to output both text and numeric values to the monitor, because
+it makes a copy of both of these libraries available for use by our program.
+The <B>use </B>statement, because it mentions both of these packages, makes
+it very easy to "use" these packages within our program. Without the <B>use
+</B>statement, we would have to qualify every input or output statement,
+which makes for very ugly code, but which some programers find preferable
+for various reasons.
+
+<P>We will cover all of this in great detail later in this tutorial, but
+it would be best for you to simply include the appropriate packages in
+a <B>with </B>statement and a <B>use </B>statement for your initial programming
+efforts and pick up the additional knowledge later. There is only so much
+you can absorb and understand at one time, and the author of this tutorial
+desires to simplify your study of Ada as much as possible by deferring
+some topics until later.
+
+<P><B>HOW DO WE DECLARE A VARIABLE?</B>
+
+<P>Back to the program named e_c03_p1.ada. To understand the definition of
+a variable, examine the program at hand and specifically line 7. This declares
+a variable, which we will call <B>Index</B>, to be of type <B>INTEGER</B>,
+therefore defining an allowable range of values which can be assigned to
+it. Most 16 bit computers allow an <B>INTEGER </B>type variable to cover
+a range of -32,768 to 32,767. The corresponding range for 32 bit computers
+is from -2,147,483,648 to 2,147,483,647 but the definition of Ada allows
+for flexibility in both of these ranges. We will see a way to determine
+exactly what the limits are for your compiler later in this chapter.
+
+<P>The type also defines a number of operations which can be performed
+on the variable. More will be said of that later. The type <B>INTEGER </B>is
+used to declare a scalar variable, which is a variable that can contain
+a single value.
+
+<P>The word <B>INTEGER </B>is not a reserved word but a predefined word
+which we can redefine if we so choose. We will not be doing that for a
+long time since it could cause untold problems in a program. You should
+know that it is possible for you to redefine this word, and many other
+similarly predefined words, to mean something entirely different from their
+predefined meanings.
+
+<P>In the last chapter, we said that the declarative part of the program
+goes between the reserved words <B>is </B>and <B>begin</B>, and you will
+notice that we did indeed declare the variable named <B>Index </B>in that
+area of the program. The end result of line 7 is that we have a variable
+named <B>Index </B>which is of type <B>INTEGER</B>. As yet however, it
+does not contain a useful value.
+
+<P><B>HOW DO WE USE THE VARIABLE IN A PROGRAM?</B>
+
+<P>In the last chapter we also said that the executable statements went
+between the <B>begin </B>and the <B>end </B>reserved words and you will
+see that we have some executable statements within that range, in lines
+11 through 18 of this program. In line 11 we assign the value of 23 to
+the variable <B>Index </B>which is valid to do because 23 is within the
+range of allowable values that can be assigned to an <B>INTEGER </B>type
+variable.
+
+<P><B>THE ASSIGNMENT OPERATOR</B>
+
+<P>The combination := can be read as "gets the value of". Line 11 can then
+be read as, "<B>Index </B>gets the value of 23." The equal sign alone is
+reserved for another use. Actually, if we say that <B>Index </B>= 23, it
+is only mathematically correct if <B>Index </B>is never changed, but since
+it is a variable and will be changed, the equality is not true.
+
+<P>We have succeeded in assigning a value of 23 to the variable named <B>Index
+</B>and can use it in many different ways in an Ada program, but we will
+illustrate only very simple uses at this point.
+
+<P>Line 12 instructs the system to output a line of text to the monitor
+and leave the cursor at the end of the line. In line 13, we use the predefined
+procedure named <B>Put </B>to tell the system to display the value of <B>Index</B>,
+which has the value of 23, on the monitor. The system will right justify
+the output in a field width that depends on the size of an <B>INTEGER </B>on
+your system, because of its definition. This <B>Put </B>is part of the
+<B>Ada.Integer_Text_IO</B> package we declared earlier. The <B>Put </B>in
+line 12 is from <B>Ada.Text_IO</B>. Later in this tutorial you will understand
+which <B>Put </B>is from which package and why. Line 14 returns the cursor
+to the beginning of the next line. The <B>New_Line</B> procedure is from
+the <B>Ada.Text_IO</B> package.
+
+<P><B>OUR FIRST ARITHMETIC</B>
+
+<P>Line 15 contains our first arithmetic statement and it will do exactly
+what it appears to do, "<B>Index </B>gets the value of <B>Index </B>with
+12 added to it." The variable <B>Index </B>should now have a stored value
+of 23 + 12, or 35, which we verify by telling the system to display the
+new value of <B>Index</B>. The numeral 8 in line 17 tells the system to
+display the value right justified in a field 8 columns wide. We will discuss
+the <B>Put </B>procedure in detail later in this tutorial. If you remember
+that the statements are executed sequentially, you should have no difficulty
+following this program.
+
+<P>Compile and execute this program being careful to observe that the two
+values of <B>Index </B>are displayed in fields of different widths.
+
+<P><B>LET'S USE LOTS OF INTEGERS NOW</B>
+
+<P>Example program ------> <B><A HREF="e_c03_p2.ada">e_c03_p2.ada</A></B>
+
+<P>Examine the program named e_c03_p2.ada and you will see an example of
+using many variables of type <B>INTEGER </B>in a program. Lines 7 and 8
+illustrate that you can define one or more variables on a single line.
+All four variables are of type <B>INTEGER </B>and can be assigned values
+within the range of integer variables as defined for your particular compiler.
+Each of these variables have no value associated with them since they were
+created without an initial value. The executable part of the program can
+assign a value to each of them. The variable named <B>Cat </B>is also an
+<B>INTEGER </B>type variable but after being created, it is assigned an
+initial value of 12. Likewise <B>Dog </B>is created and initialized to
+a value of -5. It should not come as a surprise to you that the three variables
+in line 11 are created, and each is assigned an initial value of 1000.
+
+<P>According to the Ada definition, line 11 is merely a shorthand for three
+different lines with a single variable declaration on each line as far
+as the Ada compiler is concerned. The same is true of line 8. This is a
+very subtle point, and has no consequence on the program at hand, but will
+make a difference later when we commence the study of arrays.
+
+<P><B>NOW TO EXERCISE SOME OF THOSE VARIABLES</B>
+
+<P>Examining the executable part of the program we find the four arithmetic
+operations in lines 15 through 18 which should be self explanatory. Note
+that integer division in line 18 results in truncation, not rounding. The
+four values are displayed on the monitor in lines 19 through 22 in a format
+utilizing several statements per line which is simply a matter of style.
+
+<P>Continuing with lines 24 and 25, we have examples of more complex mathematical
+calculations which should be clear to you. The order of precedence of mathematical
+operators is given in detail in section 4.5 of the Ada 95 Reference Manual
+(ARM). The order of precedence is similar to other languages and follows
+common sense. A discussion of the order of precedence will be given at
+the end of the next chapter of this tutorial.
+
+<P>Lines 26 and 27 illustrate use of the <B>mod </B>and <B>rem </B>operators,
+each of which return the remainder which would be obtained following an
+integer divide operation. They differ only in the sign when negative numbers
+are involved and since negative numbers are rare when using these operators,
+little will be said except to give a brief statement of the differences.
+<PRE>&nbsp;&nbsp;&nbsp; <B>mod </B>- gets the sign of the second operator.
+&nbsp;&nbsp;&nbsp; <B>rem </B>- gets the sign of the first operator.</PRE>
+<B>TWO MORE OPERATIONS</B>
+
+<P>After displaying the results, four more values are calculated, the first
+being the absolute value of the variable <B>Dog </B>in line 33. This is
+not a function, it is an operation defined with the reserved word <B>abs</B>.
+The fact that it is an operator will be very significant when we come to
+the portion of this tutorial that deals with overloading operators. The
+<B>abs </B>operator returns the absolute value of the variable given to
+it as a parameter.
+
+<P>The operation in line 34 is an illustration of exponentiation of integer
+numbers. Since <B>Cat </B>has the value of 12, this line says that <B>Index_2</B>
+gets the value of 12 raised to the 3rd power. The only rules for using
+exponentiation with integer values are, the exponent must be an integer
+type value, and it cannot be negative. Note that a zero value for an exponent
+is legal. Line 35 is a combination of several of the previous operations,
+and line 36 is an illustration of unary negation.
+
+<P>Be sure to compile and execute this program and study the results.
+
+<P><B>HOW DO WE DECLARE A CONSTANT?</B>
+
+<P>Example program ------> <B><A HREF="e_c03_p3.ada">e_c03_p3.ada</A></B>
+
+<P>Examine e_c03_p3.ada for an example of a program with some <B>INTEGER
+</B>type variables and some <B>INTEGER </B>type constants declared and
+used in it. Lines 7 and 8 should be familiar to you now, but when we get
+to lines 10 through 13 we have a few new things to observe. <B>DOZEN </B>and
+<B>GROSS </B>are <B>INTEGER </B>type constants because of the reserved
+word <B>constant </B>in their declaration. The only difference between
+a constant and a variable is that a constant cannot be changed during execution
+of the program and in the present example, it would probably be silly to
+redefine how many elements are in a dozen. This is one of the things Ada
+can do to help you if you analyze your program right, because if you ever
+tried to change the value of <B>DOZEN </B>during program execution, Ada
+would give you an error message and you would eliminate one bug immediately.
+
+<P>Notice that <B>GROSS </B>is defined in terms of <B>DOZEN </B>since the
+constant <B>DOZEN </B>is available when <B>GROSS </B>is initialized. Likewise,
+the constant <B>TWO </B>is defined in terms of <B>BIG_NO</B> in the next
+two lines. It should be obvious that a constant must have an initialization
+value assigned to it at the point of declaration.
+
+<P><B>TWO MORE DEFINITIONS</B>
+
+<P>Lines 12 and 13 contain underlines in the numeric values that the Ada
+compiler will simply ignore. You can put them in wherever you please to
+make the numeric literals more readable for you, but you cannot put more
+than one underline between each digit. The poor choice of underline locations
+in this example do not add to the ease of reading the numbers but illustrate
+the places where they can be located. The word <B>INTEGER </B>has been
+omitted from lines 12 and 13, which makes the type of these constants slightly
+different from the other two but we will have to learn a bit more before
+we can understand or appreciate the value of doing this.
+
+<P>Lines 17 through 25, in the executable part of the program, should be
+easy for you to understand on your own, so they will be left to your study.
+
+<P><B>DECLARING LITERAL CONSTANTS</B>
+
+<P>Lines 27 through 29 give examples of declaration of literal values using
+the exponential notation. The exponent can be indicated with either case
+of "E" and the number following it must be positive for an <B>INTEGER </B>literal.
+Lines 30 through 33 give examples of the use of a base other than 10. The
+radix of the number is given prior to the first "#" sign, and can be any
+value from 2 through 16, the radix itself being given in decimal notation.
+The value is given between "#" signs and can be followed by an optional
+exponent, the exponent being given in the defined base. If no radix is
+given, base 10 is assumed as in lines 27 through 29 of this example program.
+
+<P>The executable part of this program should be very clear to you. Be
+sure to compile and execute it.
+
+<P><B>TYPES AND SUBTYPES</B>
+
+<P>Example program ------> <B><A HREF="e_c03_p4.ada">e_c03_p4.ada</A></B>
+
+<P>Examine the program e_c03_p4.ada for your first look at a user defined
+type. We mentioned earlier that the range of a variable of type <B>INTEGER
+</B>could be different on different computers or with different compilers
+on the same computer. Ada gives us the ability to define our own type in
+such a way that it will be identical on every computer and with every Ada
+compiler.
+
+<P><B>A DIFFERENT TYPE IS INCOMPATIBLE</B>
+
+<P>Line 7 defines a new integer type which will cover the range of -10,000
+to 20,000 because of the use of the reserved word <B>range </B>to limit
+the available range of values that can be assigned to a variable of this
+type. Notice carefully that we called this an integer type, not a type
+<B>INTEGER</B>. Since it is an integer type, it has all of the properties
+defined earlier in this chapter but a variable of this type can only be
+assigned a value from -10,000 to 20,000. The actual range is given by specifying
+the lower and upper limits separated by two decimal points.
+
+<P>We have actually defined an entirely new type, and since Ada does very
+strong type checking, it will not allow you to assign a value directly
+from a variable of type <B>INTEGER </B>to a variable of our new type, or
+vice versa. The variable <B>My_Int </B>is defined with the new type in
+line 8. We will return to consideration of this variable later.
+
+<P>The package declaration in line 10 is completely new to us, so a few
+comments on it are in order. The complete definition of line 10 in Ada
+terminology will be given first, including a lot of new words which will
+mean very little to you until you gain some additional knowledge which
+will be given later in this tutorial. Line 10 is an instantiation of the
+generic package named <B>Ada.Text_IO.Integer_IO</B> with the type <B>MY_INT_TYPE</B>
+to provide the ability to output values of <B>MY_INT_TYPE</B> to the monitor
+or to files, or to input from the keyboard or from files. Saying the same
+thing in a more useful way, if you want to input or output values in some
+integral class type other than the predefined type <B>INTEGER</B>, you
+must include the line as shown with the desired type in the parentheses.
+Line 11 is included to make the new package easy to use. You will notice
+that it tells the system to <B>use </B>the package named in line 10 immediately
+following the keyword <B>package</B>.
+
+<P>As stated earlier, in an attempt to simplify the Ada learning curve,
+some topics will be deferred until later to give you a chance to absorb
+a few topics at a time, so don't spend any time trying to understand the
+previous paragraph at this time.
+
+<P><B>A NEW SUBTYPE IS COMPATIBLE WITH ITS PARENT</B>
+
+<P>In line 13, we define a new subtype which is of the parent type <B>INTEGER
+</B>except that it covers a limited range, then we declare a variable named
+<B>Thing </B>of the new subtype in line 14. Any attempt to assign a value
+to the variable <B>Thing </B>which is outside of its assigned range, will
+result in an error. If you were running a small company with 23 employees
+and you assigned them each a unique number from 1 to 23, you would be interested
+if the payroll program tried to generate a paycheck for employee numbered
+36, for example, because there would definitely be something wrong. A limited
+subrange could save you a lot of money in a case such as that.
+
+<P><B>ASSIGNMENT MUST BE TYPE COMPATIBLE</B>
+
+<P>Anytime a value is assigned to a variable, the type assigned to it must
+be of its declared type or a compiler error will be generated. This will
+always be true in Ada and is one of the most important concepts behind
+its design. This is to prevent us from making the silly little mistakes
+which we humans are so good at making.
+
+<P>The variable <B>Count </B>is defined as an <B>INTEGER </B>type variable
+and <B>Stuff </B>is defined as a limited range <B>INTEGER </B>also. Remember
+that <B>Thing </B>is declared to be a <B>subtype</B> of <B>INTEGER</B>,
+so it is also a limited range <B>INTEGER </B>type variable. Because of
+the way these three variables are defined, they can be freely assigned
+to each other as long as the values assigned are within their respective
+ranges. This is because they are all of their parent type of <B>INTEGER</B>,
+and various assignments among them are illustrated in lines 25 through
+27.
+
+<P>If we tried to assign the value of <B>Thing </B>to <B>My_Int</B>, the
+computer would give a compile error because they are of different types,
+but an explicit type conversion can be used to do the assignment as illustrated
+in line 30. By including the variable to convert to a new type in parentheses
+and preceding the parentheses with the desired type name, the system will
+convert the type as illustrated. The addition to <B>Thing </B>is completed
+and the entire expression inside of the parentheses is changed in type,
+by the explicit type conversion, to the desired type of the left side of
+the assignment statement. Note that explicit type conversion can only be
+done from within the same type class, in this case the integer class.
+
+<P>In line 31, the type is changed to the new type before the value of
+17 is added to it, which should lead you to ask a question about the type
+of the constant 17.
+
+<P><B>HOW CAN 17 BE ADDED TO EITHER TYPE?</B>
+
+<P>The constant 17 is of a very special type defined by Ada as type "universal_integer"
+which can be combined with any of the integer types without specific conversion.
+This term will be used in many ways in future lessons. The type universal_integer
+is compatible with all integer types and has a range with no limits. The
+range is effectively minus infinity to plus infinity. The type universal_integer
+is used for all literal values, but it is not available for your use in
+declaring a variable.
+
+<P><B>NOW FOR A SUBRANGE ERROR</B>
+
+<P>Lines 30 and 31 are essentially the same because they result in the
+same answer, and lines 33 and 34 would appear to be the same, but they
+are not. In line 33, the value of <B>Thing</B>, which is 18, is converted
+to type <B>MY_INT_TYPE</B> and 10 is subtracted from it. Both 18 and 8
+are within the specified range of <B>MY_INT_TYPE</B> so there is no error.
+In line 34 however, the result of the subtraction has the type of <B>Thing
+</B>and even the intermediate result is required to be within the range
+of 12 to 144. The result of 8 is outside of the required range so a run-time
+error is signaled in a special way called raising an exception. We will
+discuss the exception shortly but first notice that if we could get past
+the error, we could change the type of the result to <B>MY_INT_TYPE</B>
+and everything would work as desired.
+
+<P><B>INTERMEDIATE RESULTS OF CALCULATIONS</B>
+
+<P>The ARM allows the limits of intermediate results to be checked against
+the limits of the parent type rather than the limits of the subtype. Line
+34 therefore, may not give an error indicating that the intermediate result
+is out of the allowable range. This will depend on your compiler.
+
+<P><B>WHAT IS AN EXCEPTION?</B>
+
+<P>We will have a lot to say about exceptions as we progress through this
+tutorial but a very brief description is needed at this time. When an Ada
+program is running, and a potentially disastrous error is detected, it
+would be good for you, the programmer, to be able to tell the system what
+to do with the error rather than cause a complete termination of the program.
+Ada gives you that capability through the use of exception handlers that
+you write and include in your program. In the above case, when the program
+detected the value of 8 as being out of the allowable range of that type
+of variable, it would signal your program that the error occurred, and
+if you did nothing, the Ada system would terminate the program. The proper
+Ada terminology for signaling you is called "raising an exception", and
+in the case of an out-of-bounds value, the exception named <B>Constraint_Error</B>
+would be raised. You could then trap this error and handle it any way you
+choose to.
+
+<P>There are several different exceptions that the system can raise and
+you can define your own exceptions which your program can raise and respond
+to. We will have a lot more to say about exceptions later in this tutorial.
+
+<P>A little study on your part should reveal why line 38 also has a run
+time error that will raise the exception <B>Constraint_Error</B>, if execution
+continues to that statement.
+
+<P><B>ANOTHER LOOK AT THE universal_integer</B>
+
+<P>Before we leave this program we must look at lines 18 and 19 where we
+first define <B>START </B>and <B>STOP </B>as constants with no type indication.
+These constants are therefore of type "universal_integer" and can be used
+in the range definitions of the next two lines even though the two lines
+are of different parent types. If we had included the word <B>INTEGER </B>in
+the definitions in lines 18 and 19, they could not be used to define the
+limits of <B>Example2 </B>because it is of a different type. The example
+program named e_c03_p3.ada had examples of <B>INTEGER </B>constants (<B>DOZEN
+</B>and <B>GROSS</B>) and universal_integer type constants (<B>BIG_NO</B>
+and <B>TWO</B>). The type universal_integer is actually a hidden type that
+is type compatible with all integer types.
+
+<P>It should also be observed that the limits of the range in these definitions
+are based on previously defined entities and can be of arbitrary complexity
+as long as they evaluate to the right types. The limits must also be within
+the range of the parent type or a compile error will result.
+
+<P><B>HOW TO DEFINE TYPES AND SUBTYPES</B>
+
+<P>To declare types or subtypes, here are two simple formulas which can
+be followed.
+<PRE>&nbsp;&nbsp; <B>type&nbsp;&nbsp;&nbsp; </B>&lt;type_name>&nbsp;&nbsp;&nbsp; <B>is </B>&lt;type_definition>;
+&nbsp;&nbsp; <B>subtype </B>&lt;subtype_name> <B>is </B>&lt;subtype_definition>;</PRE>
+Note that each declaration starts with a reserved word and includes the
+reserved word <B>is </B>between the name and the definition. It should
+be pointed out that Ada permits new types, subtypes, and variable declarations
+to be done in any order as long as everything is defined before it is used.
+
+<P>Compile and execute e_c03_p4.ada and observe the exception error as
+reported by your runtime system. The exception may be raised at line 34,
+depending on your compiler, where the value of 8 is outside of the allowable
+range of 12 through 144. The error message will vary with different compilers.
+
+<P>Much more will be said about types and subtypes in chapter 7 of this
+tutorial.
+
+<P><B>WHAT ARE ATTRIBUTES?</B>
+
+<P>Example program ------> <B><A HREF="e_c03_p5.ada">e_c03_p5.ada</A></B>
+
+<P>Ada has a rather large list of attributes available for you as a programming
+aid. For an example of a program that contains, and therefore illustrates
+the use of attributes, examine the program named e_c03_p5.ada.
+
+<P>A new type is defined in line 7 with a limited range to illustrate that
+attributes are available even for user defined types.
+
+<P>Two additional predefined integer types are introduced in lines 10 and
+11, the <B>NATURAL </B>and <B>POSITIVE </B>types. The <B>POSITIVE </B>type
+includes all integers greater than or equal to 1, and the <B>NATURAL </B>type
+includes all integers greater than or equal to 0. Both of these are available
+with your Ada compiler, and both are subtypes of <B>INTEGER</B>, so all
+variables of these three types can be freely mixed with no type errors.
+
+<P>Attributes are used to gain access to various limits within the program.
+For example, it may be necessary to know the upper limit of a variable
+of some type because it is of some strange subtype. An attribute can be
+used to find this limit, specifically the attribute <B>LAST </B>as illustrated
+in line 28 of this program. By combining the type name and the attribute
+in question with a "tick" or apostrophe, the upper limit of the range of
+the type is returned. The attribute <B>FIRST </B>is used to find the lowest
+value allowed by the subrange. The attribute <B>SIZE </B>gives the storage
+size of the type in bits of memory. Other attributes are available for
+integer types. A complete list of available attributes is given in Annex
+K of the ARM. You should spend a few minutes reviewing the list at this
+time even though you will understand little of what is presented there.
+In the near future, you will understand most of the material included there.
+
+<P><B>TYPE CONVERSIONS</B>
+
+<P>Note the type conversions in lines 63, 67, 69, and 72. The values could
+be output directly with the <B>BUG_RANGE</B> type by instantiating a copy
+of <B>Ada.Text_IO.Integer_IO</B> in a manner similar to that done in the
+example program named e_c03_p4.ada, but we choose to use type conversion
+rather than instantiating a new copy of the I/O package. Because <B>NATURAL</B>
+and <B>POSITIVE</B> are subtypes of <B>INTEGER</B>, they use the copy of
+the I/O package pre-instantiated for the <B>INTEGER</B> type by the Ada
+system.
+
+<P>Compile and run this program and you will get a listing of the number
+of bits required by your compiler to store each of the four types along
+with the range covered by each of the four types.
+
+<P><B>PROGRAMMING EXERCISES</B>
+<OL>
+<LI>
+Write a program with some types containing some constrained limits and
+see what errors occur when you exceed their limits.<A HREF=" a_c03_p1.ada">(Solution)</A></LI>
+
+<LI>
+Try to assign some wrong type of data to some variables and try to mix
+up some types in arithmetic statements. Study the compiler error messages.<A HREF=" a_c03_p2.ada">(Solution)</A></LI>
+
+<LI>
+Modify e_c03_p5.ada to output the <B>BUG_RANGE</B> attributes directly
+by instantiating a new copy of the generic package <B>Ada.Text_IO.Integer_IO.</B>
+Don't spend too much time on this exercise before you look at the answer.
+It contains a new construct, at least new to you.<A HREF=" a_c03_p3.ada">(Solution)</A></LI>
+</OL>
+<A HREF="chap04.htm">Advance to Chapter 4</A>
+
+<P><A HREF="a95list.htm">Return to the Table of Contents</A>
+
+<P>
+<HR width="100%"><I><FONT SIZE=-1>Copyright &copy; 1988-1998 Coronado Enterprises
+- Last update, February 1, 1998</FONT></I>
+<BR><I><FONT SIZE=-1>Gordon Dodrill - dodrill@swcp.com - </FONT></I><FONT SIZE=-1><A HREF="mailto:dodrill@swcp.com">Please
+email any comments or suggestions.</A></FONT>
+</BODY>
+</HTML>

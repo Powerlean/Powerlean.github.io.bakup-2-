@@ -1,0 +1,426 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Author" CONTENT="Gordon Dodrill">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (Win95; I) [Netscape]">
+   <TITLE>Ada Tutorial - Chapter 8</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<B>Ada Tutorial - Chapter 8</B>
+
+<P><B><FONT SIZE=+3>S</FONT><FONT SIZE=+2>UBPROGRAMS</FONT></B>
+
+<P><B>LET'S LOOK AT A PROCEDURE</B>
+
+<P>Example program ------> <B><A HREF="e_c08_p1.ada">e_c08_p1.ada</A></B>
+
+<P>Ada was designed to be very modular, and we come to the point where
+we will study the first and simplest form of modularization, the procedure.
+If you examine the program named e_c08_p1.ada, you will have your first
+example of a procedure. Some languages call this kind of subprogram a subroutine,
+others a function, but Ada calls it a procedure.
+
+<P><B>THE PROCEDURE IS LIKE THE MAIN PROGRAM</B>
+
+<P>Beginning with the executable part of the main program, we have two
+executable statements in lines 14 and 15, each calling a procedure to write
+a line, if the name has any meaning. As always, the two statements are
+executed in succession, and each statement is a procedure call to which
+we would like to transfer control. The procedure itself is defined in lines
+7 through 11, and a close inspection will reveal that the structure of
+the procedure is very similar to the structure for the main program. It
+is in fact, identical to the main program, and just as we begin executing
+the main program by mentioning its name, we begin executing the procedure
+by mentioning its name. The procedure has a declarative part, which is
+empty in this case, and an executable part which says to display a line
+of text and return the cursor to the beginning of the next line.
+
+<P>When execution reaches the <B>end </B>statement of the procedure, the
+procedure is complete and control returns to the next successive statement
+in the calling program.
+
+<P>Everything we have said about the main program, which is actually a
+procedure, is true for the procedure. Thus we can define new types, declare
+variables and constants, and even define additional procedures in the declarative
+part of this procedure. Likewise, we can call other procedures, and do
+assignments and compares in the executable part of the procedure.
+
+<P><B>ORDER OF DECLARATIONS</B>
+
+<P>The original Ada specification, Ada 83, required that all procedures
+must come after all type, constant, and variable declarations. This was
+to force you to arrange your program such that all of the smaller declarations
+must come first, followed by the larger ones, so that the smaller declarations
+would not get lost by being buried between the larger declarations. This
+has been removed from the requirement for Ada 95, and you are permitted
+to list the various entities in any order you desire.
+
+<P>The embedded procedure has all of the flexibility and requirements as
+those defined for the main procedure. We will give further examples of
+each of these points in the next few example programs. At this time, compile
+and run this program, and make sure you understand its operation completely.
+
+<P><B>THREE PROCEDURES</B>
+
+<P>Example program ------> <B><A HREF="e_c08_p2.ada">e_c08_p2.ada</A></B>
+
+<P>Examine the program named e_c08_p2.ada, and you will see three procedures
+in the declarative part of this program. Jumping ahead to the main program,
+beginning in line 30, you will see that the program will write a header,
+write and increment something 7 times, then write an ending statement.
+Notice how the use of descriptive procedure names resulted in our understanding
+of what the program will do without looking at the procedures themselves.
+The names are long, and a bit tedious to type in, but since Ada was designed
+to be a language that would be written once and read many times, the extra
+time will pay off when the source code is studied by several persons in
+the future.
+
+<P><B>WHAT IS A GLOBAL VARIABLE?</B>
+
+<P>The variable named <B>Counter</B>, defined in line 7, is a global variable
+because it is defined prior to any procedure. It is therefore available
+for use by any of these procedures and it is, in fact, used by two of them.
+In line 11, the variable <B>Counter </B>is assigned the value of 1 when
+the procedure named <B>Write_A_Header</B> is called. Each time <B>Write_And_Increment
+</B>is called, the current value of <B>Counter </B>is written to the display,
+along with a message, and the value is incremented. Note carefully that
+the procedures are not executed in the order they are because of their
+relative order in the declaration part of the program, but because the
+main program calls them in that order. The program would work exactly the
+same way if you moved the first procedure, in its entirety of course, after
+the procedure <B>Write_An_Ending_Statement</B>. The order of execution
+is controlled by the order of calls, not the physical order of the procedures.
+
+<P><B>WHY DO PROCEDURES GO IN THE DECLARATIVE PART?</B>
+
+<P>The declarative part of the program is where we define entities for
+use within the executable part. The procedures are actually definitions
+of how to do something, so they are right where they belong. Compile and
+run this program and be sure you understand the output.
+
+<P><B>A PROCEDURE WITH PARAMETERS</B>
+
+<P>Example program ------> <B><A HREF="e_c08_p3.ada">e_c08_p3.ada</A></B>
+
+<P>Examine the file named e_c08_p3.ada and you will find a procedure that
+requires some data to be supplied to it each time it is called. Three variables
+are defined as type <B>INTEGER </B>and used in the procedure call in line
+25. We will ignore the strange looking constructs in lines 9 through 12
+for a couple of paragraphs. The procedure header, beginning in line 15,
+states that it is expecting three parameters, and each must be of type
+<B>INTEGER</B>, so we are compatible so far. When the procedure is called,
+the value of the first variable, which is named <B>Dogs </B>in this case,
+is taken to the procedure, where the procedure prefers to refer to it by
+the name <B>Variety1</B>. In like manner, the value of <B>Cats </B>is given
+to the procedure, and is called <B>Variety2</B>. The variable named <B>Animals
+</B>is referred to by the name <B>Total </B>in the procedure. The procedure
+is now ready to do some meaningful work with these variables, but is somewhat
+limited in what it can do to them because of the mode field of the procedure
+header.
+
+<P><B>THE MODE OF A PARAMETER</B>
+
+<P>The formal parameter, as it is called in the procedure header, named
+<B>Variety1</B>, is of mode <B>in </B>which means that it is an input parameter,
+and therefore cannot be changed within the procedure. <B>Variety1</B>,
+along with <B>Variety2 </B>for the same reason, is a constant within the
+procedure, and any attempt to assign a value to it will result in a compile
+error. The formal parameter named <B>Total</B>, however, is of mode <B>out
+</B>and can therefore have a new value assigned to it within the procedure.
+Ada 83 defined that the <B>out </B>mode variable could not be read, but
+Ada 95 has relaxed this requirement and permits you to read the <B>out
+</B>mode variable within the procedure. Extra care must be taken that you
+do not attempt to read the value of an <B>out </B>mode parameter that has
+not yet been initialized to some meaningful value. Parameters that are
+of the modes <B>in </B>or <B>in out </B>do not have this problem since
+they are initialized, by definition, when the procedure is called.
+
+<P>If a parameter is defined as being of mode <B>in out</B>, it can be
+both read from and written to. If no mode is given, the system will use
+mode <B>in </B>as a default.
+
+<P><B>PARAMETER MODE SELECTION</B>
+
+<P>All variables could be defined as mode <B>in out</B> and there would
+be no problems, since there would be maximum flexibility, or so it would
+seem. There is another rule that must be considered, and that rule says
+that every parameter that is of mode <B>out </B>or <B>in out</B> must be
+called with a variable as the actual parameter in the calling program.
+This permits the value to be returned and assigned to the variable. A variable
+of mode <B>in </B>can use a constant or a variable for the actual parameter
+in the calling program. We have been using the <B>New_Line</B> procedure
+with a constant in it, such as <B>New_Line(2)</B>, and if it had been defined
+with the formal parameter of mode <B>in out</B>, we would have had to define
+a variable, assign the value 2 to it, and use the variable in the call.
+This would have made the procedure a bit more difficult to use, and in
+fact, somewhat awkward. For this reason, the formal parameter in <B>New_Line</B>
+was defined using mode <B>in</B>. You should choose the mode of the formal
+parameters very carefully.
+
+<P>The three formal parameters are available for use in the procedure,
+once they are defined as illustrated, just as if they had been defined
+in the declarative portion of the procedure. They are not available to
+any other procedure or the main program, because they are defined locally
+for the procedure. When used however, their use must be consistent with
+the defined mode for each.
+
+<P><B>SOME GLOBAL VARIABLES</B>
+
+<P>The three variables declared in line 7 can be referred to in the procedure
+as well as in the main program. Because it is possible to refer to them
+in the procedure, they can be changed directly within the procedure. The
+variable <B>Animals </B>can also be modified when control returns to the
+main program because it is declared as <B>out </B>mode in the procedure
+header. This possibility can lead to some rather unusual results. You should
+spend some time thinking about what this really means.
+
+<P><B>THE PROCEDURE SPECIFICATION</B>
+
+<P>Lines 10, 11, and 12, give an example of a procedure specification.
+This is an incomplete procedure declaration that you will find useful when
+you begin writing larger programs. The procedure specification can be included
+for any procedure, if desired, and it describes the external interface
+to the procedure without declaring what the procedure actually does. The
+Pascal programmer will recognize this as being very similar to the forward
+declaration. More will be said about this topic later. Note that the procedure
+specification is not required in this case, it is only included as an illustration.
+
+<P>Compile and run this program after you understand the simple addition
+and assignment that is done for purposes of illustration.
+
+<P><B>PROCEDURES CALLING OTHER PROCEDURES</B>
+
+<P>Example program ------> <B><A HREF="e_c08_p4.ada">e_c08_p4.ada</A></B>
+
+<P>The example program e_c08_p4.ada contains examples of a procedure calling
+another procedure, which is perfectly legal if the called procedure is
+within the scope of the calling procedure. Much more will be said about
+scope later in this tutorial. The only rule that will be mentioned here
+is that the procedure must be defined prior to a call to it. You should
+have no trouble understanding this program, and when you do, you should
+compile and execute it. Be sure you understand where each line in the output
+comes from and why it is listed in the order that it is.
+
+<P><B>HOW DO WE NEST PROCEDURES?</B>
+
+<P>Example program ------> <B><A HREF="e_c08_p5.ada">e_c08_p5.ada</A></B>
+
+<P>Examine the program named e_c08_p5.ada for examples of nested procedures.
+We mentioned earlier that it was possible to embed a procedure within the
+declarative part of any other procedure. This is illustrated in lines 9
+through 20 where the procedure <B>Second_Layer</B> is embedded within the
+procedure <B>Triple</B>. In addition, the procedure <B>Second_Layer</B>
+has the procedure <B>Bottom_Layer</B> embedded within its declarative part
+in lines 11 through 14. Such nesting can continue indefinitely, because
+there is no limit to the depth of nesting allowed in Ada.
+
+<P><B>VISIBILITY OF PROCEDURES</B>
+
+<P>There is a limit on visibility of procedures. Any procedure is visible,
+and can therefore be called, if it is within the top level of the declarative
+part of the calling procedure. Any procedure is also visible if it is prior
+to, on the same level, and within the same declarative part as the calling
+point. Finally, any procedure can be called if it is prior to, on the same
+level, and within the same declarative part as any subprogram within which
+the calling point is nested. In simpler words, a procedure is visible in
+three cases. First, if it is within the declarative part of the calling
+procedure. The second case is if it is a peer (on the same level within
+a parent subprogram) or thirdly, if it is a peer of any parent.
+
+<P>The procedure named <B>Triple </B>can therefore call <B>Second_Layer</B>,
+but not <B>Bottom_Layer</B>, since it is at a lower level and is not visible.
+The main program, according to these rules, is only allowed to call <B>Triple</B>,
+because the other two procedures are nested too deeply for a direct call.
+Be sure to compile and run this program and study the results.
+
+<P><B>ADA FUNCTIONS</B>
+
+<P>Example program ------> <B><A HREF="e_c08_p6.ada">e_c08_p6.ada</A></B>
+
+<P>The program named e_c08_p6.ada has two examples of Ada functions. A function
+differs from a procedure in only two ways. A function returns a single
+value which is used in the place of its call, and all formal parameters
+of a function must be of type <B>in</B>, with no other mode permitted.
+In the program under consideration, two functions are illustrated, one
+beginning in line 13, and the other beginning in line 18. Note that each
+begins with the reserved word <B>function</B>.
+
+<P><B>A FUNCTION SPECIFICATION</B>
+
+<P>In a manner similar to that defined for a procedure we can define a
+function specification that gives the interface of the function to any
+potential caller. You will find the function specification useful later
+in your Ada programming efforts. It is similar to the Pascal forward declaration.
+Note once again, that the function specification is not required in this
+case, it is only given here as an illustration.
+
+<P>The function named <B>Square </B>requires one argument which it prefers
+to call <B>Val</B>, and which must be of type <B>INTEGER</B>. It returns
+a value to the main program which will be of type <B>INTEGER </B>because
+that is the type given between the reserved words <B>return </B>and <B>is
+</B>in the function header in line 13.
+
+<P>A function must return a value, and the value is returned by following
+the reserved word <B>return </B>with the value to be returned. This return
+must be done in the executable part of the program, as illustrated in line
+15. It is an error to fail to execute a <B>return </B>statement and fall
+through the end of a function. Such a runtime error will be reported by
+raising the exception <B>Program_Error</B>, which will be explained later
+in this tutorial.
+
+<P><B>CAN YOU RETURN FROM A PROCEDURE?</B>
+
+<P>It would be well to point out that you can return from a procedure by
+using the <B>return </B>statement also, but no value can be given since
+a procedure does not return a value in the same manner as a function. The
+return statement can be anyplace in the procedure or function and there
+can be multiple returns if the logic dictates the possibility of returning
+from several different places.
+
+<P><B>A VALUE IS SUBSTITUTED FOR THE FUNCTION CALL</B>
+
+<P>Examining the executable part of the program, we find that the variable
+<B>Twelve </B>has been initialized to the value of 12, and is used in line
+25 as the argument for the function <B>Square</B>. This causes <B>Square
+</B>to be called, where the value of 12 is squared and the result is returned
+as 144. It is as if the resulting value of 144 replaces the function call
+<B>Square(Twelve)</B> in the <B>Put </B>procedure call, and the value of
+144 is displayed. Continuing on to line 27, the variable <B>Twelve</B>,
+which still contains the value of 12, and the constant 12, are given to
+the function <B>Sum_Of_Numbers</B> which returns the sum of 24. This value
+is assigned to the variable named <B>Sum </B>where it is stored for use
+in line 29.
+
+<P>A function can be defined with no input parameters, in which case, the
+function is called with no parameters. Such a case would be useful for
+a random number generator where the call could be X := Random; assuming
+a new random number is returned each time the function is called. Compile
+and execute this program and study the output generated.
+
+<P><B>A FULLER EXAMPLE</B>
+
+<P>Example program ------> <B><A HREF="e_c08_p7.ada">e_c08_p7.ada</A></B>
+
+<P>Examine the program named e_c08_p7.ada which is a rather odd program
+that computes the square of an integer type variable, but maintains the
+sign of the variable. In this program, the odd square of 3 is 9, and the
+odd square of -3 is -9. Its real purpose is to illustrate several procedures
+and a function interacting.
+
+<P>The main program named <B>OddSqre </B>has a function and a procedure
+nested within its declarative part, both of which have parameters passed.
+The nested procedure named <B>Square_And_Keep_Sign</B> has another procedure
+nested within its declarative part, named <B>Do_A_Negative_Number</B> which
+calls the function declared at the next higher level.
+
+<P>This program is a terrible example of how to solve the problem at hand
+but is an excellent example of several interacting subprograms, and it
+would be profitable for you to spend enough time with it to thoroughly
+understand what it does.
+
+<P><B>COMMENTS ON e_c08_p7.ada</B>
+
+<P>This program illustrates some of the options that are purely programming
+taste. The first option is illustrated in line 21, where we could have
+chosen to use the construct <B>Number_To_Square**2</B> instead of the simple
+multiplication. Either form is correct and the one to be used should reflect
+the nature of the problem at hand. The second option is the fact that three
+returns were included in lines 36, 39, and 42, when a single return could
+have been used following the end of the <B>if </B>statement. This was done
+to illustrate multiple returns in use. In some cases, the logic of the
+program is much clearer to use several returns instead of only one. More
+than anything else, it is a matter of personal taste. Be sure to compile
+and execute this program.
+
+<P><B>OVERLOADING</B>
+
+<P>Example program ------> <B><A HREF="e_c08_p8.ada">e_c08_p8.ada</A></B>
+
+<P>We have casually mentioned overloading earlier in this tutorial and
+it is now time to get a good example of what overloading is by examining
+the program named e_c08_p8.ada. This program includes two functions and
+two procedures and all four of these subprograms have the same name. The
+Ada system has the ability to discern which subprogram you wish to use
+by the types included in the actual parameter list and the type of the
+return. In line 45, we make a call to a function with a 2, which is an
+integer type constant, and we assign the returned value to an <B>INTEGER
+</B>type variable. The system will look for a function named <B>Raise_To_Power</B>
+with a single integer class formal parameter and an <B>INTEGER </B>type
+return which it finds in lines 11 through 15, so it executes this function.
+The actual searching will be done at compile time so the efficiency is
+not degraded in any way by the overloaded names.
+
+<P>If you continue studying this program you will see how the system can
+find the correct subprogram by comparing types used as formal parameters,
+and the type returned. Using the same name for several uses is referred
+to as overloading the subprogram names and is an important concept in the
+Ada language.
+
+<P><B>OVERLOADING CAN CAUSE YOU PROBLEMS</B>
+
+<P>If we made an error in this example program, by inadvertently omitting
+the decimal point in line 47, and assigning the result to an <B>INTEGER
+</B>type variable, the system would simply use the wrong function and generate
+invalid data for us. An even worse problem could be found if we had a function
+that used an <B>INTEGER </B>for input and a <B>FLOAT </B>for output, because
+only one small error could cause erroneous results. Because of this, it
+would be to your advantage to use different subprogram names for different
+operations, unless using the same name results in clear code.
+
+<P>In the case of the text output procedures which we have been using,
+it makes a lot of sense to overload the output subprograms to avoid confusion.
+The name <B>Put </B>is used for outputting strings, integers, enumerated
+types, etc, and we are not confused. Overloading can be an advantage in
+certain cases but should not be abused just because it is available. Be
+sure to compile and execute this program.
+
+<P>HOW ARE PARAMETERS PASSED TO A SUBPROGRAM?
+
+<P>If you understand the method of passing parameters to and from a subprogram,
+it may occasionally be possible to improve the efficiency by selecting
+the type carefully. For that reason the following, admittedly sketchy,
+descriptions are given;
+<UL>
+<LI>
+Parameters of scalar types are always passed by copy, and when the subprogram
+returns, the new value is copied back to the original. Therefore, in the
+case of <B>out </B>or <B>in out</B> parameters, intermediate values are
+not reflected back to the original until the subprogram is complete.</LI>
+
+<LI>
+Composite parameters (array and record) can use either a copy as defined
+above, or a reference to the original. The compiler writer has the option
+of choosing the means of parameter passing in this case.</LI>
+
+<LI>
+The more advanced types, such as task types or protected types, are always
+passed by a reference to the original.</LI>
+</UL>
+Generally, it shouldn't matter to you how the various types are passed,
+but it might matter in some situations.
+
+<P><B>PROGRAMMING EXERCISES</B>
+<OL>
+<LI>
+Rewrite e_c05_p6.ada to do the temperature conversion in a procedure.<A HREF=" a_c08_p1.ada">(Solution)</A></LI>
+
+<LI>
+Rewrite e_c05_p6.ada to do the temperature conversion in a function.<A HREF=" a_c08_p2.ada">(Solution)</A></LI>
+
+<LI>
+As mentioned in the text, add a function to the program e_c08_p8.ada that
+uses an <B>INTEGER </B>for input and returns a <B>FLOAT </B>type result.
+Remove the decimal point from line 47 to see that the new function is called
+when we really intended to call the procedure with the floating point number.<A HREF=" a_c08_p3.ada">(Solution)</A></LI>
+</OL>
+<A HREF="chap09.htm">Advance to Chapter 9</A>
+
+<P><A HREF="a95list.htm">Return to the Table of Contents</A>
+
+<P>
+<HR width="100%"><I><FONT SIZE=-1>Copyright &copy; 1988-1998 Coronado Enterprises
+- Last update, February 1, 1998</FONT></I>
+<BR><I><FONT SIZE=-1>Gordon Dodrill - dodrill@swcp.com - </FONT></I><FONT SIZE=-1><A HREF="mailto:dodrill@swcp.com">Please
+email any comments or suggestions.</A></FONT>
+</BODY>
+</HTML>

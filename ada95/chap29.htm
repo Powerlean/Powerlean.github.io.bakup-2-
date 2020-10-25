@@ -1,0 +1,292 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Author" CONTENT="Gordon Dodrill">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (Win95; I) [Netscape]">
+   <TITLE>Ada Tutorial - Chapter 29</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<B>Ada Tutorial - Chapter 29</B>
+
+<P><B><FONT SIZE=+3>A</FONT><FONT SIZE=+2>DDITIONAL</FONT><FONT SIZE=+3>
+T</FONT><FONT SIZE=+2>ASKING</FONT><FONT SIZE=+3> T</FONT><FONT SIZE=+2>OPICS</FONT></B>
+
+<P>We have covered most of the topics concerning tasking in the last three
+chapters, but there are a few more tasking themes that must be considered
+in order for you to use tasking to the fullest. The topics in this chapter
+are definitely advanced tasking topics and you may wish to ignore some
+of this material until you have gained considerable experience in the use
+of Ada. It would be worth your time to at least read through this material
+once to gain some exposure to it and to realize that these capabilities
+exist in the Ada programming language.
+
+<P><B>THE TASK TYPE</B>
+
+<P>Example program ------> <B><A HREF="e_c29_p1.ada">e_c29_p1.ada</A></B>
+
+<P>Examine the program named e_c29_p1.ada for an example of the <B>task
+type</B> in Ada. This will seem like a very strange construct, but if you
+spend time thinking about it, you will see that it does have a place in
+an Ada program, and it can be very useful.
+
+<P>In all previous programs with tasking, we have declared a task specification
+followed by a task body, but that is not the general case. It is actually
+a shorthand notation for declaring tasking and is somewhat similar to an
+anonymous type. The more general case of task definition is to declare
+a <B>task type</B> specification, then the task body, followed by a task
+that is of the declared type. In fact, the task is declared in much the
+same way we have been declaring variables in Ada, the task name followed
+by a colon and the task type. In the present program we declare the first
+<B>task type</B> specification in lines 7 and 8, and the corresponding
+<B>task body</B> in lines 16 through 22. The task itself is declared in
+line 13 where <B>Cow </B>is declared to be of task type <B>SHORT_LINE</B>.
+In fact, there are three tasks declared in this line, the other two being
+named <B>Dog </B>and <B>Pig</B>.
+
+<P><B>WHAT DOES IT REALLY MEAN?</B>
+
+<P>If we declared a data type, then used the data type to declare three
+variables, you would have no trouble understanding what was happening,
+because you have been doing that all along in this tutorial. It may be
+a little more difficult for you to understand, but we are doing the same
+thing with the task, except that we are declaring a type of a section of
+code, then generating and executing three copies of that code. It is the
+same as if we declared a task specification named <B>Cow </B>that was identical
+to that given in lines 7 and 8, then a task body named <B>Cow </B>that
+was identical to that given in lines 16 through 22, and did exactly the
+same thing for the other two tasks named <B>Dog </B>and <B>Pig</B>. Instead
+of duplicating the code three times we declared a pattern for the task
+then told the system to run three copies of it.
+
+<P>The task itself is extremely simple, consisting of a loop with a zero
+delay, and a statement to output a message to the standard output device,
+the monitor. The tasks themselves are declared in line 13 before the task
+body is declared, but this should pose no difficulty for you since we have
+used partial declaration of subprograms and types before.
+
+<P>A fine point should be mentioned here. A task type is always of <B>limited
+private</B> type, which means you can do no operations on it. Assignment
+and comparisons are not available with a <B>limited private</B> type, and
+it makes sense to prevent these operations with tasks.
+
+<P><B>THERE ARE TWO TASK TYPES DECLARED</B>
+
+<P>In addition to the task type named <B>SHORT_LINE</B>, there is another
+named <B>LONG_LINE</B> similar to the first, which outputs only three lines
+until it completes, but outputs a much longer line of text. Two copies
+of this type are declared and executed.
+
+<P>The end result of all of this is the generation and execution of five
+tasks all running in parallel with no rendezvous between them except for
+the zero time delay statements which we discussed in an earlier chapter.
+
+<P><B>WHEN DO THEY RUN?</B>
+
+<P>We discussed in an earlier chapter how each of the tasks got started
+running and this is no different. When all five tasks have been completely
+elaborated and are all waiting at their respective <B>begin </B>statements,
+and when the main program arrives at its <B>begin </B>statement, then all
+of the tasks begin to execute. Remember that there are six tasks counting
+the main program as a task. Likewise, when all of the tasks, including
+the main program, reach their <B>end </B>points, an orderly termination
+is effected and the program ceases to execute, returning control to the
+operating system.
+
+<P>Compile and run this program and you will see that all five tasks do
+indeed run as described above. Add a few additional tasks in lines 13 and
+14 to see how easy it is to add additional tasks once the task type is
+completed. It would be well worth your time to study this program until
+you understand this material, because it will be used in the next few example
+programs.
+
+<P><B>A TASK AS PART OF A RECORD</B>
+
+<P>It will not be illustrated here, but it is possible to declare a task
+type variable as part of a <B>record</B>. Such a record can be used to
+declare a task variable along with a few other variables for use by the
+task.
+
+<P><B>AN ARRAY OF TASKS</B>
+
+<P>Example program ------> <B><A HREF="e_c29_p2.ada">e_c29_p2.ada</A></B>
+
+<P>Examine the program named e_c29_p2.ada for an example of an array of
+task types. This program is identical to the last except for the addition
+of an array of tasks in line 13. The task name <B>Cow </B>is declared to
+be an array of tasks named <B>Cow(1)</B>, <B>Cow(2)</B>, ... <B>Cow(4)</B>,
+so there are four tasks of this type running concurrently when execution
+begins. These four are in addition to the two of type <B>LONG_LINE</B>
+as in the previous program. Nothing more needs to be said about this program
+except for you to compile and execute it to see that you really do get
+all six tasks running in parallel with the task in the main program. There
+are actually seven tasks running in parallel. It would be a snap to increase
+the <B>Cow </B>array to 6 tasks and see nine running, the six in the array,
+the two which are the other type, and the main program.
+
+<P><B>A TASK ACCESS TYPE</B>
+
+<P>Example program ------> <B><A HREF="e_c29_p3.ada">e_c29_p3.ada</A></B>
+
+<P>Examine the program named e_c29_p3.ada for an example of an <B>access
+</B>type which can be used to access a task. Once we have the ability to
+access a task through an access variable, we can also dynamically allocate
+a task and execute it. We will illustrate this operation in the present
+example program.
+
+<P>This program in nearly identical to the last two except that the variables
+named <B>Elephant </B>and <B>Hippopotamus </B>are not task type variables,
+but task <B>access </B>type variables because we declared the type <B>LONG_POINT</B>
+as an <B>access </B>variable in line thirteen.
+
+<P>When we execute this program, the three statically declared tasks begin
+executing when the main program does, but the two <B>access </B>type variables
+do nothing because they are simply <B>access </B>types that access nothing
+yet. The main program outputs a line of text to the monitor, then dynamically
+allocates a copy of the task type <B>LONG_LINE</B> in line 37 and the new
+task begins executing. Another task is allocated and begins execution in
+line 38. All five tasks will run to completion and there will be an orderly
+termination.
+
+<P>In this case, the main program is a parent task to the two dynamically
+allocated tasks and they are referred to as children tasks of the main
+program.
+
+<P><B>WHEN DO THEY BEGIN EXECUTION?</B>
+
+<P>The biggest difference between this program and the previous two, involves
+when the respective tasks begin execution. All of the statically declared
+tasks begin execution when the main program begins, but the dynamically
+allocated tasks begin execution when they are allocated. This can be clearly
+seen by studying the result of execution of each of the three programs.
+In the present program, the first output of each of the two allocated tasks
+is delayed considerably behind the first output of the statically declared
+tasks.
+
+<P>Be sure to compile and execute this program and compare the output of
+your compiler with that generated by the author's Ada compiler. It would
+be a simple matter for you to add a few more access variables and allocate
+additional tasks just to gain the experience.
+
+<P><B>A VERY INEFFICIENT EXAMPLE OF TASKING</B>
+
+<P>Example program ------> <B><A HREF="e_c29_p4.ada">e_c29_p4.ada</A></B>
+
+<P>The example program named e_c29_p4.ada is an example of a very poor
+way to solve this particular problem but is a meaningful example of a tasking
+solution to a problem. In this program we will declare eleven parallel
+tasks, start all eleven running, then retrieve the results of the eleven
+tasks.
+
+<P>We begin by declaring several types and variables, then declare a task
+specification in lines 17 through 20 with two entry points. Because the
+constant <B>EMPLOYEES </B>is declared as having the value 11, we declare
+11 tasks in line 22, named <B>Adding_Task(1)</B>, <B>Adding_Task(2)</B>,
+... <B>Adding_Task(11)</B>, each of which will begin running when we begin
+execution of the main program. The task body, given in lines 24 through
+39, consists of a local variable, and two <B>accept </B>statements, with
+a few calculations between them.
+
+<P>The main program is the most interesting part of this program, but we
+need to get through the initialization code before we come to the interesting
+part. The initialization code in lines 42 through 48, assigns values to
+the big array declared previously including a couple of funny data points
+which will show up in the results. Finally, we display a message that the
+array is filled.
+
+<P><B>START ALL TASKS RUNNING</B>
+
+<P>The loop in lines 53 through 55 calls the eleven tasks at their first
+entry point and begins them executing so that they all are executing their
+respective <B>for </B>loops. If you had a computer with a large number
+of actual processors, each task could be assigned to a separate processor
+and all calculations could be done concurrently. In the present case of
+adding seven numbers, the calculations are trivial, but if each task required
+the performance of several million floating point operations, the time
+saved through the efficient use of parallel hardware could be very significant.
+This program serves to illustrate the technique that could be used and
+is the most practical illustration of tasking to be demonstrated in this
+course.
+
+<P><B>ALL TASKS ARE NOW COMPLETE</B>
+
+<P>The loop in lines 58 through 61 once again calls all eleven tasks one
+at a time at their final entry point where it requests that the result
+of the summation be returned. All results are stored in the <B>Weekly_Totals</B>
+array, and the results are then displayed along with appropriate text.
+You will notice, when you examine the result of execution, that employees
+numbered 2 and 3 have the funny data reflected in their totals.
+
+<P>The point of interest you should have gleaned from this program is that
+all eleven tasks were operating in parallel, with the main program being
+a twelfth task. The logic of the main program requires concurrent tasks
+as opposed to eleven calls to a single subprogram. Keep in mind that this
+would actually be a very poor way to program this particular problem, but
+was included as an illustration.
+
+<P>Be sure to compile and execute this program on your system to verify
+that the results are the same. After it does compile and execute correctly,
+change the number of employees to see how many tasks can be operated in
+parallel with your system. You will not be limited by some arbitrary upper
+limit on the number of allowable tasks imposed by your particular compiler,
+but by the amount of memory required for each task.
+
+<P><B>PRIORITY OF TASKS</B>
+
+<P>Example program ------> <B><A HREF="e_c29_p5.ada">e_c29_p5.ada</A></B>
+
+<P>The example program named e_c29_p5.ada contains an example of establishing
+priority within tasks. The priority of tasks is indicated by the use of
+the <B>pragma </B>named <B>PRIORITY </B>as illustrated in the task specifications
+and the declaration part of the main program. An integer class variable
+is included in the parentheses with the larger numbers indicating the higher
+priority or the most urgent tasks. The range of allowable priorities are
+defined for your individual compiler in the <B>System </B>specification
+package definition as a subrange of <B>INTEGER</B>. According to the ARM,
+a range of 0..0 is legal. If your compiler only supports a single value
+for the priority, you will have to change the priorities in this program
+to the single value and you will, in effect, have no priority.
+
+<P>Compile and execute this program, then change the priorities and see
+what order of execution you can achieve. It is important to realize that
+the ARM does not absolutely define how priorities will be handled, but
+it only gives a rather vague definition. Priorities should be used with
+care in a production program.
+
+<P><B>A FAMILY OF ENTRIES</B>
+
+<P>Example program ------> <B><A HREF="e_c29_p6.ada">e_c29_p6.ada</A></B>
+
+<P>The example program named e_c29_p6.ada illustrates one more construct
+that can be used with the tasking rendezvous to achieve a user defined
+priority structure. In this case, there are three entry points which are
+very similar but have only a small difference between them. An enumerated
+variable is declared and used as the discriminator between the three entries.
+The only real advantage to using a family of entries is that they all use
+the same name and therefore add to the clarity of the resulting program.
+
+<P>The use of the family of entries is illustrated here and should be very
+easy for you to understand. When you do, compile and execute this program
+and compare your output with that given in the result of execution section.
+
+<P><B>PROGRAMMING EXERCISES</B>
+<OL>
+<LI>
+Increase the size of the array in e_c29_p2.ada to see how big you can make
+this array before the program no longer fits in memory. This will give
+you an idea of how many tasks can be run at the same time with your system.<A HREF=" a_c29_p1.ada">(Solution)</A></LI>
+
+<LI>
+Add another access variable to e_c29_p3.ada and initialize it as a part
+of its declaration. When will this task begin execution?<A HREF=" a_c29_p2.ada">(Solution)</A></LI>
+</OL>
+<A HREF="chap30.htm">Advance to Chapter 30</A>
+
+<P><A HREF="a95list.htm">Return to the Table of Contents</A>
+
+<P>
+<HR width="100%"><I><FONT SIZE=-1>Copyright &copy; 1988-1998 Coronado Enterprises
+- Last update, February 1, 1998</FONT></I>
+<BR><I><FONT SIZE=-1>Gordon Dodrill - dodrill@swcp.com - </FONT></I><FONT SIZE=-1><A HREF="mailto:dodrill@swcp.com">Please
+email any comments or suggestions.</A></FONT>
+</BODY>
+</HTML>

@@ -1,0 +1,280 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Author" CONTENT="Gordon Dodrill">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (Win95; I) [Netscape]">
+   <TITLE>Ada Tutorial - Chapter 28</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<B>Ada Tutorial - Chapter 28</B>
+
+<P><B><FONT SIZE=+3>T</FONT><FONT SIZE=+2>HE</FONT><FONT SIZE=+3> C</FONT><FONT SIZE=+2>ONDITIONAL</FONT><FONT SIZE=+3>
+R</FONT><FONT SIZE=+2>ENDEZVOUS</FONT></B>
+
+<P><B>IMPATIENT PROGRAMMING</B>
+
+<P>Many times in your life you wish to do something but you decide after
+trying for a short period of time, that it cannot be done, so you change
+your mind and do something else. This capability must be available in a
+computer program also, since a computer program is often used to simulate
+something in real life. This chapter will give examples of impatient programs,
+those that refuse to simply wait forever for a certain job to be done.
+
+<P><B>THE BASIC PROGRAM OUTLINE</B>
+
+<P>Example program ------> <B><A HREF="e_c28_p1.ada">e_c28_p1.ada</A></B>
+
+<P>Examine the file named e_c28_p1.ada for the program that will serve as
+the outline for the selective rendezvous even though it does not contain
+one. The program consists of four tasks, one each to describe Bill's day
+and John's day, and one each to describe eating a meal at a restaurant
+and at a fast food Burger Boy (hopefully not an actual restaurant). In
+this program, all of the delay times have been defined in terms of a constant
+named <B>HOURS </B>which actually causes a delay of one second per hour
+to speed up program execution to a reasonable level.
+
+<P>Eating a meal at the restaurant requires half an hour to be served and
+another half hour to consume the meal, whereas the Burger Boy requires
+only one tenth of an hour to be served and another tenth to consume the
+meal. The task named <B>Bills_Day</B> has him eating three meals only one
+hour apart, and the task named <B>Johns_Day </B>has him eating two meals
+in rapid succession then waiting four hours until he eats supper. Another
+interesting point is the fact that both eat every meal at the restaurant
+with no concern for how long they have to wait to be seated and eat. It
+is of no concern either to the Ada program at hand or the analysis of the
+problem, that one of the tasks is never called, because this is perfectly
+legal. Finally, both the restaurant and the Burger Boy can only serve one
+customer at a time, since this is the way the tasks were programmed. They
+can however, each serve a different customer at the same time.
+
+<P><B>EATING MEALS IS VERY SLOW</B>
+
+<P>You will notice, by inspecting the delays, that John waits 0.4 hours
+and gets to the restaurant first, then takes a total of one hour to eat.
+Bill waits one hour, and goes to the restaurant, but must wait on the entry
+queue for 0.4 hours for John to finish eating, then takes another hour
+to eat. During this hour, John has returned and is waiting to be served
+again. They continue getting in each others way and finally each consumes
+three meals.
+
+<P><B>DEADLOCK OCCURS</B>
+
+<P>The observant student will notice that the tasks named <B>Bills_Day</B>
+and <B>Johns_Day</B> each run through sequentially to completion and make
+no additional calls. The two named <B>Restaurant </B>and <B>Burger_Boy</B>
+however, each consist of an infinite loop and never actually complete.
+When the first two tasks execute to completion, the system will recognize
+that there are no tasks running that are capable of making calls to the
+waiting <B>accept </B>statements. The system will recognize this condition,
+and it will terminate the program due to deadlock after displaying a message
+that deadlock has occurred.
+
+<P>We still have not given an acceptable method of terminating our program
+gracefully, but we will later in this chapter. You should spend the time
+necessary to thoroughly understand this program since it will be the basis
+for the remaining example programs in this chapter. When you do understand
+it, compile and execute it to see if your compiler will recognize the deadlock
+condition.
+
+<P><B>THE CONDITIONAL RENDEZVOUS</B>
+
+<P>Example program ------> <B><A HREF="e_c28_p2.ada">e_c28_p2.ada</A></B>
+
+<P>Examine the program named e_c28_p2.ada for our first example of a conditional
+rendezvous. This program is identical to the last one named e_c28_p1.ada
+except for the addition of a few statements in the task named <B>Bills_Day</B>.
+In this program Bill is in a bit of a hurry to eat his first two meals
+and puts in a few conditions to indicate this.
+
+<P><B>THE SELECTED RENDEZVOUS</B>
+
+<P>When Bill starts his day, he is very impatient and will not wait at
+all for his first meal. If the restaurant is not ready to serve a meal
+immediately, he will go to the Burger Boy and have his breakfast. The statements
+in lines 29 through 33 replace the single statement of the last program
+to indicate this impatience. In Ada terms, if the task named <B>Restaurant
+</B>is not waiting at the <B>Eat_A_Meal</B> entry point, the call will
+not be made there, but a call will be made to the entry point named <B>Eat_A_Meal</B>
+in the <B>Burger_Boy</B> task. If the <B>Burger_Boy</B> task is not waiting
+at the entry point, then <B>Bill </B>will be required to wait until it
+is ready, when he will be served.
+
+<P>The reserved word <B>else </B>is used to indicate the selected rendezvous
+and it can follow as many <B>or </B>clauses as desired. The general form
+is;
+<PRE>&nbsp;&nbsp;&nbsp; <B>select</B>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;entry call>;
+&nbsp;&nbsp;&nbsp; <B>or
+</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; >entry call>;
+&nbsp;&nbsp;&nbsp; <B>else
+</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;entry call>;
+&nbsp;&nbsp;&nbsp; <B>end select</B>;</PRE>
+The <B>else </B>clause will be taken if none of the other entry points
+are waiting at their respective rendezvous points.
+
+<P><B>THE DELAYED RENDEZVOUS</B>
+
+<P>Bill is not quite as hungry for his second meal so he is willing to
+wait for a short period at the restaurant, but if he is not served within
+one tenth of an hour, he will go to the Burger Boy for lunch. The single
+statement in lines 35 through 40 replaces the single statement in the previous
+program. In Ada terms, the task named <B>Bills_Day</B> will wait .1 hour
+for the <B>Restaurant </B>task to reach its entry point, after which it
+will call the entry point of <B>Burger_Boy</B> and wait no matter how long
+it takes to be served there.
+
+<P>As many selections as desired can be used, with <B>delay </B>statements
+in as many of the selections as needed. The general form is given by;
+<PRE>&nbsp;&nbsp;&nbsp; <B>select</B>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <B>delay</B> &lt;time>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;entry call>;
+&nbsp;&nbsp;&nbsp; <B>or</B>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <B>delay</B> &lt;time>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;entry call>;
+&nbsp;&nbsp;&nbsp; <B>or
+</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <B>delay</B> &lt;time>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;entry call>;
+&nbsp;&nbsp;&nbsp; <B>end select</B>;</PRE>
+An <B>else </B>clause cannot be used if any <B>delay </B>statements are
+used because the <B>else </B>clause will be executed immediately and any
+statement with a <B>delay </B>would never have a chance to time out. It
+would therefore never be executed and must be regarded as unexecutable
+code.
+
+<P><B>BILL'S STUBBORN RESOLUTION FOR SUPPER</B>
+
+<P>Bill has decided that under no conditions will he eat supper at the
+Burger Boy. He will wait for as long as necessary in order to be served
+at the restaurant, and this is reflected in the single call in line 42
+in exactly the same manner that was indicated in the previous program.
+
+<P>Take careful notice that both of these <B>select </B>statements are
+in the calling task, not the called task, but we will see shortly that
+the same sort of things are available in the called task.
+
+<P>Examination of the result of execution will reveal that Bill did eat
+both of his early meals at the Burger Boy. In addition, you will see that
+his second meal was ordered and eaten at the Burger Boy during the time
+that John was eating his meal at the Restaurant. This indicates that resources
+are being well used.
+
+<P>Be sure to compile and execute this program. Observe the result of execution
+to see that it does send Bill to the Burger Boy on occasion. Because we
+still have no graceful termination, deadlock occurs once again.
+
+<P><B>THE DELAYED ENTRY POINT</B>
+
+<P>Example program ------> <B><A HREF="e_c28_p3.ada">e_c28_p3.ada</A></B>
+
+<P>Examine the program named e_c28_p3.ada for yet another addition to our
+example of Bill and John satisfying their desire for nourishment. In this
+case, the restaurant will not remain open forever, nor will the Burger
+Boy, both choosing to close for the day if there are no customers for a
+period of time.
+
+<P>The select statement in lines 59 through 72 contains two alternatives,
+one to handle a customer as usual, and another with a delay of 1.5 hours
+followed by a restaurant closing statement. If there are no entry calls
+to the entry named <B>Eat_A_Meal</B> for 1.5 seconds (since <B>HOURS </B>is
+actually one second), then the second branch of the select statement will
+be executed, resulting in the display of a message and execution of an
+<B>exit </B>statement. You will recall that an <B>exit </B>will take you
+out of the most immediate loop and continue execution of statements from
+that point. In the case of the <B>Restaurant </B>task, the task is therefore
+completed and waits for the other tasks to complete.
+
+<P>The task named <B>Burger_Boy</B> has the same alternative entry point,
+except for a delay of 2.1 seconds. It also reaches its <B>end </B>statement
+and waits for the others to finish. Examination of the result of execution
+will reveal that both eating establishments actually did reach timeout
+and closed for the day leaving John to go hungry since he never ate his
+third meal. Since John did not eat his third meal of the day, some code
+was not executed and it was not reported as such. This seems to be an error,
+but it is actually not, because it is a tasking error that is not propagated
+to the main program. This is according to the definition of Ada and is
+explained more fully in the last two paragraphs of this chapter.
+
+<P>Be sure to compile and run this program and observe the early closing
+of the eating establishments.
+
+<P><B>ORDERLY TERMINATION OF TASKS</B>
+
+<P>Example program ------> <B><A HREF="e_c28_p4.ada">e_c28_p4.ada</A></B>
+
+<P>Examine the program named e_c28_p4.ada for an example of orderly termination
+of tasks. This program is identical to the first program in this chapter
+named e_c28_p1.ada except for two minor changes. The entry point for the
+task named <B>Restaurant </B>has been put inside of a <B>select </B>statement
+in a manner similar to that done in e_c28_p2.ada or e_c28_p3.ada but a different
+<B>or</B> clause is used, one that contains the reserved word <B>terminate</B>.
+Each time through the loop, the entry point named <B>Eat_A_Meal</B> can
+be selected for execution and the task execution will wait until this entry
+point is called. While the program is waiting for the entry call, the branch
+of the select with the <B>terminate </B>allows the possibility of a termination
+to occur. However, the termination can only occur under the right conditions.
+The right conditions require that all other concurrent tasks, including
+the task in the main program, are either at their final <B>end </B>waiting
+to terminate, or have a similar <B>terminate </B>alternative to select.
+
+<P>The task named <B>Burger_Boy</B> has a similar <B>terminate </B>alternative.
+When the two calling tasks reach their final end, the two serving tasks
+have <B>terminate </B>alternatives available, so there is an orderly termination
+and the program returns to the operating system. Be sure to compile and
+execute this program, then study the result for conformance to this definition.
+
+<P><B>THE abort STATEMENT</B>
+
+<P>The <B>abort </B>statement will unconditionally abort any tasks with
+no regard to their present operating condition. It is extremely abrupt
+and does not provide for an orderly termination. It should therefore be
+used only in conditions of an emergency nature. Possibly the detection
+of loss of power would be such a circumstance. The tasks to be aborted
+are listed following the reserved word <B>abort </B>in an executable statement
+anywhere that it is legal to use an executable statement.
+
+<P><B>TWO TASK ATTRIBUTES</B>
+
+<P>There are two useful task attributes that can be used to find the condition
+of any given task. They are <B>CALLABLE</B>, and <B>TERMINATED</B>, and
+each returns a <B>BOOLEAN </B>type indication of the current status of
+the task to which the attribute is appended. See the ARM for details on
+the use of these two attributes.
+
+<P><B>TASK EXCEPTIONS</B>
+
+<P>The tasking exception named <B>Tasking_Error</B> is raised during essentially
+any communication error. Any error during task elaboration will raise this
+exception (this will be illustrated in a later example program). This exception
+is raised in the caller if the called task is aborted, and is raised in
+the originators of all calls on an entry queue of an aborted task.
+
+<P>If an exception is raised during a rendezvous, it is propagated into
+both tasks since each may need some form of recovery. If the exception
+is not handled internally by the task, it is not propagated to the calling
+program because to do so would be very disruptive. This means that a program
+that appears to be working correctly could actually have a very disruptive
+tasking error, much like the example program named e_c28_p3.ada in this chapter.
+Each significant task should therefore have an exception handler to guard
+against the occurrence of an unknown exception.
+
+<P><B>PROGRAMMING EXERCISE</B>
+<OL>
+<LI>
+Modify the program named e_c28_p2.ada such that it has an orderly termination
+upon completion.<A HREF=" a_c28_p1.ada">(Solution)</A></LI>
+
+<LI>
+Modify e_c28_p2.ada even further such that John eats every meal at the Burger
+Boy unless he has to wait there, in which case he eats at the restaurant.<A HREF=" a_c28_p2.ada">(Solution)</A></LI>
+</OL>
+<A HREF="chap29.htm">Advance to Chapter 29</A>
+
+<P><A HREF="a95list.htm">Return to the Table of Contents</A>
+
+<P>
+<HR width="100%"><I><FONT SIZE=-1>Copyright &copy; 1988-1998 Coronado Enterprises
+- Last update, February 1, 1998</FONT></I>
+<BR><I><FONT SIZE=-1>Gordon Dodrill - dodrill@swcp.com - </FONT></I><FONT SIZE=-1><A HREF="mailto:dodrill@swcp.com">Please
+email any comments or suggestions.</A></FONT>
+</BODY>
+</HTML>

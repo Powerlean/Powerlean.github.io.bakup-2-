@@ -1,0 +1,214 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Author" CONTENT="Gordon Dodrill">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (Win95; I) [Netscape]">
+   <TITLE>Ada Tutorial - Chapter 4</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<B>Ada Tutorial - Chapter 4</B>
+
+<P><B><FONT SIZE=+3>L</FONT><FONT SIZE=+2>OGICAL</FONT><FONT SIZE=+3> C</FONT><FONT SIZE=+2>OMPARES</FONT><FONT SIZE=+3>
+A</FONT><FONT SIZE=+2>ND</FONT><FONT SIZE=+3> P</FONT><FONT SIZE=+2>RECEDENCE</FONT></B>
+
+<P><B>WHAT IS A BOOLEAN VARIABLE?</B>
+
+<P>Example program ------> <B><A HREF="e_c04_p1.ada">e_c04_p1.ada</A></B>
+
+<P>Examine the program named e_c04_p1.ada for an example of logical compares
+being used in a very trivial way. We declare and initialize three <B>INTEGER
+</B>type variables for use later then declare two variables of type <B>BOOLEAN
+</B>in lines 14 and 15, with the first one being initialized to <B>TRUE</B>.
+A <B>BOOLEAN </B>type variable has a very limited range of values which
+can be assigned to it, namely <B>TRUE </B>or <B>FALSE</B>, and there are
+no mathematical operations available for use on variables of type <B>BOOLEAN</B>.
+
+<P>Much more will be said about the <B>BOOLEAN </B>type variable later
+in this tutorial, but we need a basic understanding of a boolean variable
+in order to study program control in the next chapter.
+
+<P>Lines 19 and 23 illustrate how you can assign a value of either <B>TRUE
+</B>or <B>FALSE </B>to a <B>BOOLEAN </B>variable. These illustrate literal
+assignment in much the same way that a literal value can be assigned to
+an <B>INTEGER </B>type variable. Because we wish to display <B>BOOLEAN
+</B>values, we instantiate a copy of the generic package <B>Enumeration_IO</B>
+for the <B>BOOLEAN </B>type. Once again, we will study the details of this
+later in the tutorial. This package makes it possible to output <B>BOOLEAN
+</B>values in lines 21 and 25.
+
+<P><B>BOOLEAN ASSIGNMENT STATEMENTS</B>
+
+<P>Lines 28 through 30 are a bit more interesting because they illustrate
+assigning a calculated <B>BOOLEAN </B>value to a <B>BOOLEAN </B>variable.
+In line 28, the value of the <B>INTEGER </B>variable <B>One </B>has the
+literal 1 added to it and the total is compared to the value contained
+in the variable <B>Two</B>. The expression reduces to the expression 1
++ 1 = 2, and since 1 + 1 is equal to 2, the expression evaluates to <B>TRUE
+</B>which is assigned to the <B>BOOLEAN </B>variable <B>Is_It</B>. The
+various steps in evaluation are illustrated below for the student with
+little or no experience using <B>BOOLEAN </B>expressions in some other
+programming language.
+<PRE>&nbsp;&nbsp;&nbsp; Is_It := (One + 1) = Two;
+&nbsp;&nbsp;&nbsp; Is_It := (1 + 1) = 2;
+&nbsp;&nbsp;&nbsp; Is_It := 2 = 2;
+&nbsp;&nbsp;&nbsp; Is_It := TRUE;</PRE>
+The single equal sign is the <B>BOOLEAN </B>operator for equality, and
+if the two expressions being evaluated are of the same value, a value of
+<B>TRUE </B>will result. If they are not of the same value, the <B>BOOLEAN
+</B>result will be <B>FALSE</B>.
+
+<P><B>ARE THERE OTHER BOOLEAN OPERATORS?</B>
+
+<P>There are six <B>BOOLEAN </B>operators, and all six will be illustrated
+in the next example program. Line 29 in the present program illustrates
+use of one of the others, the inequality operator. This statement says,
+if <B>One </B>is not equal to <B>Two </B>then assign the value of <B>TRUE
+</B>to the <B>BOOLEAN </B>variable <B>Is_It</B>, otherwise assign a value
+of <B>FALSE </B>to the <B>BOOLEAN </B>variable <B>Is_It</B>. Note that
+regardless of the result, a value will be assigned to the <B>BOOLEAN </B>variable.
+Finally, the "greater than or equal" operator is illustrated in use in
+line 30.
+
+<P>This is a rather silly program since none of the results are used, but
+it is meant to illustrate just what a <B>BOOLEAN </B>variable is and how
+to use it. Compile and run this program before continuing on to the next
+example program.
+
+<P><B>ADDITIONAL TOPICS ON BOOLEAN EVALUATION</B>
+
+<P>Example program ------> <B><A HREF="e_c04_p2.ada">e_c04_p2.ada</A></B>
+
+<P>Examine the program named e_c04_p2.ada and you will see all six <B>BOOLEAN
+</B>operators in use. We define two <B>INTEGER </B>and three <B>BOOLEAN
+</B>type variables in the declaration part of the program, and begin the
+executable part with some compare examples in lines 14 and 15. It should
+be clear that in line 15, <B>Index </B>can not be less than itself, so
+the result is <B>FALSE</B>.
+
+<P>Lines 18 through 23 illustrate the use of all six <B>BOOLEAN </B>operators
+which are available in Ada and you should have no trouble understanding
+this list.
+
+<P><B>THE BOOLEAN and OPERATOR</B>
+
+<P>Lines 26 through 29 illustrate composite <B>BOOLEAN </B>operators using
+the reserved words <B>and</B>, <B>or</B>, <B>not</B>, and <B>xor</B>. The
+statement in line 26 says that
+<PRE>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <B>if </B>Index = 12
+&nbsp;&nbsp;&nbsp; <B>and if</B> Count = 12
+&nbsp;&nbsp;&nbsp; <B>and if</B> Truth currently has the value TRUE
+&nbsp;&nbsp;&nbsp; <B>and if</B> TRUE&nbsp;&nbsp;&nbsp;&nbsp; (which is always TRUE)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <B>then</B> assign <B>TRUE </B>to Question
+&nbsp; otherwise assign <B>FALSE </B>to Question.</PRE>
+Using the freeform available in an Ada program to write the previous sentence,
+can help in understanding the sentence. The point to be illustrated is
+that you can combine as many <B>BOOLEAN </B>expressions as you desire to
+do a particular job.
+
+<P><B>THE BOOLEAN or OPERATOR</B>
+
+<P>Using the expanded freeform available in Ada, the statement in line
+27 says that
+<PRE>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <B>if </B>Index is not equal to 12&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp; <B>or if</B> FALSE&nbsp;&nbsp;&nbsp;&nbsp; (which is always FALSE)&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp; <B>or if</B> Count is greater than 3&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp; <B>or if</B> Truth currently has the value of TRUE&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <B>then </B>assign <B>TRUE </B>to Question&nbsp;
+&nbsp; otherwise assign <B>FALSE </B>to Question.</PRE>
+<B>THE BOOLEAN not OPERATOR</B>
+
+<P>The expression in line 28 illustrates the use of these two operators
+combined in a slightly more complex way using parentheses to properly group
+the expressions. A new operator appears here, the <B>not </B>which simply
+says to reverse the meaning of the <B>BOOLEAN </B>operator which it precedes.
+
+<P><B>THE BOOLEAN xor OPERATOR</B>
+
+<P>Line 29 illustrates the use of the "exclusive or" operator which says
+that the result will be <B>TRUE </B>if one and only one of the operands
+are <B>TRUE</B>, and <B>FALSE </B>if both operands are <B>TRUE</B>, or
+both operands are <B>FALSE</B>. A good illustration of this operation would
+be a hall light with a switch at both ends of the hall. If one of the switches
+is up, the light is on, but if both are up or both are down, the light
+is off.
+
+<P><B>FULL EVALUATION OF BOOLEAN EXPRESSIONS</B>
+
+<P>The way the expressions are written in lines 26 through 29, all of the
+expressions will be evaluated when the statement is executed. If, in the
+case of line 26, the value of <B>Index </B>is not 12, then the final result
+will be <B>FALSE </B>no matter what the rest of the expressions are and
+it would be a waste of time to evaluate them. Ada will continue blindly
+across the entire line evaluating all of the expressions and wasting time
+since it should know the final result based on the first comparison. There
+is however, a way to tell it to stop as soon as it knows the final answer,
+through use of the short circuit operators.
+
+<P><B>WHAT ARE "SHORT CIRCUIT OPERATORS"?</B>
+
+<P>If you study line 32, you will see that if <B>Index </B>is equal to
+<B>Count</B>, we will be dividing the constant 9 by zero in the second
+part of the expression. By adding the reserved word <B>then </B>to the
+<B>and </B>operator we have a short circuit operation, which means as soon
+as the system knows the final outcome, the remaining operations are short
+circuited and not evaluated. In the present example, if <B>Index </B>is
+equal to <B>Count</B>, the first term is <B>FALSE </B>and there is no need
+to continue since the second term is to be <B>and</B>ed with the <B>FALSE
+</B>resulting in <B>FALSE </B>no matter what the second term is. Division
+by zero is avoided in this case because the division is not attempted.
+In the same manner, line 33 illustrates the short circuit <B>or </B>operator
+which is obtained by adding the reserved word <B>else</B>. In this case,
+if <B>Index </B>is equal to <B>Count</B>, the result will be <B>TRUE </B>regardless
+of what the second term is, so the second term is not evaluated and division
+by zero is avoided. Line 34 is identical to line 33 but illustrates the
+use of parentheses to make the logic a little easier to read.
+
+<P>It should be clear that Ada provides the tools needed to do any boolean
+operation needed. It is up to you to learn how to use them.
+
+<P><B>ORDER OF PRECEDENCE</B>
+
+<P>The order of precedence of operators is given by the following list.
+<PRE>&nbsp;&nbsp;&nbsp;&nbsp; **&nbsp;&nbsp;&nbsp;&nbsp; <B>not</B>&nbsp;&nbsp;&nbsp; <B>abs</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -- Highest precedence
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <B>mod rem</B>&nbsp; -- Multiplying operators
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp; +&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -- Unary operators
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp; +&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &amp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -- Binary adding operators
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp; =&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /=&nbsp;&nbsp;&nbsp;&nbsp; &lt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -- Relational operators&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp; &lt;=&nbsp;&nbsp;&nbsp;&nbsp; >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; >=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -- Relational operators&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp; <B>in</B>&nbsp;&nbsp;&nbsp;&nbsp; <B>not in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -- (same precedence)
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp; <B>and&nbsp;&nbsp;&nbsp; or&nbsp;&nbsp;&nbsp;&nbsp; xor</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -- Logical operators&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp; <B>and then&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; or else</B>&nbsp; -- (same precedence)</PRE>
+The Ada 95 Reference Manual (ARM) has a complete list of the operators
+and the details of the order of precedence in section 4.5. If there is
+any question as to the order of precedence, you should group expressions
+together with parentheses since they have the absolute highest precedence.
+A future reader of your program will know exactly what your program is
+doing.
+
+<P>Be sure to compile and execute this program. Note that we have not yet
+studied the &amp;, the <B>in</B>, and the <B>not in</B> operators but will
+soon.
+
+<P><B>PROGRAMMING EXERCISE</B>
+<OL>
+<LI>
+Add some output statements to both example programs to see that the results
+are as predicted. This will give you experience using the boolean output
+statement.<A HREF=" a_c04_p1.ada">(Solution)</A></LI>
+</OL>
+<A HREF="chap05.htm">Advance to Chapter 5</A>
+
+<P><A HREF="a95list.htm">Return to the Table of Contents</A>
+
+<P>
+<HR width="100%"><I><FONT SIZE=-1>Copyright &copy; 1988-1998 Coronado Enterprises
+- Last update, February 1, 1998</FONT></I>
+<BR><I><FONT SIZE=-1>Gordon Dodrill - dodrill@swcp.com - </FONT></I><FONT SIZE=-1><A HREF="mailto:dodrill@swcp.com">Please
+email any comments or suggestions.</A></FONT>
+</BODY>
+</HTML>

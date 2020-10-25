@@ -1,0 +1,592 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Author" CONTENT="Gordon Dodrill">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (Win95; I) [Netscape]">
+   <TITLE>Ada Tutorial - Chapter 6</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<B>Ada Tutorial - Chapter 6</B>
+
+<P><B><FONT SIZE=+3>A</FONT><FONT SIZE=+2>DDITIONAL</FONT><FONT SIZE=+3>
+S</FONT><FONT SIZE=+2>CALAR</FONT><FONT SIZE=+3> T</FONT><FONT SIZE=+2>YPES</FONT></B>
+
+<P><B>OUR OWN TYPES</B>
+
+<P>Most of the example programs in this tutorial have used the predefined
+type <B>INTEGER </B>for illustrating various concepts, and it is an excellent
+choice due to its versatility. There are several other types available
+because they are part of the Ada definition, and we can define our own
+types for special purposes. This chapter will illustrate some of the reasons
+for doing so.
+
+<P>A complete description of types will be given in the next chapter but
+first we will learn how to use some of them. We are caught in a dilemma
+like the proverbial, "which came first, the chicken or the egg?", and must
+select which to define first. We have chosen to illustrate usage in this
+chapter, and then give the details of type definition in the next chapter.
+
+<P><B>A FEW INTEGER CLASS TYPES</B>
+
+<P>Example program ------> <B><A HREF="e_c06_p1.ada">e_c06_p1.ada</A></B>
+
+<P>Examine the file named e_c06_p1.ada for some examples of how and why we
+might use our own type definitions. The three types illustrated in lines
+7 through 9 are available with all Ada compilers because they are so versatile
+and useful, and because they are required by the Ada programming language.
+As we have said before, the type <B>INTEGER </B>defines a variable that
+can have any whole value between -2,147,483,648 to 2,147,483,647 on most
+32 bit computers. It should be pointed out that some microcomputers use
+a much smaller range as standard. The type <B>NATURAL </B>defines a variable
+from 0 to 2,147,483,647, and the type <B>POSITIVE </B>covers the range
+from 1 to 2,147,483,647 on most 32 bit computers.
+
+<P>Consider the word "most" in the last paragraph, and think about the
+problems you could have if you wrote a program that depended on a particular
+variable covering the listed range, and tried to move the program to a
+different machine which used a different range. You could be faced with
+a large rewrite problem in order to get the program to work on the new
+computer.
+
+<P><B>HOW CAN WE HELP SOLVE PORTABILITY PROBLEMS</B>
+
+<P>Suppose we defined our type to cover a certain range, such as illustrated
+in line 11 of this example program, and moved the program to another computer.
+According to the definition of Ada, the new compiler would be obligated
+to create a type for us that would cover the given range, or give us a
+compile time error telling us that the hardware simply could not support
+the defined range. In this case, due to the rather small range requested,
+any meaningful compiler and machine combination would be able to cover
+the defined range, and we would have a program that would run in spite
+of differences in the way the standard types were defined. Good programming
+practice, especially if the source code may need to be moved to other computers,
+would define all ranges explicitly and avoid the implementation defined
+limits built into the compiler.
+
+<P>Two new types are defined in lines 11 and 12, and the program uses some
+new attributes to illustrate the new types. In lines 21 and 24, we use
+two attributes which we have used before, but in lines 28 and 31, we use
+two new attributes. In order for the system to create a type which covers
+a range of -1000 to 24000, it must use a structure with enough binary bits
+to cover the given range. The range is not composed of binary limits so
+the system will have to define enough bits to cover this range and a little
+more. It will probably define some number of 8-bit bytes and the range
+covered by the full pattern, as defined, is called the base range. The
+two new attributes give the limits of the base selected by the system.
+The base limits will probably be -32768 to 32767 even if you are using
+a 32 bit system or it may even use -128 to 127.
+
+<P><B>DO YOU HAVE A SMART COMPILER?</B>
+
+<P>The type illustrated here named <B>MY_SHORT</B> has defined limits of
+-12 and 127, a relatively small range. It is small enough that it can fit
+into a base range of -128 to 127, which could be stored in a single 8-bit
+byte. If your compiler is smart enough to realize that, it could use a
+single 8-bit byte to store every variable of this type, and if you had
+a lot of these to store, it would save you a lot of memory. You will probably
+find however, that most compilers will simply use the full <B>INTEGER </B>range
+for the base type of even this small number. Four attributes of two different
+types are displayed on the monitor for your information. You can see from
+the results of running this program exactly how your compiler stores these
+two types.
+
+<P><B>THE in AND not in OPERATORS</B>
+
+<P>We have a new operator to learn about now, the <B>in </B>operator illustrated
+in line 46. If the variable <B>Index</B>, which has a current value of
+345 due to initialization, is within the defined range of the subtype <B>MY_SUBTYPE</B>,
+a <B>BOOLEAN </B>type <B>TRUE </B>will be returned, otherwise a <B>BOOLEAN
+</B>type <B>FALSE </B>is returned. This result can be assigned to a <B>BOOLEAN
+</B>variable or used for a boolean decision as shown. In this case, the
+value of <B>Index </B>is not in the range of <B>MY_SUBTYPE</B> so a <B>FALSE
+</B>is returned and the message will not be output. Another operation is
+illustrated in line 50 which is the <B>not in</B> operation, and should
+be self explanatory. You should be able to see that the message in line
+51 will be displayed. The <B>in </B>and <B>not in</B> operators are further
+illustrated in lines 54 and 58 where an explicit range is used for the
+test range.
+
+<P>Be sure to compile and run this program and observe the output. Here
+is a chance for you to see if you have a smart compiler. If you check the
+package named <B>Interfaces</B>, you will find that you have a few other
+types available such as <B>INTEGER_8</B>, <B>INTEGER_16</B>, and <B>INTEGER_32</B>.
+These are all optional, but some will surely be available with your compiler.
+
+<P><B>THE ENUMERATED TYPE</B>
+
+<P>Example program ------> <B><A HREF="e_c06_p2.ada">e_c06_p2.ada</A></B>
+
+<P>Examine the program named e_c06_p2.ada for our first look at an enumerated
+type and how it is used in a program. Line 7 is the first definition of
+an enumerated type, and uses the reserved words <B>type </B>and <B>is </B>as
+shown. The type name is given between the two reserved words and the values
+which a variable of this type is allowed to have assigned to it are given
+as a list within parentheses. The values actually represent numerical values
+from 0 up to that value required for the largest value, in this case 6,
+since the numbering will be assigned from 0 to 6. In line 20, the variable
+named <B>Day_Of_Week</B> is declared to be of type <B>DAY</B>, so it can
+be assigned any of the 7 values listed for the type <B>DAY</B>, and no
+others. We could assign the values 0, 1, 2,.. 6 to represent the 7 days
+of the week and use the numerical values within the program, but by using
+the enumerated type, we can refer to Sunday as <B>SUN</B>, Monday as <B>MON</B>,
+etc., making the program much clearer and easy to follow.
+
+<P>There are three predefined enumerated types in the Ada language, <B>BOOLEAN</B>,
+<B>CHARACTER</B>, and <B>WIDE_CHARACTER</B>. The <B>BOOLEAN </B>type is
+an enumerated type with two possible values, but it has some special properties
+available with no other enumerated variables. These will be discussed using
+the next example program.
+
+<P>Jumping ahead to the executable code in the current example program,
+we illustrate assignment in line 28, where we assign the value of <B>WED
+</B>to the variable <B>Day_Of_Week</B>. Lines 29 and 30 illustrate the
+<B>FIRST </B>and <B>LAST </B>attributes which we have seen before for <B>INTEGER
+</B>type variables. Just as -2,147,483,648 is the lowest possible value
+that can be assigned to a 32 bit <B>INTEGER </B>type variable, <B>MON </B>is
+the lowest, and hence the first, value that can be assigned to a variable
+of type <B>DAY</B>.
+
+<P><B>TWO NEW ATTRIBUTES</B>
+
+<P>Lines 31 and 32 illustrate the attributes <B>PRED</B>, which means the
+predecessor, and <B>SUCC</B>, which means the successor. <B>PRED </B>returns
+the value of the predecessor of the present value of the variable used
+as an argument. Since the variable <B>Day_Of_Week</B> was assigned the
+value of <B>SUN </B>in line 30, and the day just prior to <B>SUN </B>is
+<B>SAT</B>, <B>SAT </B>is assigned to the variable <B>Day_Of_Week</B> in
+line 31. It is an error to attempt to take the <B>PRED </B>of a variable
+which contains the first value in the available list, and will result in
+raising the exception <B>Range_Error</B>. Likewise, an attempt to take
+the <B>SUCC </B>of any variable that is at its maximum value will result
+in the exception <B>Range_Error</B> being raised. Exceptions will be covered
+in detail later in this tutorial. At this time simply remember that an
+exception refers to an exceptional condition or an error.
+
+<P><B>WHAT IS A SUBTYPE OF AN ENUMERATED TYPE?</B>
+
+<P>In lines 8 and 9, we define two subtypes of the type <B>DAY </B>which
+will have all the characteristics of type <B>DAY </B>except for a more
+restricted range. A variable that is declared to be of type <B>PLAY_DAY
+</B>can be assigned either of two values, <B>SAT </B>or <B>SUN</B>. <B>SAT
+</B>will have a numerical value of 5, and <B>SUN </B>will have a numerical
+value of 6, both of these being inherited from the parent type, <B>DAY</B>.
+Thus in line 32, we use the attribute <B>FIRST </B>to get the first day
+of type <B>PLAY_DAY</B>, which will be <B>SAT</B>, then use the attribute
+<B>SUCC </B>to get the successor of that value, which will be <B>SUN</B>.
+Notice how the attributes can be combined to obtain the needed information.
+A subtype is assignment compatible with its parent type. We will discuss
+subtypes in greater detail in the next chapter of this tutorial.
+
+<P><B>NOW FOR THE POS AND VAL ATTRIBUTES</B>
+
+<P>The <B>POS </B>attribute will return a value of type universal_integer,
+the value representing the position of the enumerated value within the
+parentheses as shown in lines 33 and 34. The <B>VAL </B>attribute will
+return the enumerated value of the numerical value included in the parentheses.
+Notice that if the type <B>DAY </B>in line 35 were changed to <B>PLAY_DAY</B>,
+an error would be returned, since that is an illegal enumerated value for
+that type. The error would be returned by raising the exception <B>Range_Error</B>.
+
+<P><B>WHAT ABOUT ENUMERATED ASSIGNMENTS?</B>
+
+<P>The value of <B>Happy_Day </B>can be assigned to <B>Day_Of_Week</B>
+at any time because they are type compatible, and any value that can be
+legally assigned to <B>Happy_Day</B> can also be assigned to <B>Day_Of_Week</B>.
+<B>Day_Of_Week</B> cannot always be assigned to <B>Happy_Day</B> however,
+because <B>Day_Of_Week</B> is permitted to contain some values which are
+not legal to assign to <B>Happy_Day</B>. This would illustrate that some
+care must be exercised when using the enumerated type, but if used properly,
+it can help in program debugging by the use of the strong type-checking
+defined into the Ada language.
+
+<P><B>USING ENUMERATED TYPES FOR CONTROL</B>
+
+<P>The loop in lines 37 through 40 covers exactly the range covered by
+the subtype <B>WORK_DAY</B>, so we can use it in the range part of the
+definition of the loop. When you run this program, you will see that the
+loop will be executed exactly five times.
+
+<P>Lines 42 through 51 contain two relational checks on the variable <B>Today
+</B>to illustrate that the enumerated type variable can be used in a <B>BOOLEAN
+</B>expression. All of the boolean operators are available, which includes
+the following list, and no others;
+<PRE>&nbsp;&nbsp;&nbsp;&nbsp; =&nbsp;&nbsp;&nbsp;&nbsp; equality
+&nbsp;&nbsp;&nbsp;&nbsp; /=&nbsp;&nbsp;&nbsp; inequality
+&nbsp;&nbsp;&nbsp;&nbsp; >&nbsp;&nbsp;&nbsp;&nbsp; greater than
+&nbsp;&nbsp;&nbsp;&nbsp; >=&nbsp;&nbsp;&nbsp; greater than or equal to
+&nbsp;&nbsp;&nbsp;&nbsp; &lt;&nbsp;&nbsp;&nbsp;&nbsp; less than
+&nbsp;&nbsp;&nbsp;&nbsp; &lt;=&nbsp;&nbsp;&nbsp; less than or equal to</PRE>
+No mathematical operations are available with enumerated type variables.
+Assignments are available as illustrated in the present example program.
+
+<P><B>WHAT IS QUALIFICATION?</B>
+
+<P>In lines 53 and 54, we assign the same value to two different enumerated
+type variables. At least it seems to be the same value. In actuality, they
+are two different values with the same name, namely <B>SUN</B>. Because
+Ada does such strong type checking, it is smart enough to realize that
+they are actually two different constants and it will select the one that
+it needs for each statement based on the type of the variable to which
+it will be assigned.
+
+<P>Lines 56 and 57 make the identical assignments by qualifying which value
+you are interested in, but in this case, the qualifications are unnecessary.
+There could be a case when you would need to tell the system which value
+of <B>SUN </B>you are interested in. Qualification uses the type followed
+by a "tick", or apostrophe, prior to the enumeration value.
+
+<P><B>OUTPUTTING ENUMERATED VARIABLES</B>
+
+<P>The statements in lines 59 and 60 output the current value of the variable
+<B>Today</B>, and the predecessor of the current value. Finally, the same
+values are output for the variable <B>Big_Sphere</B>, and when you run
+the program, you will see that the same value is output for the first value
+in each line, but the second values differ for the two variables. Note
+the four extra lines of code given in program lines 14 through 18. These
+are used to tell the system how to output enumerated variables, and we
+will cover the essentials of how this works very soon.
+
+<P>The <B>in </B>and <B>not in</B> operators which we studied in the last
+program are available for use with the enumerated type variable. In fact,
+they are available with all discrete types. Be sure to compile and run
+this program and after studying the results, see if you can modify the
+program to output additional enumerated values.
+
+<P><B>THE BOOLEAN VARIABLE</B>
+
+<P>Example program ------> <B><A HREF="e_c06_p3.ada">e_c06_p3.ada</A></B>
+
+<P>The program named e_c06_p3.ada is an illustration of how to use the
+<B>BOOLEAN </B>variable, which is actually a special case of an enumerated
+variable. It is simply an enumerated type with two possible values, <B>TRUE
+</B>or <B>FALSE</B>. Since it is an enumerated type, all of the operations
+available with the enumerated type are available with the <B>BOOLEAN </B>type,
+including all six of the relational operators, the assignment operator,
+the attributes, and no mathematical operators.
+
+<P><B>THE LOGICAL OPERATORS</B>
+
+<P>The <B>BOOLEAN </B>type has some of its own unique operators that are
+available with no other types, and these are the logical operators. The
+logical operators were defined earlier, but are repeated here as a complete
+list.
+<PRE>&nbsp;&nbsp;&nbsp;&nbsp; <B>and</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; logical and operation
+&nbsp;&nbsp;&nbsp;&nbsp; <B>or</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; logical or operation
+&nbsp;&nbsp;&nbsp;&nbsp; <B>xor</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exclusive or of two values
+&nbsp;&nbsp;&nbsp;&nbsp; <B>not</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; inversion of the value
+&nbsp;&nbsp;&nbsp;&nbsp; <B>and then</B>&nbsp;&nbsp; short circuit and operation
+&nbsp;&nbsp;&nbsp;&nbsp; <B>or else</B>&nbsp;&nbsp;&nbsp; short circuit or operation</PRE>
+It should be pointed out that <B>FALSE </B>is of less numerical value than
+<B>TRUE</B>, by definition, and in actuality, the value of <B>FALSE </B>is
+0, and the value of <B>TRUE </B>is 1.
+
+<P>The program illustrates how to output <B>BOOLEAN </B>values in lines
+29 and 30, after the package instantiation in lines 7 and 8. Notice that
+the <B>Enumeration_IO</B> library is used for <B>BOOLEAN </B>output illustrating
+again that <B>BOOLEAN </B>is a special case of the enumerated type.
+
+<P>Be sure to compile and execute this program to see that it really does
+compile and execute as stated. Someday, you will need the ability to display
+the <B>BOOLEAN </B>results as is done in this program.
+
+<P><B>SOME USELESS ATTRIBUTES OF INTEGER TYPES</B>
+
+<P>Example program ------> <B><A HREF="e_c06_p4.ada">e_c06_p4.ada</A></B>
+
+<P>It may seem silly to illustrate some useless attributes but the program
+named e_c06_p4.ada does that very thing. The <B>POS </B>attribute of an
+integer variable is defined as being the number itself, and the <B>VAL
+</B>is also the number. The <B>SUCC </B>of an integer variable is the next
+number, and the <B>PRED </B>is the predecessor. These last two attributes
+could be useful for incrementing or decrementing a variable in a program,
+but good programming practice would forbid such a use of these attributes.
+You should use the very clear and easy to understand method of adding one
+to the value and assigning the result back to the variable, as illustrated
+in line 17 of the program.
+
+<P>Even though these are really useless at this point in time, the fact
+that this can be done will be very useful when we get to the study of generics
+later in this tutorial.
+
+<P>Compile and run this program, adding some output to gain some of your
+own programming experience.
+
+<P><B>MODULAR TYPE VARIABLES</B>
+
+<P>Example program ------> <B><A HREF="e_c06_p5.ada">e_c06_p5.ada</A></B>
+
+<P>Ada 95 introduced a new type into the language, the modular type variable
+which can be very useful in certain kinds of programs. In line 7, we define
+the type <B>DIAL_RANGE</B> as <B>mod</B> 5, which means that any variable
+declared to be of this type will "modulo" when it reaches the value of
+5. The variable declared in line 8, namely <B>Dial</B>, can store only
+values in the range of 0 to 4, and when it is incremented past 4 it modulo's
+back to zero with no error indication of overflow. Any value from 0 to
+4 can be added to it, or subtracted from it and it will modulo at either
+the upper or lower end of it's permitted range. A modulo variable cannot
+store a negative number. It is essentially an unsigned <B>INTEGER </B>with
+the added provision that it cannot overflow or underflow.
+
+<P>The type declared in line 10 is another <B>mod </B>variable named <B>MY_BINARY_BIT</B>
+which is only permitted to store a value of 0 or 1, and a variable of this
+type named <B>My_Bit</B> is declared in line 11.
+
+<P>Two other types are defined in lines 13 and 14 for illustration, but
+they are not actually used in this program.
+
+<P>In lines 16 through 20, we instantiate modulo output packages for these
+variable types and use them in the main program. We use an incrementing
+loop, followed by a decrementing loop to illustrate both overflow and underflow
+with these two new types. The program should be very easy for you to follow
+and understand, so nothing more needs to be said about it.
+
+<P>There are some predefined modular types available such as <B>UNSIGNED_8</B>,
+<B>UNSIGNED_16</B>, and <B>UNSIGNED_32</B>. They are defined in the package
+<B>Interfaces </B>along with several bitwise <B>and</B>, <B>or</B>, <B>xor</B>,
+etc. operations, and several shifting and rotating subprograms.
+
+<P><B>FLOATING POINT VARIABLES</B>
+
+<P>Example program ------> <B><A HREF="e_c06_p7.ada">e_c06_p7.ada</A></B>
+
+<P>Examine the program named e_c06_p7.ada for examples of nearly all operations
+possible with floating point numbers.
+
+<P>We begin, in lines 7 and 8, by defining two constants, the second being
+defined in terms of the first. Remember that any thing used in an Ada program
+must be previously defined, and you will know all of the rules for defining
+a value in terms of some other value. The two constants are of type universal_real,
+so they can be used with any of the various real types we will encounter
+in this program. We declare a variable named <B>R </B>in line 10 of type
+<B>FLOAT</B>, which is defined by the compiler writer, then two new types
+of floating point numbers, and we finally declare six variables of various
+types.
+
+<P>Two additional floating point types, <B>SHORT_FLOAT</B> and <B>LONG_FLOAT</B>
+are defined as optional by the ARM and may be available with your compiler.
+You can find out by checking the documentation supplied with your compiler
+or by declaring variables of those types to see if the compiler will accept
+the declarations. If they do exist, you can determine their limits by using
+attributes as defined below. You can also determine their limits by studying
+Annex M which is required to be supplied with every Ada 95 compiler. Annex
+M contains the definition of all implementation dependent entities.
+
+<P><B>HOW TO DECLARE A NEW FLOATING POINT TYPE</B>
+
+<P>The reserved word <B>digits </B>used in line 12 tells the compiler that
+you don't care how many bytes of storage it uses to define the number,
+but it must store at least 7 significant digits for every variable of type
+<B>MY_FLOAT</B>. Line 13 requests a minimum of 15 significant digits for
+every variable of type <B>MY_LONG_FLOAT</B>. The type <B>FLOAT </B>as used
+in line 10, on the other hand, only requires that it be a floating point
+number, and the compiler writer has the option of using as many significant
+digits as he desires to implement variables of this type. If you wrote
+a program that ran well with one compiler, it may not run properly with
+a different compiler, either because the new one did not use enough significant
+digits, or because the new one used far more, causing your program to run
+out of storage space or run too slowly. The forms in lines 12 and 13 are
+therefore preferred for portability purposes. More will be said about declaring
+floating point types in the next chapter of this tutorial.
+
+<P><B>FLOATING POINT LITERALS</B>
+
+<P>The distinguishing characteristic that defines a floating point number
+is the use of a decimal point. Ada requires at least one digit before and
+after the decimal point in all floating point literals, although either
+or both may be a zero. Single embedded underlines are allowed to improve
+readability, but cannot be adjacent to the decimal point. The underlines
+are ignored by the compiler, and have no significance. Any radix from 2
+through 16 may be used by first giving the radix, then enclosing the number
+in pound (#) characters. The base 10 is the default and need not be specified.
+Exponential notation can be used, the exponent being to the same base as
+that indicated by the radix. A binary floating point literal is illustrated
+in line 31 of the program and you can see that the radix is similar to
+that used for integer class literals.
+
+<P><B>FLOATING POINT MATHEMATICAL OPERATORS</B>
+
+<P>Lines 29 through 35 illustrate the mathematical operators available
+with floating point variables and should be self explanatory with the exception
+of the exponential operator. This can use only an integer type of exponent
+but it can be either positive or negative. Of course, zero is also permissible.
+
+<P>All six logical comparisons are available with floating point variables
+as illustrated in lines 38 through 43. Keep in mind that it is bad practice
+to compare two floating point numbers for equality or inequality in any
+language, but it can be done in Ada. The next two lines, 45 and 46, illustrate
+some multiple mathematical operations.
+
+<P>As with all variables, the types must agree within all mathematical
+and logical operations and the result must be assigned to the right type
+of variable, or a type error will be generated at compile time. In line
+46, the variable <B>Area </B>must be transformed in type prior to being
+assigned to <B>Cover </B>since they are of different types. The entire
+statement will be evaluated as of type <B>MY_LONG_FLOAT</B>, since that
+will be the final result. The constant 27.3, and the constant <B>TWO_PI</B>,
+will be transformed automatically from universal_real to <B>MY_LONG_FLOAT</B>
+prior to the multiplications.
+
+<P><B>NOW TO OUTPUT SOME FLOATING POINT VALUES</B>
+
+<P>In lines 22 through 25 we instantiate a copy of the <B>Integer_IO</B>
+package and a copy of the <B>Float_IO</B> package for use with the types
+<B>INTEGER </B>and <B>MY_FLOAT</B> and use it in lines 49 through 55. The
+variable <B>Area </B>will be output in a default exponential notation in
+line 49, but with 5 digits prior to the decimal point in line 50. Line
+54 adds an additional 5, which will cause 5 digits to be output following
+the decimal point, and the fourth field, in this case a zero, causes the
+output to be written with a zero exponent, or no exponential notation.
+
+<P><B>FLOATING POINT ATTRIBUTES</B>
+
+<P>Floating point variables and types are no different from the scalar
+types concerning attributes available for your use, except that there are
+different attributes available. Lines 58 through 66 illustrate the use
+of some of the available attributes. The attribute named <B>DIGITS</B>,
+gives the number of significant digits available with the specific type,
+and the return is a universal_integer type.
+
+<P>The attributes named <B>SMALL </B>and <B>LARGE </B>give the smallest
+and largest numbers available with the corresponding type, and the attributes
+named <B>FIRST </B>and <B>LAST </B>combined with the <B>BASE </B>attribute
+as shown in lines 62 and 65, define the extreme values as used by the underlying
+base type of the actual user's type. All four of these attributes return
+a value of the type universal_real, and are displayed on the monitor for
+your information. Note that there are other attributes available with the
+floating point type, but only these will be elaborated upon at this time.
+
+<P>See Annex K of the ARM for additional information on attributes. This
+appendix lists all of the attributes available with an Ada system.
+
+<P>Compile and run this program and observe the output. The actual output
+is the clearest description of the <B>Put </B>procedure when used with
+floating point numbers. Study the result of the attribute outputs before
+continuing on to the next example program.
+
+<P><B>FIXED POINT VARIABLES</B>
+
+<P>Example program ------> <B><A HREF="e_c06_p8.ada">e_c06_p8.ada</A></B>
+
+<P>Fixed point variables are a relatively new concept and may be a bit
+confusing, but the file named e_c06_p8.ada will illustrate the use of a few
+fixed point variables. Line 9 defines a fixed point type as having a <B>range
+</B>of -40.0 to 120.0, and a <B>delta </B>of 0.1 which means that a variable
+of this number can only have a value that is accurate to one digit after
+the decimal point. There are therefore a fixed number of digits before
+and after the decimal point, hence the name of this type of variable.
+
+<P>A fixed point number will always be exact since it is defined that way.
+There can never be a gradual accumulation of error with a fixed point variable.
+In order to completely understand the fixed point type, one would require
+a complete understanding of numerical analysis, which is beyond the scope
+of this tutorial. The program before you will illustrate how to use this
+type, but no attempt will be made to explain why it should be used.
+
+<P>There are no predefined fixed point types, so it is up to the programmer
+to define every fixed point type needed, as illustrated in lines 9 and
+10. The reserved word <B>delta </B>denotes a fixed point type and a <B>range
+</B>is required for every fixed point type. Lines 12 and 13 are used to
+declare a few variables for use in the program, then lines 17 through 20
+instantiate the package <B>Fixed_IO</B> for use with our two fixed point
+types.
+
+<P><B>HOW DO WE USE FIXED POINT TYPES?</B>
+
+<P>Output of a fixed point type uses the same format as that defined for
+floating point data as shown in line 27. When we come to arithmetical operations,
+we find some funny rules which we will simply state, and make no attempt
+to justify. Variables of the same fixed point types can be added and subtracted
+freely, provided the results are within the defined range, just like floating
+point type variables. Multiplication by a constant of type universal_integer
+is permitted, resulting in the same fixed point type we started with. Multiplication
+of two fixed point variables results in an anonymous type which must be
+explicitly converted to some predefined type, as illustrated in lines 33
+and 34. The only operator available with the fixed types is the <B>abs
+</B>operator.
+
+<P>Many attributes are available with the fixed point type, some of which
+are illustrated in lines 46 through 55. The attributes named <B>DELTA</B>,
+<B>SMALL</B>, and <B>LARGE</B>, each return a value which is of type universal_real,
+and must be converted to the users fixed type, by a type conversion, before
+the result can be used in the program. Line 48 illustrates the conversion
+within the <B>Put </B>procedure call.
+
+<P>Be sure to compile and run this program and observe the output to see
+if it conforms to what you think it should do based on the previous discussion.
+Note that your compiler may not generate identical output as that listed
+in the result of execution due to different compiler defaults.
+
+<P><B>ANOTHER NEW TYPE</B>
+
+<P>Example program ------> <B><A HREF="e_c06_p9.ada">e_c06_p9.ada</A></B>
+
+<P>A new type was added to the language with the introduction of Ada 96,
+the decimal type. It looks and acts very much like any other fixed type
+with the added limitation that it can only use a <B>delta </B>that is a
+power of 10. Every thing that can be done with a fixed type can be done
+with the decimal type, and all of the limitations of fixed types are applied
+to the decimal type also.
+
+<P>The decimal type is intended for financial software and has one advantage
+over the fixed type, and that is the predefined package named <B>Ada.Text_IO.Editing</B>
+which is a part of the optional Information Systems Annex. This package
+provides formatting monetary values with the dollar sign, commas, and proper
+placement of the decimal point. The example program illustrates use of
+the decimal type, but it does not illustrate the use of the optional annex
+since it is expected to be supported by only a few Ada compilers, those
+targeted to the banking and financial industry.
+
+<P><B>MIXING VARIOUS TYPES</B>
+
+<P>Example program ------> <B><A HREF="e_c06_p10.ada">e_c06_p10.ada</A></B>
+
+<P>Examine the program named e_c06_p10.ada for examples of using various
+types together. It is meant to be an illustration of how to combine some
+of the various types available in Ada. Many type transformations are illustrated
+by the explicit conversions in this program and should be easy for you
+to understand. Note especially, that the final result of lines 27, 28,
+and 29 will not necessarily be the same due to the rounding that takes
+place at different points in the calculations.
+
+<P>Note that in Ada, conversion from real to integer always rounds rather
+than truncates. A value midway between the two integer values will always
+move away from zero. This is carefully specified in Ada 95, but was not
+defined for Ada 83.
+
+<P>Compile and execute this program to assure yourself that it will compile
+correctly.
+
+<P>This would be a good time to get a little more familiar with the ARM
+by examining sections 3.5.4 and 3.5.7 which define the requirements for
+<B>INTEGER </B>and <B>FLOAT </B>type variables. You will not understand
+it all, but you will understand enough of it to make it a profitable task.
+
+<P><B>PROGRAMMING EXERCISES</B>
+<OL>
+<LI>
+Write a program to determine if <B>LONG_INTEGER</B> and <B>SHORT_INTEGER</B>
+types are available with your compiler. If they are available, use attributes
+to determine their characteristics.<A HREF=" a_c06_p1.ada">(Solution)</A></LI>
+
+<LI>
+Do the same thing as exercise 1 for the <B>LONG_FLOAT</B> and <B>SHORT_FLOAT</B>
+types.<A HREF=" a_c06_p2.ada">(Solution)</A></LI>
+
+<LI>
+Try to take the <B>PRED </B>of the first element of an enumerated variable
+to see what kind of a run-time error you get. Your compiler may be smart
+enough to warn you if you try to take it directly (i.e. - by using the
+first value in the parentheses), so you may need to assign a variable to
+the first value and take the <B>PRED </B>of the variable.<A HREF=" a_c06_p3.ada">(Solution)</A></LI>
+</OL>
+<A HREF="chap07.htm">Advance to Chapter 7</A>
+
+<P><A HREF="a95list.htm">Return to the Table of Contents</A>
+
+<P>
+<HR width="100%"><I><FONT SIZE=-1>Copyright &copy; 1988-1998 Coronado Enterprises
+- Last update, February 1, 1998</FONT></I>
+<BR><I><FONT SIZE=-1>Gordon Dodrill - dodrill@swcp.com - </FONT></I><FONT SIZE=-1><A HREF="mailto:dodrill@swcp.com">Please
+email any comments or suggestions.</A></FONT>
+</BODY>
+</HTML>

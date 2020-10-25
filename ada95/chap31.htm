@@ -1,0 +1,215 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Author" CONTENT="Gordon Dodrill">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (Win95; I) [Netscape]">
+   <TITLE>Ada Tutorial - Chapter 31</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<B>Ada Tutorial - Chapter 31</B>
+
+<P><B><FONT SIZE=+3>G</FONT><FONT SIZE=+2>ENERIC</FONT><FONT SIZE=+3> P</FONT><FONT SIZE=+2>ACKAGES</FONT></B>
+
+<P><B>OUR FIRST GENERIC PACKAGE</B>
+
+<P>In the last chapter we studied the use of generic subprograms. This
+chapter will be devoted to the study of generic packages, and we will exhaust
+the topic because only procedures, functions, and packages can be used
+as generic units.
+
+<P>Example program ------> <B><A HREF="e_c31_p1.ada">e_c31_p1.ada</A></B>
+
+<P>Examine the file named e_c31_p1.ada for our first example of a generic
+package. This package is named <B>EasyPkg</B>, because it is so easy to
+understand, and is composed of one procedure and one function. The generic
+package begins with the reserved word <B>generic</B>, followed by two generic
+formal parameters, and the standard format for an Ada package specification
+in lines 5 through 9. The first generic formal parameter is a discrete
+type, and the second is a floating point type as we discussed in the last
+chapter.
+
+<P>The instantiating statements are given in lines 39 and 41 of the main
+program and are no different than those used in the last chapter except
+for the first word, the reserved word <B>package</B>, because we are declaring
+an instance of a package in this case. If we replace the formal parameter
+types with the types declared in each instantiation statement, we will
+have a normal package just as we studied previously. In the case of a package,
+we can add the <B>use </B>clause as we have in lines 40 and 42, eliminating
+the need for the extended naming notation, commonly called the dot notation.
+After declaring a few variables to work with, we are ready to exercise
+the two procedures and functions we have declared. It should be clear to
+you that we have a procedure and a function in the package named <B>Funny_Stuff</B>,
+and another procedure and function in the package named <B>Usual_Stuff</B>.
+
+<P>A fine point must be mentioned about the <B>use </B>clause when used
+with the generic package. It is not legal to use a <B>use </B>clause with
+the generic package itself. Every instantiation must explicitly give the
+extended name for the generic package. Of course this only occurs with
+nested generic packages which are the topic of the next example program.
+The <B>use </B>clause however, is legal for use with any and every instantiated
+copy of a generic package. The instantiated package's new name cannot be
+overloaded because it is not permitted to overload the name of any package.
+
+<P><B>USING THE INSTANTIATED PACKAGES</B>
+
+<P>In line 53, we call the procedure named <B>Trade_Values</B>, but since
+there are two procedures with this name, Ada will pick the correct one
+by comparing the types. This is our old friend called overloading again.
+In line 54, because of the types used, the other procedure will be used
+as indicated in the comments. In lines 55 and 56, we explicitly tell the
+system which overloading to use, but it will still check the types to see
+if they are compatible. In line 57 we tell the system to use the wrong
+one which leads to a type mismatch and a compile error, and in line 58,
+we use two different types for the parameters, which is another type mismatch.
+(Lines 57 and 58 are commented out so that we will not actually get the
+error, but you should remove the comments to see that the compiler does
+report an error.)
+
+<P>Lines 60 through 64 give examples of proper usage of the two functions
+instantiated above and illustrate that the literals of type universal_real
+are compatible with both copies of the function as you would expect. The
+compiler uses the type of the assignment variable on the left hand side
+of the assignment statement to decide which overloading to use for each
+statement.
+
+<P>After you spend enough time to understand this program, compile and
+execute it even though it has no output.
+
+<P><B>NESTED GENERIC PACKAGES</B>
+
+<P>Example program ------> <B><A HREF="e_c31_p2.ada">e_c31_p2.ada</A></B>
+
+<P>The example program named e_c31_p2.ada contains a generic package nested
+within another non-generic package. The outer package contains a single
+procedure, and the nested generic package contains a single formal generic
+parameter of a floating point type, and a single function. The procedure
+and function are the same as those in the last program, but they are organized
+differently here for illustration.
+
+<P>Note carefully that since the procedure is not in the generic part of
+the outer package, it is directly available in the same manner as if it
+were in a package without a generic part. The package name can be declared
+in a <B>use </B>clause which will make the non-generic portion of the package
+usable.
+
+<P>The executable part of the program is very simple and very similar to
+the last example program so it will be left to the student to study, compile,
+and execute this program.
+
+<P><B>OBJECTS AS GENERIC FORMAL PARAMETERS</B>
+
+<P>Example program ------> <B><A HREF="e_c31_p3.ada">e_c31_p3.ada</A></B>
+
+<P>Examine the program named e_c31_p3.ada for an example of using objects
+for formal generic parameters instead of just types. In this case the number
+of <B>ROWS </B>and the number of <B>COLUMNS </B>will be part of the instantiation,
+and the resulting procedure and function will be ready to work with the
+desired size matrices. In addition, the constant named <B>ROWS</B>, and
+the constant named <B>COLUMNS </B>are initialized to the values given in
+lines 4 and 5. If a value is not given with the instantiation, these values
+will be used in much the same way that we use default values with a procedure
+or function.
+
+<P>In this case, the package body uses the standard <B>Ada.Text_IO</B>
+package and outputs a string to the monitor each time one of the subprograms
+is called. This is only done to illustrate to you that there is nothing
+magic about the package <B>Ada.Text_IO,</B> and that it can be used within
+another package.
+
+<P><B>USING THE OBJECTS</B>
+
+<P>In line 58, the package is instantiated using the positional aggregate
+notation with values of 3 and 5 for the matrix size. Line 60 illustrates
+the use of the defaults declared in the generic part above, and line 61
+illustrates the use of the named aggregate notation used during package
+instantiation.
+
+<P><B>AN EXPORTED TYPE CAN BE USED</B>
+
+<P>Referring back to line 8, we have the type named <B>LOCAL_MATRIX</B>
+declared in the package specification and therefore available to any calling
+program. If you refer to the private part of the package specification,
+you will see that the type <B>LOCAL_MATRIX</B> is declared to be a function
+of the formal generic objects. After we instantiate a copy of the package,
+we have the exported type available for use in the calling program. We
+use the types exported types in lines 66 through 68 to declare a few variables,
+but even though two of the instantiations make use of the <B>use </B>clause,
+we must explicitly declare the desired type by using the extended naming
+notation. This is because the compiler has no way of knowing which exported
+type we are interested in using for each variable.
+
+<P>With the above descriptions of the new concepts in this program, you
+should be able to understand the details of it. Be sure to compile and
+execute this program.
+
+<P><B>A PROCEDURE AS A GENERIC PARAMETER</B>
+
+<P>Example program ------> <B><A HREF="e_c31_p4.ada">e_c31_p4.ada</A></B>
+
+<P>Examine the program named e_c31_p4.ada for an example of a procedure
+being used as a generic formal parameter. The syntax uses the reserved
+word <B>with </B>to begin the formal parameter in line 4, and the complete
+header for the procedure is given with the list of formal parameters and
+their types. This procedure can then be called from within the body of
+the package and will refer to a procedure that is actually outside of the
+generic package. Now we must define the procedure that will be called in
+order to satisfy a call to this formal parameter. We will see where this
+procedure is defined shortly.
+
+<P>Refer to the main program where the procedure named <B>R_Average</B>
+is declared. It has exactly the same formal parameter structure as that
+declared in the generic formal parameter, so it can be used in the instantiating
+call in line 43. A call to the procedure in the generic instantiation actually
+results in a call back to the procedure in the calling program to do some
+calculations.
+
+<P><B>WHAT CAN THIS BE USED FOR?</B>
+
+<P>This capability gives you the ability to write a generic package that
+can be used in several places but with a slight difference in each place,
+because each instantiation can use a different procedure for the reference
+back to the calling program. This is simply another one of the available
+entities that add to the flexibility of Ada. After you understand the logic
+here, you should compile and execute this program.
+
+<P><B>A FUNCTION AS A GENERIC PARAMETER</B>
+
+<P>Example program ------> <B><A HREF="e_c31_p5.ada">e_c31_p5.ada</A></B>
+
+<P>Examine the program named e_c31_p5.ada for an example of using a function
+as a generic formal parameter. The logic is similar to that described in
+the last program except that a function is used for the reference back
+to the calling program. No further explanation will be given since it should
+not be needed. It should not come as much of a surprise to you that several
+procedures or functions, or a combination of them, can be used as generic
+formal parameters. Any of the isolated examples can be combined as needed
+to achieve the desired goal. Nesting of generic and normal packages can
+be done as needed. It will be up to you to decide how to modularize and
+package your program to best accomplish the stated goals. Ada gives you
+many options. Be sure to compile and execute this program.
+
+<P><B>PROGRAMMING EXERCISES</B>
+<OL>
+<LI>
+Add an enumerated type to e_c31_p1.ada, instantiate a copy of <B>EasyPkg</B>,
+and use it to swap some values of the enumerated type. You will have to
+supply a floating point type with the enumerated type when you instantiate
+it.<A HREF=" a_c31_p1.ada">(Solution)</A></LI>
+
+<LI>
+Convert e_c16_p1.ada from chapter 16 of this tutorial into a generic package
+that can be used with any discrete type. Modify e_c16_p2.ada from the same
+chapter to instantiate and use both an enumerated type and an <B>INTEGER
+</B>type.<A HREF="a_c31_p2A.ada">(Solution 1)</A><A HREF="a_c31_p2B.ada">(Solution 2)</A></LI>
+</OL>
+<A HREF="chap32.htm">Advance to Chapter 32</A>
+
+<P><A HREF="a95list.htm">Return to the Table of Contents</A>
+
+<P>
+<HR width="100%"><I><FONT SIZE=-1>Copyright &copy; 1988-1998 Coronado Enterprises
+- Last update, February 1, 1998</FONT></I>
+<BR><I><FONT SIZE=-1>Gordon Dodrill - dodrill@swcp.com - </FONT></I><FONT SIZE=-1><A HREF="mailto:dodrill@swcp.com">Please
+email any comments or suggestions.</A></FONT>
+</BODY>
+</HTML>

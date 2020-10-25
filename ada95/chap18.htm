@@ -1,0 +1,359 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Author" CONTENT="Gordon Dodrill">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (Win95; I) [Netscape]">
+   <TITLE>Ada Tutorial - Chapter 18</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<B>Ada Tutorial - Chapter 18</B>
+
+<P><B><FONT SIZE=+3>A</FONT><FONT SIZE=+2>DVANCED</FONT><FONT SIZE=+3>
+S</FONT><FONT SIZE=+2>UBPROGRAM</FONT><FONT SIZE=+3> T</FONT><FONT SIZE=+2>OPICS</FONT></B>
+
+<P>In part 1 of this tutorial we covered the topic of subprograms in some
+detail, but there are many other things to discuss about them, so we return
+to them for more advanced topics.
+
+<P><B>DEFAULT PARAMETERS</B>
+
+<P>Example program ------> <B><A HREF="e_c18_p1.ada">e_c18_p1.ada</A></B>
+
+<P>Examine the program named e_c18_p1.ada for some examples of default
+parameters used in the definition of a procedure. The procedure has four
+formal parameters, of which the first is of mode <B>in out</B>, and the
+other three are of the mode <B>in</B>. The three <B>in </B>parameters have
+default values of zero assigned to each of them. When we call this procedure,
+we are not required to supply a value for each variable, and those we do
+not supply a value for will be defaulted to zero upon execution. Of course
+the first variable in the list, named <B>Total</B>, must have a variable
+name supplied so it can return a value. Therefore, it cannot be defaulted.
+
+<P>The procedure itself, and the first two calls to it, in lines 29 and
+30, should pose no problem for you to understand. When we arrive at line
+31, however, we have a few things to point out.
+
+<P><B>NAMED NOTATION FOR ACTUAL PARAMETERS</B>
+
+<P>We are using the named aggregate notation for the actual parameters
+in line 31, so they can be listed in any order, but due to the defaults
+defined in the procedure header, we do not have to specify every parameter,
+allowing the default values to take effect upon a call to the procedure.
+You will see, when you compile and run this program, that <B>Cows </B>and
+<B>Pigs </B>will have the default values of zero. Lines 32 and 33 also
+use the named aggregate notation and should be clear as to their operation.
+Line 34 uses the mixed aggregate notation, and as we discussed before,
+the positional aggregate notation can be used initially, but after switching
+to the named notation, all remaining entries must be named, unless they
+are allowed to default. Line 35 illustrates the degenerate case where only
+the result is used, with all three input variables defaulting to zero.
+
+<P><B>PARAMETERS WITH out MODE CANNOT BE DEFAULTED</B>
+
+<P>Since the parameters that are of either mode <B>in out </B>or mode <B>out
+</B>must be able to return a value, they must have a variable defined as
+their actual parameter, and cannot therefore be defaulted.
+
+<P>Default parameters are not new to you, because you have actually used
+them in procedure calls before. When you call the procedure <B>New_Line</B>,
+you have an optional number following it as in <B>New_Line(2)</B>. The
+number of lines to space up on the monitor is defaulted to one in the package
+<B>Ada.Text_IO</B>, which was supplied to you with your compiler, but you
+can override the default by inserting a value for the number of lines.
+It is defined in Annex A.10.1 of the Ada 95 Reference Manual (ARM), where
+the formal parameter named <B>Spacing </B>is defaulted to the value of
+1. Refer to either your documentation or the ARM and see this in use.
+
+<P><B>DYNAMIC DEFAULT PARAMETERS</B>
+
+<P>Example program ------> <B><A HREF="e_c18_p2.ada">e_c18_p2.ada</A></B>
+
+<P>The program named e_c18_p2.ada is identical to the last example program
+except for one detail. The definition of the default values of the formal
+parameters are declared differently here. You will notice that the default
+values are not only arithmetic combinations, but the values to combine
+are the results of function calls, where the values are dynamically evaluated
+each time the procedure <B>Animals </B>is called. The default values are
+constants for each call of the procedure, but they are evaluated for each
+call and could therefore be different each time the procedure is called
+and executed. As mentioned previously, this is called elaboration. If the
+return from <B>Cow_Constant</B>, in line 12, returned the value of a global
+variable for example, the main program could modify the value of the global
+variable and therefore modify the value of the default variables prior
+to each call to the procedure. It would therefore be possible to set up
+different default values in each of several different procedures based
+on the currently read time of day, the ambient temperature, or whatever
+other variable conditions could be read into the system.
+
+<P>Be sure to compile and run this program and observe the results, comparing
+them with the results you expected the program to output.
+
+<P><B>THE MYSTERY OF RECURSION</B>
+
+<P>Example program ------> <B><A HREF="e_c18_p3.ada">e_c18_p3.ada</A></B>
+
+<P>This topic will be no problem for the experienced Pascal programmer,
+but for the FORTRAN programmer, it may be an entirely new and somewhat
+perplexing topic. Stay with it, and you will see exactly what recursion
+is and how to use it effectively. Examine the example program named e_c18_p3.ada,
+which is the simplest recursive program possible, but which is excellent
+for describing what recursion is and how it works.
+
+<P>Beginning at the main program, we assign the variable named <B>Index
+</B>the value of 7 then call the procedure named <B>Print_And_Decrement</B>,
+taking along the value of <B>Index </B>as an actual parameter. Arriving
+at the procedure itself, we use the name <B>Value </B>for the formal parameter,
+and we display the value on the monitor with an appropriate line of text.
+Continuing on to line 15, we decrement the value of the passed variable
+then compare the result to zero. If the value is greater than zero, we
+call the procedure named <B>Print_And_Decrement </B>taking along the newly
+decremented value called <B>New_Value</B>. Here is where the FORTRAN programmer
+notices something new. We are calling the procedure from within itself,
+and that is just what recursion is. Assume for a moment that we call another
+complete copy of the procedure, decrement the value once again, and if
+it is still not zero, call another copy of the procedure. Eventually, the
+value of the passed variable will be reduced to zero and the procedure
+calls will all be completed, each returning to the procedure that called
+it until we arrive once again at the main program.
+
+<P>You should compile and run this program to see that it really does what
+we say it does, then return for additional discussion of this program and
+what it is doing. This is a really dumb way to count from 7 down to 1,
+but it is a very simple way to illustrate the use of recursion. Later in
+this tutorial, we will have illustrations of excellent uses of recursion
+for your instruction.
+
+<P><B>WHAT ACTUALLY HAPPENED?</B>
+
+<P>When we called the procedure <B>Print_And_Decrement</B>, it began by
+elaborating its formal variables and assigning them the values passed by
+the calling program. These are stored on the stack, an internal portion
+of memory set aside by the Ada system to store dynamic variables and constants,
+and are available for later use. The local variables are then generated
+and elaborated, although in this case there was only one, and stored on
+the stack also with means to refer to them. Finally, the program code itself
+is actually executed, and when it is completed, the local variables and
+formal variables are erased from the stack and no longer exist. In a recursive
+call, the stack grows with each new call, and when control returns to an
+earlier call of the code, the variables for that call are still on the
+stack and available for use. In this program, we actually have only one
+copy of the executable code stored, but we have many copies of the formal
+variable and the local variable stored on the stack.
+
+<P><B>ALL ADA SUBPROGRAMS ARE RE-ENTRANT</B>
+
+<P>If you have experience in systems programming and understand what it
+means for a program to be re-entrant, you will understand how this means
+of variable storage allows all Ada subprograms to be re- entrant. The ARM
+requires that all Ada subprograms be re-entrant, but if you don't know
+what it means, don't worry about it.
+
+<P>It would be a good exercise for you to insert some code to display the
+value of the formal parameter following the recursive call to see that
+the value of the formal variable is still available when we return from
+each recursive call. This code would be inserted immediately after line
+18.
+
+<P>You should spend the time necessary to completely understand this program
+before continuing on to the next example program.
+
+<P><B>A RECURSIVE FUNCTION</B>
+
+<P>Example program ------> <B><A HREF="e_c18_p4.ada">e_c18_p4.ada</A></B>
+
+<P>Examine the program named e_c18_p4.ada for an example of a recursive
+function, which is actually no different than a recursive procedure. This
+program is used to illustrate two other Ada concepts, neither of which
+is new to you, but both of which contain valuable insights for you. The
+first is the partial declaration which will be discussed at the outset,
+and the other is a return to exceptions which will be deferred for a couple
+of paragraphs.
+
+<P><B>THE PARTIAL DECLARATION</B>
+
+<P>Ada requires that you define everything prior to its use, and this rule
+is never broken. Suppose you wished to have a program with two procedures,
+two functions, or even a procedure and a function, calling each other recursively.
+If A were declared first, it could be called by B, but A could not call
+B because it would not be defined by the time A was elaborated, and we
+cannot break the rule of defining everything prior to its use. This is
+more properly called linear declaration. Ada gets around this by allowing
+a partial declaration of a type, procedure, function, or package. If you
+remember, we used the partial declaration with respect to a record when
+we studied the access type variable, so this concept is not entirely new
+to you. It is also proper to refer to the partial declaration as a function
+specification.
+
+<P>In the present example program, we desire to place the functions in
+the program in the order shown, for no good reason other than to illustrate
+that it can be done, but we have the problem of linear declaration because
+<B>Factorial </B>calls <B>Factorial_Possible</B> and they are in the wrong
+order. The partial declaration in line 12 tells the system that the function
+<B>Factorial_Possible</B> will be defined later and what its characteristics
+will be, because the formal parameter is defined along with its return
+type. The function <B>Factorial </B>is then completely defined, and it
+can call the other function because it has the definition of its interface.
+We then have the complete definition of the function <B>Factorial_Possible</B>
+and we have accomplished our desired goals, while meeting the requirements
+of linear declaration.
+
+<P><B>NOW FOR THE RECURSIVE FUNCTION</B>
+
+<P>Assuming you are familiar with the factorial function which is a part
+of higher mathematics, we will continue with the program description. Since
+<B>Factorial(N)</B> is the same as N times <B>Factorial(N-1)</B>, we can
+calculate the factorial of any number using a recursive technique. We continue
+to recurse until we reach a point where we need the value of <B>Factorial(1)</B>,
+which we define as 1, and begin going back up the recursive chain, each
+time multiplying by the value with which we entered into that particular
+recursive call. By defining the value of <B>Factorial(0)</B> as 1, and
+making it illegal to take the factorial of any negative number, we can
+now write the complete program. Most of the program involves checking limits
+and outputting messages, but the actual work is done by line 27 which is
+the recursive call as defined earlier in this paragraph.
+
+<P><B>EXTRA CHECKS ARE DONE</B>
+
+<P>The program should not be at all difficult for you to follow and understand,
+so you will be left on your own to study it. A few comments on style should
+be mentioned, however. The function <B>Factorial </B>calls the other function
+to verify that the value is factoriable before attempting to do so, and
+the main program, in lines 44 through 54, checks the value before calling
+the function to attempt to factorialize the number. A redundant check like
+this is not necessarily bad, because the procedure was written to be all
+inclusive, and the main program may wish to do something entirely different
+than that dictated by the procedure. In lines 58 through 63 however, the
+main program accepts the default error handling provided by the procedure,
+by calling the procedure without first checking the data.
+
+<P>Compile and run this program, observing the various messages output
+depending on which portion of the program handled the errors. Note carefully
+that the program is not meant to be an illustration of good programming
+style, only as an illustration of a few things that can be done using Ada.
+
+<P><B>ANOTHER LOOK AT EXCEPTIONS</B>
+
+<P>The last program was unusual because it has the ability to illustrate
+three of the four standard exceptions defined by the Ada system. They can
+be illustrated as follows;
+<UL>
+<LI>
+<B>Program_Error</B> - Remove the <B>return </B>from line 27 and you will
+drop out of the bottom of the function. (Actually, a validated compiler
+will generate a compile error.)</LI>
+
+<LI>
+<B>Constraint_Error</B> - Change the type of the formal parameter in line
+14 to <B>POSITIVE</B>, which covers the range of all numbers legal to compute
+a factorial for. Then call the function with -1 as a parameter.</LI>
+
+<LI>
+<B>Storage_Error</B> - Call Factorial(100000). The stack should overflow
+prior to completing the required number of recursions.</LI>
+</UL>
+<B>A FUNCTION RETURNING AN ARRAY</B>
+
+<P>Example program ------> <B><A HREF="e_c18_p5.ada">e_c18_p5.ada</A></B>
+
+<P>The example program named e_c18_p5.ada will give you an example of a function
+that returns more than a single scalar variable, in fact, it returns an
+entire <B>array </B>of <B>INTEGER </B>type variables. The program itself
+is extremely simple, the only thing that is different from most functions
+is the type of return listed in line 12, and the actual return in line
+18. These must, of course, agree in type or a type mismatch error will
+be issued during compilation.
+
+<P>Using the technique given here, there is no reason why a function cannot
+return a record, or even an array of records, as long as the types are
+correctly defined and they agree when used.
+
+<P><B>THE INLINE pragma</B>
+
+<P>A <B>pragma </B>is a compiler directive, as we have mentioned previously,
+and the <B>INLINE </B>pragma tells the compiler to expand the called subprogram
+body and insert it into the calling program for each call. Since the code
+is inserted inline, there is no calling sequence and therefore no time
+wasted in setting up subprogram linkage, but there is a separate section
+of code for each invocation of the subprogram. The result will usually
+be a larger but faster program. Use of this <B>pragma </B>is illustrated
+as follows;
+<PRE>&nbsp;&nbsp;&nbsp;&nbsp; <B>pragma </B>INLINE(subprogram1, subprogram2, ... );</PRE>
+This line is inserted in the declarative part of the compilation unit,
+following the subprogram specifications. By definition, the meaning of
+a subprogram is not affected by the pragma.
+
+<P><B>OPERATOR OVERLOADING AND THE "use" CLAUSE</B>
+
+<P>Example program ------> <B><A HREF="e_c18_p6.ada">e_c18_p6.ada</A></B>
+
+<P>Operator overloading has been mentioned in this tutorial before, but
+it is necessary to cover a little more ground on this very important topic,
+and we will use e_c18_p6.ada as a vehicle for discussion.
+
+<P>We define a package specification in lines 2 through 18 named <B>Shape
+</B>with a record type named <B>BOX </B>defined within the package. The
+subprograms <B>Make_A_Box </B>and <B>Print_Box</B> provide us with the
+ability to generate and display any variable of the <B>BOX </B>type, and
+we provide three overloaded operators for use with this type. Two of the
+subprograms overload the + operator for use with variables of this type,
+and the other provides us with a multiply capability. Many more overloadings
+could be defined if desired, but these three illustrate the technique.
+
+<P>The body for the package is given in lines 22 through 75. The overloaded
+operations make little sense in the real world, since adding two boxes
+would not usually be done by simply adding the size of all three dimensions.
+However, we are far more interested in the technique of overloading operators,
+so the interface is what really matters here. The implementation should
+be simple for you to study on your own.
+
+<P><B>THE CALLING PROGRAM</B>
+
+<P>The calling program is definitely the most interesting part of this
+example, beginning with line 80 where we have a <B>use type</B> construct
+which is new to us. A short digression is in order at this point to explain
+what this does.
+
+<P>Many experienced Ada programmers feel that the <B>use </B>statement
+should never be used in an Ada program because it hides the source of any
+subprogram calls or type definitions. For this reason many projects outlaw
+its use. It seems reasonable to this author, that <B>Ada.Text_IO</B> should
+be a permitted violation of this rule, but that is yet another digression
+so we will not consider it further. In order for the overloaded operators
+to be available for use as infix operators, as illustrated in lines 94
+through 97 of this example program, the <B>use </B>clause must be included.
+If it is not included, line 97 would need to be written as illustrated
+in line 99, a very ugly and difficult to read notation. The use of the
+<B>use type</B> construct in line 80 makes the overloaded operators available
+for use as infix operators, but does not permit the use of any other subprograms
+from the <B>Shape </B>package without the package prefix. This gives the
+ease of readability, and the extra safety desired by some project leaders.
+
+<P>The package name is required when defining variables in lines 84 and
+85, and when calling subprograms that are not operator overloads, such
+as illustrated in lines 89 through 99. Note that line 97 calculates the
+result we expect because the multiplication is done prior to the addition.
+It is not possible to change the order of precedence when overloading operators.
+
+<P><B>PROGRAMMING EXERCISES</B>
+<OL>
+<LI>
+As suggested earlier, include an output statement in e_c18_p3.ada to display
+the value of <B>Value </B>after the recursive call to see the recursion
+come back up through the chain of recursive calls.<A HREF=" a_c18_p1.ada">(Solution)</A></LI>
+
+<LI>
+Write a recursive program with two procedures named <B>Increment </B>and
+<B>Display </B>which call each other and increment a variable, initialized
+to 1, until it reaches a count of 8.<A HREF=" a_c18_p2.ada">(Solution)</A></LI>
+</OL>
+<A HREF="chap19.htm">Advance to Chapter 19</A>
+
+<P><A HREF="a95list.htm">Return to the Table of Contents</A>
+
+<P>
+<HR width="100%"><I><FONT SIZE=-1>Copyright &copy; 1988-1998 Coronado Enterprises
+- Last update, February 1, 1998</FONT></I>
+<BR><I><FONT SIZE=-1>Gordon Dodrill - dodrill@swcp.com - </FONT></I><FONT SIZE=-1><A HREF="mailto:dodrill@swcp.com">Please
+email any comments or suggestions.</A></FONT>
+</BODY>
+</HTML>

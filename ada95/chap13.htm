@@ -1,0 +1,381 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Author" CONTENT="Gordon Dodrill">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (Win95; I) [Netscape]">
+   <TITLE>Ada Tutorial - Chapter 13</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<B>Ada Tutorial - Chapter 13</B>
+
+<P><B><FONT SIZE=+3>T</FONT><FONT SIZE=+2>HE</FONT><FONT SIZE=+3> A</FONT><FONT SIZE=+2>CCESS</FONT><FONT SIZE=+3>
+T</FONT><FONT SIZE=+2>YPE</FONT><FONT SIZE=+3> V</FONT><FONT SIZE=+2>ARIABLE</FONT></B>
+
+<P><B>THE ACCESS TYPE IS DIFFERENT</B>
+
+<P>Example program ------> <B><A HREF="e_c13_p1.ada">e_c13_p1.ada</A></B>
+
+<P>The access type variable is different from every other type we have
+encountered because it is not actually a variable which can store a piece
+of data, but contains the address of another piece of data which can be
+manipulated. As always the best teacher is an example, so examine the file
+named e_c13_p1.ada for an example program with a few access type variables
+in it.
+
+<P><B>DECLARING AN ACCESS TYPE VARIABLE</B>
+
+<P>In line 7 we declare a new type, an <B>access </B>type. As with all
+types, the reserved word <B>type </B>is given, followed by the type name,
+then the reserved words <B>is </B>and the type definition. The type definition
+begins with the reserved word <B>access</B>, which denotes an access type
+variable, then by the type which we wish to access. The type which we wish
+to access can be any type which has been declared prior to this point in
+the program, either a predeclared type or a type we have declared. Because
+there are no predeclared access types available in Ada, we must declare
+all access types we wish to use.
+
+<P><IMG SRC="ada1301.gif" HSPACE=20 VSPACE=20 BORDER=0 HEIGHT=127 WIDTH=382 ALIGN=RIGHT>The
+new type is used to declare three access variables in line 8. No actual
+variables are declared, only access to three places in memory which actually
+do not exist yet. The access type variables do not store an integer value,
+as might be expected, but instead store the address of an integer value
+located somewhere within the address space of the computer memory. Note
+that the three access variables are automatically initialized to <B>null
+</B>when they are declared, as are all access variables in Ada.
+
+<P>Figure 13-1 illustrates graphically the condition of the system at this
+point. A box with a dot in the center depicts an access variable and an
+empty box will be used to depict a scalar variable.
+
+<P><B>WE NEED SOME DATA TO POINT AT</B>
+
+<P>As we begin the executable part of the program, we have no data to access,
+so we create some data storage in line 11 using the <B>new </B>reserved
+word. This tells the system to go somewhere and create a variable of type
+<B>INTEGER</B>, with no name, and cause the access variable named <B>Index
+</B>to point at this new variable. The effective address of the new variable
+is assigned to the access variable <B>Index</B>, but the new variable still
+has no assigned value.
+
+<P><IMG SRC="ada1302.gif" HSPACE=20 VSPACE=20 BORDER=0 HEIGHT=125 WIDTH=384 ALIGN=RIGHT>Line
+12 tells the system to assign the value of 13 to the new variable by using
+a very strange looking method of doing so. For the first two example programs
+in this chapter, we will simply say that the value of all of the variable
+is set to the indicated value, namely 13. The end result is that the access
+variable named <B>Index </B>is pointing someplace in memory which has no
+name, but contains the value of 13. Figure 13-2 illustrates our current
+situation.
+
+<P>Lines 13 through 15 indicate that it is possible to display the value
+of this variable using the same method we have used in all earlier lessons
+of this tutorial. If you remember to add the <B>.all</B> to the access
+variable, you will be referring to the data stored at the location which
+it accesses.
+
+<P>Line 17 is used to create another variable of type <B>INTEGER </B>somewhere
+in memory, with <B>Arrow </B>pointing to it, but which contains no value
+as yet. The next line says to take the value that is stored at the location
+to which <B>Index </B>points, add 16 to it, and store the result, which
+should be 29, in the location to which <B>Arrow </B>points. <B>Arrow </B>actually
+"accesses" the variable, but it is a bit more descriptive to use the word
+points, especially if you are a Pascal or C programmer.
+
+<P><B>THE THIRD ACCESS VARIABLE</B>
+
+<P>We have not yet used the access variable named <B>There</B>, so we instruct
+the system, in line 19, to cause it to point to the same piece of data
+which <B>Arrow </B>is currently accessing. By failing to add the <B>all
+</B>to the two access variables, we are assigning the <B>access </B>address
+to <B>There </B>rather than the value which <B>Arrow </B>accesses. If only
+one of them had the <B>all </B>appended in line 19, there would be a type
+clash resulting in a compiler error message. All three access variables
+are accessing some data somewhere, so we can use their .<B>all </B>notation
+to display all three values. See figure 13-3 for a graphic representation
+of the current data space.
+
+<P><IMG SRC="ada1303.gif" HSPACE=20 VSPACE=20 BORDER=0 HEIGHT=133 WIDTH=384 ALIGN=RIGHT>Note
+that there are actually only two variables, because two of the access variables
+are pointing at the same piece of data. This is illustrated when one of
+the variables is changed in line 26, and when the data is printed, it is
+evident that two of the values are different.
+
+<P>Be sure to compile and run this program. When you think you understand
+it, see if you can modify it such that all three access variables point
+to the same piece of data.
+
+<P><B>ACCESSING INTEGER AND FLOAT TYPE VARIABLES</B>
+
+<P>Example program ------> <B><A HREF="e_c13_p2.ada">e_c13_p2.ada</A></B>
+
+<P>Examine the file named e_c13_p2.ada for some additional examples of access
+type variables. We begin by declaring two access variables which access
+<B>INTEGER </B>type variables and three access variables that access <B>FLOAT
+</B>type variables. It should be pointed out, and it probably comes as
+no surprise to you, that it is illegal to attempt to access a variable
+with the wrong type of access variable. Explicit type conversion is possible
+concerning the data types, but not the access types.
+
+<P>Line 14 introduces a new construct, that of initializing a variable
+when it is created. Using a form similar to qualification, an <B>INTEGER
+</B>type variable is created somewhere in memory, initialized to 173, and
+the access variable named <B>Index </B>is assigned its address so that
+it points to it, or accesses it. After executing line 15, the data space
+is as shown in figure 13-4.
+
+<P><IMG SRC="ada1304.gif" HSPACE=20 VSPACE=20 BORDER=0 HEIGHT=144 WIDTH=393 ALIGN=RIGHT>Be
+sure to note the difference between the expressions in lines 21 and 22.
+In line 21, the value stored at the place where <B>Index </B>points, is
+stored at the place where <B>Arrow </B>points. However, in line 22, the
+access variable <B>Index </B>is caused to point to the same location where
+the access variable <B>Arrow </B>points.
+
+<P><B>A FLOAT TYPE ACCESS VARIABLE</B>
+
+<P>Line 24 illustrates creation of a <B>FLOAT </B>type variable initialized
+with the value of Pi. Since the access variable names are used in lines
+25 and 26 without the <B>all </B>appended, all three <B>FLOAT </B>type
+access variables are assigned to access the same variable, and some results
+are displayed. Figure 13-5 illustrates the condition of the system at this
+point.
+
+<P><IMG SRC="ada1305.gif" HSPACE=20 VSPACE=20 BORDER=0 HEIGHT=145 WIDTH=422>
+
+<P>The single <B>FLOAT </B>type variable is doubled in line 33, and it
+is displayed again three different ways. Be sure to compile and execute
+this program.
+
+<P><B>ACCESSING A RECORD VARIABLE</B>
+
+<P>Example program ------> <B><A HREF="e_c13_p3.ada">e_c13_p3.ada</A></B>
+
+<P>Examine the example program named e_c13_p3.ada for some additional uses
+for access variables. This program begins by defining a record type, then
+an <B>access</B> type which can be used to access data of this record type.
+Ignore the procedure <B>Free </B>in line 16 for a short time. In line 19,
+we declare a variable named <B>Myself </B>which is an access variable that
+accesses a variable of the type <B>MY_RECORD</B>. Since the record does
+not exist yet, the access variable is actually pointing nowhere. According
+to the Ada definition, the created access variable will be initialized
+to the value <B>null</B>, which means it points nowhere. This value can
+be tested for some value as we shall see later. All access variables used
+in an Ada program, regardless of how they are declared, will be initially
+assigned the value of <B>null</B>. This is true, unless they are specifically
+initialized to some value as shown in line 20.
+
+<P><IMG SRC="ada1306.gif" HSPACE=20 VSPACE=20 BORDER=0 HEIGHT=139 WIDTH=414>
+
+<P>Line 20 is very interesting because we declare an access variable named
+<B>Friend</B>, and initialize the access variable by creating a new record
+somewhere in memory, then initialize the record itself to the values given
+in the positional aggregate. Finally, the access variable <B>Friend </B>is
+caused to point to the newly created record. It is permissible to create
+a new record, but omit the initialization, supplying the initial values
+in the executable part of the program as we are doing with the variable
+named <B>Myself</B>. We finally declare a <B>BOOLEAN </B>type variable
+for later use. Figure 13-6 illustrates our current data space.
+
+<P><B>USING THE RECORD ACCESS VARIABLE</B>
+
+<P>In line 26, we create a new variable of type <B>MY_RECORD</B>, which
+is composed of three separate fields. The three fields are assigned in
+much the same manner that they were assigned in the chapter where we studied
+records, so this should pose no problem for you. In line 32, we create
+another new record somewhere and initialize it to the values given, and
+cause the variable named <B>Friend </B>to point to it, or access it. See
+figure 13-7.
+
+<P><IMG SRC="ada1307.gif" HSPACE=20 VSPACE=20 BORDER=0 HEIGHT=167 WIDTH=414>
+
+<P><B>NOW WE HAVE SOME LOST VARIABLES</B>
+
+<P>Consider that the access variable <B>Friend </B>already had some data
+that it was pointing at, and we told the system to cause it to point at
+this newly created record. The record it was formerly pointing at is now
+somewhere in memory, but has nothing pointing at it, so it is in effect
+lost. We cannot store anything in it, nor can we read out the data that
+is stored in it. Of even more consequence, we cannot free up those memory
+locations for further use, so the space is totally lost to our program.
+Of course, the operating system will take care of cleaning up all of the
+lost variables when our program terminates, so the data is not lost forever.
+It is up to us to see that we do not lose memory space through clumsy programming
+because Ada cannot check to see that we have reassigned an access variable.
+
+<P>The next interesting thing is illustrated in line 40 where <B>all </B>of
+the fields of the record which <B>Myself </B>accesses are assigned to all
+of the fields of the record which <B>Friend </B>accesses. Now it makes
+sense why the designers of Ada chose to refer to the data which is accessed
+by the .<B>all </B>notation, it refers to all of the data that the access
+variable points to. It should be pointed out that as you gain experience
+with Ada you will find that nearly all access type variables are used to
+access records, and few, if any, will access scalar variables.
+
+<P><B>BOOLEAN OPERATIONS WITH ACCESS VARIABLES</B>
+
+<P>Records accessed by access variables can be compared for equality or
+inequality, just like regular records, and they are equal only if all fields
+in one record are equal to the corresponding fields in the other record.
+Line 42 will therefore result in <B>TRUE</B>, because the records are identical,
+due to the assignment in line 40. Access variables can also be compared
+to each other, and result in <B>TRUE </B>only if they are both pointing
+to the same object. In line 43, the result is <B>FALSE </B>because they
+are pointing to different records, even though the records they point to
+happen to be equal to each other.
+
+<P><B>WHAT IS UNCHECKED DEALLOCATION?</B>
+
+<P>The procedure <B>Unchecked_Deallocation</B> is a required part of Ada,
+so your compiler writer has supplied you with this procedure as a part
+of the library. Any dynamically allocated data can be freed up for reuse
+by the system through use of this procedure as illustrated in this program.
+You must first instantiate a copy of the generic procedure as illustrated
+in line 16, and name it any available identifier you choose. You must supply
+two types as parameters, the first being the object type you wish to deallocate,
+and the second being the access type. The name <B>Free </B>is generally
+used because that name is used for the equivalent procedure in Pascal and
+in C.
+
+<P>To actually deallocate some storage, you use the name of the access
+variable which is accessing the storage to be released as the only parameter
+of the procedure named <B>Free </B>as illustrated in lines 46 and 47. This
+storage is then available for reuse by some other part of the program.
+
+<P>There is a lot more to be said about deallocation of storage and the
+way it is accomplished, but the details will be left until chapter 23,
+after you gain more experience with Ada. Until then, with your limited
+knowledge of Ada, you will probably not be writing programs in which you
+will need this information. Be sure to compile and execute this program.
+
+<P><B>GARBAGE COLLECTION</B>
+
+<P>Another way to deallocate the data accessed by the access variables,
+is to assign the value of <B>null </B>to the access variables. This will
+cause the dynamically allocated variables to have no access variables accessing
+them, and they are then unusable, or garbage. An Ada implementation may
+implement a garbage collector to search for un-accessed data and reclaim
+the storage for further use. Implementation of a garbage collector is optional
+according to the ARM. Much more will be said about deallocation and garbage
+collection in chapter 25.
+
+<P><B>ACCESSING AN ARRAY OF DATA</B>
+
+<P>Example program ------> <B><A HREF="e_c13_p4.ada">e_c13_p4.ada</A></B>
+
+<P>The example program named e_c13_p4.ada gives an example of using an access
+variable to access an array. The only thing that could be considered new
+here is the assignment in line 20 where the value of the array <B>List_Of_Stuff</B>,
+is assigned to the variable which is accessed by the access variable <B>There</B>.
+Note that 6 <B>INTEGER </B>type values are actually assigned in this one
+statement.
+
+<P>Note that <B>Unchecked_Deallocation</B> is illustrated here also as
+an example. The program should be simple for you to follow, and after you
+understand it, compile and execute it.
+
+<P><B>AN ARRAY OF ACCESS VARIABLES</B>
+
+<P>Example program ------> <B><A HREF="e_c13_p5.ada">e_c13_p5.ada</A></B>
+
+<P>Examine the program e_c13_p5.ada for an example including an array of
+access variables which is declared in line 17. The variable named <B>Class
+</B>is composed of a total of ten access type variables, any of which can
+be used to point to a variable of type <B>MY_RECORD.</B> The loop in lines
+26 through 29 is used to first create a record variable, then assign values
+to the fields of the created record variable, for each of the ten access
+variables. Since each record is composed of three subfields, a total of
+30 separate variables are created and assigned values in this loop. A few
+of the variables are reassigned values in lines 31 through 37 for illustrative
+purposes, and the entire array named <B>Class </B>is displayed on the monitor.
+
+<P>Note that the array declared in line 17 is an anonymous type array.
+
+<P>Compile and run this program, and be sure you understand the resulting
+printout. The access variable will be very important when we study some
+of the advanced programming techniques later in this tutorial.
+
+<P><B>ACCESS TO STATIC OBJECTS</B>
+
+<P>Example program ------> <B><A HREF="e_c13_p6.ada">e_c13_p6.ada</A></B>
+
+<P>Ada 95 has the ability to access a local or global variable with an
+access variable. This was not permitted with Ada 83. In order to do so,
+it is necessary to identify the access variable as one with the ability
+to access a local or global variable by using the keyword <B>all </B>as
+is done in lines 13 through 15 of the example program. In addition, the
+variables to be accessed must be identified as accessible with the new
+keyword <B>aliased </B>as illustrated in lines 18, 21, and 24 of this program.
+This is a practice that could be easily abused, so the designers of Ada
+force you to identify the access variable and the variable to be accessed
+prior to actually doing the operation. This forces you to think carefully
+about what you are doing. The use and abuse of pointers is the weakest
+spot in some other languages and lead to very difficult to find errors.
+
+<P>You will note that the Ada compiler will complain, via an error, if
+any of the ingredients is missing while using this technique. Lines 30
+through 32 are included in this program to illustrate the various rules
+of usage.
+
+<P>There is one other rule that must be followed and is checked by the
+compiler anytime you use an access variable to refer to a local or global
+variable. The object referred to must exist for as long or longer than
+the access variable itself, or the compiler will issue an error message.
+This is to prevent the error of using an access variable when the object
+it refers to is no longer in existence.
+
+<P><B>ACCESS TO SUBPROGRAMS</B>
+
+<P>Example program ------> <B><A HREF="e_c13_p7.ada">e_c13_p7.ada</A></B>
+
+<P>The example program named e_c13_p7.ada is an example of using a single
+access variable to call three different functions. There are three functions
+defined in lines 7 through 20, and each have the same number of parameters,
+the same type of parameters and the same return type. With all of this
+parallelism, they are candidates for use with an access variable. In line
+22 we define a type which happens to have the same signature as the three
+functions listed above it, and finally we declare an access variable of
+the new type named <B>Multiply</B>. In the executable part of the program
+we call the three functions with the access variable in lines 31, 36, and
+41. The same call results in calls to different physical functions since
+it is pointing to a different function each time we call it. Lines 29,
+34, and 39 are where we actually assign the address to the access variable.
+
+<P>This same technique can be used with procedure calls as well, provided
+that the signature for each of the entities is identical. In the case of
+the procedure, all of the parameters must have the same mode. They are
+by definition, all of the <B>in </B>mode in a function.
+
+<P>There is one other rule that must be followed and is checked by the
+compiler anytime you use an access variable to refer to a subprogram. The
+object referred to must exist for as long or longer than the access variable
+itself, or the compiler will issue an error message. This is to prevent
+the use of an access variable when the object it refers to is no longer
+in existence, an obvious error. In those cases when you think it is all
+right to override this rule, <B>Unchecked_Access</B> is available for use
+and documented in the ARM.
+
+<P>The use of anything that is unchecked is highly discouraged.
+
+<P><B>PROGRAMMING EXERCISES</B>
+<OL>
+<LI>
+Declare a record named <B>BOX_TYPE</B> composed of three <B>FLOAT </B>type
+elements, <B>Length</B>, <B>Width</B>, and <B>Height</B>. Use the <B>new
+</B>function to create three boxes named <B>Small</B>, <B>Medium</B>, and
+<B>Large</B>, and store suitable values in all nine fields. Display the
+data concerning the three boxes along with the volume of each box.<A HREF=" a_c13_p1.ada">(Solution)</A></LI>
+
+<LI>
+Add the <B>Unchecked_Deallocation</B> procedure to the other three example
+programs, e_c13_p1.ada, e_c13_p2.ada, and e_c13_p5.ada, and deallocate all
+allocated variables.<A HREF="a_c13_p2A.ada">(Solution 1)</A><A HREF="a_c13_p2B.ada">(Solution 2)</A><A HREF="a_c13_p2C.ada">(Solution 3)</A></LI>
+</OL>
+<A HREF="chap14.htm">Advance to Chapter 14</A>
+
+<P><A HREF="a95list.htm">Return to the Table of Contents</A>
+
+<P>
+<HR width="100%"><I><FONT SIZE=-1>Copyright &copy; 1988-1998 Coronado Enterprises
+- Last update, February 1, 1998</FONT></I>
+<BR><I><FONT SIZE=-1>Gordon Dodrill - dodrill@swcp.com - </FONT></I><FONT SIZE=-1><A HREF="mailto:dodrill@swcp.com">Please
+email any comments or suggestions.</A></FONT>
+</BODY>
+</HTML>

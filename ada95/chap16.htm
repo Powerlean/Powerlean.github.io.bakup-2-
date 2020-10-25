@@ -1,0 +1,258 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Author" CONTENT="Gordon Dodrill">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (Win95; I) [Netscape]">
+   <TITLE>Ada Tutorial - Chapter 16</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<B>Ada Tutorial - Chapter 16</B>
+
+<P><B><FONT SIZE=+3>E</FONT><FONT SIZE=+2>XAMPLE</FONT><FONT SIZE=+3> P</FONT><FONT SIZE=+2>ROGRAMS</FONT></B>
+
+<P><B>WHY IS THIS CHAPTER INCLUDED?</B>
+
+<P>It would be a real disservice to you to discuss all of the constructs
+available with Ada, then simply drop you in the middle of a large program
+and tell you to put it all together. This chapter is intended to illustrate
+to you, with simple examples, how to put some of these topics together
+to build a meaningful program. The examples are larger than any programs
+we have examined to this point, but they are still very simple, and should
+be easy for you to follow along and understand what they are doing.
+
+<P><B>THE CHARACTER STACK</B>
+
+<P>Example program ------> <B><A HREF="e_c16_p1.ada">e_c16_p1.ada</A></B>
+
+<P>The program named e_c16_p1.ada illustrates how you can define your own
+stack for use in your programs. A stack is a list of homogeneous items
+that grows and shrinks in such a way that the last item entered will always
+be the first removed, thus it is often referred to as a Last In, First
+Out (LIFO) list. In order to keep it simple, we will only allow the stack
+to store <B>CHARACTER </B>type variables, although it could be defined
+to store any type of variables we desired, even arrays or records.
+
+<P><B>THE SPECIFICATION PACKAGE</B>
+
+<P>The specification package is defined in lines 2 through 20, and gives
+the user everything he needs to know to use the character stack package.
+You will see that the user does not know how the stack is implemented,
+or even how big the stack can grow to unless he looks into the package
+body, and if we hide the body from him, he has no way of knowing this information.
+All he can do is use the package the way we tell him it works. In a real
+system, we would have to tell him how big the stack could grow, because
+that would probably be valuable information for him when he designed his
+software, but for our purposes we are not going to let him know the maximum
+size. Of course, we must then provide a means to be sure that he cannot
+force the stack to get larger than its maximum size. The procedure <B>Push
+</B>is defined in such a way that if the stack is full and the character
+will not fit, it is simply not put on the list. The user must check if
+the stack is full by calling the function <B>Is_Full</B> which returns
+a <B>BOOLEAN </B>value of <B>TRUE </B>if there is no additional room on
+the stack.
+
+<P>Careful study of the package specification will reveal that enough functions
+and procedures are included to allow effective use of the character stack.
+The package body simply defines the actual implementation required to do
+the work defined in the specification. Once again, you should be able to
+understand the package body since there is nothing here which is new or
+strange to you. It should be pointed out to you that this is actually not
+a very efficient way to define a stack, because it is limited to a single
+type, but it serves our purposes well as an illustration. When we study
+generic packages in part 2 of this tutorial, we will see a much better
+way to define the stack so that it can be used with additional types. Chapter
+33 of part 2 of this tutorial includes this same program rewritten as a
+generic package which can be used with virtually any data type. You should
+compile this file in preparation for using it in conjunction with the next
+example program.
+
+<P><B>HOW DO WE USE THE CHARACTER STACK?</B>
+
+<P>Example program ------> <B><A HREF="e_c16_p2.ada">e_c16_p2.ada</A></B>
+
+<P>The example program e_c16_p2.ada uses the character stack included in
+the last program. Notice the <B>with </B>and the <B>use </B>clause in lines
+4 and 5. These tell the system to get a copy of <B>CharStak</B>, and make
+it available for use in this program. Two string constants are defined
+for use later, and two procedures are defined to fill the stack, or add
+a string of characters to the stack one at a time, and to empty it a character
+at a time. The main program displays each of the string constants on the
+monitor, then uses the two procedures to reverse the string of characters
+and output the reversed strings on the monitor. You should study the program
+until you understand how it works, even though the program itself is not
+nearly as important to understand as the concept of the separately compiled
+package. Be sure to compile and run e_c16_p2.ada to see that it really does
+what you expect it to do.
+
+<P><B>THE DYNAMIC STRING PACKAGE</B>
+
+<P>Example program ------> <B><A HREF="e_c16_p3.ada">e_c16_p3.ada</A></B>
+
+<P>The next example program, named e_c16_p3.ada, fulfills a promise made
+when we were studying strings. At that time, we mentioned that Ada 83 did
+not have a dynamic string capability but Ada 95 does have several packages
+that are defined in the ARM as part of the Ada environment. It will be
+advantageous for you to learn how to use these supplied packages for use
+in production programs. For the time being, it will be beneficial to spend
+some time studying the dynamic string package included in e_c16_p3.ada
+because it illustrates how to use many of the constructs we have studied
+in this tutorial to this point
+
+<P>The dynamic string package, although implementing a complete version
+of a dynamic string package, is not submitted as the final word in string
+packages. In fact, it has a problem which we will describe later in this
+chapter. Even after we fix the problem, there is a better string package
+we can use in all of our production programs. It will also be discussed
+later in this chapter.
+
+<P>One construct is used which we have not yet studied in this tutorial
+although we did mention it in passing in the last chapter. Line 33 contains
+an unconstrained array type declaration. Its use is illustrated in lines
+9 and 10 of the program named e_c16_p4.ada. The unconstrained array will
+be studied in part 2 of this tutorial. Other than this one construct, e_c16_p3.ada
+uses no portion of Ada that we have not yet studied in this tutorial, so
+it does not take advantage of the advanced constructs of Ada. It is meant
+to be a teaching aid only, but you could use it in a production program,
+which you are welcome to do as a user of Coronado Enterprises tutorials.
+You are granted the right to use any of the included software for whatever
+purpose you deem necessary, except commercialization of the tutorial itself.
+You may need to modify a program slightly for your own purposes, and you
+have permission to do so.
+
+<P>The dynamic string, as defined here, has a maximum length of 255 characters,
+with the dynamic length stored in the first element of the string which
+has a subscript of zero. The string must therefore be declared as a <B>CHARACTER
+</B>string with a lower bound of 0, and an upper bound representing the
+maximum length that the string will ever be asked to store. This definition
+comes from Borland International's implementation of Pascal, which they
+market as TURBO Pascal.
+
+<P><B>THE DYNSTRNG SPECIFICATION</B>
+
+<P>The specification package of <B>DynStrng </B>is defined in lines 29
+through 116 of the file which is well commented, giving a thorough definition
+of the package, and describing how to use it. The body is given in lines
+124 through 384, and give the actual implementation. Note that some software
+developers give you only the specification part of the package, which is
+all you really need to use it, and hide the body from you. If they provide
+the compiled body, and the specification source, you have all you need
+to use the package with that specific compiler. Your compiler came with
+the package <B>Ada.Text_IO</B>, a standard package, and your compiler writer
+almost certainly did not provide you with the source code to the body.
+The <B>Ada.Text_IO</B> package, as defined in the ARM, is only the specification
+part of the package <B>Ada.Text_IO.</B> It can be found in Annex A.10.1
+of the ARM.
+
+<P>You should take notice of the fact that we are overloading the name
+<B>Put </B>on line 36 of this package so we can use it to output a dynamic
+string to the monitor. The system knows which one we wish to use by the
+type of the actual parameter used. The careful observer will notice that
+we use the <B>Ada.Text_IO</B> version of <B>Put </B>in line 132 of the
+procedure used to overload the name <B>Put</B>. Continuing the discussion
+of overloading, you will see that we define two procedures with the same
+name in lines 60 and 63, once again depending on the types to select the
+proper procedure for each call.
+
+<P>Study the <B>DynStrng </B>package until you feel you understand it fairly
+well, then compile the file to prepare for the next program.
+
+<P><B>USING DYNAMIC STRINGS</B>
+
+<P>Example program ------> <B><A HREF="e_c16_p4.ada">e_c16_p4.ada</A></B>
+
+<P>The example program e_c16_p4.ada is designed to use the dynamic string
+package in various ways by defining strings, inserting characters or strings,
+deleting portions of strings, and displaying the results. This program
+was written to test the <B>DynStrng </B>package so it does a lot of silly
+things. There is nothing new or innovative in this utilitarian program,
+so you will be left on your own to understand, compile, and execute it.
+
+<P><B>A PROBLEM WITH e_c16_p3.ada</B>
+
+<P>The <B>DynStrng </B>package works just fine the way it is used in the
+<B>TryStrng </B>package, but a problem appears when it is used to copy
+a string constant into a dynamic string. The problem is due to overloading
+the name <B>Copy </B>in lines 60 and 63 of the <B>DynStrng </B>specification,
+and is best illustrated with an example. Consider the following line of
+Ada code;
+<PRE>&nbsp;&nbsp;&nbsp;&nbsp; Copy("Line of text.", Stuff, Result);</PRE>
+In this case, the compiler finds that the string constant could be of type
+<B>STRING </B>or of type <B>DYNAMIC_STRING</B>, and does not know which
+overloading to use, so it gives a compile error saying that it cannot resolve
+the type. The way to use this package to do this would be to tell the compiler
+which one to use by qualifying the string constant as shown in this line
+of code.
+<PRE>&nbsp;&nbsp;&nbsp;&nbsp; Copy(STRING'("Line of text."), Stuff, Result);</PRE>
+This will completely resolve the ambiguity and the program will then compile
+and execute properly. You should include these two lines in a test program
+to see for yourself that this does resolve the ambiguity.
+
+<P><B>NOW TO FIX THE PROBLEM</B>
+
+<P>There is an excellent solution to this problem that will render this
+dynamic string package flexible and useful but it requires the use of a
+discriminated record which we have not yet studied in this tutorial. In
+part 2 of this tutorial, we will revisit this dynamic string package and
+offer a much more flexible package for your information and use.
+
+<P>The <B>DYNAMIC_STRING</B> package is a great package for you to study
+as an illustration of how a package is developed, and how a typical package
+works. However, it has been superseded by two new packages available for
+use with any Ada 95 program. The packages named <B>Ada.Strings.Bounded</B>,
+and <B>Ada.Strings.Unbounded </B>are parts of the Ada 95 standard library
+and are available for your use. You should learn their capabilities and
+limitations thoroughly because they can save you a lot of time.
+
+<P><B>HOW OLD ARE YOU IN DAYS?</B>
+
+<P>Example program ------> <B><A HREF="e_c16_p5.ada">e_c16_p5.ada</A></B>
+
+<P>The example program named e_c16_p5.ada, is a silly little program, but intended
+to illustrate how to effectively use the keyboard for input to a program.
+This program will ask you for today's date, and your birthday, then calculate
+your age in days. There is no provision for leap year, or even for months
+with other than 31 days. It is intended to illustrate how to put together
+an interactive program that could be useful in some way.
+
+<P>Once again, since we have not studied the advanced topics of Ada yet,
+we have a limited number of constructs to use. The example programs at
+the end of Part 2 of this tutorial repeats this program, but uses the predefined
+Ada package <B>Calendar </B>to get today's date rather than asking the
+user to supply it. The advanced topics will add flexibility to your use
+of Ada. Compile and run this program to get a feel for how to write an
+interactive program.
+
+<P><B>PROGRAMMING EXERCISES</B>
+<OL>
+<LI>
+Add an additional function to e_c16_p1.ada to return a value indicating
+how many more characters can be pushed onto the stack.<A HREF=" a_c16_p1.ada">(Solution)</A></LI>
+
+<LI>
+Use the new function in e_c16_p2.ada to output a message to the monitor
+indicating the amount of space remaining on the stack at the end of the
+<B>Fill_The_Stack</B> procedure.<A HREF=" a_c16_p2.ada">(Solution)</A></LI>
+
+<LI>
+A major programming assignment - The best way to learn Ada is to use it,
+so the following programming suggestion is given. After studying the package
+e_c16_p3.ada, put it away and attempt to duplicate it from scratch. You
+will find that you will use nearly every topic covered in part 1 of this
+tutorial, and if you get completely stumped, you will have the supplied
+version of the package to help you over the rough spots. Your goal should
+be to duplicate the supplied package so closely that the existing program
+named e_c16_p4.ada can use your new version. If you find e_c16_p3.ada too
+big for a first step, you may wish to try to duplicate e_c16_p1.ada in
+the same manner before jumping into the dynamic string effort.</LI>
+</OL>
+<A HREF="chap17.htm">Advance to chapter 17</A>
+
+<P><A HREF="a95list.htm">Return to the Table of Contents</A>
+
+<P>
+<HR width="100%"><I><FONT SIZE=-1>Copyright &copy; 1988-1998 Coronado Enterprises
+- Last update, February 1, 1998</FONT></I>
+<BR><I><FONT SIZE=-1>Gordon Dodrill - dodrill@swcp.com - </FONT></I><FONT SIZE=-1><A HREF="mailto:dodrill@swcp.com">Please
+email any comments or suggestions.</A></FONT>
+</BODY>
+</HTML>

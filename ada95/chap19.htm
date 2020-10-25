@@ -1,0 +1,236 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Author" CONTENT="Gordon Dodrill">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (Win95; I) [Netscape]">
+   <TITLE>Ada Tutorial - Chapter 19</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<B>Ada Tutorial - Chapter 19</B>
+
+<P><B><FONT SIZE=+3>A</FONT><FONT SIZE=+2>DVANCED</FONT><FONT SIZE=+3>
+A</FONT><FONT SIZE=+2>RRAY</FONT><FONT SIZE=+3> T</FONT><FONT SIZE=+2>OPICS</FONT></B>
+
+<P>Example program ------> <B><A HREF="e_c19_p1.ada">e_c19_p1.ada</A></B>
+
+<P>Examine the file named e_c19_p1.ada for an example of an unconstrained
+array type illustrated in line 7. The box (&lt;>), as it is called, refers
+to something that must be filled in later, and is a construct that will
+be used in many other places in Ada. Note that the index type in line 7
+is <B>POSITIVE</B>, a fact that will have a bearing on its use later.
+
+<P><B>USE OF THE UNCONSTRAINED ARRAY TYPE</B>
+
+<P>In line 9, we declare an array constant of type <B>MY_ARRAY</B> and
+we assign values to the constants by use of the positional aggregate. Since
+we do not give the range of the indices of the array, the system will assign
+them, and in this case will use a range of 1 through 4, because of the
+use of the type <B>POSITIVE </B>for the index type. If we would have used
+type <B>INTEGER </B>for the index, the selected range would have been -2,147,483,648
+through -2,147,483,645, which is the lower end of the <B>INTEGER </B>range,
+unless your implementation used a different lower limit for <B>INTEGER</B>.
+Careful selection of the array index type is important. In line 10, we
+declare another constant array, but this time we use a named aggregate
+and the system does not get the opportunity to pick the range, we pick
+it explicitly ourselves. The indices do not have to be named in consecutive
+order as is done here, but all values must be given.
+
+<P>We declare an uninitialized variable array in line 13, which covers
+the range of 1 through 12, and an initialized variable array in line 14,
+which uses the positional aggregate method of initialization. The <B>others
+</B>portion will fill in positions 9, 10, and 11 with the value of 17.
+The <B>others </B>construct used in the array aggregate is new in Ada 95.
+It can only be used with a constrained array and it must be last in the
+list.
+
+<P><B>A VERY FLEXIBLE FUNCTION</B>
+
+<P>The function in lines 17 through 27 appears to use an unconstrained
+array for its formal parameter variable, and it does, but with each use
+of the function, the formal parameter array is constrained to the limits
+of the actual variable. When the function is called in line 33 of the program
+with <B>My_List </B>as the actual array variable, the range of <B>My_List</B>,
+1 through 12, is used for the range of the formal parameter in the function.
+This makes it possible to use the array attributes within the function,
+in the manner shown, such that they are dependent on which array is used
+for the actual parameter. When <B>Stuff </B>is used for the actual parameter,
+the formal parameter will have a range of 4 through 11 within the function.
+The function can therefore be written in such a way that it has flexibility
+built into it, even though strong type checking continues to be done, since
+the function cannot be used with a different unconstrained type if we had
+one in this example program. Note that all array attributes are available
+here as they are with any array.
+
+<P><B>A FEW NOTES ABOUT THIS TYPE</B>
+
+<P>All elements of every variable of type <B>MY_ARRAY</B> will be of type
+<B>INTEGER</B>, and all indices will be of subtype <B>POSITIVE </B>including
+the range limits. The variables named <B>My_List</B> and <B>Stuff </B>are
+of the same type with different limits, so the slice can be used with them.
+After you study this program, compile and execute it so you can observe
+the output.
+
+<P><B>AN ARRAY WITH AN ENUMERATED INDEX</B>
+
+<P>Example program ------> <B><A HREF="e_c19_p2.ada">e_c19_p2.ada</A></B>
+
+<P>Examine the program named e_c19_p2.ada for an example of an array with
+an enumerated variable for an index. Since the index of an array may be
+any discrete type, and an enumerated type is discrete, it can be used for
+an array index according to the Ada standard.
+
+<P>We define an enumerated type named <B>DAY</B>, that includes the days
+of the week as elements, then declare an array using the type <B>DAY </B>for
+the index. It should be apparent to you that this is an anonymous array
+type, the use of which is discouraged in a significant program, but should
+cause no type conversion problems in a simple program such as this one.
+Finally, we declare two other simple variables for later use and begin
+the executable part of the program.
+
+<P>We use a loop to assign 8.0 hours to each day from <B>MON </B>through
+<B>FRI</B>, then assign 4.0 hours to <B>SAT</B>, and 0.0 hours to <B>SUN</B>.
+Finally we sum up the hours for the week and display them on the monitor.
+It is a very simple program, but it illustrates a very useful construct
+in Ada. For that reason, you should spend enough time studying it until
+you thoroughly understand it. Be sure to compile and execute e_c19_p2.ada.
+
+<P><B>ARRAY OPERATORS</B>
+
+<P>Example program ------> <B><A HREF="e_c19_p3.ada">e_c19_p3.ada</A></B>
+
+<P>Some of the operators discussed earlier in this tutorial are available
+for use with arrays. They operate on each element of the array as if the
+operation were done in a loop. The example program e_c19_p3.ada will illustrate
+the use of a few of these operations.
+
+<P>Lines 19 through 24 illustrate the logical operators being used with
+entire arrays. The arrays are compared element by element, and as soon
+as a difference is found in two corresponding elements, the comparison
+result of these two elements is returned as the overall comparison result.
+If all corresponding elements are equal, the result of the comparison is
+equal.
+
+<P>Note that it is legal and sometimes very useful to use an array of records.
+Arrays of records can be compared for equality or inequality, but not for
+the other four operators ( >, >=, &lt;, &lt;= ) because they are illegal
+for use with individual record elements. Some thought on your part would
+have led to this conclusion without us explicitly stating it. Many such
+combinations of operations are possible with Ada. It will be up to you
+to try a few yourself, as you need them, because there are too many permutations
+for us to delineate all of them.
+
+<P><B>ARITHMETIC ARRAY OPERATORS</B>
+
+<P>The operators illustrated in comments in lines 26 through 31 are not
+available as a part of Ada, but they can be made available to your programs
+by use of operator overloading. This will be illustrated in the next example
+program.
+
+<P><B>BOOLEAN ARRAY OPERATORS</B>
+
+<P>Two of the <B>BOOLEAN </B>arrays are assigned some values using positional
+aggregates in lines 33 and 34, then used in lines 36 through 44 as complete
+arrays. The logical operators are used in much the same way that the comparison
+operators were used previously in this file. Note that these operators
+result in another array, each element being the result of the logical operation
+of the corresponding elements in the compared arrays. The comparison operators
+are available with boolean arrays in a manner similar to that with other
+scalar arrays, only a single <B>BOOLEAN </B>type result value is returned.
+Compile and run this program after you understand the new material presented.
+
+<P><B>HOW TO WRITE THE ARITHMETIC ARRAY OPERATORS</B>
+
+<P>Example program ------> <B><A HREF="e_c19_p4.ada">e_c19_p4.ada</A></B>
+
+<P>The example program named e_c19_p4.ada illustrates how to write the
+arithmetic array operators. This is actually an overloading of the usual
+arithmetic operators. Overloading these operators is nothing new, you have
+been doing it all through this tutorial, because the plus sign, for example,
+has been available for adding integer types, as well as fixed and floating
+point types. There is no reason the plus sign could not be used to add
+arrays, element by element, and that is exactly what we will illustrate
+here.
+
+<P>The "+" function is listed in lines 11 through 18 and is a very simple
+function, with no difficult code. The name of the function is the unusual
+thing about this function, its name being <B>"+"</B>. This is the usual
+Ada method of overloading operators which we have illustrated before in
+this tutorial. After the function is defined, it is called by using an
+infix notation, as illustrated in line 34 of the program where all 6 elements
+of <B>Group1 </B>are added to the corresponding elements of <B>Group2</B>,
+and the 6 results being assigned to the 6 elements of <B>Crowd</B>. The
+results of the addition are displayed in lines 35 through 40 to show that
+all elements were summed.
+
+<P>In a similar manner, the function named "<B>mod</B>" is used to provide
+an infix notation for the modulo operator, and is called in line 45. The
+other four arithmetic operators are not defined here since they are so
+similar to the two which are illustrated. The overloading of the <B>mod
+</B>operator in this way should indicate to you why it is important to
+think of <B>mod </B>as an operator rather than a subprogram call.
+
+<P><B>OVERLOADING RULES</B>
+
+<P>There are two rules which must be considered when overloading operators,
+the first being that you are permitted as many overloadings for a given
+operator as you desire, provided that the parameters of the inputs and
+result have unique types for each of the overloadings. This is because
+the system uses the types of the parameters and the type of the result
+to determine which overloading you wish to use each time you use the operator.
+This implies, correctly, that you cannot redefine the use of an existing
+operator for a given type.
+
+<P>The second rule is simple. You can overload existing Ada operators,
+but you cannot define an infix operator that is not predefined in Ada.
+Be sure to compile and execute this program.
+
+<P><B>UNARY OPERATOR OVERLOADING</B>
+
+<P>Example program ------> <B><A HREF="e_c19_p5.ada">e_c19_p5.ada</A></B>
+
+<P>Examine the program named e_c19_p5.ada for an example of overloading
+the unary operators "+" and "-". The function in lines 27 through 30 overloads
+the "+" operator for the array defined and is of little interest since
+nothing is really accomplished here. The function in lines 32 through 39
+overloads the "-" operator and negates each element of the array. It may
+seem silly to even bother with overloading the "+" operator, but it is
+illustrated here and can be used to advantage when we come to a study of
+generic packages. It may be necessary to allow use of such a seemingly
+silly construct in order to write a general purpose generic package.
+
+<P>Be sure to compile and run this program and see that the illustrated
+overloadings work as we have stated.
+
+<P><B>OPERATOR HIDING</B>
+
+<P>In all of the overloadings we have examined, we were careful to use
+overloadings that introduced new type combinations so there was never an
+instance of hiding another subprogram. If the type combinations are already
+overloaded in a global manner when a further overloading is declared at
+a lower level of nesting, the subprogram called by the global combination
+will be hidden and the nested subprogram will be called each time. Even
+though care must be exercised when overloading operators or identifiers,
+do not fear use of this powerful technique made available to you by the
+designers of Ada.
+
+<P><B>PROGRAMMING EXERCISES</B>
+<OL>
+<LI>
+Modify the program named e_c19_p2.ada to output the name of each day as
+an enumerated output along with the number of hours worked each day.<A HREF=" a_c19_p1.ada">(Solution)</A></LI>
+
+<LI>
+Write functions for any two of the remaining four arithmetic operators
+in the example program named e_c19_p4.ada, and test the two new functions.<A HREF=" a_c19_p2.ada">(Solution)</A></LI>
+</OL>
+<A HREF="chap20.htm">Advance to Chapter 20</A>
+
+<P><A HREF="a95list.htm">Return to the Table of Contents</A>
+
+<P>
+<HR width="100%"><I><FONT SIZE=-1>Copyright &copy; 1988-1998 Coronado Enterprises
+- Last update, February 1, 1998</FONT></I>
+<BR><I><FONT SIZE=-1>Gordon Dodrill - dodrill@swcp.com - </FONT></I><FONT SIZE=-1><A HREF="mailto:dodrill@swcp.com">Please
+email any comments or suggestions.</A></FONT>
+</BODY>
+</HTML>

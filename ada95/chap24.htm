@@ -1,0 +1,319 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Author" CONTENT="Gordon Dodrill">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (Win95; I) [Netscape]">
+   <TITLE>Ada Tutorial - Chapter 24</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<B>Ada Tutorial - Chapter 24</B>
+
+<P><B><FONT SIZE=+3>B</FONT><FONT SIZE=+2>INARY</FONT><FONT SIZE=+3> I</FONT><FONT SIZE=+2>NPUT/</FONT><FONT SIZE=+3>O</FONT><FONT SIZE=+2>UTPUT</FONT></B>
+
+<P>Any useful computer program must have a way to get data into it to operate
+on, and a way to get the results out to the user. In part 1 of this tutorial,
+we studied how to get text in and out of the computer, now we will see
+how to get binary data in and out of the computer. Most of the binary input
+and output will be to or from files because the data is always in a machine
+readable format, not one that a human reader can easily comprehend. A block
+of binary data could be transmitted to a hardware device that is designed
+to respond to the data, or a block of data could be input from a hardware
+device reporting on some process. A little more will be said about that
+later.
+
+<P><B>BINARY DATA OUTPUT</B>
+
+<P>Example program ------> <B><A HREF="e_c24_p1.ada">e_c24_p1.ada</A></B>
+
+<P>Examine the program named e_c24_p1.ada for an example of outputting
+binary sequential data. Ada gives you five data input/output library packages
+that are defined in the Ada 95 Reference Manual (ARM), and required to
+be available with every Ada compiler. They are listed by package name as
+follows;
+<UL>
+<LI>
+<B>Ada.Text_IO</B> - This is used for text Input/Output and is always in
+a sequential mode of operation. Any file can be used for input or output,
+but not both. (This package has been in use during most of this tutorial
+and was specifically described in chapter 14.)</LI>
+
+<LI>
+<B>Ada.Sequential_IO</B> - This is used for binary Input/Output and is
+always in a sequential mode of operation. Any file can be used for input
+or output, but not both.</LI>
+
+<LI>
+<B>Ada.Direct_IO</B> - This is used for binary Input/Output and can be
+used in either a sequential or random mode of operation. Any file can be
+used for input, output, or input and output.</LI>
+
+<LI>
+<B>Ada.Streams.Stream_IO</B> - This is used for either binary or text Input/Output
+but permits the use of heterogeneous data whereas the other three require
+all data to be of the same type. for any given file. In the case of <B>Ada.Text_IO</B>,
+the data must all be of the <B>CHARACTER </B>type, so it must be of a single
+type also.</LI>
+
+<LI>
+<B>Ada.Text_IO.Text_Streams</B> - This permits a text file to be used for
+stream Input/Output so it can be mixed with binary data in the same file.</LI>
+</UL>
+You should refer to either your compiler documentation or the ARM for the
+definition of these packages. All definitions are found in Annex A. Spend
+a little time studying the procedures and functions available with each
+to become familiar with the capability of each package. The knowledge you
+have gained studying this tutorial to this point should enable you to understand
+most of the specifications of these five packages.
+
+<P><B>THE PACKAGE NAMED Low_Level_IO</B>
+
+<P>There is another input/output package that may be available with your
+compiler named <B>Ada.Low_Level_IO</B>. This is not required by the ARM,
+but if it exists, it will be used for machine dependent input/output programming
+with your particular implementation. If it exists with your compiler, the
+description of how to use it will be included with your documentation,
+and since it will be completely different with each compiler, no attempt
+will be made to explain its use here.
+
+<P><B>BACK TO e_c24_p1.ada</B>
+
+<P>Although this program does very little, there are several steps that
+must be performed to output to a binary file. They will be taken in order,
+so follow along closely. First we must tell the system that we wish to
+use the external package <B>Ada.Sequential_IO</B>, which we do using a
+<B>with </B>clause in line 4. Next we define a <B>record </B>type to illustrate
+one kind of data that can be output to the file, and declare a variable
+of the record type in line 18.
+
+<P>In order to use the sequential input/output package, we must instantiate
+a copy of it, because it is a generic package and cannot be used directly.
+We do this in line 15, using the data type we wish to output to the file,
+then add the <B>use </B>clause in line 16 to make the new package readily
+available. We need an internal file name, and we define it in line 19,
+but with a minor difficulty because we have an overloaded file type available.
+We have made <B>Ada.Text_IO</B> available to illustrate the problem, even
+though we don't use it in this program, because it contains a type named
+<B>FILE_TYPE</B>. The package named <B>Seq_IO</B> that we have instantiated
+also contains a type named <B>FILE_TYPE</B>, the one we wish to use. In
+order to tell the system which one we want, we must use the extended naming
+notation to differentiate between the two types. This is done in line 19
+of the example program. With these steps, we are ready to begin the executable
+part of the program.
+
+<P>In a manner similar to that used for text files which we studied earlier,
+we create the file in line 23, in this case using the mode <B>Out_File</B>
+since we wish to write to the file. As you recall, this also ties the internal
+name for the file to the external name we have chosen, NAMEFILE.TXT, which
+must follow the conventions for our particular Ada compiler and operating
+system. If your operating system is substantially different, you may need
+to change this name. We are finally ready to actually use the output file,
+so we load some nonsense data into the declared record variable in lines
+25 and 26, then enter a loop where we will change the <B>Age </B>field
+of the record in order to have some varying data to write to the file.
+This will make it more useful when we read the data from this file in another
+example program.
+
+<P><B>WRITING BINARY DATA TO THE FILE</B>
+
+<P>We actually write data to the file in line 30, where we use the procedure
+<B>Write </B>which is part of the instantiated package we named <B>Seq_IO</B>
+earlier, but since we have defined <B>Seq_IO </B>in a <B>use </B>clause,
+we do not need the qualifier "dotted" to the procedure name. We mention
+the internal file name to tell the system which file we wish to write to,
+and the variable which we desire to output. The variable to be output must
+be of the type for which the package was instantiated, resulting in a rule
+that all binary records output to any given file must be of the same type.
+Even though they must be of the same type, they can be records of a variant
+record with different variants.
+
+<P>After writing 100 binary records, we close the file in the manner shown
+in line 33, and the program is complete.
+
+<P>We covered a lot of territory in the last few paragraphs, but it is
+useful information we will need in the next few example programs, and of
+course we will need it anytime we wish to actually use a binary file. It
+should be clear that we could open several files, each storing a different
+data type, and write to them in any order provided that we wrote the proper
+data type to each file.
+
+<P>The resulting file, named NAMEFILE.TXT, will be used to illustrate binary
+reading in the next two programs, so it is imperative that you compile
+and execute this program. After running it, you will find the file named
+NAMEFILE.TXT in the default directory of your system, and if you attempt
+to look at it with a text editor, it will have some very strange looking
+characters because it is a binary file. You will notice however, that much
+of it will be readable because of the nature of the data written to it.
+
+<P><B>READING A BINARY FILE</B>
+
+<P>Example program ------> <B><A HREF="e_c24_p2.ada">e_c24_p2.ada</A></B>
+
+<P>The example program named e_c24_p2.ada illustrates how to read from a
+binary file in a sequential mode. Everything in the declaration part of
+the program is identical to the last program except for including the <B>Ada.Integer_Text_IO</B>
+package in lines 2 and 3 for use later.
+
+<P>The only differences in the executable part is the use of the <B>Open
+</B>procedure from the <B>Seq_IO</B> package, which uses the <B>In_File</B>
+mode of file opening. We can now read from the file we wrote in the last
+program, but we cannot write to it from this program. We execute a loop
+100 times where we read a record from the binary file each time through
+the loop. The record definition is identical to the record used to write
+the binary file. If the record is different in structure or in data types,
+you may get anything upon reading, and the data probably will not appear
+to have anything to do with the original data written, because the bytes
+will be mixed around.
+
+<P>You may wonder what will happen if the file that we requested the system
+to open is not available where we expect it to be. In the spirit of Ada,
+you may guess that an exception will be raised and you will be correct.
+If the file is not available for opening, the exception <B>Name_Error</B>
+will be raised as an indicator. There are eight exceptions defined in the
+package <B>IO_Exceptions</B> that are raised for various kinds of errors.
+
+<P>Assuming that the file did open properly, all 100 elements are read
+in and those with the <B>Age </B>field greater than or equal to 82 are
+displayed to illustrate that the data really did get written. Finally,
+the binary file is closed and the program terminated.
+
+<P><B>WHAT ABOUT PORTABILITY?</B>
+
+<P>Suppose you wrote the binary file with one Ada compiler, and attempted
+to read it using a different compiler. It would be indeterminate whether
+or not it would work, because each implementor is free to define the internal
+bit patterns of the various types to fit his particular compiler. Using
+such simple fields as those in this illustration would lead to a very good
+chance of portability, but using more elaborate records or arrays, would
+almost certainly cause incompatibility problems.
+
+<P>The solution to this problem is to read a file with the same compiler
+that was used to write it. Of course a file written in a text format, using
+<B>Ada.Text_IO,</B> is portable and can be read with a different system.
+
+<P>Compile and execute this program and verify that the data really did
+get output as desired. If you did not compile and execute the last example
+program, you did not generate the file named "NAMEFILE.TXT", and you cannot
+successfully execute this program.
+
+<P><B>RANDOM INPUT AND OUTPUT</B>
+
+<P>Example program ------> <B><A HREF="e_c24_p3.ada">e_c24_p3.ada</A></B>
+
+<P>Examine the file named e_c24_p3.ada for an example of random input and
+output. Random file access means that we can output data to the file, or
+read data from the file just as if the file were an array. The elements
+of the file do not have to be accessed in order. We will illustrate all
+of this in this example program.
+
+<P>The declaration part of this program should look familiar to you since
+it is nearly identical to the last two example programs. The biggest difference
+is the use of the <B>Ada.Direct_IO</B> package instead of the <B>Ada.Sequential_IO</B>
+package. We instantiate a copy of this called <B>Ran_IO</B>, and use it
+to declare the internal filename, <B>My_In_Out_File</B>. Next, as part
+of the declaration part of the program, we declare a function that will
+be used to output some well formatted data.
+
+<P><B>READING FROM THE RANDOM FILE</B>
+
+<P>Before we can do anything with the file, we must open it, and since
+we intend to read from and write to this file, we open it with the <B>InOut_File</B>
+mode. Of course we use the internal filename we defined in line 19, and
+the external filename we have already written to. In line 36, we use the
+procedure <B>Read</B>, reading from the file we have opened, and we read
+the data into the record variable named <B>Myself</B>. The thing that is
+really new here is the use of the number 37 as the third actual parameter
+of the procedure call. This tells the system that we wish to read the 37th
+record from the designated file. We use our <B>Display_Record</B> procedure
+to display the record read, then tell the system that we wish to read record
+number 25, and display it. In line 40, we don't tell the system which record
+we want to read explicitly, so it returns the next record, the 26th, which
+we display.
+
+<P><B>WRITING TO THE RANDOM FILE</B>
+
+<P>We fill the three fields of the record variable with nonsense data in
+lines 44 through 46, and write the modified record to records 91, 96, and
+97. We write to record 97 because we don't specify a record and the system
+will default to the next successive record number. In line 51 we call the
+procedure <B>Set_Index </B>with the value of 88, and as you may guess,
+it sets the record pointer to 88, which is the next record that will be
+read by default if no record number is stated. The loop in lines 52 through
+55 read and display all records from 88 through the last, because we keep
+reading until we find an end of file. You will see when you compile and
+execute this program that we did modify records numbered 91, 96, and 97.
+
+<P>You will find binary Input/Output to be very useful for temporary storage
+of large amounts of data, but you must keep in mind that any data you write
+using this technique may or may not be readable by some other system. For
+this reason, binary output should not be used except for data that is meant
+to be read by another program compiled with the same Ada compiler as the
+data generator. Be sure to compile and execute this program.
+
+<P><B>USING HETEROGENEOUS DATA</B>
+
+<P>Example program ------> <B><A HREF="e_c24_p4.ada">e_c24_p4.ada</A></B>
+
+<P>Examine the example program e_c24_p4.ada which contains an example of
+writing several types of data to a single file using the streams capability
+which was added to Ada 95. The package named <B>Ada.Streams.Stream_IO</B>
+contains the required entities, so it is included in context clauses in
+lines 3 and 4, and we declare a file object along with an access type for
+use with the file. Note that even though the package is included in a <B>use
+</B>clause, the extended naming notation is required in line 8 because
+there is also a type <B>FILE_TYPE</B> defined in <B>Ada.Text_IO</B>, and
+the system does not know which to select based on the available information.
+The extended naming notation is not required in line 9, but is given to
+indicate clearly that the two types work closely together.
+
+<P>In lines 11 through 23, we define several types and various variables
+for use within the executable portion of the program. They are all assigned
+initial values which have no significance, but provide known values for
+all entities.
+
+<P>In line 27, we create a stream with the name <B>My_File</B> which will
+allow us to write to the file named "funny.txt" in the default directory.
+In line 28 we cause the access variable named <B>My_File_Access</B> to
+access the file we just opened. In lines 30 through 36, we write seven
+different variables, which represent three different types, to the same
+file in an arbitrary order. The method of writing seems very strange, and
+it is, because it uses an attribute of the types to do the actual writing.
+The file is closed in line 38, and the same file is opened for reading
+in line 41.
+
+<P>The first two variables are read from the file in lines 44 and 45, being
+careful to read them in the proper order and using the proper type for
+each variable. To illustrate that the data did get read in properly, the
+value of <B>Animal </B>is displayed on the monitor for inspection. The
+file is closed a second time in line 52, and the program is complete.
+
+<P>This very limited program illustrates only one use for the streams capability
+provided with Ada 95. This package also provides for random input/output
+rather than only sequential, and the stream can be directed into memory
+rather than into a file, or read directly from memory.
+
+<P><B>PROGRAMMING EXERCISES</B>
+<OL>
+<LI>
+Modify e_c24_p1.ada to write the same data to two different files, except
+when <B>Age </B>is between 50 and 60. During this range, one of the characters
+should be changed for one of the files.<A HREF=" a_c24_p1.ada">(Solution)</A></LI>
+
+<LI>
+Modify e_c24_p2.ada to read both files output from exercise 1 and list the
+differences in the two files.<A HREF=" a_c24_p2.ada">(Solution)</A></LI>
+
+<LI>
+Combine e_c24_p1.ada and e_c24_p2.ada in such a way that the file is written
+in one loop, then read back in and displayed in a successive loop.<A HREF=" a_c24_p3.ada">(Solution)</A></LI>
+</OL>
+<A HREF="chap25.htm">Advance to Chapter 25</A>
+
+<P><A HREF="a95list.htm">Return to the Table of Contents</A>
+
+<P>
+<HR width="100%"><I><FONT SIZE=-1>Copyright &copy; 1988-1998 Coronado Enterprises
+- Last update, February 1, 1998</FONT></I>
+<BR><I><FONT SIZE=-1>Gordon Dodrill - dodrill@swcp.com - </FONT></I><FONT SIZE=-1><A HREF="mailto:dodrill@swcp.com">Please
+email any comments or suggestions.</A></FONT>
+</BODY>
+</HTML>

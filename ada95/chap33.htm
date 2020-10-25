@@ -1,0 +1,218 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Author" CONTENT="Gordon Dodrill">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (Win95; I) [Netscape]">
+   <TITLE>Ada Tutorial - Chapter 33</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<B>Ada Tutorial - Chapter 33</B>
+
+<P><B><FONT SIZE=+3>M</FONT><FONT SIZE=+2>ORE</FONT><FONT SIZE=+3> E</FONT><FONT SIZE=+2>XAMPLE</FONT><FONT SIZE=+3>
+P</FONT><FONT SIZE=+2>ROGRAMS</FONT></B>
+
+<P><B>RANDOM NUMBERS</B>
+
+<P>Example program ------> <B><A HREF="e_c33_p1.ada">e_c33_p1.ada</A></B>
+
+<P>Occasionally when writing a computer program, you will have a need to
+use a random number generator. Very few compilers have a random number
+generator as a part of the system, so it is necessary for you to either
+write one yourself or find one that has been written and debugged by someone
+else. The example package named e_c33_p1.ada is presented to you for several
+reasons. The first reason is to provide you with a useful example of a
+complete generic package to serve as an illustration of how to write one.
+Secondly, it is a useful package that you can use as a part of your own
+programs when you have a need to use a random number generator. Finally,
+it is an illustration of good formatting style and it illustrates the inclusion
+of enough comments in the package specification to completely define the
+method used, and how to utilize this package as part of another program.
+
+<P>When Ada 83 was upgraded to Ada 95, a random number generator was defined
+as part of the standard library making it a required component of every
+Ada 95 compilation system. The random number generator in e_c33_p1.ada was
+not removed from the tutorial because it is a good example of a well commented
+Ada utility package. No attempt has been made to prove that it generates
+truly random numbers, so no claim can be made for it. It would be of benefit
+to you to study it, then use the random number generator supplied with
+your compiler for any production work you do,
+
+<P>No other comments need to be given about the operation of this package,
+so you will be left on your own to study the listing then compile this
+package in preparation for use with the next example program.
+
+<P><B>TESTING THE RANDOM NUMBERS</B>
+
+<P>Example program ------> <B><A HREF="e_c33_p2.ada">e_c33_p2.ada</A></B>
+
+<P>Examine the program named e_c33_p2.ada which was written solely to test
+the random number generator in the package named <B>Random</B>. It instantiates
+a copy of the generic package using the type <B>FLOAT </B>in line 7, then
+declares a few objects and an array type. In the executable part of the
+program the random number generator is initialized with the <B>Set_Seed</B>
+procedure in line 21, and 12 random numbers are read and printed to see
+that they do cover the range of 0.0 to 1.0 as defined in the header of
+the package named <B>Random</B>.
+
+<P>The real test of the random number generator is in the loop beginning
+in line 35 where ten thousand random numbers are generated and converted
+into integer type values by multiplying by 100. The integer values will
+therefore cover a range of 1 to 100, and they are counted in the array
+named <B>Events</B>. The count in each element of the array should be about
+100 since there are ten thousand cases distributed over 100 elements. Execution
+of the program will reveal that the count in each array element is about
+100 as expected, so we declare the random number generator to be at least
+reasonably random. A mathematician may decide that this method is too crude
+to be called a good random number generator, but for our purposes it is
+good enough.
+
+<P>Compile and execute this program, and you will find that each time you
+run it, you should get different results because it uses the system clock
+to set the seed, resulting in a new starting seed for each execution.
+
+<P><B>A NEW DYNAMIC STRING PACKAGE</B>
+
+<P>Example program ------> <B><A HREF="e_c33_p3.ada">e_c33_p3.ada</A></B>
+
+<P>Examine the program named e_c16_p3.ada, which is included in part 2
+of this tutorial for a better dynamic string package. You will recall that
+when we studied the dynamic string package in chapter 16 of part 1 of this
+tutorial, we found a problem when using string constants in the <B>Copy
+</B>procedure calls. This was because the system found ambiguous procedures.
+It could not tell if the string constant was of type <B>STRING </B>or of
+our own declared type which we named <B>DYNAMIC_STRING</B>. Since we had
+not studied the discriminated record at that time, we could not properly
+fix the problem. The new <B>DynStrng </B>package, using a discriminated
+record, is offered as a better package for the problem of using dynamic
+strings.
+
+<P>The <B>DYNAMIC_STRING</B> type is declared in lines 33 through 37 and
+is declared as a record this time so there is no confusion as to whether
+it is a string or a record, and the overloading ambiguity problem is gone.
+The package specification is essentially unchanged from the last dynamic
+string package, except for the type of course, but the body is changed
+considerably to reflect the new data structure. You will be left on your
+own to compare the bodies of these two packages if you so desire.
+
+<P><B>THE STRING CONSTANT PROBLEM IS FIXED</B>
+
+<P>Example program ------> <B><A HREF="e_c33_p4.ada">e_c33_p4.ada</A></B>
+
+<P>The program named e_c33_p4.ada is designed to test the new package with
+a few string constants to prove that it really does work as advertised.
+You can compile and execute this file to see that it really does work with
+string constants in a <B>Copy </B>procedure call.
+
+<P>Example program ------> <B>e_c16_p4.ada</B>
+
+<P>You can return to the program named e_c16_p4.ada from chapter 16 to
+prove that the new package still works with this old program. You will
+find that a couple of changes must be made to reflect the different data
+type. Lines 11 and 12 must be modified to reflect only the upper limit
+on the static length of the dynamic string variables. They will read as
+follows;
+<PRE>&nbsp;&nbsp;&nbsp; Name&nbsp;&nbsp;&nbsp; : DYNAMIC_STRING(15);&nbsp;
+&nbsp;&nbsp;&nbsp; Stuff&nbsp;&nbsp; : DYNAMIC_STRING(35);</PRE>
+In addition, because the type is changed, lines 21 and 22 must also be
+modified as follows;
+<PRE>&nbsp;&nbsp;&nbsp; Name.Dynamic_Length := 3;
+&nbsp;&nbsp;&nbsp; Stuff.Dynamic_Length := 7;</PRE>
+After making these two changes, this program should execute exactly as
+it did when it used the old dynamic string package.
+
+<P><B>HOW OLD ARE YOU IN DAYS</B>
+
+<P>Example program ------> <B><A HREF="e_c33_p5.ada">e_c33_p5.ada</A></B>
+
+<P>This program is a repeat of the program given in chapter 16, but it
+is improved somewhat here. Since we now know how to use the <B>Calendar
+</B>package, we can use it to get today's date for us, and we do this in
+the new program named e_c33_p5.ada. Notice especially the way the data is read
+in and checked for validity before continuing on. If the data were read
+into the corresponding variables, an invalid entry would cause an exception,
+but since the data is read into an <B>INTEGER </B>type variable with a
+wide range, it can be checked for validity before being assigned to the
+correct variable with a much smaller range. The program should be very
+simple for you to understand, but it would be good for you to spend a little
+time studying it before compiling and executing it.
+
+<P><B>THE DINING PHILOSOPHERS</B>
+
+<P>Example program ------> <B><A HREF="e_c33_p6.ada">e_c33_p6.ada</A></B>
+
+<P>Most books and articles on tasking or concurrency at least mention the
+problem of the dining philosophers, so it would not be good to leave this
+tutorial without a little discussion of this problem. In fact, the program
+named e_c33_p6.ada is a program you can study and execute to see this problem
+illustrated.
+
+<P>The problem is stated that five philosophers sit down to eat. They like
+to eat for awhile then think for awhile and repeat the pattern forever.
+In order to eat, they require a fork in both their left and their right
+hands, and the table is set with a fork on each side of their plates. The
+problem occurs when we state that there is only one fork between each adjacent
+philosopher, and he is therefore required to share each fork with his adjacent
+colleague.
+
+<P>Each philosopher sits down, waits a random length of time, then picks
+up the fork on his left, waits another random length of time, and picks
+up the fork on his right. He then proceeds to eat for a random length of
+time, then returns both forks to the table and thinks for a random length
+of time. Once he picks up the left fork, he stubbornly hangs on to it until
+he gets the right fork. If we ever reach the condition where each philosopher
+has his left fork, then none will ever return it and none can ever therefore
+pick up his right fork. The entire system is said to be deadlocked because
+nothing else will ever be accomplished. All five of the uncooperative philosophers
+will eventually starve since none can eat.
+
+<P><B>THE PROGRAM ILLUSTRATES DEADLOCK</B>
+
+<P>The program uses a package to define a task type for one philosopher
+with the required delays and the logic to acquire each fork, eat, then
+return the forks to the table. Following our study of tasking, you should
+have no problem understanding the logic presented here.
+
+<P>The main program named <B>Philos</B>, which starts in line 93 of the
+file simply declares the five philosophers, starts them through their cycles
+in lines 108 through 112, then loops while it is watching for deadlock.
+When deadlock is detected, a message is output to the monitor, and the
+entire system is aborted.
+
+<P>Compile and execute this program, so you can observe deadlock occurring
+and the system aborting operation. If you run it several times, you will
+see that quite often deadlock occurs immediately, but at other times it
+will run for several seconds before deadlock is detected.
+
+<P>This is an interesting problem, but the more interesting point is the
+fact that this program, which begins in line 93 uses <B>Ada.Text_IO</B>
+and <B>One_Man</B>, and <B>One_Man</B> in turn uses <B>Ada.Text_IO</B>,
+<B>Ada.Calendar</B>, and <B>Random</B>. This program uses quite a bit of
+the resources available in Ada, and uses several packages to accomplish
+its intended mission. Since we are using <B>Random</B>, which was developed
+for an earlier project, we are actually illustrating the reusability of
+Ada software.
+
+<P><B>THE GENERIC STACK</B>
+
+<P>Example program ------> <B><A HREF="e_c33_p7.ada">e_c33_p7.ada</A></B>
+
+<P>We promised we would include a generic stack when we studied the character
+stack in chapter 16, and e_c33_p7.ada is a generic stack to fulfill that
+promise. It is really only a copy of e_c16_p1.ada from chapter 16 made
+into a generic package according to the rules studied in this tutorial.
+
+<P>Example program ------> <B><A HREF="e_c33_p8.ada">e_c33_p8.ada</A></B>
+
+<P>The program e_c16_p2.ada is nearly identical to the program of the same
+name from chapter 16, the only difference being the instantiation of the
+generic package so it can be used in the main program.
+
+<P><A HREF="a95list.htm">Return to the Table of Contents</A>
+
+<P>
+<HR width="100%"><I><FONT SIZE=-1>Copyright &copy; 1988-1998 Coronado Enterprises
+- Last update, February 1, 1998</FONT></I>
+<BR><I><FONT SIZE=-1>Gordon Dodrill - dodrill@swcp.com - </FONT></I><FONT SIZE=-1><A HREF="mailto:dodrill@swcp.com">Please
+email any comments or suggestions.</A></FONT>
+</BODY>
+</HTML>

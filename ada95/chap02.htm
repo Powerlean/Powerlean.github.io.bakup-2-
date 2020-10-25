@@ -1,0 +1,251 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Author" CONTENT="Gordon Dodrill">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (Win95; I) [Netscape]">
+   <TITLE>Ada Tutorial - Chapter 2</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<B>Ada Tutorial - Chapter 2</B>
+
+<P><B><FONT SIZE=+3>P</FONT><FONT SIZE=+2>ROGRAM</FONT><FONT SIZE=+3> S</FONT><FONT SIZE=+2>TRUCTURE</FONT></B>
+
+<P><B>OUR FIRST ADA PROGRAM</B>
+
+<P>Example program ------> <B><A HREF="e_c02_p1.ada">e_c02_p1.ada</A></B>
+
+<P>The best way to begin our study of Ada is to look at a real Ada program,
+so by whatever means you have at your disposal, display the Ada program
+named e_c02_p1.ada on your monitor.
+
+<P>You are looking at the simplest Ada program that it is possible to write.
+Even though it is the simplest, it is a complete executable program that
+you will be able to compile and execute after we discuss a few of the entities
+that appear in it.
+
+<P>The word <B>procedure </B>in line 1 is the first of the reserved words
+we will look at. Until we reach a much later point in this tutorial, we
+will simply say that a procedure is a program. In this case, therefore,
+the program is defined by the reserved word <B>procedure </B>followed by
+the program name and another reserved word <B>is</B>. Following the reserved
+word <B>is</B>, we have the actual program extending to line 5. The reserved
+word <B>is </B>therefore, is saying that the program (or procedure) which
+is named <B>Trivial </B>is defined as everything that follows.
+
+<P>The program name, in this case <B>Trivial</B>, must be selected by following
+all of rules given in chapter 1 for naming an identifier. In addition to
+those rules, it cannot be one of the 69 reserved words.
+
+<P><B>WHERE IS THE ACTUAL PROGRAM?</B>
+
+<P>There are two portions of any Ada program, a declarative part, which
+is contained between the reserved words <B>is </B>and <B>begin</B>, and
+the executable part which is contained between the reserved words <B>begin
+</B>and <B>end</B>. In this particular case, there is nothing in the declaration
+part, and the executable part consists of line 4. (We will return to line
+4 shortly.) Following the reserved word <B>end </B>is a repeat of the program
+name and a semicolon. Repeating the program name is optional but, as a
+matter of style, you should get into the habit of including it at the end
+of every program. The semicolon is required to end the program.
+
+<P>The actual program, the executable part, is line 4 since that is the
+only statement between the <B>begin </B>and <B>end </B>reserved words.
+In this case we wanted to study the simplest Ada program possible so we
+wanted the program to do nothing. We explicitly tell the Ada compiler to
+do nothing which is the definition of our fifth reserved word <B>null </B>in
+line 4. Ada demands that you explicitly tell it that you really mean to
+do nothing rather than simply leaving the executable part of the program
+blank which would be acceptable in most other languages.
+
+<P><B>WHAT IS A STATEMENT TERMINATOR?</B>
+
+<P>Line 4 ends with a semicolon which is a statement terminator in Ada.
+It tells the compiler that this particular statement is complete at this
+point. Later in this chapter you will see why the statement terminator
+is required. The semicolon at the end of the procedure is also a statement
+terminator since a procedure, and hence the entire program, is defined
+as a complete statement in Ada.
+
+<P>Lines 10 and 12 are Ada comments and will be ignored by the compiler.
+A complete definition of Ada comments will be given at the end of this
+chapter. All example programs in this tutorial will give you the results
+of execution at the end of the program as illustrated here.
+
+<P>It should be clear that a complete Ada program uses at least the four
+reserved words to define the beginning and end of each of the fields and
+they must come in the given order. Of course many other things can be included
+in the declarative part and the executable part which we will see during
+the remainder of this tutorial.
+
+<P>The program outline can be given as follows;
+<PRE>&nbsp;&nbsp;&nbsp; <B>procedure </B>&lt;program name> <B>is
+</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;declarative part>
+&nbsp;&nbsp;&nbsp; <B>begin</B>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;executable part>
+&nbsp;&nbsp;&nbsp; <B>end</B> &lt;optional repeat of program name>;</PRE>
+At this point it would be wise for you to compile and run this program
+to see that it truly does obey all the rules of the Ada compiler. Unfortunately,
+it doesn't do anything, so running it will give you no results. Even though
+this program does nothing, any good Ada compiler will allow you to compile,
+link, load, execute, and properly terminate execution of this program.
+
+<P><B>NOW FOR A PROGRAM THAT DOES SOMETHING</B>
+
+<P>Example program ------> <B><A HREF="e_c02_p1.ada">e_c02_p1.ada</A></B>
+
+<P>Observe the program named e_c02_p1.ada for an example program that really
+does something. Ignore the first two lines for the time being, they are
+needed to tell the system how to output data to the monitor. We will study
+them in a later lesson. Considering only lines 4 through 10, you will see
+exactly the same structure used in the last program with a different program
+name and something new in line 8.
+
+<P>Line 8 is a call to a procedure named <B>Put </B>which is supplied with
+your Ada compiler as a convenience for you. It is very precisely defined
+so that you can use it to display text on your monitor. The string of characters
+contained within the parentheses and quotation marks will be displayed
+on your monitor when you compile and execute this program. The procedure
+named <B>Put </B>is actually a part of a library named <B>Ada.Text_IO</B>
+which is why the first two lines are included in this program. They tell
+the system where to find the procedure named <B>Put</B>, and how to use
+it. (We will discuss these two lines in great detail later in this tutorial.)
+
+<P>Once again, the executable statement in line 8 has a semicolon at the
+end as the statement terminator in the same manner that the reserved word
+<B>null </B>was followed by a semicolon in the last program.
+
+<P>Compile and execute this program and observe that the phrase in line
+8 is displayed on the monitor each time you execute the program.
+
+<P><B>A LITTLE MORE OUTPUT</B>
+
+<P>Example program ------> <B><A HREF="e_c02_p1.ada">e_c02_p1.ada</A></B>
+
+<P>Examine the program named e_c02_p1.ada, and you will see a few differences
+from the last two example programs. Observe that the program name is not
+repeated in the last line of the program. This is optional as we stated
+earlier, but it is a good practice to include the name.
+
+<P>The second, and most obvious difference, is the fact that there are
+several executable statements in this program. The executable statements,
+as with most other procedural programming languages, are executed in sequential
+order from top to bottom. The lines with calls to the procedure <B>Put
+</B>are executed just like the last program except a new operation becomes
+apparent here because we have multiple <B>Put </B>calls. The <B>Put </B>call
+does not cause the cursor to return to the beginning of a line following
+output of the line of text. The cursor simply stays where it ends up at,
+resulting in lines 8 and 9 being output on the same line of the monitor.
+Another new procedure, at least new to us, is named <B>New_Line </B>and
+this procedure causes the cursor to be returned to the beginning of the
+next line of the monitor. In fact, when using the <B>New_Line</B> procedure,
+you can even include an optional number within parentheses following the
+procedure name, and the cursor will be moved down that number of lines.
+This is illustrated in lines 12 and 14, and if the optional number is omitted,
+a value of 1 is assumed.
+
+<P>Note carefully that the procedure names used here, <B>Put </B>and <B>New_Line</B>,
+meet all of the requirements for naming an identifier which we studied
+in chapter 1. These names were selected by the Ada language definition
+committee.
+
+<P>Lines 16 and 17 introduce another useful procedure, named <B>Put_Line</B>,
+which causes an automatic "carriage return" to be output after the string
+within the parentheses is output. You will find this to be very useful,
+and should begin using it immediately. The blank line in line 15 is ignored
+by the Ada compiler. More will be said about the use of white space in
+the next two example programs.
+
+<P><B>HOW DID WE NAME THE IDENTIFIERS?</B>
+
+<P>We have the option of naming our program any name we wish as long as
+we obey all of the rules of naming an identifier listed in Chapter 1 of
+this tutorial. We have a restriction on the program name because of the
+way Ada compiles and links a program. In order to meet all of the requirements
+as specified in the Ada 95 Reference Manual (ARM), a compiler must generate
+some form of intermediate files containing object and type information.
+Any particular Ada compiler may use a naming convention for the intermediate
+files based on the program name we supply, or the file name we supply,
+so in order to avoid confusion, the same name will be used in both places
+throughout most of this tutorial. Therefore the name of the procedure,
+<B>MoreOut </B>in this case, will be the same as the name of the file,
+e_c02_p1.ada in this case. Note that your particular Ada compiler may not
+have this limitation.
+
+<P>With the above information, you should be able to figure out what this
+program will do. Compile and run it to see if you are correct in your analysis.
+This is a great place for you to begin programming by using these three
+subprograms to output some text in a neat format.
+
+<P><B>CONSIDER THE STYLE OF ADA PROGRAMMING</B>
+
+<P>Example program ------> <B><A HREF="e_c02_p1.ada">e_c02_p1.ada</A></B>
+
+<P>Observe the program named e_c02_p1.ada and you will see a familiar form,
+and a very clear and easy to understand Ada program. You should have no
+problem at all understanding what this program does. You should observe
+that Ada programming is free form, allowing you to add spaces and blank
+lines anywhere you wish to make the program clear and easy to understand,
+provided of course that you do not split up an identifier.
+
+<P>Once again, don't worry about the first two lines, we will discuss them
+later.
+
+<P>Example program ------> <B><A HREF="e_c02_p1.ada">e_c02_p1.ada</A></B>
+
+<P>After compiling and executing e_c02_p1.ada, observe the next example
+program named e_c02_p1.ada for an example of terrible formatting style.
+See if you can figure out what this program does, then decide if you would
+like to debug it if a problem should surface. Finally, compile and execute
+this program and you will find that it actually does compile and execute,
+doing exactly what the last program did.
+
+<P>These two programs were intended to give you an idea of the amount of
+freedom you have in formatting style when writing an Ada program and the
+amount of information the style can add to a program.
+
+<P><B>COMMENTS IN AN ADA PROGRAM</B>
+
+<P>Example program ------> <B><A HREF="e_c02_p1.ada">e_c02_p1.ada</A></B>
+
+<P>Examine the program named e_c02_p1.ada for an example of how comments
+are added to an Ada program. Comments convey no information to the computer,
+they only aid the writer and reader of the program to understand what the
+original writer was trying to do within the program. All comments in Ada
+begin with a double minus sign, or double dash if you prefer, and continue
+to the end of that line. No spaces are allowed between the dashes, they
+must be adjacent. There is no provision for middle-of-line comments in
+the Ada language, only end-of-line, although they can be an entire line
+as illustrated in the first two lines of the example program.
+
+<P>Comments can be placed nearly anywhere in an Ada program, including
+prior to the program, and following the end of it. The example program
+gives many illustrations of where comments can go and it will be left to
+your study. Note that line 16 is not an executable statement since it is
+commented out. As with all programs in this tutorial, this one is executable,
+so you should compile and execute it at this time.
+
+<P>One other point must be made. This example program is not meant to be
+an illustration of good commenting style, only an indication of where comments
+can go. It is actually a very choppy looking program, and is not at all
+clear.
+
+<P><B>PROGRAMMING EXERCISES</B>
+<OL>
+<LI>
+Write a program to display your name on the monitor.<A HREF=" a_c02_p1.ada">(Solution)</A></LI>
+
+<LI>
+Write a program to display your name, address, and phone number on different
+lines of the monitor.<A HREF=" a_c02_p2.ada">(Solution)</A></LI>
+</OL>
+<A HREF="chap03.htm">Advance to Chapter 3</A>
+
+<P><A HREF="a95list.htm">Return to the Table of Contents</A>
+
+<P>
+<HR width="100%"><I><FONT SIZE=-1>Copyright &copy; 1988-1998 Coronado Enterprises
+- Last update, February 1, 1998</FONT></I>
+<BR><I><FONT SIZE=-1>Gordon Dodrill - dodrill@swcp.com - </FONT></I><FONT SIZE=-1><A HREF="mailto:dodrill@swcp.com">Please
+email any comments or suggestions.</A></FONT>
+</BODY>
+</HTML>

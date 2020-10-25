@@ -1,0 +1,419 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Author" CONTENT="Gordon Dodrill">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (Win95; I) [Netscape]">
+   <TITLE>Ada Tutorial - Chapter 15</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<B>Ada Tutorial - Chapter 15</B>
+
+<P><B><FONT SIZE=+3>P</FONT><FONT SIZE=+2>ACKAGES</FONT></B>
+
+<P><B>PACKAGES ARE WHY ADA EXISTS</B>
+
+<P>One of the biggest advantages of Ada, over most other programming languages,
+is its well defined system of modularization and separate compilation.
+Even though Ada allows separate compilation, it maintains the strong type
+checking among the various compilations by enforcing rules of compilation
+order and compatibility checking. Ada uses separate compilation, but FORTRAN,
+as a classic example, uses independent compilation, in which the various
+parts are compiled with no knowledge of the other compilation units with
+which they will be combined. As we progress through this material, and
+additional material to come later, do not be discouraged if you find many
+things to keep in mind when doing separate compilations. The rules are
+not meant to be roadblocks, but are actually benefits for you when you
+are working on a large complex system.
+
+<P><B>LET'S LOOK AT A PACKAGE</B>
+
+<P>Example program ------> <B><A HREF="e_c15_p1.ada">e_c15_p1.ada</A></B>
+
+<P>Examine the file named e_c15_p1.ada for our first example of a separately
+compiled Ada package. A package, as the term is used in Ada, refers to
+a collection of related entities, the collection being composed of procedures,
+functions, variables, constants, types, subtypes, and even other packages.
+In our present example, the package is composed of one type, and one procedure.
+
+<P><B>THE SPECIFICATION OF THE PACKAGE</B>
+
+<P>Lines 4 through 8 define the specification of the package named <B>AdderPkg</B>,
+which is actually a very simple package, and purposely kept simple for
+illustrative purposes. The type <B>MY_ARRAY</B> is defined, as well as
+the procedure heading for <B>Add_Em_Up</B> in the specification part of
+the package. The only things a user needs to know about the package in
+order to use it are defined in the package specification, so it becomes
+the interface to the outside world. With a few defining statements, this
+is all the user would need to know about the package, and he could be isolated
+from the actual details of how the procedure does its job. We will see
+more about the topic of information hiding later in this chapter.
+
+<P>Note that any entity that is declared in the specification part of the
+package can be used in any other package that <B>with</B>'s this package.
+
+<P>We have an unconstrained array type declared in line 5 which we have
+not yet studied in this tutorial. The range for the subscript is defined
+by the "&lt;>", which is a box that must be filled in later when we define
+the actual type. We will cover this in detail in the chapter on advanced
+array topics.
+
+<P><B>THE BODY OF THE PACKAGE</B>
+
+<P>Lines 12 through 23 define the body of the package, and it is distinguished
+from the specification by the reserved word <B>body </B>in its header,
+and by the fact that the procedure is completely defined here. Anything
+defined or declared in the specification part of the package is available
+for use here, just as if it were defined at the beginning of this section.
+The procedure header is redefined here in full, and it must exactly match
+the definition in the specification or you will get a compile error and
+no compilation. There is nothing different about this procedure from any
+other procedure we have seen, it just happens to be in the package body.
+
+<P>Note that any types, variables, constants, procedures, or functions,
+can be declared in the package body for use within the body, but none of
+them are available outside of the package because they are not defined
+in the specification part of the package. The variable declared in line
+15 named <B>Total </B>is not available outside of this package and there
+is no way it can be referred to outside of the package without being declared
+in the package specification. In fact, since it is embedded within the
+procedure, it would be hidden anyway, but the fact remains that no entities
+are available outside of the package except those that are declared in
+the specification of the package.
+
+<P>It is not legal to place any subprogram bodies in the package specification.
+
+<P>Note that since the array has no defined limits, we must use attributes
+to define the loop range. Even though you may find this a bit confusing,
+you will appreciate the flexibility found here after we study some of the
+more advanced topics.
+
+<P><B>IT CAN BE COMPILED BUT NOT EXECUTED</B>
+
+<P>This file can be compiled, but it cannot be linked and executed because
+it is not a complete program, it is only a package containing a type and
+a procedure which can be called from another program just like we have
+been calling the procedure <B>Put </B>in the <B>Ada.Text_IO</B> package
+throughout this tutorial.
+
+<P>One other point must be made before we look at a program to use this
+package, the specification and the body do not need to be in the same file,
+they can be contained in separate files and compiled separately. If this
+is the case, the specification must be compiled prior to compiling the
+body because the body uses information generated during compilation of
+the specification. Actually, even though they are in one file in this example,
+they are considered separately by the compiler, being compiled in serial
+fashion. This file is said to be composed of two compilation units.
+
+<P><B>FILENAME VERSUS PACKAGE NAME</B>
+
+<P>In all of the example programs so far in this tutorial, we have used
+the same name for the filename and the program name, or the procedure name.
+This is not really necessary, but it was felt that an additional level
+of complexity should be delayed until later. We have arrived at the time
+when an explanation is needed.
+
+<P>When Ada compiles a program, it adds the result of the compilation into
+its library using the program name, not the filename. This library entry
+includes all information needed to link the program with the other needed
+library entries. Later when you use the linker supplied with your compiler,
+the linker will collect all of the necessary compiled packages and subprograms
+and combine them into an executable program.
+
+<P>In order to compile a program, it is necessary to give the filename
+so the operating system can find the program for the Ada compiler, but
+in order to link a program, the filename is no longer of any use because
+the name that really matters is the program name, and the program name
+is what the linker uses. Ada allows identifiers to be of any arbitrary
+length, but your operating system has some length limit, eight if you are
+using MS_DOS, therefore the Ada compiler may need to somehow make up a
+new name if intermediate results are put into individual files. It will
+be up to you to determine how your compiler stores intermediate results
+and how it makes up filenames for these results.
+
+<P>For simplicity, therefore, all program names have been limited to eight
+characters, and the same name is used for the filename throughout most
+of this tutorial.
+
+<P><B>NOW TO USE THE NEW PACKAGE</B>
+
+<P>Example program ------> <B><A HREF="e_c15_p2.ada">e_c15_p2.ada</A></B>
+
+<P>The example file named e_c15_p2.ada, illustrates how to use the previously
+studied package. There is nothing different about this program from any
+other program we have used except that it uses the package we defined and
+named <B>AdderPkg</B>, which it acknowledges in lines 5 and 6 where it
+tells the system to <B>with </B>the package and to <B>use </B>it in the
+program at hand. It also uses the renaming statement in line 16 which we
+will discuss later. The remainder of the program is simple, and you should
+have no trouble deciphering it. The primary purpose of these two examples
+is to illustrate how to write a library package.
+
+<P>In line 14 we declare an array of type <B>MY_ARRAY </B>and at this time
+we supply the range limits for the subscript. You may begin to see the
+flexibility in this method of array declaration, but we will study it in
+detail later.
+
+<P><B>THE with CLAUSE</B>
+
+<P>It is finally time for a complete definition of just what the <B>with
+</B>clause does for us. When we <B>with </B>a package into our program,
+we are telling the system that we wish to have everything that is declared
+in the specification of that package available for our use in this program.
+Accordingly, the system will look at the items declared in the specification
+for that package and every time we use one of those items, it will see
+that we have the correct number of parameters and that we have the types
+declared for each parameter correctly. Note that this happens during compilation
+and explains why Ada is said to be compiled separately, but not independently
+of other compilation units. In a sense, the resources available in the
+<B>with</B>ed package act as though they are extensions to the Ada programming
+language. Because of this, the <B>with </B>clause is called a context clause.
+
+<P>When you arrive at the linking operation, the <B>with</B>ed packages
+are automatically added into the executable file, as are any other packages
+that are <B>with</B>ed into your program. Note that the package named <B>Standard
+</B>is automatically <B>with</B>ed into every Ada program, subprogram,
+or package. The package named <B>Standard </B>defines many of the predefined
+entities such as <B>INTEGER</B>, <B>BOOLEAN</B>, <B>FLOAT</B>, etc.
+
+<P>In a large program, it is possible to <B>with </B>the same package several
+times since it is used in several packages. You can be assured that only
+one copy of the package will be included during the linking operation.
+Multiple copies will not be stored.
+
+<P>One other point must be made before leaving this topic, and that is
+the fact that all <B>with </B>clauses must be at the beginning of the program
+or package. There is a good reason for this. The dependent packages, and
+hence the overall program structure must be given at the beginning of each
+package making it easy to ascertain the overall structure without being
+forced to search through the entire listing for each package.
+
+<P><B>THE use CLAUSE</B>
+
+<P>The <B>use </B>clause in Ada allows you to use a shorthand when naming
+procedures, functions, variables, etc, from a package. Instead of using
+the extended naming convention, or the so called "dot" notation, and including
+the package name followed by the procedure name, dotted together, you can
+simply use the procedure name and let the system figure out what package
+it is coming from. In most of the programs we have studied so far, we have
+included the <B>Ada.Text_IO</B> package in a <B>use </B>clause. If the
+<B>use </B>clause were omitted we would have to identify the package each
+time one of the procedures is used. Put("This is Ada"); would have to be
+changed to read Ada.Text_IO.Put("This is Ada");, which clutters up the
+listing a bit but removes all ambiguity.
+
+<P>Because it is possible to get a different procedure than the one you
+are expecting under very unusual conditions of overloaded procedure names,
+the use of the <B>use </B>clause is falling into some disrepute in the
+software engineering literature. Without the <B>use </B>clause, you are
+forced to type in additional information for each procedure call. The presence
+of the package name prepended to each subprogram call however, leads to
+no ambiguity and therefore follows the basic premise of Ada that a program
+is written once but read many times. The extra keystrokes are worth the
+trouble to include them.
+
+<P>Use of the <B>use </B>clause is a matter of personal taste or possibly
+a style dictated by a project style guide.
+
+<P><B>RENAMING A PROCEDURE</B>
+
+<P>A procedure can be renamed in order to reduce the length of the identifier,
+especially if a rather long extended name is required. It may be better
+to use a more descriptive name based on the actual use of a general purpose
+procedure. The method of renaming is illustrated in lines 16 and 17 of
+this program. Of most importance is the fact that the entire list of formal
+parameters must be repeated. This is done so that the definition of the
+new procedure name is complete and should be of help during program debugging.
+
+<P>Use of the new name, which is of course only a synonym and not a new
+procedure, is illustrated in line 32 of this program.
+
+<P>If you compiled the previous file, named e_c15_p1.ada, you can compile,
+link, and execute this one to see that the system knows how to link the
+two together.
+
+<P><B>COMBINING FILES</B>
+
+<P>If you wish, you could combine the two files, provided you appended
+the second file to the end of the first. The compiler would then compile
+all three in succession, after which you could link the results, and execute
+the result. The library files must be compiled first so that the compiler
+can check the types in the procedure call to see that they agree, so putting
+them before the calling program conforms to this rule. If you did put them
+in a single file, you would still need the statements in lines 5 and 6
+of e_c15_p2.ada to tell the system to <B>with </B>and <B>use </B>the library
+file defined earlier in the file, because the compiler would consider them
+to be three separate compilations.
+
+<P><B>ANOTHER METHOD OF COMBINING FILES</B>
+
+<P>Example program ------> <B><A HREF="e_c15_p3.ada">e_c15_p3.ada</A></B>
+
+<P>The example program named e_c15_p3.ada illustrates another way to combine
+the last two files, in this case including the package in the declaration
+part of the program. The specification part of the package is in lines
+12 through 16, and the body is in lines 24 through 35. In this case, a
+new type is defined between the two parts to illustrate that it can be
+done. Since the package is compiled as a part of the main program, it does
+not have to be mentioned in a <B>with </B>statement. The compiler knows
+that it is a part of the program, but the <B>use </B>must be mentioned
+to tell the system where to get the procedure name and the type. Of course
+the <B>use </B>can be omitted and the extended naming convention used for
+all references to the package.
+
+<P>Even though the body is defined after the variable <B>New_Array</B>
+is declared in line 20, this variable is not directly available for use
+in the body, because the package structure effectively builds a strong
+wall around the enclosed statements, and nothing can get in or out. The
+only inputs to and outputs from the body are those defined in the specification
+part of the package. Of course the variable <B>New_Array</B> is available
+to the procedure because it is passed in as a parameter, but is not directly
+visible.
+
+<P>One other difference occurs here that is different from the last two
+files. This embedded package is not available for use by any other program,
+because it is enclosed within this program, and is not therefore a library
+package. The entire file contains only one compilation unit.
+
+<P><B>ANOTHER KIND OF SEPARATE COMPILATION</B>
+
+<P>Example program ------> <B><A HREF="e_c15_p4.ada">e_c15_p4.ada</A></B>
+
+<P>The example file named e_c15_p4.ada illustrates still another method of
+separate compilation. This program is identical to the last except that
+the package body is removed to a separate file for separate compilation,
+and is called a stub. The statement in line 24 indicates to the compiler
+that the body will be found elsewhere. Although this illustrates separate
+compilation of a package body, the same method can be used for separate
+compilation of a procedure. This could be used if you wished to remove
+a large procedure from the logic defined here to make it more manageable.
+
+<P>Example program ------> <B><A HREF="e_c15_p5.ada">e_c15_p5.ada</A></B>
+
+<P>The separately compiled body is found in the file named e_c15_p5.ada,
+which begins with the reserved word <B>separate </B>which indicates that
+this is a stub. The main program, or whatever other package, procedure,
+or function, that uses this stub is defined in parentheses following the
+reserved word <B>separate </B>to tell the compiler where this is used.
+This stub cannot be called or used by any other program, because it is
+in truth part of the program <B>Adder3</B>, not a general purpose program.
+Any variables, types, procedures, etc, that are available for use at the
+point where the stub is used, are available at the point where the stub
+is defined. The stub therefore has the same environment as the environment
+existing at the point of use, in this case line 24 of e_c15_p4.ada.
+
+<P><B>ORDER OF COMPILATION FOR THE STUB</B>
+
+<P>Since all of the variables, types, etc must be made available to the
+stub, the using program must be compiled before the stub itself is compiled.
+After both are compiled, the program can be linked and executed. You should
+compile e_c15_p4.ada first, then e_c15_p5.ada should be compiled, and finally
+ADDER3 should be linked. You will then have an executable ADDER3 program.
+
+<P><B>ORDER OF COMPILATION IS NOT MYSTERIOUS</B>
+
+<P>The example files included with this chapter are intended to illustrate
+to you the required order of compilation in a meaningful way, not as a
+group of rules to be memorized. If you understand the dependencies of files
+on one another, the order of compilation will make sense, and you will
+be able to intelligently arrange your programs to use the Ada type checking
+between the various separately compiled files. Remember that Ada, unlike
+Pascal, was designed to allow the development of huge programs that require
+separate compilation facilities, and yet retain the strong type checking
+between modules.
+
+<P><B>A PACKAGE WITH AN INITIALIZATION PART</B>
+
+<P>Example program ------> <B><A HREF="e_c15_p6.ada">e_c15_p6.ada</A></B>
+
+<P>The example file named e_c15_p6.ada illustrates one more feature of a
+package. This program is nearly identical to the first program in this
+chapter. Both files which comprise the first example program have been
+incorporated into a single file for ease of compilation, and the variable
+named <B>Total </B>has been made global within the package. Since it is
+global within the package, it can be referred to by any subprogram in the
+package or in the initialization section as illustrated in lines 23 and
+24. This section is optional but can be included in any package.
+
+<P>Note that the initialization section is only executed once, at load
+time. For that reason, this program will not operate exactly as the first
+one did. The result that is output is identical in both cases, but the
+additional calls will not produce the same result because the variable
+<B>Total </B>is not cleared to zero during each call in this example program
+as it is in the first example. The initialization section only initializes
+the variable once, and it is impossible to call this section of code from
+within the executable part of the package.
+
+<P><B>A FEW OF THE STANDARD PACKAGES</B>
+
+<P>Ada 95 provides many new packages to improve the programming model and
+prevents errors on the part of the programmer, and to provide additional
+conveniences when programming. We have already discussed a few of the additional
+packages during our study of Ada earlier in this tutorial. We will make
+a few comments on a few more that you may find useful, but really didn't
+fit in well anywhere yet in the tutorial.
+
+<P>package <B>Standard</B> - This is the root of all packages in Ada 95
+and is where such things as <B>INTEGER</B>, <B>FLOAT</B>, <B>BOOLEAN</B>,
+and other such entities are defined. It is inherently <B>with</B>ed into
+every Ada compilation unit automatically.
+
+<P>package <B>Ada.Command_Line</B> - This is actually a part of the above
+mentioned <B>Standard </B>package but that fact is really invisible to
+you. This package provides the ability to retrieve any parameters provided
+by the user when he begins execution of the resulting program. This package
+provides a means to retrieve those parameters in a portable manner. This
+did not exist in Ada 83, so each compiler writer came up with a non-portable
+way to do this.
+
+<P>package <B>Ada.Numerics.Elementary_Functions</B> - This package provides
+the trig functions along with a floating point exponentiation operator,
+and many other math functions.
+
+<P>package <B>Ada.Characters.Latin_1</B>- This package replaces the <B>ASCII
+</B>package which was available with Ada 83 but is now obsolete. This new
+package provides definitions of the ASCII character set.
+
+<P><B>INTERFACES TO OTHER LANGUAGES</B>
+
+<P>Annex B of the ARM defines the method of interfacing to other languages
+which your compiler may or may not support. The packages named <B>Interface.C</B>,
+<B>Interface.COBOL</B>, and <B>Interface.Fortran</B>, if available with
+your compiler, will provide you with the ability to combine code in those
+languages with your Ada code in a well defined manner. Of special importance
+is the method of handling strings, pointers, arrays, and structures since
+they can be so different for other languages. The interfaces consist of
+various pragmas and subprograms to define the interface characteristics.
+You can study the details on your own, if you ever have the need to interface
+to a language supported by your Ada compiler.
+
+<P><B>PROGRAMMING EXERCISES</B>
+<OL>
+<LI>
+Remove the package body from e_c15_p3.ada and make it a stub. Compile the
+two resulting files in the correct order and link and execute the resulting
+program.<A HREF="a_c15_p1A.ada">(Solution 1)</A><A HREF="a_c15_p1B.ada">(Solution 2)</A></LI>
+
+<LI>
+Remove all <B>use </B>clauses from the program named e_c14_p1.ada in the
+last chapter, and prefix the I/O procedure calls with the proper package
+names. It should be clear to you that there can be no naming conflicts
+after this is done.<A HREF=" a_c15_p2.ada">(Solution)</A></LI>
+
+<LI>
+Change the name of the two compilation units in e_c15_p1.ada without modifying
+the filename, and modify e_c15_p2.ada to correspond to the new package name.
+Use a name that contains more characters than your operating system permits
+for a filename. Compile each file and link them together to result in an
+executable program.<A HREF="a_c15_p3A.ada">(Solution 1)</A><A HREF="a_c15_p3B.ada">(Solution 2)</A></LI>
+</OL>
+<A HREF="chap16.htm">Advance to Chapter 16</A>
+
+<P><A HREF="a95list.htm">Return to the Table of Contents</A>
+
+<P>
+<HR width="100%"><I><FONT SIZE=-1>Copyright &copy; 1988-1998 Coronado Enterprises
+- Last update, February 1, 1998</FONT></I>
+<BR><I><FONT SIZE=-1>Gordon Dodrill - dodrill@swcp.com - </FONT></I><FONT SIZE=-1><A HREF="mailto:dodrill@swcp.com">Please
+email any comments or suggestions.</A></FONT>
+</BODY>
+</HTML>

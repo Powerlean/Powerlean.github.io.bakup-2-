@@ -1,0 +1,441 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Author" CONTENT="Gordon Dodrill">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (Win95; I) [Netscape]">
+   <TITLE>Ada Tutorial - Chapter 17</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<B>Ada Tutorial - Chapter 17</B>
+
+<P><B><FONT SIZE=+3>E</FONT><FONT SIZE=+2>XCEPTIONS</FONT></B>
+
+<P><B>EXCEPTIONS ARE NOT NEW TO YOU</B>
+
+<P>Assuming you have completed part 1 of this tutorial, you have seen many
+references to exceptions, but we have said little about how you can use
+them. The purpose of this chapter is to instruct you on the use of exceptions,
+and by the time you complete it, you will have the ability to use exceptions
+to develop a program with its own error handling ability.
+
+<P><B>WHY DO WE NEED EXCEPTIONS?</B>
+
+<P>The original charter for the development of Ada included the ability
+to operate in a real-time environment. You already understand, if you have
+much programming experience, that if it is possible for an error to surface,
+it will eventually surface. Many programming languages simply terminate
+operation if a "fatal error" is detected, but this could be a disaster
+if the program was controlling a real-time system upon which human lives
+or safety depended. A 747 in final approach to the airport, or a system
+used in a hospital operating room would be two examples of systems that
+simply could not be terminated abruptly because a bad data point was somehow
+accumulated. The careful application of Ada exceptions will allow the software
+to gracefully recover from such a situation rather than aborting operation
+completely.
+
+<P><B>OUR FIRST EXCEPTION</B>
+
+<P>Example program ------> <B><A HREF="e_c17_p1.ada">e_c17_p1.ada</A></B>
+
+<P>Examine the program named e_c17_p1.ada for our first example program
+with an exception handler. Ignore lines 18 and 19 for the moment and you
+will have a program that is not at all unusual, and should pose no problem
+for you to understand. The program does have a carefully introduced error
+however, because when we reach a value of 4 for <B>Index </B>in line 14,
+we will be attempting to divide by zero. Dividing by zero is not allowed
+in any programming language, because the answer is infinite and therefore
+undefined. The Ada runtime system will, by definition, cause the exception
+named <B>Constraint_Error</B> to be raised, which is the Ada way of saying
+that a divide by zero was attempted. This signals the system to do something
+about it. (Actually, there are many other ways to get the <B>Constraint_Error</B>
+exception raised but we will worry about them later.)
+
+<P>The Ada system will search, in a very definite way, for any instructions
+we have given about this error, and if it finds none, will terminate operation
+of the program after issuing a message concerning the error. If we have
+given instructions about what to do with the error, it will execute the
+instructions and continue operation as we direct it to do. The method of
+giving the system these instructions is illustrated in lines 18 and 19.
+
+<P><B>HOW ARE EXCEPTIONS HANDLED?</B>
+
+<P>When any exception is raised, the system immediately looks at the end
+of the current block or subprogram for the reserved word <B>exception</B>.
+If it is found, and if the specific exception that was raised is defined
+there, the instructions associated with that exception are executed, and
+the subprogram or block is exited.
+
+<P>To define a handler for a specific exception, the reserved word <B>when
+</B>is used, followed by the name of the exception, and finally the sequence
+of statements to be executed following the => operator. The sequence of
+statements can be of arbitrary complexity, but should be kept simple due
+to the nature of exception handling. In this case, we output a message
+to the monitor and do nothing else. As many different exceptions as desired
+can be handled at the end of any block or subprogram by adding additional
+constructs of the form,
+<PRE>&nbsp;&nbsp;&nbsp;&nbsp; <B>when </B>&lt;exception-name> => instructions;</PRE>
+following the single instance of the reserved word <B>exception</B>. We
+will study examples of multiple exception handlers later in this chapter.
+
+<P><B>WHAT HAPPENS FOLLOWING EXCEPTION HANDLING?</B>
+
+<P>Following handling of the exception, the program executes an otherwise
+normal return to the calling program, and the normal sequence of instructions
+in the calling program is executed. Note that it is impossible to jump
+back into the subprogram or block in which the exception was raised from
+the exception handling routine at the end of that block. In this case,
+because of the logic used, the loop defined in line 10 is terminated early
+because we essentially jumped out of the loop and the program is ended.
+If an exception handler or a group of exception handlers is included, it
+must be the last thing in the block. If normal execution of the block reaches
+the end of the executable statements by coming to the reserved word <B>exception</B>,
+the block is terminated normally. You cannot drop into the exception handler
+at the end of a block. The only way to get to the exception handling code
+is through raising an exception.
+
+<P>In spite of the additional questions you have at this point, compile
+and execute this program. Observe the results, and if you do not understand
+the output, reread the above text until you do, because these fundamental
+points are essential to understanding the entire topic of exceptions.
+
+<P><B>LET'S USE SEVERAL EXCEPTIONS</B>
+
+<P>Example program ------> <B><A HREF="e_c17_p2.ada">e_c17_p2.ada</A></B>
+
+<P>Examine the program named e_c17_p2.ada for additional examples of exceptions.
+This program will answer many of your questions about exceptions.
+
+<P>In the last program we terminated the loop when the exception was raised,
+but we may desire to continue execution of the program following the exception.
+The first procedure in this program is logically identical to the last
+example program except the loop is moved to the calling program. When the
+divide by zero is detected by the system, which raises the <B>Constraint_Error</B>
+exception, the exception is handled by the exception handler defined in
+lines 17 and 18, and the return to the calling program is effected. In
+this case however, when control returns to the calling program, we are
+still inside of the loop, and the loop completes normally. This should
+indicate to you that by careful selection of where you handle exceptions,
+you can control the overall result. We will see more about this as we continue
+our study of exceptions.
+
+<P>The logic of the second group of instructions, found in lines 49 through
+64, is identical to the logic of the first group as studied in the last
+paragraph. The only difference is that the procedure has been changed into
+a block and inserted into the code in an inline fashion. This has been
+done to illustrate the use of an exception in a block of code, and to illustrate
+that the exception handler for the block of code is put at the end of that
+block. After the exception is raised and handled, execution begins at the
+first statement following the block. Because the block is contained within
+the loop, the exception is handled within the loop and the loop runs to
+completion.
+
+<P><B>MULTIPLE EXCEPTION HANDLERS</B>
+
+<P>Finally, we come to the section of code in lines 66 through 69, consisting
+of a simple loop calling the procedure <B>New_Divide_Loop</B>. The procedure
+itself, defined in lines 21 through 40, contains an example of a new operation,
+the ability to make up our own exception, raise it our self, and handle
+it with our own exception handler.
+
+<P>Line 22 declares the identifier <B>My_Own_Exception </B>as being the
+name of an exception, and is defined in much the same way that we would
+declare a variable. We cannot assign a value to it, but we can raise it
+anywhere within its defined scope which is the same as the scope of a variable
+declared at the same place. The exception is automatically initialized
+to the "not raised" condition by the system.
+
+<P>Beginning in line 34, we define three different exception handlers,
+which will cover any exceptions raised anywhere within this procedure.
+The first two are named exception handlers but the third handler uses the
+reserved word <B>others </B>to indicate that it will be used for any exceptions
+that are not handled by the two named exception handlers. The <B>others
+</B>clause is optional, but if it is included, it must be last.
+
+<P><B>RAISING AN EXCEPTION</B>
+
+<P>If we reach line 28 with a value of 4, which we eventually will because
+of the logic of the calling program, we will detect the divide by zero
+that would be attempted upon reaching line 31. Instead of letting the system
+generate the exception named <B>Constraint_Error</B>, we generate our own
+exception named <B>My_Own_Exception,</B> using the reserved word <B>raise
+</B>followed by the name of the exception. As soon as we raise this exception,
+the system jumps to the end of the block, looks for the reserved word <B>exception</B>,
+which it finds, then looks for the exception handler with the name that
+was raised. Upon finding it, the statements are executed, resulting in
+a message being output to the display, and we return to the calling program.
+
+<P>In this case, the system will not raise the exception <B>Constraint_Error</B>,
+because we are detecting the error before it actually happens. You could
+raise it yourself by inserting the statement "raise Constraint_Error;"
+somewhere in this procedure, possibly when the value of <B>Index </B>is
+equal to 3. It would be a good exercise for you to insert that in the code
+to see that you can raise one of the system exceptions as well as your
+own.
+
+<P>Be sure to compile and execute this program to verify proper operation
+according to this description and to ascertain your understanding of the
+same.
+
+<P>Note that if an exception occurs, formal parameters of mode <B>out </B>or
+<B>in out</B> are not updated since a normal return is not accomplished.
+Partial results will therefore not be returned to the calling program.
+This is not illustrated here, but is left for the student to investigate
+if desired.
+
+<P><B>WHAT ARE THE PREDEFINED EXCEPTIONS?</B>
+
+<P>There are four predefined exceptions which can be raised by the system
+to indicate a very specific problem. A brief definition follows;
+<OL>
+<LI>
+<B>Constraint_Error</B> - This will occur if something goes out of its
+assigned range.</LI>
+
+<LI>
+<B>Program_Error</B> - This will occur if we attempt to violate an Ada
+control structure such as dropping through the bottom of a function without
+a return.</LI>
+
+<LI>
+<B>Storage_Error</B> - This will occur if we run out of storage space through
+either recursive calls or storage allocation calls.</LI>
+
+<LI>
+<B>Tasking_Error</B> - This will occur when attempting to use some form
+of tasking in violation of the rules.</LI>
+</OL>
+<B>WHAT ABOUT AN UNHANDLED EXCEPTION?</B>
+
+<P>Example program ------> <B><A HREF="e_c17_p3.ada">e_c17_p3.ada</A></B>
+
+<P>Examination of the program named e_c17_p3.ada will reveal what happens
+if an exception is raised that is not handled by the program. In a word,
+the program will be terminated, but we need to understand how termination
+occurs so we can intelligently prevent it.
+
+<P>There is a loop in the main program which calls two procedures successively,
+<B>Divide_By_Zero</B> and <B>Raise_An_Error</B>. The first procedure is
+identical to that in the first two example programs and the only exception
+raised is <B>Constraint_Error</B>, which is handled properly.
+
+<P>The second procedure has its own exception defined, named <B>My_Own_Error</B>
+which it raises and handles itself in the manner defined previously in
+this chapter. It also has a divide by zero problem in line 26 that will
+raise the exception <B>Constraint_Error</B> when <B>Count </B>is equal
+to 6. Of course, the logic is defined to make this happen and illustrate
+the error.
+
+<P><B>PROPAGATION OF EXCEPTIONS</B>
+
+<P>When the exception <B>Constraint_Error</B> is raised at line 26, the
+system searches for the reserved word <B>exception </B>which it finds in
+line 31 at the end of the procedure. It then searches for a sequence of
+statements for <B>Constraint_Error</B> which it does not find. Since an
+exception handler is not found within the procedure, the exception is propagated
+to the calling program in such a way that the exception appears to have
+been raised by the calling statement. In this case it will appear to the
+logic as if the exception <B>Constraint_Error </B>was raised by the statement
+in line 39. Once again, the exception rules are applied, and the system
+searches for an exception section at the end of the block or subprogram,
+in this case being the main program. Finding the reserved word <B>exception
+</B>in line 43, the system looks for the desired exception handler, which
+it finds and executes, then drops out of the bottom of the main program
+and returns to the operating system.
+
+<P>If there were no handler for the exception, the exception would be propagated
+to the operating system, and it would issue some sort of nasty message
+on the standard output device about an unhandled exception leading to program
+termination.
+
+<P>It should be somewhat obvious to you that if you added another level
+of subprogram nesting, you could report the error yourself, and possibly
+recover operation of the program. It is all a matter of program definition.
+
+<P><B>CAN YOU EXECUTE AN EXCEPTION WITHOUT RAISING IT?</B>
+
+<P>As mentioned before, the section of code at the end of a block or subprogram,
+following the reserved word <B>exception</B>, is never executed without
+raising an exception. It can never be executed by dropping into it.
+
+<P>Be sure to compile and execute this program to observe the operation
+of the exceptions.
+
+<P><B>EXCEPTIONS CAN OCCUR DURING DECLARATIONS</B>
+
+<P>Example program ------> <B><A HREF="e_c17_p4.ada">e_c17_p4.ada</A></B>
+
+<P>Examine the program named e_c17_p4.ada for an example of an exception
+that occurs during the declaration part of the program.
+
+<P>When a procedure is called, its declarations are elaborated prior to
+the logic being executed, as we have stated before. If one of the declarations
+cannot be properly elaborated, then an error occurs and an exception is
+raised. Examining the procedure <B>Try_It</B> will reveal an error in lines
+8 through 10, where he variable <B>Funny </B>is declared to be of type
+<B>LIMIT_RANGE </B>with limits of 14 through 33, then it is initialized
+to the value 8. Since this is out of the allowed range, the exception <B>Constraint_Error</B>
+will be raised. The executable part of the procedure is not yet ready for
+use, so the exception handler defined within it cannot be used, and the
+exception will be propagated to the calling program where it will be handled
+just as if it occurred in the calling statement, which is line 22 in this
+case. The exception will therefore be handled by lines 24 through 26 of
+the procedure <B>Try_To_Fix_It</B>. Note that we never executed the code
+in the procedure named <B>Try_It</B>.
+
+<P>Be sure to compile and run this program, then study the results.
+
+<P><B>ADDITIONAL PREDEFINED EXCEPTIONS</B>
+
+<P>You will find that there are actually additional exceptions predefined
+by your compiler, but these are all defined in additional packages supplied
+with your compiler. Packages such as <B>Ada.Text_IO</B>, <B>Ada.Sequential_IO</B>,
+or <B>Ada.Calendar</B> (to be discussed later with tasking), have some
+number of exceptions defined as a part of their interfaces, but there are
+only four exceptions predefined as a part of Ada. These were listed and
+discussed earlier.
+
+<P><B>A FEW MORE TOPICS CONCERNING EXCEPTIONS</B>
+
+<P>Example program ------> <B><A HREF="e_c17_p5.ada">e_c17_p5.ada</A></B>
+
+<P>The example program named e_c17_p5.ada illustrates a few additional topics
+about exceptions and illustrates how they are used in a package. This is
+a very strange program with lots of exception handling examples for your
+study. You will be left on your own to study the overall operation of this
+program, but the unique exception handling techniques will be pointed out
+to you.
+
+<P>The package body contains a section of initialization code in lines
+37 through 49 which is composed of nothing but a <B>null </B>statement
+and several exception handlers. These are only used during initialization
+of the package since they are not within the executable portion of either
+of the subprograms. You will notice that the exception named <B>Funny_Add_Error</B>
+is declared in the package specification so it is visible in the exception
+handler in line 46, but the exception named <B>Funny_Subtract_Error</B>
+is not visible there because it is declared within the function. We will
+see soon however, that even this exception can be propagated to the main
+program.
+
+<P>When the program is executing, a call to the function <B>Subtract_One</B>
+raises the exception <B>Funny_Subtract_Error </B>which is handled by the
+exception handler at the end of the function in line 32. A message is displayed
+and the same exception is raised by the isolated <B>raise </B>statement
+in line 34. This statement simply raises the exception that caused the
+jump to the exception handler in the first place. The isolated <B>raise
+</B>statement can only be used within an exception handler. The exception
+is passed on to the calling program, even though it has already been handled
+here.
+
+<P>Because the exception named <B>Funny_Subtract_Error</B> is not visible
+to the main program, it cannot handle it by name but even this exception
+can be handled by an <B>others </B>clause as is done in line 68. After
+printing a message, the same exception is once again raised in line 70
+where it is passed on to the operating system. You will see when you execute
+this program that the exception is known by name to the operating system.
+It will give you a nasty message about the unhandled exception and terminate
+operation.
+
+<P><B>THE others CLAUSE IN AN EXCEPTION HANDLER</B>
+
+<P>If the <B>others </B>clause is used, it must be the last in the exception
+handler list and it cannot be combined with any other exceptions such as
+illustrated in line 64. As in other Ada constructs, two or more exceptions
+can be "or"ed and use the same exception handler. <B>Numeric_Error</B>
+was available inn Ada 83, but is considered obsolete in Ada 95. The name
+<B>Numeric_Error</B> is a synonym for <B>Constraint_Error</B> in Ada 95
+to permit legacy code to compile without error.
+
+<P>Note line 59 where an exception is renamed to reduce the length of its
+name. Any exception can be renamed in a similar fashion.
+
+<P>Be sure to compile and execute this program and spend the time necessary
+to understand the exception propagation illustrated here.
+
+<P><B>WHAT IS AN EXCEPTION OCCURRENCE?</B>
+
+<P>Many times it is adequate to simply report that an exception occurred
+and the general nature of the exception is sufficient to permit a recovery
+from the exceptional condition. There are times however, that it is necessary
+to provide additional information about the exception and what caused it.
+The exception occurrence is available in a predefined Ada 95 package for
+this purpose. The exception occurrence gives a unique name to one instance
+of raising an exception and provides hooks to completely analyze where
+and when the exception occurred. As always in this tutorial, an example
+program provides the best illustration, so examine the example program
+named e_c17_p6.ada.
+
+<P>Example program ------> <B><A HREF="e_c17_p6.ada">e_c17_p6.ada</A></B>
+
+<P>In line 2 we <B>with </B>the package named <B>Ada.Exceptions</B> which
+provides us with the ability to name and use an exception occurrence, and
+we name one in line 8. The name <B>Except_ID</B> can be used to refer to
+any single exception at a time, but can be reused to refer to any other
+exception at a later time. This example program executes a loop with a
+contrived error in it, a divide by zero. In fact, you may recognize it
+as a modification of the first example program in this chapter.
+
+<P>When we arrive at the divide by zero condition, the exception <B>Constraint_Error</B>
+is raised and the exception handler defined in line 23 is found and execution
+begins. However, because of the occurrence name given immediately following
+the reserved word <B>when</B>, this particular occurrence of <B>Constraint_Error</B>
+is given the name <B>Except_ID</B>. Once we have the occurrence name, we
+can use it to retrieve a formatted message with the name of the exception,
+even if the exception name in no longer within scope. This is done via
+a call to <B>Exception_Name</B> which is a part of the <B>Ada.Exceptions</B>
+package. This is illustrated in line 28 where the returned line of text
+is simply copied to the monitor. We can also get a more detailed message
+including a complete call stack listing by calling the function named <B>Exception_Message</B>
+with the name of the exception occurrence as the only parameter. This result
+is also copied to the monitor for inspection.
+
+<P>The actual format is implementation dependent, and your compiler may
+give a very verbose line of text or a very sparse line of text. The compiler
+used for this compilation emitted a very scarce text.
+
+<P>If we were to correct the error and allow the program to continue, another
+divide by zero condition would cause the <B>Constraint_Error</B> and the
+<B>Except_ID</B> exception occurrence could be used to analyze that particular
+exception. It should be obvious that you could use this to log certain
+exceptions to a log file for post execution analysis of what caused some
+particular catastrophic failure. If properly planned, such a log file would
+have a complete history of system operation prior to failure.
+
+<P><B>USING THE OCCURRENCE MORE THAN ONCE</B>
+
+<P>In line 34 of the example program, we use the same occurrence name to
+retrieve and display information about any occurrence of the <B>Storage_Error</B>
+exception. This indicates that the exception occurrence acts just like
+a variable and can be used to refer to any exception that occurs during
+execution of the program. Note that it is very unlikely that the <B>Storage_Error</B>
+exception will be raised in this program, but is given here only for illustration.
+
+<P>The same name can be used with the <B>others </B>condition to cover
+any otherwise unhandled exceptions that occur.
+
+<P>Be sure to compile and execute this program with your compiler to see
+the output format provided for you. There is no standard way to format
+this data, so your output could look very different from the example output
+provided in the result of execution. The same information will be provided
+for you in some meaningful manner.
+
+<P><B>PROGRAMMING EXERCISES</B>
+<OL>
+<LI>
+Change line 31 of e_c17_p2.ada to cause a divide by zero when <B>Index </B>is
+equal to 2 and see that both exceptions will be handled correctly.<A HREF=" a_c17_p1.ada">(Solution)</A></LI>
+
+<LI>
+Also in e_c17_p2.ada, declare a new exception in line 22, and raise it in
+line 29 to see how the <B>others </B>clause handles it.<A HREF=" a_c17_p2.ada">(Solution)</A></LI>
+</OL>
+<A HREF="chap18.htm">Advance to Chapter 18</A>
+
+<P><A HREF="a95list.htm">Return to the Table of Contents</A>
+
+<P>
+<HR width="100%"><I><FONT SIZE=-1>Copyright &copy; 1988-1998 Coronado Enterprises
+- Last update, February 1, 1998</FONT></I>
+<BR><I><FONT SIZE=-1>Gordon Dodrill - dodrill@swcp.com - </FONT></I><FONT SIZE=-1><A HREF="mailto:dodrill@swcp.com">Please
+email any comments or suggestions.</A></FONT>
+</BODY>
+</HTML>

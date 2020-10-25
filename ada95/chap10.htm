@@ -1,0 +1,352 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Author" CONTENT="Gordon Dodrill">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (Win95; I) [Netscape]">
+   <TITLE>Ada Tutorial - Chapter 10</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<B>Ada Tutorial - Chapter 10</B>
+
+<P><B><FONT SIZE=+3>A</FONT><FONT SIZE=+2>RRAYS</FONT></B>
+
+<P><B>OUR FIRST ARRAY</B>
+
+<P>Example program ------> <B><A HREF="e_c10_p1.ada">e_c10_p1.ada</A></B>
+
+<P>An array is a group of two or more elements that are all of the same
+type. In Ada, as in most modern computer languages, arrays can be made
+of many different kinds of data, but all elements of an array must be of
+the same type. The best way to see this is to inspect the program named
+e_c10_p1.ada which contains a few examples of arrays.
+
+<P><B>HOW DO WE DECLARE A SUBSCRIPT?</B>
+
+<P>For simplicity, we will start with line 8 where we have a declaration
+of the array named <B>Dummy1</B>. This line says that the variable named
+<B>Dummy1 </B>will have 7 elements numbered from 1 through 7, and each
+element will have the ability to store one <B>BOOLEAN </B>variable. We
+will see shortly that the individual elements will be referred to by the
+variable name followed by a subscript in parentheses, or <B>Dummy1(1)</B>,
+<B>Dummy1(2)</B>,... <B>to Dummy1(7)</B>. Keep in mind that each is a single
+<B>BOOLEAN </B>variable.
+
+<P>To define an array, we use the reserved words <B>array </B>and <B>of
+</B>with the appropriate modifiers as illustrated in this example. We define
+a range which the array will cover, the type of the range variable, which
+must be composed of discrete type limits, and the type of each element
+of the array. Remember that a discrete type is any type of the integer
+class including enumerated types. We will have an example program with
+an enumerated array index in part 2 of this tutorial.
+
+<P><B>LET'S LOOK AT ANOTHER ARRAY DECLARATION</B>
+
+<P>In line 9, we have <B>Dummy2 </B>defined as an array of <B>BOOLEAN </B>type
+variables that covers the range of <B>Dummy2(-21)</B> through <B>Dummy2(10)</B>,
+since <B>N </B>has the value of 10. Line 10 illustrates declaring the array
+<B>Dummy3 </B>as an array of <B>BOOLEAN </B>variables from <B>Dummy3(-21)</B>
+through <B>Dummy3(10)</B>, but this time the subscript type is not explicitly
+stated, only implied by the values of the subscript limits. Actually, the
+subscript type was not needed in the first two either, since they were
+implied. The type <B>INTEGER </B>is used so often for an array subscript
+that the type <B>INTEGER </B>has been defined as the default if none is
+given. This is done only to make it a little simpler to use arrays.
+
+<P>So far in this program, we have defined about 70 variables that have
+no initial values because we have not assigned them any. We will see how
+to initialize an array later, but first we will learn how to use them.
+
+<P><B>HOW DO WE DEFINE AN ARRAY TYPE?</B>
+
+<P>Line 12 gives the general method of declaring an array type. It uses
+the reserved word <B>type </B>followed by the type name, the reserved word
+<B>is</B>, then the definition of the type. The definition is composed
+of the range, followed by the reserved word <B>of </B>and the element type.
+We now have a type name which can be used to define any number of array
+variables, and each will be made up of integer variables. Each will also
+have 5 elements and will cover the range of 1 through 5. Thus line 14 defines
+an array of five elements named <B>Total</B>, the elements of which will
+be named <B>Total(1)</B>, <B>Total(2)</B>, ... <B>Total(5)</B>. Each of
+these elements can be used to store one value of type <B>INTEGER</B>.
+
+<P>Line 22 of the program illustrates how we can assign a value of 12 to
+one of the elements of <B>First</B>, which is another array of type <B>MY_ARRAY</B>
+and therefore composed of 5 elements. The second element is assigned the
+value of 16, and the third is assigned a value found by subtracting the
+first element from the second, resulting in a value of 4. This illustrates
+the use of the elements once they are assigned values. The fourth and fifth
+elements are also assigned nonsense data, illustrating some mathematical
+operations. The assignment in line 25 will be explained in the next paragraph.
+If you remember that each element is an <B>INTEGER </B>type variable, you
+can use them just like any other <B>INTEGER </B>type variable, except that
+you must add the subscript to indicate which element you are interested
+in using at each point in the program.
+
+<P><B>RENAMING AN ARRAY ELEMENT</B>
+
+<P>Line 19 is an illustration of renaming a single element of the array.
+Once again, this simply gives us a synonym which we can use to refer to
+the variable, it does not declare another variable. It should be pointed
+out that it is not permitted to rename a type but you can achieve the same
+effect by declaring a subtype with the same range as the parent type.
+
+<P><B>WHAT IS A RANGE_ERROR?</B>
+
+<P>Any attempt to use a subscript which is outside of the assigned range
+will result in the system raising the exception <B>Range_Error</B>, and
+will be handled as a fatal error, terminating operation of the program
+unless you handle the exception yourself. We will study exceptions in part
+2 of this tutorial.
+
+<P>The subscript can be a variable itself, provided it is of the correct
+type, as is illustrated in line 29, where all five elements of the array
+named <B>Second </B>are assigned nonsense data for illustration. The subscript
+can also be calculated, with any arbitrary level of complexity, provided
+of course that it results in an <B>INTEGER </B>type result and is within
+the range of the declared subscript.
+
+<P><B>ARRAY ASSIGNMENT</B>
+
+<P>The assignment in line 32 is legal, provided the two arrays are of the
+same type, resulting in all 5 values of the array named <B>First </B>being
+assigned to the five elements of the array named <B>Total</B>. Line 33
+illustrates that arrays can even be compared for equality or inequality,
+and they are considered equal if each element of <B>Total </B>is equal
+to the corresponding element of <B>First</B>. If there is any inequality,
+the result is <B>FALSE</B>.
+
+<P>Lines 38 through 45 illustrate a few more of the permissible operations
+on arrays. You should have no trouble studying them on your own.
+
+<P><B>WHAT IS AN ANONYMOUS TYPE?</B>
+
+<P>In line 12, we defined a type and gave it a name which we could then
+use at will throughout the remainder of the program. Any array of this
+type is said to be of type <B>MY_ARRAY</B>, because it has a name assigned
+to it. The array declared in line 17 does not have a name associated with
+it, so it is referred to as an anonymous type.
+
+<P>The array assignment in line 32 was only possible because the two arrays
+were of the same exact type, and in order to be of the same type, they
+must be declared with the same type name. The array named <B>Funny </B>has
+the identical structure as the array <B>First</B>, but it was not declared
+with the same type name, and it is therefore of a different type and cannot
+be used in an array assignment statement. Since the array <B>Funny </B>is
+of an anonymous type, it is impossible to define another array with the
+same type, so it is impossible to use this array in an assignment statement
+with any other array.
+
+<P>Line 18 declares the arrays <B>X </B>and <B>Y </B>in the same statement,
+and it would seem that they should have assignment compatibility, but according
+to the definition of Ada, the two arrays are of different types because
+naming both variable names in one statement is merely a shorthand method
+for naming them in two separate lines. The two arrays are therefore each
+of a separate anonymous type. This is a fine point, but should be clearly
+understood.
+
+<P>Two arrays are assignment compatible only if they are declared with
+the same type name. Compile and run this program and compare the output
+with the output you expect.
+
+<P><B>WHAT IS A SLICE OF AN ARRAY?</B>
+
+<P>Example program ------> <B><A HREF="e_c10_p2.ada">e_c10_p2.ada</A></B>
+
+<P>The program named e_c10_p2.ada contains several examples of the use of
+the slice in Ada, which is a portion of an array. You may wish to assign
+part of an array to part of another array in a single statement. This can
+be done with a slice.
+
+<P>We begin by declaring an array type, <B>MY_ARRAY</B>, which is then
+used to declare two arrays, <B>First </B>and <B>Second</B>. Finally we
+declare a third array named <B>Funny</B>, which is of an anonymous type,
+which we explained during our study of the last example program. The current
+example program will illustrate the difficulty of working with an array
+of anonymous type, but we will start by working with the named arrays.
+
+<P><B>WHAT IS A SLICE?</B>
+
+<P>In the executable part of the program, we assign nonsense values to
+the arrays named <B>Funny </B>and <B>First</B>, so we will have some data
+to work with. Then in line 22 we tell the system to take elements 3 through
+7 of the array named <B>First </B>and assign them to elements 1 through
+5 of the array named <B>Second</B>. The term on each side of the assignment
+operator is a slice, a portion of an array. In order to do the slice assignment
+as illustrated, both arrays must be of the same type and both slices must
+have the same number of elements. Of course, all slice limits must be within
+the declared range limits of the subscripts for the type in use. Line 23
+illustrates copying 4 elements from <B>First </B>to <B>Second</B>, and
+line 24 illustrates copying 6 elements.
+
+<P>In line 25, eight elements are copied from an array to itself in such
+a manner that the destination and origin portions of the array overlap.
+Ada is defined such that all of the values are copied in true fashion rather
+than recopying some earlier copied values again as the copying of values
+continues. This is because the entire right hand expression is evaluated
+before the assignment is made to the left side variable. Note that the
+slice can only be used with a singly dimensioned array.
+
+<P><B>BACK TO THE ANONYMOUS TYPE VARIABLE</B>
+
+<P>We said that the variable named <B>Funny </B>is an anonymous type and
+that it would cause some difficulties, so let's see what the problems are.
+In order to assign all or part of an array to another type of array, we
+must use a type transformation or get a compile error. Line 27 illustrates
+how to use a type transformation, as we have seen before. However, we can
+only do a type transformation based on the entire array, not a portion
+of it, so we can only transform the type from anonymous to a full sized
+array of the target type, <B>MY_ARRAY</B>. Therefore we can only copy a
+slice from the anonymous type variable into the full array of the target.
+There is no way to transform the type from <B>MY_ARRAY</B> to the anonymous
+type, since the anonymous type doesn't have a name, so a slice cannot be
+used to assign to the array variable named <B>Funny</B>. Line 28 illustrates
+another slice assignment to the complete array named <B>First</B>.
+
+<P>The entire array named <B>First </B>is displayed for your observation.
+Compile and run this program and examine the output.
+
+<P><B>A MULTI DIMENSIONAL ARRAY</B>
+
+<P>Example program ------> <B><A HREF="e_c10_p3.ada">e_c10_p3.ada</A></B>
+
+<P>Examine the program named e_c10_p3.ada for our first example of a multidimensional
+array. We begin by declaring a type named <B>MATRIX </B>which is composed
+of an array of an array with a total of 12 elements. Each element of the
+array is referred to by two subscripts following the variable name in parentheses
+as illustrated in the executable part of the program. Lines 18 through
+23 contain a nested loop to fill the variable named <B>Square_Board</B>
+with a multiplication table, and to fill <B>Chess_Board</B> with all zeros.
+Note that the variable named <B>Chess_Board</B> is of an anonymous type
+because there is no type name associated with it.
+
+<P>The entire array named <B>Square_Board</B> is assigned to the array
+<B>Checker_Board</B> in line 25, which is legal because they are of the
+same type, which means they were defined with the same type name. Line
+27 is used to assign a value of 2 to one element of the <B>Checker_Board</B>,
+and that value is used in line 28, which states, "Checker_Board(2,4) :=
+17;", because line 27 assigned the value of 2 to <B>Checker_Board(2,3)</B>.
+
+<P>It should be clear to you, based on the discussion of the last program,
+that even though <B>Chess_Board</B> has the same structure as <B>Square_Board</B>,
+they are not type compatible and are not assignment compatible. The individual
+elements are assignment compatible however.
+
+<P>The array named <B>Checker_Board</B> is displayed which you can observe
+when you compile and run this program. By the way, the array names are
+poorly chosen in this example because a chess board is not 3 by 4. Good
+naming conventions help toward developing quality software.
+
+<P><B>WE NEED SOME FLEXIBILITY</B>
+
+<P>Example program ------> <B><A HREF="e_c10_p4.ada">e_c10_p4.ada</A></B>
+
+<P>The previous program used fixed values for all of the range and loop
+definitions, which allows very little flexibility, and is therefore considered
+to be poor programming practice. Of course, it was done for clarity since
+this was your first look at a multidimensional array. The next program,
+named e_c10_p4.ada is much more flexible and illustrates some of the slightly
+more advanced techniques which can be used with Ada.
+
+<P>This program is identical to the last except that there are two constants
+defined in the declaration part which are then used to define the limits
+of the arrays and the loops. If you needed to make the program cover a
+larger range, it would be trivial to modify the constants and recompile
+the program. Compile and run this program and you will see that it does
+exactly the same thing as the last one.
+
+<P><B>WE NEED MORE FLEXIBILITY</B>
+
+<P>Example program ------> <B><A HREF="e_c10_p5.ada">e_c10_p5.ada</A></B>
+
+<P>Examine the program named e_c10_p5.ada and you will find that it is
+identical to the last two except in the way we define the loop limits.
+Recall the information we covered on attributes in an earlier lesson and
+the additions to this program will be simple for you to understand. In
+line 21 we use the attribute <B>LAST </B>to define the upper limit of the
+outer loop and add the digit "1" in parentheses to tell the system that
+we are interested in the first subscript of the array named <B>Square_Board</B>.
+Line 22 uses a "2" to indicate the <B>LAST </B>value of the second subscript
+of <B>Square_Board</B>. If no subscript indication is given, the system
+will default to "1", but it is much clearer for the reader to indicate
+the "1" in parentheses. It may seem to you to be a lot of trouble to define
+the limits this way, but when we get to the point where we are writing
+generalized procedures we will need the flexibility given here. Generic
+procedures are a long way off too, but these techniques will be absolutely
+essential when we study them.
+
+<P>Lines 34 and 35 also use attributes for the two loop ranges, but they
+use the <B>RANGE </B>attribute with the number of the desired subscript
+in parentheses once again.
+
+<P>When using a singly subscripted array, it is legal to use a "1" in parentheses
+also, but if none is given, the system will default to one. You should
+explicitly include the number in a multidimensional array and omit it for
+a singly dimensioned array as a matter of programming clarity.
+
+<P><B>HOW DO WE INITIALIZE ARRAYS?</B>
+
+<P>Example program ------> <B><A HREF="e_c10_p6.ada">e_c10_p6.ada</A></B>
+
+<P>Examine the program named e_c10_p6.ada for some examples of array initialization.
+Seven arrays are declared and the method of aggregate notation, both positional
+and named, are illustrated. An aggregate is a group of numeric literals,
+although enumeration values could also be included, that are used in many
+places in Ada. We will use an aggregate to initialize an array in this
+example program. The literals can be grouped in the order in which they
+are used, and this is referred to as a positional aggregate. The literals
+can also be in a named aggregate, in which the use for each value is defined
+by using the name of the location to which it should be assigned.
+
+<P>The variable <B>Total </B>is initialized using the positional notation
+and the variable <B>First </B>is initialized by use of the named notation.
+Mixed notation is not allowed for array initialization. The array named
+<B>Another </B>in line 13 contains a new construct using the reserved word
+<B>others </B>in conjunction with the named aggregate notation. If included,
+it must be the last entry in the aggregate. The values of <B>Another(1)</B>,
+<B>Another(3)</B>, and <B>Another(4)</B> will be initialized to the value
+of 3. The array named <B>One_More</B> in line 15 illustrates initialization
+of a range of variables to the value 13, and two variables to the value
+27. Note that the <B>others </B>case can be included here but must be last
+and alone. The other singly dimensioned arrays should pose no problem for
+you but a few comments are in order concerning the multi dimensional arrays.
+
+<P>Even though you are not permitted to use mixed aggregate notation for
+an array, the rule is applied at only one level so you can use different
+methods for each level.
+
+<P>The variable <B>Square_Board</B> uses all positional notation, but <B>Checker_Board</B>
+uses a named aggregate for the first subscript and positional for the second.
+<B>Chess_Board </B>mixes things up a little more by using a named aggregate
+for the first subscript and both methods for the second subscript even
+though it is consistent within each subgroup and is therefore obeying the
+rules.
+
+<P><B>MORE ARRAY EXAMPLES LATER</B>
+
+<P>There is more to be said about arrays, but it will have to wait until
+we cover a few more topics. This is meant to get you started using arrays,
+but in a later chapter we will cover additional array topics.
+
+<P><B>PROGRAMMING EXERCISES</B>
+<OL>
+<LI>
+Modify e_c10_p1.ada in such a way that the variables <B>X </B>and <B>Y </B>are
+assignment compatible.<A HREF=" a_c10_p1.ada">(Solution)</A></LI>
+
+<LI>
+Write a program with two arrays of size 3 by 5 each and initialize each
+to a suitable set of integer values. Multiply these, element by element,
+and store the values in a third array. Finally, display the results in
+a clear format on the monitor.<A HREF=" a_c10_p2.ada">(Solution)</A></LI>
+</OL>
+<A HREF="chap11.htm">Advance to Chapter 11</A>
+
+<P><A HREF="a95list.htm">Return to the Table of Contents</A>
+
+<P>
+<HR width="100%"><I><FONT SIZE=-1>Copyright &copy; 1988-1998 Coronado Enterprises
+- Last update, February 1, 1998</FONT></I>
+<BR><FONT SIZE=-1><I>Gordon Dodrill - dodrill@swcp.com - </I><A HREF="mailto:dodrill@swcp.com">Please
+email any comments or suggestions.</A></FONT>
+</BODY>
+</HTML>

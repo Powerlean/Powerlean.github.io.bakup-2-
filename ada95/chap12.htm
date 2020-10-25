@@ -1,0 +1,263 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Author" CONTENT="Gordon Dodrill">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (Win95; I) [Netscape]">
+   <TITLE>Ada Tutorial - Chapter 12</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<B>Ada Tutorial - Chapter 12</B>
+
+<P><B><FONT SIZE=+3>R</FONT><FONT SIZE=+2>ECORDS</FONT></B>
+
+<P><B>OUR FIRST LOOK AT A RECORD</B>
+
+<P>Example program ------> <B><A HREF="e_c12_p1.ada">e_c12_p1.ada</A></B>
+
+<P>Ada has provision for two composite types, the array, which we studied
+earlier, and the record, which is the topic of this chapter. Examine the
+program named e_c12_p1.ada for our first example of a record.
+
+<P>Lines 7 through 12 declare an Ada record, which actually only declares
+a type. The usual syntax for a type is used but when we come to the type
+definition itself, we begin with the reserved word <B>record</B>. The components
+of the record are then inserted, and the record type definition is terminated
+by the reserved words <B>end record.</B>
+
+<P>A record can contain any desired components, the only requirement being
+that the component types must be declared prior to this definition, and
+the record type cannot be included as a component of itself. The key point
+to keep in mind about records is, whereas an array is composed of some
+number of like elements, the record is composed of some number of components
+that may be of different types.
+
+<P><B>WHAT IS CONTAINED IN THE RECORD?</B>
+
+<P>It is impossible to declare an anonymous record type like you can do
+in Pascal. The record must be a named type prior to being used in a variable
+declaration.
+
+<P>In this record, we have a variable named <B>Month </B>that is permitted
+to store any value from 1 through 12, obviously representing the months
+of the year. There are also <B>Day </B>and <B>Year </B>variables, each
+of which is different from <B>Month </B>since different constraints are
+placed upon each. After declaring the record type, we still have no actual
+variables, only a type, but in lines 14 through 16, we declare four variables
+of type <B>DATE</B>. Since the variables are of type <B>DATE</B>, each
+has three components, namely a <B>Month</B>, <B>Day</B>, and <B>Year</B>.
+Notice that two of the variables are initialized to the values given in
+parentheses in the order of the variable definitions. <B>Month </B>is therefore
+set to 5, <B>Day </B>to 25, and <B>Year </B>to 1982 for each of the two
+initialized variables, <B>Today </B>and <B>Pay_Day</B>. The initialization
+will be very clear after we discuss the program itself, so we will come
+back to it later.
+
+<P><B>HOW DO WE USE THE RECORDS?</B>
+
+<P>Since <B>Independence_Day</B> is actually a variable composed of three
+different variables, we need a way to tell the computer which subfield
+we are interested in using. We do this by combining the major variable
+name and the subfield with a dot as shown in lines 19 through 21. This
+is called the selected component notation in Ada. It should be clear to
+you that <B>Independence_Day.Month</B> is actually a single variable capable
+of storing an <B>INTEGER </B>type number as long as it is in the range
+of 1 through 12. The three elements of the record are three simple variables
+that can be used in a program wherever it is possible to use any other
+integer type variable. The three are grouped together for our convenience
+because they define a date which we call <B>Independence_Day</B>. The data
+could be stored in three simple variables and we could keep track of them
+in the way we usually handle data, but the record allows a more convenient
+grouping and a few additional operations.
+
+<P><B>THE RECORD ASSIGNMENT</B>
+
+<P>There is one big advantage to using a record and it is illustrated in
+line 23 where all three values associated with the variable <B>Independence_Day</B>
+are assigned to the three corresponding components of the variable <B>Birth_Day</B>.
+If they were separate variables, they would have to be copied one at a
+time. The <B>Day </B>field of <B>Pay_Day</B> is assigned a new value in
+line 25 and the date contained in <B>Independence_Day</B> is displayed
+on the monitor for illustrative purposes.
+
+<P><B>NAMED AND POSITIONAL AGGREGATES</B>
+
+<P>Line 35 has an example of assignment using a named aggregate in which
+the three fields are defined with their respective names and the pointing
+operator. It can be read as, "the variable named <B>Day </B>gets the value
+of 19, <B>Month </B>gets the value of 2, and so on". Since they are named,
+they are not required to be in the same order that they are in the record
+definition, but can be in any order. The real advantage to using the named
+aggregate notation is the fact that all elements are named and it is clear
+just what value is being assigned to each variable field. It should be
+pointed out that an aggregate is a group of data which may or may not be
+of the same type.
+
+<P>Line 36 defines the three values of the record by simply giving the
+three values, but in this case, the three elements must be in the correct
+order so the compiler will be able to assign them to their correct subfields.
+This is called a positional aggregate. This is the kind of aggregate used
+to initialize the dates in line 16.
+
+<P><B>A MIXED AGGREGATE</B>
+
+<P>Line 37 illustrates use of a mixed aggregate in which some are defined
+by their position, and the rest are defined by their names. The positional
+definitions must come first, and after a named variable is given, the remainder
+must be named also. One point that must be remembered, all values must
+be mentioned, even if some of them will not be changed. This seems like
+a picky nuisance, but it greatly simplifies the compiler writer's job.
+
+<P>Compile and run this program, and you will get the date of Independence
+Day displayed on your monitor. Be sure you understand this program, because
+understanding the next program requires that you thoroughly understand
+this one. It should be clear that whether you use the named, positional,
+or mixed notation, you are required to use the correct types for each of
+the parameters.
+
+<P><B>A RECORD CONTAINING A RECORD</B>
+
+<P>Example program ------> <B><A HREF="e_c12_p2.ada">e_c12_p2.ada</A></B>
+
+<P>Examine the file named e_c12_p2.ada for an example of a record declaration
+containing another record within it. We declare the record type <B>DATE
+</B>in exactly the same manner that we did in the last program, but we
+go on to declare another record type named <B>PERSON</B>. You will note
+that the new record is composed of four variables, one of the variables
+being of type <B>DATE </B>which contains three variables itself. We have
+thus declared a record that contains three simple variables and a variable
+record containing three more variables, leading to a total of six separate
+variables within this one record type. In line 22, we declare three variables,
+each composed of six simple variables, so we have 18 declared variables
+to work with in our example program.
+
+<P><B>HOW TO USE THE COMPOSITE RECORD</B>
+
+<P>Lines 28 through 30 should pose no real problem for you since we are
+using knowledge gained during the last example program, but to assign the
+date requires another extension to our store of Ada knowledge. Notice that
+in addition to the name of the main variable <B>Self</B>, we must mention
+the <B>Birth_Day</B> variable which is part of it, and finally the subfield
+of the <B>Birth_Day</B> variable, <B>Month </B>in line 31. The variable
+name is therefore composed of the three names, "dotted" together resulting
+in the name of a unique simple variable. Once again, this is called the
+selected component notation. Lines 32 through 34 assign the remaining three
+fields of the variable <B>Self </B>some meaningful data. Line 36 assigns
+all six elements of the variable <B>Self </B>to the variable <B>Mother
+</B>in one simple statement. Line 37 is used to assign the values of only
+the three components of <B>Mother</B>'s <B>Birth_Day</B> to the three corresponding
+components of <B>Father</B>'s <B>Birth_Day</B>.
+
+<P>Since each subfield is actually a simple variable, each one can be used
+in computations as illustrated in line 38 where <B>Mother</B>'s <B>Birth_Day</B>
+<B>Month </B>is assigned the value which is 4 less than <B>Self</B>'s <B>Birth_Day
+Month</B>. This is only done to illustrate that the simple variables can
+be used in any way you so desire, provided that you follow the rules of
+simple types.
+
+<P><B>RENAMING A RECORD COMPONENT</B>
+
+<P>Line 24 illustrates how you can rename a component of a record in order
+to ease the problem of entering the dotted notation each time a field is
+used. In this case the simple name <B>My_Birth_Year</B> is a synonym for
+the extended naming required with all three components. Once again it must
+be pointed out that this only affects speed of compilation since it is
+only an additional name which can be used to refer to the variable. It
+must also be repeated that this facility should not be used except in those
+few case where it really adds to the program clarity. Correct use of the
+new name is illustrated in line 34.
+
+<P><B>RECORD ASSIGNMENT AND COMPARISON</B>
+
+<P>As illustrated in lines 36, 37, and 41, entire records can be assigned
+to other records of the same type, and entire records of the same type
+can be compared for equality or inequality. The records are equal only
+if every subfield of one record is equal to the corresponding subfield
+of the other. The other comparison operators are not available in Ada for
+records.
+
+<P>Compile and run this program even though you will not get any output.
+Add some output statements yourself to see if you can get some of the data
+out to the monitor.
+
+<P><B>AN ARRAY WITHIN A RECORD</B>
+
+<P>Example program ------> <B><A HREF="e_c12_p3.ada">e_c12_p3.ada</A></B>
+
+<P>Examine the file named e_c12_p3.ada and you will find an array type declared
+in line 17 which is then used in the record type <B>PERSON</B>. The addition
+allows a variable of type <B>PERSON </B>to store four grades giving us
+a little additional flexibility over the last program. The method of assigning
+data to the new fields are illustrated in lines 38 through 41 and should
+require no additional comment, because you are already versed on how to
+use arrays. One rule must be mentioned here, you are not allowed to declare
+an array with an anonymous type within a record, it must be named. Be sure
+to compile and run this program.
+
+<P>You will notice that lines 23 through 25 have default values assigned
+to some elements of the record. The default values will be assigned to
+those elements every time a record of this type is declared. Of course,
+the programmer can immediately override the default values by assigning
+any values he desires, but the default values will be used to initialize
+those particular members.
+
+<P><B>AN ARRAY OF RECORDS</B>
+
+<P>Example program ------> <B><A HREF="e_c12_p4.ada">e_c12_p4.ada</A></B>
+
+<P>Examine the file named e_c12_p4.ada for an example of an array of records.
+The types <B>DATE </B>and <B>PERSON </B>are declared in a manner similar
+to their declaration in e_c12_p2.ada, but in line 26 we declare an array
+of 35 variables, each of type <B>PERSON</B>, so each is composed of six
+variable fields. In lines 46 through 52, we assign some nonsense data to
+each field of the 35 variables by using a loop. Finally, we assign nonsense
+data to a few of the variables to illustrate how it can be done in lines
+54 through 59. You should have no problem understanding this program.
+
+<P>Note that we could have assigned data to one of the records, the first
+for instance, then used it in a loop to assign values to all of the others
+by using a record assignment such as, "Class_Member(Index) := Class_Member(1);",
+and looping from 2 to 35. In a useful program, the data to be assigned
+will be coming from a file somewhere, as we would probably be filling a
+database. This is, in fact, the beginning of a very crude database.
+
+<P>Another new construct is illustrated in lines 27 and 28 where we initialize
+the variable named <B>Standard </B>to the aggregate given. Note that, like
+the unnested record requirement, a nested record must be initialized with
+an aggregate which includes all values. Lines 30 through 33 illustrate
+a method of defining a <B>null </B>record which will be useful when we
+study inheritance later in this tutorial. Compile and run this program
+to assure yourself that it really will compile and run.
+
+<P>It would be good for you to examine section 3.8 of the ARM at this time
+to become familiar with its language and the method of definition used
+there.
+
+<P><B>THE VARIANT RECORD</B>
+
+<P>The variant record is available with Ada 95 and it will be covered in
+detail in chapter 20, but it is largely superseded by the more powerful
+techniques of inheritance and type extension which are available with Ada
+95.
+
+<P><B>PROGRAMMING EXERCISES</B>
+<OL>
+<LI>
+Rewrite e_c12_p4.ada and change the initialization aggregate for Standard
+from a positional aggregate to a named aggregate.<A HREF=" a_c12_p1.ada">(Solution)</A></LI>
+
+<LI>
+Rewrite e_c12_p1.ada to utilize the enumerated type for the month field
+as used in e_c12_p3.ada. Note that you will need to instantiate a copy of
+the package named <B>Enumerated_IO</B> to display the month name.<A HREF=" a_c12_p2.ada">(Solution)</A></LI>
+</OL>
+<A HREF="chap13.htm">Advance to Chapter 13</A>
+
+<P><A HREF="a95list.htm">Return to the Table of Contents</A>
+
+<P>
+<HR width="100%"><I><FONT SIZE=-1>Copyright &copy; 1988-1998 Coronado Enterprises
+- Last update, February 1, 1998</FONT></I>
+<BR><I><FONT SIZE=-1>Gordon Dodrill - dodrill@swcp.com - </FONT></I><FONT SIZE=-1><A HREF="mailto:dodrill@swcp.com">Please
+email any comments or suggestions.</A></FONT>
+</BODY>
+</HTML>

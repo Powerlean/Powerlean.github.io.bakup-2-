@@ -1,0 +1,407 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Author" CONTENT="Gordon Dodrill">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (Win95; I) [Netscape]">
+   <TITLE>Ada Tutorial - Chapter 32</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<B>Ada Tutorial - Chapter 32</B>
+
+<P><B><FONT SIZE=+3>M</FONT><FONT SIZE=+2>ACHINE</FONT><FONT SIZE=+3> D</FONT><FONT SIZE=+2>EPENDENT</FONT><FONT SIZE=+3>
+F</FONT><FONT SIZE=+2>EATURES</FONT></B>
+
+<P>In this chapter we will cover some of the constructs available with
+Ada that give you the ability to get into real trouble, because we will
+be using the low level features of Ada. The low level features are those
+that allow us to get down to the inner workings of the computer, but we
+will be able to get to them by use of rather high level Ada abstractions.
+
+<P><B>OVERRIDING COMPILER DEFAULTS</B>
+
+<P>Normally, the compiler will make many decisions for us about how to
+store data, and how to operate on it. Occasionally, we wish to tell the
+compiler that we are not satisfied with the way it defaults something,
+and we wish for it to use a different means of representation. The topics
+examined in this chapter will give us the ability to tell the compiler
+how to map something onto the underlying hardware. We gain control of how
+the compiler represents some things within the machine, but we also may
+make the resulting program nonportable. This can cause many problems if
+we ever wish to move our program to another computer. In addition, we may
+affect the size or speed of the resulting code, since the compiler writer
+will use a certain method of representing data because it results in some
+form of savings on the particular target machine.
+
+<P><B>USE REPRESENTATION CLAUSES SPARINGLY</B>
+
+<P>In general, the use of the representation clauses which will be discussed
+in this chapter, should be used very sparingly if they are used at all.
+In any case, it would be best to delay using any of these constructs until
+the program is fairly well developed, because correct operation of the
+overall program is far more important than generating tight efficient code.
+After the program is debugged and operating as desired, it is usually a
+simple matter to go back and tighten up the size and speed of the most
+heavily used sections of code. You may find that after you get the program
+working in a macro sense, it is fast enough and compact enough that it
+is not necessary to resort to these techniques.
+
+<P>With all of these words telling you not to use these programming techniques,
+we will now take a look at how to use some of them. Keep in mind however,
+that when you use these Ada constructs, you may lose the ability to port
+your program to another implementation. You will also find that the example
+programs in this chapter are those that are most likely to cause problems
+with your compiler.
+
+<P><B>THE REQUIRED PACKAGE NAMED System</B>
+
+<P>According to the Ada 95 reference Manual (ARM), your compiler must have
+a standard package named <B>System </B>which must be defined in Annex M
+of the documentation supplied with your compiler. Section 13.7 of the ARM
+contains a minimum list of items that must be defined for you in the package
+specification for <B>System</B>. It would be profitable for you to spend
+a few minutes studying the definition of the package named <B>System </B>in
+your compiler documentation and the required items listed in the ARM. You
+will find several constants defined there that you have been using throughout
+this tutorial, and now you know where they came from.
+
+<P><B>WHAT REPRESENTATION CONTROLS ARE THERE?</B>
+
+<P>When we attempt to control the representation of data and the way it
+is stored, we are actually telling the Ada compiler how to define a type.
+It would be a little more precise to say we are telling the compiler how
+to modify its default method of storing a certain type, including which
+parameters we want it to change, and what to change them to.
+
+<P>There are four different areas of Ada typing that can be specified with
+representation clauses, and we will look at each area in succession. They
+are listed in no particular order as follows.
+<PRE>&nbsp;&nbsp;&nbsp;&nbsp; Length specification
+&nbsp;&nbsp;&nbsp;&nbsp; Record type representation
+&nbsp;&nbsp;&nbsp;&nbsp; Enumeration type representation
+&nbsp;&nbsp;&nbsp;&nbsp; Address specification</PRE>
+You will note that in each example, we will first declare the basic type,
+then we will tell the Ada compiler what parameters we wish to modify to
+suit our purposes, and finally we will declare objects of the modified
+type. We will mention this order again in some of the following example
+programs.
+
+<P><B>THE LENGTH SPECIFICATION</B>
+
+<P>Example program ------> <B><A HREF="e_c32_p1.ada">e_c32_p1.ada</A></B>
+
+<P>The length specification is used to declare how many bits can be used
+to store data in a certain type. This representation clause is illustrated
+in the example program named SMe_c06_p1.ada, which you should examine at
+this time.
+
+<P>The only code that is of special interest in this program is found in
+lines 7 through 10. First we define a constant of value 1 named <B>BITS
+</B>to be used later for a very good reason. Next we declare a derived
+type which covers a range of -25 through 120, a range small enough to be
+represented with only 8 bits. Since we wish to declare a rather large array
+of this type, and we suspect that our compiler will simply assign a full
+word of 32 bits to each variable of this type, we tell the compiler that
+we want it to use only 8 bits to store a variable of this type. Line 9
+is a representation clause to do this. It begins with the reserved word
+<B>for </B>followed by the type with a tick and the word <B>SIZE</B>. It
+looks like an attribute, and that is just what it is, because we are telling
+the compiler that we want the attribute named <B>SIZE </B>to have the value
+of 8.
+
+<P>The use of the constant should now be clear. It makes the expression
+extremely clear because when you read the expression it says just what
+it is doing. We told the compiler to <B>use </B>8 bits for the <B>size
+</B>of this type. You should not be bothered that using this construct
+will slow down the program, because it will not. This constant will be
+evaluated only once, and that will be at compile time, not when the program
+is executing.
+
+<P><B>YOUR COMPILER MAY NOT LIKE THIS CLAUSE</B>
+
+<P>The ARM does not require that an Ada compiler implement every representation
+clause. For this reason, even though you have a validated Ada compiler,
+it may not implement line 9. If it doesn't, it will give you a message
+during compilation that it cannot handle this representation clause and
+will fail to give you an object module. You will be required to remove
+the offending representation clause and recompile the program. If your
+compiler does accept it, when you execute this program you will see that
+the type <B>SMALL_INTEGER</B> requires only 8 bits of storage. After successfully
+compiling and running the program, comment out line 9 and compile and execute
+it again. You will probably find that your compiler requires more than
+8 bits to store data of this type. If your compiler cannot handle line
+9, comment it out and compile and execute the resulting program.
+
+<P>Remember that at the beginning of this chapter we stated that of all
+the programs in this tutorial, this chapter would contain the ones that
+were most likely to have problems with your compiler. This is the reason
+that so many of these programs are not transportable from compiler to compiler.
+Only three of the five compilers used to test these example programs implemented
+this particular clause.
+
+<P><B>THE STORAGE_SIZE REPRESENTATION CLAUSE</B>
+
+<P>Another representation clause that is very similar to <B>SIZE </B>is
+the one named <B>STORAGE_SIZE</B>. This is used to tell the compiler how
+many storage units to use to store an access type variable or a task type
+variable. The ARM is not very specific on just what a storage unit is,
+so it must be defined by your compiler. Because it is not well defined,
+and is therefore different for each compiler, an explanation may be more
+confusing than simply not attempting to explain it. You will be left to
+study it on your own, remembering that it is similar to <B>SIZE</B>. With
+all of the Ada you have studied to this point, you should be able to easily
+decipher the notes on this topic in your compiler documentation.
+
+<P><B>THE RECORD TYPE REPRESENTATION</B>
+
+<P>Example program ------> <B><A HREF="e_c32_p2.ada">e_c32_p2.ada</A></B>
+
+<P>Examine the program named e_c32_p2.ada for an example of two additional
+low level constructs, the record type representation and the unchecked
+conversion. We will begin with the record type representation.
+
+<P>First, we declare a <B>record </B>type named <B>BITS </B>with three
+fields of extremely limited range since we only wish to store one or two
+bits in each field. Because of the limited range, we would like to instruct
+the compiler to store the individual variables in very small memory units,
+and in addition, we would like it to store all three fields in a single
+word. We do this in lines 13 through 17 where we give the compiler the
+desired pattern for the three fields. It looks very much like a record
+except for the substitution of the reserved words <B>for </B>and <B>use
+</B>in place of <B>type </B>and <B>is </B>in the record type definition.
+Remember that we are modifying the type we have already declared to tell
+the compiler how to actually implement it.
+
+<P>Each of the fields is slightly different also since the reserved word
+<B>at </B>is used followed by the number 0 in all three cases. This is
+telling the system to store this variable in the word with an offset of
+zero from the first word, or in other words, we are telling the compiler
+to put this variable in the first word of the record. Also, after the reserved
+word <B>range</B>, we have another defined range which tells the compiler
+which bits of the word to store these in. The variable named <B>Lower </B>is
+therefore to be stored in the first word, and is to occupy bit positions
+0 and 1 of that word. The variable named <B>Middle </B>is also to be stored
+in the first word, and will occupy bit position 2 of that word. The variable
+named <B>High </B>will occupy bit positions 3 and 4 of the same word.
+
+<P><B>WHAT DO THE BIT POSITIONS MEAN?</B>
+
+<P>By this point, you are probably wondering what is bit position 0. Is
+it the least significant bit or the most significant bit? That question
+is entirely up to the compiler writer and you must consult your documentation
+for the answer to this question and nearly any other questions you may
+have about this new construct. One possible resulting bit pattern is illustrated
+in figure 32-1. The actual bit pattern for your compiler may be something
+entirely different.
+
+<P><IMG SRC="ada3201.gif" HSPACE=20 VSPACE=20 BORDER=0 HEIGHT=81 WIDTH=357>
+
+<P>The <B>INTEGER </B>type variable consists of a 32 bit number on most
+microcomputers and nearly all minicomputers, but even this is up to the
+implementor to define in any way he desires. Because 32 bits is fairly
+standard for the <B>INTEGER </B>type variable, and for a single word, the
+various fields of the record were declared to be in one word to illustrate
+the next low level programming construct in Ada. If your compiler is especially
+smart, you could continue the packing by telling the compiler to squeeze
+the entire record into as few as 5 bits, since that is all that would be
+needed to actually store the data. This would be done using the <B>SIZE
+</B>representation clause in a manner similar to the last example program.
+
+<P><B>THERE IS A LIMIT TO THE MODIFICATIONS</B>
+
+<P>After declaring the type, then modifying it to suit our purposes, we
+declare a variable of the new type in line 19, which freezes the type and
+prevents any further type modifications. Note that it would be an error
+to attempt to further modify the type after we have declared a variable
+of that type. This is because it would allow declaring another variable
+of the newly modified type which would in fact be different from the type
+of the first variable.
+
+<P>If additional fields were added with <B>at 1</B> in their representation
+clauses, they would be put in the word that was at an offset of 1 from
+the beginning of the record. This would be the second word of course. You
+can see that it is possible to very carefully control where and how the
+data is stored in a record of this data type.
+
+<P><B>A PROBLEM GENERATOR, USE WITH CAUTION</B>
+
+<P>In line 22, we instantiate a copy of the generic function named <B>Unchecked_Conversion</B>
+to illustrate its use. This is a function that can really get you into
+trouble, but can be a real time saver if you need its capability. In this
+case, <B>Switch_To_Bits</B> will use an <B>INTEGER </B>for its source and
+a record of type <B>BITS </B>as the result or target. A call to the function
+with an <B>INTEGER </B>type variable as an argument will change the type
+of the variable and return the same value with a new type. In this case,
+because the individual bits are packed into a single word, the data in
+the <B>INTEGER </B>type variable is actually split up into the three fields
+of the record. The original data, as well as the three fields, are displayed
+for a small range of values. In this case the composite data in the integer
+variable is unpacked into the respective fields by the system.
+
+<P>Note that line 34 could have used the loop index named <B>Index </B>as
+the actual parameter since it is legal in Ada to use a universal_integer
+in the call.
+
+<P>The only real requirement for use of the unchecked type conversion is
+that both structures have the same number of program units or bits. The
+C programmer will recognize this as the union, and the Pascal programmer
+should see that this is the same as using a variant record for type conversion.
+
+<P>Be sure to compile and run this program to see if it really does what
+it should. Your compiler may not implement some or all of these features,
+in which case you can only study the result of execution given at the end
+of the example program. We said at the beginning of this chapter that there
+would be a few things you may not be able to do. Only two of the five compilers
+tested compiled this program completely, and only one stored the bits in
+the pattern depicted in figure 32-1. Note that the <B>Unchecked_Conversion</B>
+is not optional but required, and all five compilers tested by the author
+compiled it properly.
+
+<P><B>THE PRAGMA NAMED PACK</B>
+
+<P>Example program ------> <B><A HREF="e_c32_p3.ada">e_c32_p3.ada</A></B>
+
+<P>Examine the program named e_c32_p3.ada for an example of use of the
+<B>pragma </B>named <B>PACK</B>. This is an instruction to the compiler
+to pack the data as tightly as possible with no concern for how long it
+will take for the resulting program to execute. Three examples of packing
+are given here, with each resulting in a more tightly packed composite
+type.
+
+<P><B>NORMAL PACKING DENSITY</B>
+
+<P>Line 7 contains a declaration of a type which only requires 6 bits to
+store, but will probably use a full word of 32 bits on most implementations.
+Lines 9 through 12 declare a record that may require 4 words because of
+alignment requirements in some compilers, and line 14 may even waste a
+few more words due to alignment considerations. Lines 40 through 50 are
+used to output the sizes of these three types for study. The results are
+given for two Ada compilers used with MS-DOS, running on an IBM-PC type
+microcomputer.
+
+<P><B>SOME PACKING TAKES PLACE</B>
+
+<P>In line 16 the same type is repeated with a different name, and is used
+in the record in lines 18 through 22 where it is packed using the <B>pragma
+PACK</B>. Note that the packing only takes place at the record level, not
+at the lower level which is assumed to be the default packing density.
+In lines 24 and 25, the same array is declared with the <B>pragma PACK</B>
+used again at this level to achieve a better packing density than the previous
+example. The results of execution illustrate that compiler 2 did a little
+better at packing than compiler 1 did.
+
+<P><B>HIGHER PACKING DENSITY</B>
+
+<P>Lines 27 through 37 illustrate an even higher packing density because
+of the representation clause in line 28 where we instruct the compiler
+to use only 8 bits for the type used as elements in the composite types.
+In this case, neither compiler supported the representation clause, so
+line 28 had to be commented out resulting in no additional packing density.
+
+<P><B>WHICH COMPILER IS BEST?</B>
+
+<P>Simply because one compiler did a better packing job does not make it
+best between the two compared. There is a penalty to be paid here when
+it comes to executing the code because the data fields are not located
+in exactly the same places for "normal" or unpacked data fields. The compiler
+that packed the code very efficiently may take considerably longer to execute
+a program with data stored in this way than the other. The important thing
+to remember is that the two compilers, even though both are validated,
+handled the types slightly differently.
+
+<P>Keep in mind that the <B>pragma </B>named <B>PACK </B>only packs the
+data at the level at which it is mentioned. It does not pack the data at
+lower levels unless it is mentioned there also. Three of the five compilers
+were able to compile this program completely and correctly, except for
+line 28.
+
+<P>This is one example program that you should definitely compile and execute
+and do not depend on the results of execution. Your output could be significantly
+different than either of the two results illustrated.
+
+<P><B>THE ENUMERATED TYPE REPRESENTATION</B>
+
+<P>Example program ------> <B><A HREF="e_c32_p4.ada">e_c32_p4.ada</A></B>
+
+<P>The example program named e_c32_p4.ada illustrates the use of the representation
+clause used with the enumerated type variable to define the values of the
+enumerated values.
+
+<P>In this case we have declared a type named <B>MOTION </B>for use with
+some kind of a robot in which we wish to instruct the robot to move any
+one of four directions or stop. A zero indicates a stopped condition, and
+the four directions are actually four different bits of a binary code.
+Assuming that there is a different relay or electronic switch for each
+direction, we can output a single field to control the four relays or switches.
+The important thing is that the enumerated value is the pattern we wish
+to output, so it can be output directly.
+
+<P>The enumerated type will work in exactly the same manner as any other
+enumerated type. You can take the <B>PRED</B>, <B>SUCC</B>, <B>VAL</B>,
+or <B>POS</B>, and they will work the same way as if they were declared
+in order. We have only changed the underlying representation of the enumerated
+type. The values must be declared in ascending order or a compile error
+will be issued.
+
+<P>Be sure to compile and execute this program to ascertain that it is
+acceptable to your compiler. The enumerated representation clause was available
+with three of the five compilers tested.
+
+<P><B>THE ADDRESS SPECIFICATION</B>
+
+<P>The address specification is used in such a nebulous way that it is
+very difficult to even illustrate its use in a general purpose program,
+so a program is not provided. The general form of its use is given in the
+next two lines which represents a fragment of a program.
+<PRE>&nbsp;&nbsp; Robot_Port : MOTION;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -- The port to control&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -- direction&nbsp;
+&nbsp;&nbsp; <B>for</B> Robot_Port <B>use at</B> 16#0175#; -- Absolute address of&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -- the robot hardware</PRE>
+The first line of this sequence declares a variable named <B>Robot_Port</B>
+to be of type <B>MOTION </B>which was declared in the example program named
+e_c32_p4.ada. You will recall that this type was intended to be used to
+control the robot's direction. The second line tells the Ada compiler that
+this variable must be assigned the absolute address of 0175 (hexadecimal),
+because this is where the output port is located which controls the robot's
+direction. The reserved words <B>for </B>and <B>use at</B> tell the compiler
+where to locate this particular variable.
+
+<P>It should now be obvious why it is not practical to write a general
+purpose program to illustrate this concept. The location of a usable port
+will be different on every computer, and the means of addressing the entire
+memory space can be quite complex in the case of segmented memory or with
+some sort of memory management scheme. Consult the documentation that came
+with your compiler to find the method used with your compiler to address
+an absolute memory location. It will be listed in Annex M of your documentation,
+as required by the ARM.
+
+<P><B>UNCHECKED_DEALLOCATION</B>
+
+<P>This is also a very low level routine that is mentioned here for completeness.
+Its use has been illustrated previously in this tutorial in chapters 13
+and 25, where it was used to free up space that had been dynamically allocated.
+
+<P><B>PROGRAMMING EXERCISES</B>
+<OL>
+<LI>
+Write a program using <B>Unchecked_Conversion</B> to convert an <B>INTEGER
+</B>type variable into a <B>CHARACTER </B>array of as long as needed to
+represent an <B>INTEGER </B>on your system, probably two or four elements.
+Use the <B>ORD </B>attribute to convert the <B>CHARACTER </B>type data
+to numerical values and display the numerical value of the components on
+the monitor. This will identify the underlying representation of the <B>INTEGER
+</B>and the <B>CHARACTER </B>types.<A HREF=" a_c32_p1.ada">(Solution)</A></LI>
+
+<LI>
+Repeat exercise 1 to convert the <B>FLOAT </B>type to an array of <B>CHARACTER</B>.<A HREF=" a_c32_p2.ada">(Solution)</A></LI>
+</OL>
+<A HREF="chap33.htm">Advance to Chapter 33</A>
+
+<P><A HREF="a95list.htm">Return to the Table of Contents</A>
+
+<P>
+<HR width="100%"><I><FONT SIZE=-1>Copyright &copy; 1988-1998 Coronado Enterprises
+- Last update, February 1, 1998</FONT></I>
+<BR><I><FONT SIZE=-1>Gordon Dodrill - dodrill@swcp.com - </FONT></I><FONT SIZE=-1><A HREF="mailto:dodrill@swcp.com">Please
+email any comments or suggestions.</A></FONT>
+</BODY>
+</HTML>

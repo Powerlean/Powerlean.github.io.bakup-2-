@@ -1,0 +1,430 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Author" CONTENT="Gordon Dodrill">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (Win95; I) [Netscape]">
+   <TITLE>Ada Tutorial - Chapter 14</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<B>Ada Tutorial - Chapter 14</B>
+
+<P><B><FONT SIZE=+3>T</FONT><FONT SIZE=+2>EXT</FONT><FONT SIZE=+3> I</FONT><FONT SIZE=+2>NPUT/</FONT><FONT SIZE=+3>O</FONT><FONT SIZE=+2>UTPUT</FONT></B>
+
+<P><B>ADA IS NOT BIG ON I/O</B>
+
+<P>Ada was originally designed as a language for embedded real-time systems
+rather than as a business oriented language, so input and output of data
+is a rather low priority part of the language. It may surprise you to know
+that there are no input or output instructions available for use within
+the Ada language itself, the problem being left to the compiler writers.
+However, the designers of Ada realized that if the entire topic of input
+and output were left to the individual compiler writers, users would be
+left with a mess trying to use nonstandard methods of input and output.
+They exercised tremendous foresight by defining a standard external library
+to be used for input and output of data that must be available with all
+Ada compilers that pass the validation suite.
+
+<P>Even though the libraries are defined, the details of their actions
+are not precisely defined, so there is still some chance that your compiler
+will not behave in exactly the same way as the descriptions given here.
+You will have to check the documentation packaged with your compiler to
+discover the exact details of input and output operation. You may rest
+assured however, that the differences will only be in the smallest details.
+
+<P><B>PACKAGE INSTANTIATION</B>
+
+<P>Before we look at some text output procedures, we need to just scratch
+the surface on another topic. We mentioned package instantiation several
+chapters back and we have reached a point where we should define what that
+is to some extent. Ada provides the ability to write generic packages which
+can be used to provide the same functionality for several different types
+without rewriting the code. A generic package does not have a type associated
+with it, so we tell the system we would like it to work with a certain
+type by instantiating a copy of the generic package with our particular
+type. If we have, for example, 4 different types we need to work with,
+we instantiate a copy for each of the four types and we can then perform
+the same operations on variables of each of those types. An instantiation
+is a fancy way of saying we make an "instance" of the generic package.
+This will all be covered in detail in part 2 of this Ada tutorial.
+
+<P>The Ada 95 environment provides a few of the generic packages pre-instantiated
+for us. For example, a copy of the generic package <B>Ada.Text_IO.Integer_IO</B>
+is preinstantiated for the type <B>INTEGER </B>and named <B>Ada.Integer_Text_IO</B>
+which we have been using in this tutorial. Likewise <B>Ada.Float_Text_IO</B>
+is an instantiation of the generic package named <B>Ada.Text_IO.Float_IO</B>
+for use with the type <B>FLOAT</B>. Now we have another problem since we
+need to define where the generic packages mentioned in this paragraph came
+from. The best answer is that they came with our compiler, and we will
+simply use them as illustrated until we study generic packages in part
+2 of this tutorial.
+
+<P>There are probably other pre-instantiated packages provided for us by
+our compiler writers. The types <B>INTEGER </B>and <B>FLOAT </B>are required
+to be provided by every Ada compiler, but there other types that can be
+provided. For example, type <B>LONG_FLOAT</B> may be provided as well as
+<B>SHORT_FLOAT</B>, each with its own characteristics, and each with its
+own input/output package named <B>Ada.Long_Float_Text_IO</B> or <B>Ada.Short_Float_Text_IO</B>.
+Other types may be <B>SHORT_INTEGER</B>, <B>SHORT_SHORT_INTEGER</B>, or
+other variations of <B>INTEGER</B>, with the packages <B>Ada.Short_Integer_Text_IO</B>
+or <B>Ada.Short_Short_Integer_Text_IO</B>. You should spend some time studying
+the capabilities and limitations of your compiler to see just what types
+are available for your use.
+
+<P>You will notice that many of these packages start with <B>Ada.</B> tacked
+onto the front of the full name. Ada 95 includes the ability to define
+and use hierarchical libraries and many of the Ada 95 packages are declared
+as a part of the Ada library. We will cover libraries in more detail later
+along with the reasons for packaging them in this way.
+
+<P>Following that brief excursion, let's look at some text output procedures.
+
+<P><B>FORMATTED OUTPUT DATA</B>
+
+<P>Example program ------> <B><A HREF="e_c14_p1.ada">e_c14_p1.ada</A></B>
+
+<P>If you examine the program e_c14_p1.ada, you will find that it does very
+little other than illustrate the various methods of outputting formatted
+data to the monitor. Several types and variables are declared, then six
+separate instantiations of <B>Ada.Text_IO</B> are declared for use with
+the six types used in the program. Actually, there is nothing here that
+is new to you, since we have covered all of these statements before, but
+they are included here in order to present an example of all of them in
+one place.
+
+<P>A few comments should be made at this point. Note the six instantiations
+of <B>Ada.Text_IO</B> packages given in lines 19 through 31. These are
+necessary in order to output the various types we are using in this program.
+The package instantiations must be declared after the various types are
+declared. One of the instantiations could be eliminated by transforming
+the type of the <B>MY_INTEGER</B> type variable to type <B>INTEGER</B>
+prior to outputting it, but this is done for illustration. When we instantiate
+a package, we are actually using a copy of a generic package, which will
+be the subject of a detailed study in part 2 of this tutorial.
+
+<P>After you have studied the program and understand it, compile and run
+it for an elaborate set of formatted output examples. Your compiler may
+output the float and fixed outputs slightly differently than that given
+in the result of execution due to different defaults assigned by your compiler.
+
+<P><B>FORMATTED OUTPUT TO A FILE</B>
+
+<P>Example program ------> <B><A HREF="e_c14_p2.ada">e_c14_p2.ada</A></B>
+
+<P>The example file named e_c14_p2.ada contains examples of how to use a
+file in a very easy fashion. Since there is no standard method which is
+used by all operating systems to name files, we cannot depend on what the
+rules will be in order to use Ada on any system, so we need two file names
+in order to write to or read from a file. We need an internal name, which
+will be used by our program to refer to the file, and which follows the
+naming rules defined by Ada. We also need an external name which will be
+used by the operating system to refer to the file and whose name follows
+the rules dictated by the operating system. In addition to having the two
+names, we need a way to associate the names with each other, and tell the
+system that we wish to use the file so named. We do all of this with the
+<B>Create </B>procedure as shown in line 11 of this program.
+
+<P>The variable <B>Turkey</B>, is the internal file name which we declared
+in line 7 to be of type <B>FILE_TYPE</B>, a type exported by the package
+<B>Ada.Text_IO</B> for just this purpose. The "with Ada.Text_IO;" statement
+in line 2 makes the type <B>FILE_TYPE</B> available in this program. The
+last argument, which is either a string constant, as it is in this case,
+or a string variable, gives the external name of the file we wish to create
+and write to. Note carefully, that if you have a file named TEST.TXT in
+your default directory, it will be erased when this program is executed,
+because this statement will erase it. The second parameter in this procedure
+call, is either <B>In_File</B> if you intend to read from the file, or
+<B>Out_File</B> if you plan to write to it. There is no mode using text
+I/O in which you can both read from and write to the same file. In this
+case, we wish to write to the file, so we use the mode <B>Out_File</B>
+and create the file.
+
+<P><B>WRITING TO THE FILE</B>
+
+<P>Line 13 looks rather familiar to us, since it is our old friend <B>Put_Line</B>
+with an extra parameter prior to the text we wish to output. Since <B>Turkey</B>
+is of type <B>FILE_TYPE</B>, the system is smart enough to know that this
+string will be output to the file with the internal name of <B>Turkey</B>,
+and the external name of TEST.TXT, so the string will be directed there
+along with the "carriage return/line feed". The next line will also be
+directed there, as will the 2 <B>New_Lines</B> requested in line 15. Line
+16 does not have the filename of <B>Turkey </B>as a parameter, so it will
+be directed to the default output device, the monitor, in the same manner
+that it has been for all of this tutorial.
+
+<P><B>REDIRECTING THE OUTPUT</B>
+
+<P>Line 18 contains a call to the procedure <B>Set_Output</B> which will
+make the filename which is given as the actual parameter the default filename.
+As long as this is in effect, any output without a filename will be directed
+to the file with the internal filename <B>Turkey</B>. In order to output
+some data to the monitor, it can still be done, but it must be directed
+there by using its internal filename as a parameter, the internal filename
+being <B>Standard_Output</B>. The group of statements given in lines 19
+through 22 do essentially the same thing as those in lines 13 through 16.
+The default is returned to the standard output device in line 23, and the
+program completes normally.
+
+<P><B>CLOSING THE FILE</B>
+
+<P>The simple statement given in line 26 is used to close the file when
+we are finished with it. The system only needs to be given the internal
+name of the file, since it knows the corresponding external filename. Failure
+to close the file will do no harm in such a simple program, because the
+operating system will close it automatically, but in a large program, it
+would be wise to close a file when it is no longer needed. There is probably
+an upper limit on how many files can be open at one time, and there is
+no sense wasting a file allocation on an unneeded file.
+
+<P>Be sure to compile and run this program, then check your default directory
+to see that you have the file named TEST.TXT in it containing the expected
+text.
+
+<P><B>MULTIPLE FILES OPENED AT ONE TIME</B>
+
+<P>Example program ------> <B><A HREF="e_c14_p3.ada">e_c14_p3.ada</A></B>
+
+<P>Examine the file e_c14_p3.ada for an example program in which we open
+and use 3 different files plus the monitor. The three internal filenames
+are declared in line 7, and all three are opened in the output mode with
+three different external names as shown in lines 12, 13, and 14.
+
+<P>We execute the loop in lines 16 through 25, where we write nonsense
+data to the three files, output a test string to the display in line 27,
+and finally close all three files. Note that we could have defined one
+of the files to be the default file and written to it without the filename,
+then used the filename for the standard output in line 27, achieving the
+same result.
+
+<P>The program is fairly simple, so after you feel you understand it, compile
+and run it. After a successful run, examine the default directory to see
+that the three files exist and contain the expected results. Do not erase
+the generated files, because we will use them as example input files in
+the next few programs.
+
+<P><B>INPUTTING CHARACTERS FROM A FILE</B>
+
+<P>Example program ------> <B><A HREF="e_c14_p4.ada">e_c14_p4.ada</A></B>
+
+<P>Examine the file e_c14_p4.ada for an example of how to read <B>CHARACTER
+</B>type data from a file. In this example the file name <B>My_File</B>
+is declared as a <B>FILE_TYPE</B> variable, then used to open CHARACTS.TXT
+for reading since the <B>In_File</B> mode is used. In this case, the file
+must exist, or an exception will be raised. The file pointer is set to
+the beginning of the file by the <B>Open </B>procedure so we will read
+the first character in the file the first time we read from the file.
+
+<P>The loop in lines 14 through 18 causes us to read a character from the
+file and display it on the monitor each time we pass through the loop.
+The function <B>End_Of_File</B> returns a <B>TRUE </B>when the next character
+to be read is the end of file character for your particular implementation.
+We do not need to know what the end of file character is, it is up to the
+compiler writer to find out what it is and return a value of <B>TRUE </B>when
+the system finds it. The entire file is therefore displayed on the monitor
+by this program, but with one slight deviation from what you would expect.
+Because of the way Ada is defined, the end of line characters are simply
+ignored by the <B>Get </B>procedure, and since they are not read in, they
+cannot be output to the monitor either. The end result is that the characters
+are all output in one long string with no line feeds. You will see this
+later when you compile and run the program.
+
+<P>We will continue our study in this program and see a much better way
+to read and display the data.
+
+<P><B>THE RESET PROCEDURE</B>
+
+<P>The <B>Reset </B>procedure in line 21 resets the file named as a parameter,
+which simply means that the file pointer is moved to the first character
+once again. The file is ready to be read in another time. The loop in lines
+23 through 32 is the same as the previous loop except for the addition
+of another new function. When the end of a line is found, the function
+<B>End_Of_Line </B>returns a <B>TRUE</B>, and the program displays the
+special little message in line 27. In addition to the message, the <B>New_Line</B>
+procedure is called to supply the otherwise missing end of line.
+
+<P>Unfortunately, we still have a problem because the <B>End_Of_Line</B>
+is actually a lookahead function and becomes <B>TRUE </B>when the next
+character in the buffer is an end of line character. When the program is
+executed, we find that it does not output the last character of each line
+in this loop, because we never execute the <B>else </B>clause in the <B>if
+</B>statement for that character. When the program is executed, you will
+notice that the periods at the end of the sentences are not displayed.
+The next loop in this program will illustrate how to input and output the
+data correctly considering all of the Ada idiosyncrasies.
+
+<P>If you recall, we stated at the beginning of this lesson that input
+and output programming in Ada was at best a compromise. Don't worry, you
+will be able to input or output anything you wish to very soon.
+
+<P><B>A CORRECT CHARACTER INPUT/OUTPUT LOOP</B>
+
+<P>The file is once again reset in line 35, and a third loop in lines 38
+through 46 reads and displays the file on the monitor. This time when we
+go through the loop, we recognize that the end of line is reading one character
+ahead in the input file, not the one we just read, and we adjust the program
+accordingly. We output the character, then check for end of line, and call
+the <B>New_Line </B>procedure if we detect an end of line. You will see,
+when you run it, that the last character on the line will be displayed
+as desired.
+
+<P>It should be pointed out to you that the <B>End_Of_File</B> is another
+lookahead function and must be tested after we output the last character
+read in. This loop does just that, because the end of file is acted on
+after the character is output.
+
+<P>Be sure to compile and run this program. It would be interesting to
+edit the input file, CHARACTS.TXT, adding a few characters, then rerunning
+the program to see how it handles the new data.
+
+<P><B>STRING INPUT AND OUTPUT</B>
+
+<P>Example program ------> <B><A HREF="e_c14_p5.ada">e_c14_p5.ada</A></B>
+
+<P>The next example program, e_c14_p5.ada, illustrates how to read a string
+from an input file. In much the same manner as for the character, the end
+of line character is ignored when encountered in the input file. The result
+is that when the first loop is run, no "carriage returns" are issued and
+the text is all run together. The second loop, however, uses the lookahead
+method and calls the <B>New_Line </B>procedure when it detects the end
+of line in the input stream.
+
+<P>The big difference in this program and the last is the fact that a <B>STRING
+</B>type variable is used for input here and a <B>CHARACTER </B>type variable
+was used in the last one.
+
+<P><B>I PLAYED A TRICK ON YOU</B>
+
+<P>This program has a bit of a trick in it. The input file contains an
+exact multiple of 10 characters in each line, and the input variable, of
+type <B>STRING</B>, has ten characters in it. There is therefore no real
+problem in reading into the ten character string, but if the lines were
+not exact multiples of ten characters, we would have gotten an input error.
+If you remember how difficult the <B>STRING </B>variable was to work with
+when we studied strings, you will understand that we have the same problem
+here. When we get to chapter 16 with its example programs, we will see
+how we can greatly improve the string capability with an add-on library
+of dynamic string routines. Also, Ada 95 has several dynamic string packages
+available for your use.
+
+<P>Be sure to compile and run this program, then add a few characters to
+some of the lines in the file named CHARACTS.TXT to see the result of trying
+to read in an odd group of extra characters.
+
+<P><B>NOW TO READ IN SOME NUMBERS</B>
+
+<P>Example program ------> <B><A HREF="e_c14_p6.ada">e_c14_p6.ada</A></B>
+
+<P>Computers are very good at working with numbers, and in order to work
+with them, we must have a way to get them into the computer. The example
+file e_c14_p6.ada illustrates how to read <B>INTEGER </B>type data into the
+computer from a file. Much like the last two programs, we open a file for
+reading, and begin executing a loop where we read an <B>INTEGER </B>type
+number as input each time through the loop. We are reading an <B>INTEGER
+</B>type number because that is the type of <B>Index</B>, the second actual
+parameter in the <B>Get </B>procedure call. Since it is an <B>INTEGER </B>type
+number, the system will begin scanning until it finds a valid <B>INTEGER
+</B>type number terminated by a space. It will then return that number,
+in the computer's internal format, assigned to the variable we supplied
+to it, and make it available for our use like any other <B>INTEGER </B>type
+variable. If any data other than <B>INTEGER </B>type data were to be encountered
+in the input file before it found a valid <B>INTEGER </B>value, an exception
+would be raised, and the program would be terminated.
+
+<P>The loop continues in much the same manner as the last two programs
+until it detects the end of file, at which time it stops. There is one
+other slight difference when using numeric inputs, the system does not
+read over the end of line character, because it doesn't know how to get
+across it. It gets stuck trying to read the next data point but never gets
+to it because the end of line is blocking it. When the end of line is detected,
+or at any other time, you can issue the function <B>Skip_Line</B> which
+tells it to go to the beginning of the next line for its next input data.
+At any time then, you can begin reading on the next line for your next
+data point.
+
+<P>Be sure to compile and run this program, then change the spacing of
+some of the numbers in the input file to see that they are read in with
+a free form spacing.
+
+<P><B>WHAT ABOUT FLOATING POINT DATA INPUTS?</B>
+
+<P>Once you understand the method of reading <B>INTEGER </B>type data in,
+you can read any other types in by using the same methods. Just remember
+that the data you read in must be of the same type as the variable into
+which it is being read and you will have little difficulty.
+
+<P><B>WHAT ABOUT READING FROM THE KEYBOARD?</B>
+
+<P>Reading from the keyboard is similar to reading from a file, except
+that it uses the predefined internal filename, <B>Standard_Input</B>, and
+if you omit a filename reference, the input will come from the keyboard.
+It should be pointed out that the operating system will probably buffer
+the input data automatically and give it to your program as a complete
+string when you hit the return key. It will allow you to enter a complete
+string of as many integer values as you desire, and when you hit the return,
+the entire string will be input and processed.
+
+<P>Modify the last file to read from the keyboard, and enter some numbers
+after compiling and running it. Note that there is no <B>End_Of_File</B>
+when reading from the keyboard. Use a loop with a fixed number of passes,
+or use an infinite loop and quit when a certain number is input such as
+-1.
+
+<P><B>HOW DO WE PRINT DATA ON THE PRINTER?</B>
+
+<P>Example program ------> <B><A HREF="e_c14_p7.ada">e_c14_p7.ada</A></B>
+
+<P>The program named e_c14_p7.ada illustrates how to send data to your
+printer. The only difference in sending data to the printer, from sending
+data to a disk file, is the use of the predefined name <B>LPT1</B> for
+the external file name. This file is defined as the printer rather than
+a file, and as you can see from the program, it operates no differently
+than any other file.
+
+<P>Other names may be applicable for the printer also, such as <B>PRN</B>,
+<B>COM1</B>, etc. Check your documentation for the predefined names that
+mimic a file.
+
+<P>Be sure your printer is on line, then compile and run this program.
+
+<P><B>TEXT IO PRAGMAS</B>
+
+<P>A pragma is a suggestion to the compiler and can be ignored by any implementation
+according to the definition of Ada. Refer to Annex L of the Ada 95 Reference
+Manual (ARM) for the definition of the predefined pragmas <B>LIST </B>and
+<B>PAGE</B>. Since these may not be available with any particular compiler,
+their use should be discouraged in order to attain a high degree of program
+portability.
+
+<P><B>PAGE AND LINE CONTROL SUBPROGRAMS</B>
+
+<P>Refer to the definition of <B>Ada.Text_IO</B> in Annex A.10.1 of the
+ARM for a large assortment of page and line control subprograms for use
+with text I/O. These are required to be available with every compiler,
+so you should study them to gain an insight into the page and line control
+subprograms available to you in any Ada program. There should not be anything
+too difficult for you to understand in these definitions.
+
+<P><B>PROGRAMMING EXERCISES</B>
+<OL>
+<LI>
+Modify e_c14_p4.ada to read from the keyboard and echo data to the monitor
+until a Q is entered.<A HREF=" a_c14_p1.ada">(Solution)</A></LI>
+
+<LI>
+Write a program named FLOATIN.ADA that reads floating point data from a
+file and displays it. There is no standard on floating point input. Some
+compilers require a decimal point with at least one digit before and after
+the decimal point. Some may not even require a decimal point but will supply
+it to an input that looks like an <B>INTEGER </B>value. Experiment and
+determine the characteristics of your compiler.<A HREF=" a_c14_p2.ada">(Solution)</A></LI>
+</OL>
+<A HREF="chap15.htm">Advance to Chapter 15</A>
+
+<P><A HREF="a95list.htm">Return to the Table of Contents</A>
+
+<P>
+<HR width="100%"><I><FONT SIZE=-1>Copyright &copy; 1988-1998 Coronado Enterprises
+- Last update, February 1, 1998</FONT></I>
+<BR><I><FONT SIZE=-1>Gordon Dodrill - dodrill@swcp.com - </FONT></I><FONT SIZE=-1><A HREF="mailto:dodrill@swcp.com">Please
+email any comments or suggestions.</A></FONT>
+</BODY>
+</HTML>

@@ -1,0 +1,236 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Author" CONTENT="Gordon Dodrill">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (Win95; I) [Netscape]">
+   <TITLE>Ada Tutorial - Chapter 11</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<B>Ada Tutorial - Chapter 11</B>
+
+<P><B><FONT SIZE=+3>T</FONT><FONT SIZE=+2>HE</FONT><FONT SIZE=+3> C</FONT><FONT SIZE=+2>HARACTER</FONT><FONT SIZE=+3>
+A</FONT><FONT SIZE=+2>ND</FONT><FONT SIZE=+3> S</FONT><FONT SIZE=+2>TRING</FONT><FONT SIZE=+3>
+T</FONT><FONT SIZE=+2>YPE</FONT></B>
+
+<P><B>A QUICK REVIEW OF THE CHARACTER TYPE</B>
+
+<P>Example program ------> <B><A HREF="e_c11_p1.ada">e_c11_p1.ada</A></B>
+
+<P>The best way to study any topic is with an example, so examine the program
+named e_c11_p1.ada for some examples using <B>CHARACTER </B>type variables.
+
+<P>The type <B>CHARACTER </B>is a predefined type in Ada and is defined
+as the printable set of ASCII characters including a few that don't actually
+print. See Annex A.1 of the Ada 95 Reference Manual (ARM) for a complete
+list of the <B>CHARACTER </B>elements. All of the operations available
+with the enumerated type variable are available with the <B>CHARACTER </B>type
+variable. To illustrate their use, we declare two <B>CHARACTER </B>type
+variables in lines 7 and 8 with the second being initialized to the letter
+D. Note the single quote marks which define the <B>CHARACTER </B>type literal
+to which the variable named <B>Another </B>is initialized. A different
+literal value is assigned to the variable <B>My_Char</B> in line 12, and
+the two variables are compared in the <B>if </B>statement. Since 'A' is
+of lesser value than 'D', the line of text in line 14 is output to the
+monitor.
+
+<P>Lines 17 through 20 display some very predictable output that is included
+as an example of <B>CHARACTER </B>output, and finally some of the attributes
+available with the <B>CHARACTER </B>type variable are illustrated in lines
+22 through 24. The same attributes are defined for the <B>CHARACTER </B>type
+variable as for the enumerated type and all are listed in Annex K of the
+ARM.
+
+<P>Compile and execute this program to get a feel for use of the <B>CHARACTER
+</B>type variable.
+
+<P>You may wish to review the program named e_c07_p3.ada in chapter 7 to
+refresh your mind on declaring subtypes and derived types of the predefined
+<B>CHARACTER </B>type.
+
+<P><B>THE STRING TYPE</B>
+
+<P>Example program ------> <B><A HREF="e_c11_p2.ada">e_c11_p2.ada</A></B>
+
+<P>The program named e_c11_p2.ada illustrates some of the operations that
+can be done with the predefined type <B>STRING</B>. A string is an array
+of <B>CHARACTER </B>type variables which is of a fixed length and starts
+with element number 1 or higher. The index uses type <B>POSITIVE</B>. Note
+that this program is called e_c11_p2.ada instead of the more desirable name
+of STRING.ADA because the word <B>STRING </B>is a predefined word in Ada
+and using it for the program name would make it unavailable for its correct
+use.
+
+<P>Line 7 declares an uninitialized string of 33 characters, while line
+8 declares a constant string of four elements initialized to the word "John",
+and illustrates rather graphically that the string is composed of individual
+<B>CHARACTER </B>type elements. Line 9 declares another constant that is
+initialized, which all constants must be in order to be useful. Note that
+lines 8 and 9 did not contain a character count, the computer counted the
+characters for us and supplied the limits of the array.
+
+<P><B>DECLARING A STRING VARIABLE</B>
+
+<P>Line 10 defines a <B>STRING </B>variable, which will be initialized
+to the string given. Even though the initialization string is given, the
+array limits must be explicitly specified for a variable. Not only must
+the limits be given, the number of elements in the initialization string
+must agree with the number of elements defined as the array range, or a
+compiler error will be given. This is the first difficulty encountered
+when using strings, but there will be more as we progress. It seems like
+the computer should be able to count the characters in the variable for
+us, but due to the strong type checking used in Ada, this cannot be done.
+
+<P><B>STRING MANIPULATION IS DIFFICULT</B>
+
+<P>When we get to the executable part of the program, we assign a string
+constant to the string variable named <B>Line</B>. Once again, according
+to the definition of Ada, the string constant must have exactly the same
+number of characters as the number of characters in the declaration of
+the variable <B>Line</B>, or a compile error will be issued. This is another
+seemingly unnecessary inconvenience in the use of strings which we must
+put up with. The variable named <B>Line </B>is displayed on the monitor
+in line 18, and some of the other constants are displayed along with it.
+Note that the string literal in line 21 is simply another string constant,
+but it does not have a name. Finally, we assign data to a few individual
+elements of the string variable named <B>Address </B>in such a way to illustrate
+that it is indeed an array, then do a slice assignment, and finally output
+the result. It should be noted that the <B>Put_Line</B> could be used instead
+of the two separate output procedure calls in lines 30 and 31, but it is
+simply a matter of personal taste.
+
+<P>Compile and run this program and see that the output is exactly what
+you predict from your understanding of the program.
+
+<P><B>CONCATENATION OF STRINGS</B>
+
+<P>Example program ------> <B><A HREF="e_c11_p3.ada">e_c11_p3.ada</A></B>
+
+<P>Examine the program e_c11_p3.ada for several examples of string concatenation.
+Two uninitialized string variables are declared in lines 7 and 8, and they
+are used throughout the program.
+
+<P>Line 12 illustrates concatenation of a three element string and a four
+element string by using the concatenation operator, the "&amp;". The four
+element string is appended to the end of the three element string forming
+a seven element string which is assigned to the variable <B>String7</B>.
+Line 21 illustrates concatenation of a four element variable with a three
+element constant.
+
+<P>Line 24 is the most interesting assignment here, because it is a concatenation
+of four strings, two of which contain only one element each. The values
+of "CR" and "LF" are such that they produce a "carriage return" and "line
+feed" when sent to the monitor, so that when <B>String7 </B>is output,
+it will be on two successive lines of the monitor. The ASCII values of
+all of the characters are available in the predefined package named <B>Ada.Characters.Latin_1</B>,
+which is why the dotted notation gives the actual value of these constants.
+Use of the dot notation in this manner will be more fully defined later
+in this tutorial. Be sure to compile and run this program, and be sure
+you understand the results.
+
+<P><B>STRING COMPARISONS</B>
+
+<P>Example program ------> <B><A HREF="e_c11_p4.ada">e_c11_p4.ada</A></B>
+
+<P>The example program named e_c11_p4.ada will give you some examples of
+string comparisons as used in Ada, so you should examine it at this time.
+The string declarations are nothing new to you, so nothing more will be
+said about them.
+
+<P>In line 15 where the constants <B>MY_CAR</B> and <B>YOUR_CAR</B> are
+compared for inequality, they will not be equal since the case is different
+for some of the characters, and case matters in a string expression. A
+different ASCII value is used for the letter 'A' than that used for the
+letter 'a', so they are not the same. For a string comparison to be equal,
+all elements must be exactly the same as the corresponding elements in
+the other string, and the number of elements must be the same. Therefore,
+following execution of line 19, the value assigned to <B>Her_Car</B> is
+still not the same as the value stored in the constant <B>MY_CAR.</B> If
+you attempted to compare them, you would get a compile error because the
+two strings have a different length, so they could never compare anyway.
+Line 24 illustrates that a variable can be compared to a string literal.
+
+<P>Lines 20 through 22 are examples of legal statements according to the
+Ada definition. Compile and run this program and study the resulting output.
+
+<P><B>ATTRIBUTES OF CHARACTERS AND STRINGS</B>
+
+<P>Example program ------> <B><A HREF="e_c11_p5.ada">e_c11_p5.ada</A></B>
+
+<P>Examine the program named e_c11_p5.ada for examples of how you can convert
+from <B>CHARACTER </B>type variables to <B>INTEGER </B>type variables and
+back. The attributes <B>POS </B>and <B>VAL </B>are used as shown. In order
+to increment a character, for example an 'A', to the next value, it must
+be converted to <B>INTEGER</B>, incremented, then converted back to <B>CHARACTER</B>.
+Of course you could always use the <B>SUCC </B>attribute to increment the
+<B>CHARACTER </B>type variable.
+
+<P>This program should be self explanatory. After you study it, compile
+and run it.
+
+<P><B>THERE ARE TWO KINDS OF STRINGS NOW</B>
+
+<P>With the upgrade to Ada 95, there are now two kinds of strings. The
+<B>STRING </B>type that we have been discussing in this chapter, and a
+new <B>WIDE_STRING </B>type. Since there are far more than 256 different
+characters in some languages around the world, and Ada is approved by the
+International Standards Organization (ISO), it was necessary to provide
+the ability to handle many more characters. The <B>WIDE_CHARACTER</B> type
+was defined which provides 65,536 different characters, and the <B>WIDE_STRING</B>
+library was provided which uses the larger character type for each of its
+characters. The first 256 characters of the <B>WIDE_CHARACTER</B> type
+are the same as the characters in the <B>CHARACTER </B>type. The remaining
+characters can be defined as needed for whatever language is being used
+in any given application.
+
+<P><B>A NEW, VERY USEFUL LIBRARY PACKAGE</B>
+
+<P>Ada 95 has a new character handling library defined for use in text
+based processing. The library named <B>Ada.Characters.Handling</B> is composed
+of many useful subprograms for use with text handling. It contains, for
+example, a function named <B>Is_Upper</B> which returns a <B>BOOLEAN </B>value
+indicating whether the character passed in as a parameter is upper case
+or not. Another function, <B>To_Upper</B> changes the case of the character
+passed in to upper case, if it is an alphabetic character. There are functions
+to check for whitespace, if a character is numeric, if it is a special
+character, and many other useful functions. The student is encouraged to
+study this package provided by your compiler, especially if text processing
+will be a major part of your programming efforts.
+
+<P><B>DYNAMIC STRINGS ARE COMING</B>
+
+<P>You may not feel too good about the use of strings in Ada because of
+the lack of flexibility, but don't worry about them. Ada was written to
+be an extendable language and when we get to chapter 16, we will have an
+example package that will give you the ability to use strings the way you
+would like to. A rather extensive dynamic string package will be presented
+to you and you will have the ability to refine it even further if you so
+desire. In effect, you will have the ability to extend the Ada language.
+
+<P>Ada 95 has an improvement that was not available with Ada 83, the predefined
+string packages which will be covered later in this tutorial.
+
+<P><B>PROGRAMMING EXERCISES</B>
+<OL>
+<LI>
+Write a program to declare your first name as a <B>STRING </B>constant,
+and your last name as another <B>STRING </B>constant. Concatenate your
+first and last names with a blank between them and display the result with
+a single <B>Put_Line</B>. You will find much inflexibility in the definition
+of the <B>STRING </B>variable you use for the result.<A HREF=" a_c11_p1.ada">(Solution)</A></LI>
+
+<LI>
+Add code to e_c11_p5.ada to increment the variable named <B>Char </B>by
+using the <B>POS </B>and <B>VAL </B>attributes. Then add additional code
+to increment the same variable through use of the <B>SUCC </B>attribute.<A HREF=" a_c11_p2.ada">(Solution)</A></LI>
+</OL>
+<A HREF="chap12.htm">Advance to Chapter 12</A>
+
+<P><A HREF="a95list.htm">Return to the Table of Contents</A>
+
+<P>
+<HR width="100%"><I><FONT SIZE=-1>Copyright &copy; 1988-1998 Coronado Enterprises
+- Last update, February 1, 1998</FONT></I>
+<BR><I><FONT SIZE=-1>Gordon Dodrill - dodrill@swcp.com - </FONT></I><FONT SIZE=-1><A HREF="mailto:dodrill@swcp.com">Please
+email any comments or suggestions.</A></FONT>
+</BODY>
+</HTML>

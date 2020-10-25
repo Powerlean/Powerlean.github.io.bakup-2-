@@ -1,0 +1,317 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Author" CONTENT="Gordon Dodrill">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (Win95; I) [Netscape]">
+   <TITLE>Ada Tutorial - Chapter 21</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<B>Ada Tutorial - Chapter 21</B>
+
+<P><B><FONT SIZE=+3>A</FONT><FONT SIZE=+2>DVANCED</FONT><FONT SIZE=+3>
+P</FONT><FONT SIZE=+2>ACKAGES &amp;</FONT><FONT SIZE=+3> P</FONT><FONT SIZE=+2>RIVATE</FONT><FONT SIZE=+3>
+T</FONT><FONT SIZE=+2>YPES</FONT></B>
+
+<P><B>THIS IS FOR LARGE PROJECTS</B>
+
+<P>The material in this chapter is used for large projects when there are
+several programmers working together as a team. In such a case, there is
+a demand for good communication between the various programmers, regardless
+of what programming language is used. If Ada is the language chosen for
+the project, and if the principles set down in this chapter are carefully
+followed, the amount of communication required can be minimized. Of course,
+these techniques can be used by a lone programmer to improve the quality
+of his code also, especially if it is a large program.
+
+<P><B>TWO GOOD PROGRAMMERS</B>
+
+<P>In this chapter, we will assume we have a project being developed by
+two programmers, and that they are both sharp and well versed in how to
+develop quality software. We will follow along with the example programs
+as they develop a simple system to add or subtract groups of three numbers.
+One has been assigned the responsibility to write a package that the other
+programmer can use to add or subtract groups of three numbers of arbitrary
+structure.
+
+<P>This is a trivial problem, of course, but will illustrate the concept
+of information hiding, which is so necessary on a large project.
+
+<P><B>THE FIRST SOLUTION</B>
+
+<P>Example program ------> <B><A HREF="e_c21_p1.ada">e_c21_p1.ada</A></B>
+
+<P>The example file named e_c21_p1.ada illustrates the first attempt to
+solve the problem, however it does not practice any information hiding.
+Lines 1 through 69 represent the work of the package writer, and lines
+74 through 101 are written by the user of the package. The package writer
+used a record to store the three numbers and because he declared the record
+in the specification package, he gave the user full access to the record
+for his own use.
+
+<P>The package writer, by providing three functions and a procedure, gave
+the user the ability to add the corresponding elements, subtract the corresponding
+elements, and two additional capabilities. The function named <B>Build_Structure</B>
+allows the user to build a new structure given the individual components,
+and the procedure named <B>Decompose</B>, allows the user to separate the
+elements into their respective values. We might add that this package is
+a result of a meeting between the two programmers where they agreed on
+what the system must do and what the interface between them must be. The
+package specification is intended to be the only information needed to
+define the interface between the programmers. Notice the comments in lines
+3 through 7 that define clearly and completely what the package does.
+
+<P>The user wished to change one value of the variable <B>My_Data</B>,
+and since he had the entire structure available, he cheated in line 99
+by circumventing the available structure handling method provided by the
+package writer. He feels he saved a few instructions and a little execution
+time, so the little bit of cheating is justified. Line 99 is perfectly
+legal, but could cause a problem in this instance due to the immense size
+of the project. Recall that he had previously agreed to use only the functionality
+provided by the package writer because the package writer is supplying
+the same package to another large project and must maintain conformity
+with both users.
+
+<P><B>A PROBLEM DEVELOPS</B>
+
+<P>The package writer, for reasons of efficiency and conformity to the
+other project, decides to change the way he stores the data from a three
+element record, to a three element array. With this modification in place
+and tested, the user suddenly finds that his program will no longer compile,
+even though nothing has been changed in his program. The only problem is
+with line 99, which has been working just fine for months now, but as we
+stated earlier, is actually cheating on the interface agreed upon by the
+user and the package writer. Information hiding would have prevented this
+problem, which in a real world system could cause hundreds of compiler
+errors following a seemingly minor change in one of the packages.
+
+<P>In this case, the user cheated and resulted ultimately in a rather large
+problem. We need to prevent him from cheating. Of course we could make
+a project rule that says "no cheating", but we will shortly define a way
+to let the compiler enforce the rule for us. Using the word "cheating"
+is simply to enhance the story. Actually, it is more of an oversight on
+the part of the user. While debugging after a 14 hour day of programming,
+it is easy to forget the previous agreement on the interface and use some
+of the data directly as is done in line 99. We need a way for the compiler
+to remind us not to do that.
+
+<P>It should be obvious to you that in a real-life large system, the called
+package and the calling package would not be in the same file, but would
+be separately compiled. They were combined to make it easier for you to
+compile and execute, which you should do at this point.
+
+<P><B>A BETTER WAY, THE PRIVATE TYPE</B>
+
+<P>Example program ------> <B><A HREF="e_c21_p2.ada">e_c21_p2.ada</A></B>
+
+<P>Examine the program named e_c21_p2.ada for an example of a <B>private
+</B>type which forces the user to follow the rules. In the package specification,
+the type <B>DATA_STRUCTURE </B>is defined to be of type <B>private</B>,
+a reserved word in Ada, which means that the type name is available for
+the user's use in declaring variables of this type, but the structure of
+the type is not available to him. The actual type is defined at the end
+of the package specification following another use of the reserved word
+<B>private</B>.
+
+<P>Because the type is <B>private</B>, the user can make no use of the
+structure, even though he may be able to see the structure, as you can
+at this moment. If the package writer wished to do so, he could actually
+remove the type definition from the listing and give the resulting listing
+to the user, but the fact that it is private is as good as physically hiding
+it from the user.
+
+<P>Because the type is private, the user has the ability to compare two
+variables of that type for either equality or inequality, and he can assign
+another variable or constant of that type to a variable of the same type.
+No other operations on a variable of this private type are available to
+him, except for those specifically defined in the package specification
+itself.
+
+<P><B>NO TRICKS THIS TIME</B>
+
+<P>The trick, in line 99 of the last program is therefore illegal, and
+will result in a compile error. If the user needs the ability to do some
+operation on this type variable, he must ask the package writer to provide
+it for him. The package writer has the ability to do anything with the
+components of the structure within the package itself, and define any new
+procedures or functions necessary for the intelligent use of the type.
+In order for the user to add 13 to one member, it is now necessary to declare
+a temporary record variable, load it with all fields, and add the entire
+temporary variable of the type <B>DATA_STRUCTURE</B> to the variable. This
+is illustrated in lines 106 and 107. It is rather obvious that these two
+statements could be combined and the variable named <B>Temp </B>not needed,
+but this was done for clarity.
+
+<P><B>WHERE IS THIS TYPE AVAILABLE?</B>
+
+<P>Following the partial declaration of the <B>record </B>type in line
+11, it is available for use in the remainder of the specification package,
+and throughout the entire package body. It is important to remember that
+the <B>private </B>type is available in these areas just as if it were
+not private. It is only treated in a different manner with respect to the
+using program. We actually have two different views of the <B>private </B>data,
+a partial view available to any outside calling program, and a full view
+available to the implementation or body of the defining class. Actually,
+only the partial view is available in the specification prior to the <B>private
+</B>section, and the full view is available within the <B>private </B>section
+following the complete definition of the record.
+
+<P>The remaining details of the program should be simple for you to understand,
+compile and execute. Note that the output is identical to that from the
+previous example program.
+
+<P><B>A NEW PACKAGE</B>
+
+<P>Example program ------> <B><A HREF="e_c21_p3.ada">e_c21_p3.ada</A></B>
+
+<P>The package writer, for his own mysterious reasons, decides to change
+the package to use a different structure. The example program named e_c21_p3.ada
+does exactly that. The only change from e_c21_p2.ada is the method of defining
+the structure, and in this case an array is used. Since the user was forced
+to follow the rules, his program will run with no modifications. See if
+you can find anything you can do in the main program using the structure
+defined in either program that cannot be done in the other. According to
+the design of Ada, it should be impossible for you to do so.
+
+<P>Notice that the internal workings of the package body are significantly
+different to reflect the difference in the two data structures, but externally,
+you cannot tell the difference. Even though the package was changed significantly,
+none of the users will see a difference and there will be no incompatibility
+problems. Notice that the main program in this example program is identical
+to the main program in the last example program. Be sure to compile and
+execute this program.
+
+<P><B>THE LIMITED PRIVATE TYPE</B>
+
+<P>Example program ------> <B><A HREF="e_c21_p4.ada">e_c21_p4.ada</A></B>
+
+<P>Examine the program named e_c21_p4.ada for an example of a limited private
+type. The biggest difference between this program and the previous one
+is the addition of the reserved word <B>limited </B>in line 11 which declares
+the type <B>DATA_STRUCTURE</B> to be of type <B>limited private</B>. This
+gives the package writer even more control over what the user can do with
+a variable of this type. There are no operations the user can perform on
+data of this type except for those explicitly spelled out by the package
+writer in the form of procedures and functions.
+
+<P>If the user were to declare two variables of this type, the compiler
+would not allow him to compare them for equality or inequality, nor could
+he assign one variable to the other. In fact, he could not even declare
+a variable of this type and initialize it to some value, because that would
+require an implied assignment statement. He cannot declare a constant of
+this type either since that would also require an assignment statement.
+The package writer provided a procedure named <B>Assign_Struct</B>, and
+a function named <B>Compare </B>so the user could perform these operations.
+The program itself, beginning in line 95, is a bit messy because of the
+procedure calls required to do the assignments. You are surely asking,
+"why should we go to all of the trouble to use the <B>limited private</B>
+type?"
+
+<P><B>WHY USE LIMITED TYPES?</B>
+
+<P>It is conceivable that you, as the package writer, do not wish to give
+the user the ability to compare or assign variables of the type in question
+because of the nature of the project. You may be working on some form of
+a data encryption system, or a limited access file management system, and
+you wish to be sure that all users are positively locked out of access
+to certain files. The lack of compares and assignments would make it impossible
+for a user to access the lower levels of your system. This is a possible
+use for the <B>limited </B>type or the <B>limited private</B> type, but
+there is a much more important need for it. Compile and execute this program
+and we will discuss the reason for using a <B>limited </B>type.
+
+<P><B>OVERLOADING THE "=" OPERATOR</B>
+
+<P>The equals operator is defined for the <B>private </B>type, so it cannot
+be overloaded in the same manner that we have been overloading operators
+in this tutorial. The <B>limited private </B>type does not have the equality
+operator available for use, so it can be overloaded in any manner the package
+writer decrees. Suppose for example that you were using the dynamic string
+package, named e_c16_p3.ada, from chapter 16 of this tutorial, and you
+wished to compare two strings for equality. If the strings were, for example,
+80 characters long, but they only had 31 characters in use at this time,
+an overloading of the equality operator could provide a function that would
+compare only the 31 "active" characters of the string, stopping short of
+the additional characters in the static string declaration. This would
+allow the comparison to be done using an infix operator rather than a function
+call for the comparison. Overloading the "=" operator is not permitted
+for any type except the <B>limited private</B> type or the <B>limited </B>type
+in all of Ada.
+
+<P>Example program ------> <B><A HREF="e_c21_p5.ada">e_c21_p5.ada</A></B>
+
+<P>A very useful example is given in the example program named e_c21_p5.ada.
+The record is defined to be of type <B>limited</B>, which means it has
+no assignment available and it has no comparison operators for either equality
+or inequality. This was done on purpose so we could define our own comparison
+operator which we do in line 20. Since the function "=" returns a BOOLEAN
+type, it also provides a default comparison for inequality that returns
+a BOOLEAN and we cannot redefine the inequality operator. If we would have
+defined the compare for equality operator to return any other type than
+BOOLEAN, we would not have a compare for inequality automatically defined,
+and we could overload the "/=" operator to return any type we wish it to.
+
+<P>This program is based on e_c18_p6.ada from chapter 18 which used the
+<B>Make_A_Box</B> function as illustrated in lines 16 and 17, but this
+function could not be used here because we have no assignment capability
+with the <B>limited </B>type. This means that we cannot assign the result
+to a variable of this <B>limited </B>type. It was necessary to convert
+the function to a procedure so we could return a value without an assignment
+in the calling program. Lines 88 and 89 are commented out because they
+had to be rewritten as lines 91 and 92 which do not use an assignment operator
+in the calling program.
+
+<P>The big thing we gained here is that we are not required to use the
+default comparison operator. We may wish to use some very strange means
+as a basis for equality, and use of the <B>limited </B>type will permit
+us to do so.
+
+<P>You may think that it is very inefficient to write a program that requires
+a procedure or function call to do anything at all, but that is not necessarily
+the case. If the compiler writer has done a good job, a subprogram call
+can be very efficient, and a special purpose comparison could be much more
+efficient than a general purpose comparison routine that is designed to
+handle all cases. Because a general purpose routine is designed for flexibility,
+it may not do any particular comparison very efficiently.
+
+<P>Be sure you compile and execute this program so you can verify that
+it does the same thing as the last two example programs.
+
+<P><B>A PACKAGE WITHOUT A BODY</B>
+
+<P>It is possible to declare a package specification without a corresponding
+body. That would be done if you wished to declare types, variables, and
+constants that could be used by other packages and subprograms, but included
+no executable code with the declarations. Programming exercise 3 will illustrate
+this technique. It is never possible to declare a package body without
+a corresponding package specification.
+
+<P><B>PROGRAMMING EXERCISES</B>
+<OL>
+<LI>
+Add a function to PRIVATE1.ADA named <B>Compare_Sum</B>, which compares
+the sum of the three elements of one structure to the sum of the three
+elements of the second structure, returning a <B>TRUE </B>if the sums are
+equal, and a <B>FALSE </B>otherwise. Add a few statements to the main program
+to exercise this new function.<A HREF=" a_c21_p1.ada">(Solution)</A></LI>
+
+<LI>
+Add the same function to PRIVATE2.ADA, and add a few statements to the
+main program to test it.<A HREF=" a_c21_p2.ada">(Solution)</A></LI>
+
+<LI>
+Write a package named <B>Stuff </B>that contains only a package specification.
+The package specification should make the value of <B>Pi </B>(3.14159)
+and <B>Two_Pi </B>available as well as a <B>DATE </B>record type. Include
+a short program to use the package.<A HREF=" a_c21_p3.ada">(Solution)</A></LI>
+</OL>
+<A HREF="chap22.htm">Advance to Chapter 22</A>
+
+<P><A HREF="a95list.htm">Return to the Table of Contents</A>
+
+<P>
+<HR width="100%"><I><FONT SIZE=-1>Copyright &copy; 1988-1998 Coronado Enterprises
+- Last update, February 1, 1998</FONT></I>
+<BR><I><FONT SIZE=-1>Gordon Dodrill - dodrill@swcp.com - </FONT></I><FONT SIZE=-1><A HREF="mailto:dodrill@swcp.com">Please
+email any comments or suggestions.</A></FONT>
+</BODY>
+</HTML>

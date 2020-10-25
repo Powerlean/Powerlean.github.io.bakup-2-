@@ -1,0 +1,419 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Author" CONTENT="Gordon Dodrill">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (Win95; I) [Netscape]">
+   <TITLE>Ada Tutorial - Chapter 23</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<B>Ada Tutorial - Chapter 23</B>
+
+<P><B><FONT SIZE=+3>M</FONT><FONT SIZE=+2>ORE </FONT><FONT SIZE=+3>O</FONT><FONT SIZE=+2>BJECT
+</FONT><FONT SIZE=+3>O</FONT><FONT SIZE=+2>RIENTED </FONT><FONT SIZE=+3>P</FONT><FONT SIZE=+2>ROGRAMMING</FONT></B>
+
+<P><B>A CLASS WIDE PROCEDURE</B>
+
+<P>Example program ------> <B><A HREF="e_c23_p1.ada">e_c23_p1.ada</A></B>
+
+<P>Examine the example program named e_c23_p1.ada for yet another new construct
+available in Ada 95, the class wide procedure. By this time you should
+be very familiar with the <B>record </B>definitions in the package specification,
+where we declare 4 records in lines 8, 18, 26, and 38, three of which are
+descended from the parent, which is of type <B>TRANSPORT</B>. Ada calls
+the combination of all four of these records a class because they all descend
+from a common parent. In fact, they are all descended from the type <B>TRANSPORT
+</B>so the combination of all four are referred to as the <B>TRANSPORT
+</B>class.
+
+<P>The procedure named <B>Print_Values</B> is declared in line 43, and
+it uses a single parameter with a very odd looking type, namely the type
+<B>TRANSPORT'Class</B>. This says that an actual parameter of any type
+of the <B>TRANSPORT </B>class can be passed into this procedure, which
+means that any type that inherits <B>TRANSPORT </B>either directly or indirectly
+is a candidate for this parameter. The implementation for the <B>Print_Values</B>
+procedure is given in lines 136 through 149 where some of the components
+of the parameter named <B>Any_Vehicle</B> are displayed on the monitor.
+
+<P>There are several facts that must be considered when studying this procedure.
+The first one is that it is not possible to remove any data components
+when one type is inherited into another type. Elements can be added, but
+they cannot be removed. Next, a variable of any of the four types within
+the <B>TRANSPORT </B>class can be passed in as the actual parameter, and
+the only components that will exist in all four are those in the parent
+type itself. The <B>CAR </B>type for example, may have additional components
+that are not a part of the parent type, so those are not available in all
+four types. Therefore, it is not legal to use any components within this
+procedure unless they are a part of the parent type, because only those
+are guaranteed to be a part of all types of the class. <B>Wheels </B>and
+<B>Weight </B>are therefore the only variables that can be used in this
+procedure. A very brief message is displayed on the monitor containing
+both of these values, as a trivial example. You will notice that line 147
+is commented out because the component named <B>Passenger_Count</B> is
+not available in some of the types, and can not be used in this procedure
+which is designed to accommodate any variable of any one of these four
+types.
+
+<P>The rest of this package is very similar to those studied in the previous
+chapter of this tutorial. The diligent student should understand it thoroughly
+by now.
+
+<P><B>USING THE CLASS WIDE PROCEDURE</B>
+
+<P>Example program ------> <B><A HREF="e_c23_p2.ada">e_c23_p2.ada</A></B>
+
+<P>The example program named e_c23_p2.ada should be very familiar to you
+if you just completed a study of the previous chapter. The only real difference
+from e_c22_p7.ada is given in lines 36 through 40 where the same procedure
+is called with objects of three different types. The class wide procedure
+named <B>Print_Values</B> is capable of accepting a parameter of any type
+within the <B>TRANSPORT </B>class, and all five variables qualify for this.
+
+<P>When the program is executed, you will see that it does print the data
+values for each of the variables correctly even though they are of different
+types. It is therefore legal to pass a variable of any type into this procedure,
+provided that the type is a descendant of the <B>TRANSPORT </B>class no
+matter how far down the line it is.
+
+<P><B>DYNAMIC DISPATCHING?</B>
+
+<P>Example program ------> <B><A HREF="e_c23_p3.ada">e_c23_p3.ada</A></B>
+
+<P>The example program named e_c23_p3.ada introduces yet another Ada construct
+into our repertoire, the concept of dynamic binding, or polymorphism. In
+the last program we called one procedure with several different types,
+but in this program, we will call several different procedures with one
+call, by letting the system figure out which procedure to call for us.
+
+<P>This example is identical to e_c23_p1.ada except for the addition of
+four new procedures, one for each type. The specifications for these procedures
+are given in lines 14, 23, 33, and 39. You will notice that they are all
+identical except for the fact that each uses a different type for the single
+parameter to be passed in. Notice also that all of the parameter types
+are in the TRANSPORT class. The implementation for one of these four procedures
+is given in lines 85 through 89, and you can easily find the three other
+implementations. You will notice that the implementation for each of the
+procedures is different because of the difference in the string to be printed.
+It is important to note that the code within the body is different in each
+case, but the interface is identical.
+
+<P><B>USING THE DYNAMIC DISPATCHING</B>
+
+<P>Example program ------> <B><A HREF="e_c23_p4.ada">e_c23_p4.ada</A></B>
+
+<P>The example program named e_c23_p4.ada will require a good bit of explanation,
+because there is a lot of new material here. In lines 8 through 13 we define
+6 variables using the four types that are part of the <B>TRANSPORT </B>class.
+We also state explicitly that each of the variables is <B>aliased</B>,
+a reserved word that we studied when we covered the <B>access </B>type
+in this tutorial. You will recall that this permits access type variables
+to access these variables indirectly.
+
+<P>We define a new <B>access </B>type in line 15 that can access any variable
+of the right type, provided it is aliased, including those allocated on
+the heap, on the stack, or globally. In addition, it accesses the <B>TRANSPORT'Class</B>
+which means that it can access any variable of any type within that class,
+provided that variable has been defined to be <B>aliased</B>. Finally,
+to complete our data definitions, we define an <B>access </B>variable of
+the new type for use in the program.
+
+<P>The example program is the same as e_c23_p2.ada until we get to line
+47 where interesting things begin to happen. The code in line 47 assigns
+<B>Any_Pt</B> the address of the <B>Hummer</B>, and line 48 uses that address
+to make a call to the procedure named <B>Describe</B>. You will recall
+that we have four different procedures named <B>Describe</B>, but only
+one that has a <B>TRANSPORT </B>type for its parameter. Since the <B>Hummer
+</B>is of that type, that is the procedure that will be called here, and
+the procedure is dynamically selected to be executed. In line 49 we assign
+<B>Any_Pt</B> the address of the <B>Limo </B>and use it as the parameter
+for the <B>Describe </B>call. This time the procedure associated with the
+<B>CAR </B>type is called. This continues with all six variables and the
+program is complete.
+
+<P><B>WHAT REALLY HAPPENED?</B>
+
+<P>You will notice that lines 48, 50, 52, 54, 56, and 58 are identical.
+The only difference in these six lines of code is the type of the pointer
+when the call is made, and the type of the pointer is used to select the
+procedure to be executed. This selection is done at run-time and is usually
+called run-time binding or polymorphism. It seems like we went to a lot
+of trouble to do this, and we did, but we will find that this is a very
+valuable technique for some programming situations.
+
+<P>A little repetition is in order here since this is new material. In
+lines 40 through 45 we made many different calls to one procedure, but
+in lines 48 through 58 we made several repeats of one call, each of which
+was dispatched to several different procedures. This is sometimes called
+dynamic selection because the selection is made at run time, as opposed
+to static selection where the selection is made at compile time. It is
+often referred to as polymorphism which means many forms of similar entities.
+
+<P><B>A DYNAMIC BASE CLASS</B>
+
+<P>Example program ------> <B><A HREF="e_c23_p5.ada">e_c23_p5.ada</A></B>
+
+<P>Examine the file named e_c23_p5.ada to see the beginning package for
+a final examination of dynamic binding, at least for the present time.
+You will notice that we declared a simple type named <B>EMPLOYEE </B>with
+three components and a single procedure. It is declared to be <B>tagged
+</B>which will permit us to inherit this type into other types to build
+a class of types. This will be used to illustrate dynamic binding once
+more. The message printed by the procedure states that it should never
+be displayed. We will return to this later and illustrate a method by which
+the compiler will prevent that from happening.
+
+<P><B>TYPE EXTENSION</B>
+
+<P>Example program ------> <B><A HREF="e_c23_p6.ada">e_c23_p6.ada</A></B>
+
+<P>The <B>EMPLOYEE </B>type mentioned above is located in the <B>Person
+</B>package, and the three types in the file named e_c23_p6.ada are located
+in the package named <B>Person.Positions</B> as indicated by line 6. We
+are using the hierarchical libraries available with Ada 95 which could
+be used to prevent any possibility of name clashes. The package specification
+for <B>Person.Positions</B> is very straightforward and you should be able
+to understand this package on your own. Notice that there are three procedures
+named <B>Display</B>, each with a different type for the formal parameter
+but otherwise the interfaces are identical.
+
+<P>The body for the <B>Person.Positions</B> package is not so trivial because
+of the way strings are defined in Ada. We mentioned earlier in this tutorial
+that strings could not be assigned to variables unless they are all of
+the same length, or the Ada compiler will issue a type incompatibility
+error. If we were building an address list, it would not be very expedient
+to require everybody to have the same number of letters in their first
+name and the same number of letters in their last name. The <B>STRING </B>type
+available with Ada must be improved upon in order to make it convenient
+to use strings in a meaningful Ada program. We will see how to do that
+shortly, but in the meantime, we will suffer through this example program
+with the current <B>STRING </B>type implementation to show you how difficult
+they are to work with. Since we wish to use variable length strings, we
+will define each string a little longer than they need to be and associate
+a counter with each string variable to store the current length of the
+string.
+
+<P>Line 43 defines a string variable named <B>Title </B>that can store
+up to 25 characters and line 44 contains a variable named <B>Title_Length
+</B>that will store the current length of the string. If we wanted to store
+the name <B>"John"</B>, we would put those four characters in the first
+four locations of <B>Title </B>and store a value of 4 in the <B>Title_Length</B>
+variable. We must then diligently define a length variable to be associated
+with each string used in this program, and that is exactly what we do.
+In line 75, we use the <B>Length </B>attribute to determine the number
+of characters passed in from the calling program, and execute a loop to
+copy the characters one by one from the input string to the internal storage
+string. You will notice in line 80, that it is trivial to store away the
+value of the <B>Salary</B>.
+
+<P>When we get to the <B>Display </B>procedure, we are required to copy
+the characters to the monitor one at a time as is illustrated in lines
+92 through 94. This is not very convenient, and it is somewhat error prone
+because it would be very easy to use a wrong count with some particular
+string. Even though the procedures are longer than they really should be,
+they are very simple, so you should have no trouble understanding what
+the package body does.
+
+<P><B>A SIMPLE TEST PROGRAM FOR THE CLASS</B>
+
+<P>Example program ------> <B><A HREF="e_c23_p7.ada">e_c23_p7.ada</A></B>
+
+<P>The file named e_c23_p7.ada is a very simple program that exercises
+the <B>EMPLOYEE </B>class that we have just defined, but it really doesn't
+exercise it very much. It defines a few variables in lines 8 through 12,
+fills them with data in lines 16 through 20, and displays the data on the
+monitor in lines 22 through 26. The calls to <B>Display </B>are nothing
+special, in fact they only illustrate subprogram name overloading. There
+is no polymorphism being used here.
+
+<P>You should compile these three files (e_c23_p5.ada, e_c23_p6.ada, and
+BUSINESS1.ADA) and link them together, because they are the basis for some
+additional operations which we will study in the remainder of this chapter.
+
+<P><B>USING DYNAMIC DISPATCHING</B>
+
+<P>Example program ------> <B><A HREF="e_c23_p8.ada">e_c23_p8.ada</A></B>
+
+<P>Examine the file named BUSINESS2.ADA for another example of dynamic
+dispatching. We did nothing special in the last three example programs
+to prepare for dynamic dispatching but we will use the first two files
+unchanged to illustrate the use of dynamic dispatching. The file named
+e_c23_p8.ada begins by declaring all of the variables as being <B>aliased
+</B>so that an Ada access variable can access them within the program.
+We define an access type for the <B>EMPLOYEE </B>class in line 14, and
+use that type to define a variable named <B>Employee_Point</B> in line
+15. We initialize all of the variables as before and we are ready to display
+the data.
+
+<P>We use the same <B>access </B>variable to access each variable in succession
+and display the data in each variable. You will notice that the exact same
+line of code in used in lines 26, 28, 30, 32, and 34, but it does not call
+the same actual procedure each time one of those lines are executed. This
+is, of course, because of the way dynamic dispatching works. The procedure
+that matches the type of the current value of the access variable is the
+procedure that will get called.
+
+<P>We used the same two files for the type definitions for each of the
+last two main programs, but one used dynamic dispatching, and the other
+did not. This program is meant to illustrate that there is nothing magic
+about the elements of the class that will be used for dynamic dispatching,
+the critical portions are in the calling program.
+
+<P><B>DON'T USE THIS PROCEDURE</B>
+
+<P>Example program ------> <B><A HREF="e_c23_p9.ada">e_c23_p9.ada</A></B>
+
+<P>Return to the file named e_c23_p5.ada to discuss a little problem that
+we completely overlooked when we discussed it. Line 29 contains a string
+indicating that we don't expect anyone to call this procedure and we would
+construe it as an error if they did. In fact, we don't expect anyone to
+ever create an object of this type, because we don't care to work with
+<B>EMPLOYEE </B>types, only the more specific types defined in e_c23_p6.ada.
+
+<P>The example program named e_c23_p9.ada contains a new reserved word
+<B>abstract </B>that is used in lines 5 and 11 to indicate that this is
+an <B>abstract </B>record. Since it is <B>abstract</B>, it is not permissible
+to create a variable of this type, and attempting to do so will result
+in a compile error. The word <B>abstract </B>is also used in line 7 where
+it states that the procedure is <B>abstract </B>and can never be called.
+Since it will never be called, the procedure does not even need to have
+an implementation. With the body of the procedure not being needed, the
+package body is empty, so it is completely eliminated. There is then no
+need for the context clauses for the <B>Ada.Text_IO</B> package, so they
+are removed.
+
+<P>Any type that inherits the <B>EMPLOYEE </B>type must provide an implementation
+for <B>Display </B>or contain an abstract definition for it. Including
+an abstract definition for <B>Display </B>will make the new type an <B>abstract
+</B>record also, and we cannot create an object of the new type. However,
+including an implementation for <B>Display</B>, will make the new type
+a normal type which can be used to define one or more objects. The compiler
+will prevent you from ignoring the <B>Display </B>subprogram, and will
+require that you include it in every child record of <B>EMPLOYEE</B>.
+
+<P>The most surprising part of this modification is that it can still be
+used with the files named e_c23_p6.ada and e_c23_p7.ada or e_c23_p8.ada,
+with no changes to any of them. Since we never tried to create a variable
+of the EMPLOYEE type, there is nothing to change in those files. You should
+compile, link, and execute both groups of files to prove to yourself that
+it actually works as stated.
+
+<P><B>THIS ENDS THE OBJECT ORIENTED PROGRAMMING LESSONS</B>
+
+<P>This completes our study of object oriented programming in this tutorial.
+There is a lot more to learn about object oriented programming and how
+to use it, but it is beyond the scope of this tutorial, and there is a
+plethora of information about the topic in other publications. The remainder
+of this chapter will be used to illustrate a better method of using strings
+in Ada. It is included here because these example programs lend themselves
+well to illustrating the particular construct we wish to consider.
+
+<P><B>RETURNING TO THE STRING PROBLEM</B>
+
+<P>Even though it may seem like we have a <B>STRING </B>problem, we really
+don't, because the <B>STRING </B>type is working exactly as it was designed
+to work. The mark of a well designed language is not that it has the ability
+to do everything, but that it has the ability to be extended in an efficient
+manner to do anything that needs to be done. Ada was designed to be easily
+and robustly extended, and the area of strings is a very good example of
+this.
+
+<P>There are several string packages available with all Ada 95 compilers.
+They are all well defined in the ARM, and should be well defined in your
+compiler documentation. We will look at one of these packages to illustrate
+how it can be used to simplify the use of strings in an Ada program. The
+package named <B>Ada.Strings.Bounded</B> contains a generic package named
+<B>Generic_Bounded_Length</B> which implements a string package that is
+much more flexible than the <B>STRING </B>type. This string type stores
+an internal count of the number of characters that are currently significant,
+much like we did in the e_c23_p5.ada and e_c23_p6.ada files. it also provides
+a plethora of subprograms to load, extract, concatenate, and many other
+operations which are commonly needed when working with strings.
+
+<P>Example program ------> <B><A HREF="e_c23_p10.ada">e_c23_p10.ada</A></B>
+
+<P>The file named e_c23_p10.ada uses the <B>Generic_Bounded_Length</B> package
+by instantiating a copy of it in line 10 which provides an upper limit
+of 25 characters for a string of this type. The package provides a type
+named <B>BOUNDED_STRING</B> which defines the strings we wish to use. Each
+string can be from 0 to 25 characters long, and the string object will
+remember how many characters are currently stored there. The variable named
+<B>Name </B>is defined as type <B>BOUNDED_STRING</B> in line 18. The full
+name of the type is <B>My_Strings.BOUNDED_STRING</B>.You will notice that
+the generic package is in the <B>Ada.Strings.Bounded</B> library, so that
+library is mentioned in the context clause in line 2. Instead of a <B>use
+</B>clause, the fully qualified name is used in lines 10 and 11. This is
+a little different than the way it is done in most of the tutorial, but
+either method is completely acceptable.
+
+<P><B>MORE DYNAMIC STRINGS</B>
+
+<P>Example program ------> <B><A HREF="e_c23_p11.ada">e_c23_p11.ada</A></B>
+
+<P>Examine the file named e_c23_p11.ada for the definition of the other
+three types, and you will notice that there are no <B>STRING </B>types
+in the package specification. They are replaced by the new type <B>BOUNDED_STRING</B>.
+Lines 71 through 73 of the package body illustrate the clean syntax that
+is possible with this new type because it has an assignment operator available
+that assigns not only the text to the new variable, but also the current
+length.
+
+<P>Since we have no way to output a variable of type <B>BOUNDED_STRING</B>
+to the monitor, we are forced to use a loop to output a single character
+at a time, but the loop uses attributes of the single variable rather than
+using two separate variables to control the output. This results in the
+<B>Display </B>procedures looking a little cleaner than they did in the
+last example program. The remainder of this package is simply more of the
+same that you can study at your leisure.
+
+<P><B>THE MAIN PROGRAM IS UGLY</B>
+
+<P>Example program ------> <B><A HREF="e_c23_p12.ada">e_c23_p12.ada</A></B>
+
+<P>Because of the need to maintain the correct types, it is necessary to
+convert the string constants in lines 16 through 31 into <B>BOUNDED_STRING</B>
+types. This is accomplished by calling the <B>To_Bounded_String</B> function
+for each of the string parameters prior to passing them into the <B>Init_Data</B>
+procedures. This looks ugly, and it seems to defeat the purpose of using
+the bounded string package. When writing a string intensive program, you
+will normally have a small input routine of some kind, and a small output
+routine, but there may be a massive amount of string processing going on
+within the program. A good example would be a spell checker where there
+is generally only a single word input, but an entire dictionary which must
+be searched.
+
+<P>In addition to the bounded string package, where you define a string
+type with some upper limit to the number of characters that can be stored
+within, there is an unbounded string package. The unbounded string can
+store any number of characters. It does this by growing longer automatically
+as you add more characters to its length. As you add characters, it reallocates
+a larger block each time it runs out of space in order for your string
+to fit. It will be left up to you to study this package if you wish to
+use it.
+
+<P><B>PROGRAMMING EXERCISES</B>
+<OL>
+<LI>
+Remove the comment from line 147 of e_c23_p1.ada to see what kind of an
+error the compiler issues.<A HREF=" a_c23_p1.ada">(Solution)</A></LI>
+
+<LI>
+Define a variable of the <B>EMPLOYEE </B>type in the BUSINESS2.ADA file
+when you are using the e_c23_p5.ada file as the definition of that type.
+Call the <B>Display </B>procedure to see that it can be used as well as
+the child types.<A HREF=" a_c23_p2.ada">(Solution)</A></LI>
+
+<LI>
+Define a variable of the <B>EMPLOYEE </B>type in the BUSINESS2.ADA file
+when you are using the e_c23_p9.ada file as the definition of that type.
+Does the error reported make sense to you?<A HREF=" a_c23_p3.ada">(Solution)</A></LI>
+</OL>
+<A HREF="chap24.htm">Advance to Chapter 24</A>
+
+<P><A HREF="a95list.htm">Return to the Table of Contents</A>
+
+<P>
+<HR width="100%"><I><FONT SIZE=-1>Copyright &copy; 1988-1998 Coronado Enterprises
+- Last update, February 1, 1998</FONT></I>
+<BR><I><FONT SIZE=-1>Gordon Dodrill - dodrill@swcp.com - </FONT></I><FONT SIZE=-1><A HREF="mailto:dodrill@swcp.com">Please
+email any comments or suggestions.</A></FONT>
+</BODY>
+</HTML>

@@ -1,0 +1,431 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Author" CONTENT="Gordon Dodrill">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (Win95; I) [Netscape]">
+   <TITLE>Ada Tutorial - Chapter 5</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<B>Ada Tutorial - Chapter 5</B>
+
+<P><B><FONT SIZE=+3>C</FONT><FONT SIZE=+2>ONTROL</FONT><FONT SIZE=+3> S</FONT><FONT SIZE=+2>TRUCTURES</FONT></B>
+
+<P><B>THE SIMPLEST LOOP IN ADA</B>
+
+<P>Example program ------> <B><A HREF="e_c05_p1.ada">e_c05_p1.ada</A></B>
+
+<P>We will start with the simplest loop in Ada, the infinite loop which
+is illustrated in lines 11 through 16 of the program named e_c05_p1.ada.
+The variable named <B>Index </B>is initialized to the value of 1 prior
+to entering the loop, and the loop itself is given in lines 11 through
+16. The loop begins with the reserved word <B>loop </B>and ends with the
+two reserved words <B>end loop.</B> Any number of executable statements
+are placed between these two delimiters and the loop is repeated continuously
+until something causes the program to jump out of the loop. In this case,
+the variable <B>Index </B>is incremented each time through the loop, and
+when it reaches a value of 5, the <B>exit </B>statement is executed which
+causes control to jump out of the loop and begin executing instructions
+immediately following the end of the loop. The words <B>exit </B>and <B>when
+</B>are two more reserved words.
+
+<P>The expression following the <B>exit when</B> reserved words must evaluate
+to a <B>BOOLEAN </B>result and when the result is <B>TRUE</B>, the loop
+is exited, but as long as the result is <B>FALSE</B>, the loop execution
+will continue. Note that the <B>exit </B>statement can be placed anywhere
+in the loop and as many conditional exits as needed can be placed within
+the loop.
+
+<P>The statements illustrated in lines 18 through 24 use an alternative
+form of loop exit which uses the <B>if </B>statement which we have not
+yet studied. The <B>if </B>form of exit is such a common form of usage
+that it had to be included here as one of the simplest types of loops.
+Note that the <B>if exit</B> can be placed anywhere in the loop and as
+many as needed can be used within the loop. The <B>if </B>statement will
+be fully explained later in this chapter.
+
+<P><B>THE exit STATEMENT</B>
+
+<P>There is a subtle difference between the <B>exit</B> in line 15 and
+the <B>exit</B> in line 23. The exit in line 15 is conditional because
+it is only executed if the condition evaluates to <B>TRUE</B>. The exit
+in line 23 however, is unconditional since the exit will be taken anytime
+control reaches the word <B>exit</B>. Keep in mind that an <B>exit </B>is
+used only to exit a loop, it is not used for any other construct in Ada.
+
+<P><B>THE while LOOP</B>
+
+<P>The <B>while </B>loop is identical to the simple loop except for the
+addition of a test prior to the reserved word <B>loop</B>. The test is
+done at the beginning of the loop so it is slightly less general than the
+simple loop, but it also requires a <B>BOOLEAN </B>expression as part of
+the construct. This loop is illustrated in lines 27 to 31 of the present
+program. In line 27, "while Count &lt; 5" is called the iteration clause.
+
+<P><B>THE for LOOP</B>
+
+<P>The loops studied so far in this example program use an indeterminate
+number of passes since they calculate their own limits as they progress
+through the loop. It is important to point out that the <B>BOOLEAN </B>expressions
+are evaluated on every pass through the loop. The <B>for </B>loop, however,
+has its limits evaluated one time and the number of passes through the
+loop is completely defined before the first pass through the loop is begun.
+
+<P>The <B>for </B>loop is illustrated in lines 33 through 36 where the
+control consists of a few words prior to the reserved word <B>loop</B>.
+In this case, the loop control is the variable <B>Index </B>and the range
+of the variable is 1 through 4. The loop will be executed four times, each
+time with a larger number for the variable <B>Index</B>, since the loop
+index is always incremented by one. There is no provision for an increment
+of any other value in Ada. The reserved words <B>for </B>and <B>in </B>are
+used in the manner shown for all <B>for </B>loops. They serve to bracket
+the loop index, in this case named <B>Index</B>, and the range of the index,
+in this case 1 through 4 inclusive.
+
+<P>Because the type <B>INTEGER </B>is so commonly used for the loop index,
+if the type is not specifically stated, it will be defaulted to the type
+<B>INTEGER</B>. This is to make it easier to code the majority of loops.
+
+<P>Note that the loop parameters do not need to be of type <B>INTEGER</B>,
+but the loop index and both range limits must be of the same type. Note
+also that the value of the loop iterator is not available after loop termination.
+The loop iterator ceases to exist completely when the loop is completed.
+(There is good reason for this as we will see when we complete our study
+of the next example program.)
+
+<P><B>THE BACKWARDS for LOOP</B>
+
+<P>There is a slight variation to the <B>for </B>loop illustrated in lines
+38 through 41, where the loop index is decremented on each pass through
+the logic. The word <B>reverse </B>is another reserved word and serves
+to indicate the backward counting nature of this loop. Note that the range
+is expressed in ascending order, but the actual execution begins at 8 and
+decrements by 1 on each pass until it reaches 5, where it quits after the
+pass through the loop with <B>Count </B>set to 5.
+
+<P><B>THE EMPTY LOOP</B>
+
+<P>Continuing in the program named e_c05_p1.ada, the loop in lines 43 to
+45 is given to illustrate that it is possible to write a loop that does
+absolutely nothing. It may seem like a silly thing to do, but there are
+cases, when using tasking, that it is necessary to do nothing in a loop.
+It is of more importance at this point to illustrate that Ada is so picky,
+you are not allowed to write an empty loop, but are required to inform
+the compiler that you really did mean for the loop to do nothing by including
+the reserved word <B>null </B>as a statement within the loop.
+
+<P>Be sure to compile and execute this program and be sure you understand
+exactly what each loop does.
+
+<P><B>SLIGHTLY MORE COMPLEX for STATEMENTS</B>
+
+<P>Example program ------> <B><A HREF="e_c05_p2.ada">e_c05_p2.ada</A></B>
+
+<P>Examine the program named e_c05_p2.ada for a few examples of more complex
+but much more versatile <B>for </B>loops. The loops illustrate a few of
+the flexibilities designed into Ada to allow for more efficient programming.
+The first example in lines 21 through 25, has two new concepts, the first
+being that the loop variable, <B>Index</B>, is not declared in the definition
+part of the program, and secondly the range is defined by a type rather
+than variable or constant limits.
+
+<P>Considering the first point, the loop index in a <B>for </B>loop does
+not require explicit declaration, but will be implicitly declared by the
+program, used during the duration of the loop, and discarded when the loop
+terminates. The final value of the loop index is not available for use
+after the loop terminates, and this is true regardless of whether the index
+is explicitly or implicitly declared. (We will see shortly that it is always
+implicitly declared by the Ada system.) The Ada language designers gave
+compiler writers freedom on how and when the loop index is incremented
+rather than dictating what the final value would be. It is a simple rule
+to remember that you can not depend on having the final value of the loop
+index when you terminate the loop. If you need the final value, you must
+copy it into some other variable prior to leaving the loop.
+
+<P><B>USING A TYPE FOR THE&nbsp; LOOP RANGE</B>
+
+<P>The second point brought out above is the fact that the loop range is
+given as a type. The type given, <B>MY_TYPE</B>, has a defined range of
+10..13, so it should be no real problem seeing what the loop index range
+is. Moreover the implicit loop index, named <B>Index</B>, will also be
+of type <B>MY_TYPE</B>. Because we wish to print the value of the loop
+index during each pass through the loop, we instantiate a copy of the <B>Integer_IO</B>
+package for the <B>MY_TYPE</B> type in lines 9 and 10.
+
+<P>A final point about the first loop in this program must be emphasized.
+The loop index in this <B>for </B>loop, as well as in any <B>for </B>loop,
+will be treated as a constant within the loop, so you cannot assign a new
+value to it. The looping mechanism itself will be the only way that the
+loop index can be changed in value.
+
+<P><B>OUR FIRST ATTRIBUTES IN USE</B>
+
+<P>In chapter 3, we took a brief look at attributes, but didn't really
+look at uses for them. In the loop in lines 27 through 31, we have the
+range once again defined as the limits of the type named <B>MY_TYPE</B>
+but this time we explicitly name the first and last values of the type
+by using the attributes. The method depicted in line 21 is more concise,
+but both methods lead to the same result. If you wanted to loop from the
+first element to some midpoint, for example, the second method gives you
+a way to use one of the endpoints of the range.
+
+<P><B>CALCULATED LOOP RANGE LIMITS</B>
+
+<P>The loop in lines 33 through 37 has range limits that are not static
+but that are calculated when the loop is entered. In this case, the calculations
+are all based on constants, but they could be based on variables of any
+arbitrary degree of complexity. If they are based on one or more variables,
+there is a subtle point that you must understand. If one or more of the
+variables are changed within the loop, the range does not change accordingly,
+because the loop range limits are calculated only once, when the loop is
+entered.
+
+<P>It should be clear that the loop range is 2 through 5 for this particular
+loop.
+
+<P><B>A DOUBLY NESTED for LOOP</B>
+
+<P>Lines 39 through 49 contain two nested <B>for </B>loops with an addition
+to the outer loop. The identifier <B>Named_Loop</B> is a loop name which
+applies to the outer loop. The name appears prior to the start of the loop
+and also follows the corresponding <B>end loop</B> for that loop. This
+results in a named loop. In lines 42 and 43 we have a conditional statement
+that says if the product of the <B>Height </B>and the <B>Width </B>are
+equal to 12, we are to exit the loop that is named <B>Named_Loop</B>. Without
+the name given we would only exit the loop currently in effect, the inner
+one defined by the loop index <B>Width</B>, but since we mention the name,
+we exit the loop with the given name, and exit both loops. By adding a
+name to a loop, you can exit out of as many nested levels as you desire
+with a single <B>exit </B>statement.
+
+<P><B>A CLOSE LOOK AT THE LOOP INDEX</B>
+
+<P>In line 51, we assign the value of 157 to the variable named <B>Special_Index</B>
+and use that variable name for the loop index in the following loop. After
+the loop is terminated, we display the value of the variable to see what
+the final value is, and when we run the program we find that the value
+did not change from that assigned, namely 157. This would suggest that
+even if we think we are explicitly defining the loop index variable, the
+system is actually making up an entirely new variable, using it, and throwing
+it away after the loop is terminated. Ada defines a loop variable as an
+automatic variable which is generated when needed and discarded when it
+is no longer needed. More will be said about automatic variables later.
+The important point to grasp from this is that Ada implicitly declares
+all loop variables for us.
+
+<P><B>LOOPS ARE IMPORTANT</B>
+
+<P>You will have many opportunities to use all three forms of the loops
+discussed here, so it would pay you to study these loops until you are
+sure of what they are doing.
+
+<P>Note the similarity of the three loops, and the fact that each is a
+complete Ada statement terminated with a semicolon. When we study the next
+two controls, you will see that they are very similar, and fit the same
+pattern.
+<PRE>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <B>loop</B> &lt;...> <B>end loop</B>;&nbsp;
+&nbsp;&nbsp; <B>while</B> &lt;BOOLEAN expression>&nbsp; <B>loop</B> &lt;...> <B>end loop</B>;
+&nbsp;&nbsp; <B>for</B> &lt;loop index> <B>in</B> &lt;range> <B>loop</B> &lt;...> <B>end loop</B>;</PRE>
+Compile and execute this program taking care to observe the value of the
+variable named <B>Special_Index</B> when the loop is complete.
+
+<P>This would be a good point for you to begin getting acquainted with
+the Ada 95 Reference Manual (ARM). Study section 5.5 in the ARM which defines
+the Loop Statements in detail. You will find it surprisingly easy to read
+and understand except for the syntax statements at the beginning of the
+section. You will see that there is little to the loop construct that we
+have not covered in this section of the tutorial, and you will begin getting
+familiar with the ARM. You will find the ARM to be a valuable source of
+information after you gain some experience with Ada.
+
+<P><B>NOW FOR CONDITIONAL STATEMENTS</B>
+
+<P>Example program ------> <B><A HREF="e_c05_p3.ada">e_c05_p3.ada</A></B>
+
+<P>We will spend some time now examining the program named e_c05_p3.ada and
+studying the conditional statements. Notice here, that we don't even try
+to define any variables, but we will let the system generate them for us
+as implicit loop indices. The Ada statement contained in lines 8 through
+18 is a <B>for </B>loop which we are now familiar with, so we will use
+it to study how the <B>if </B>statement works. Notice that we display the
+value of <B>Index</B>, then use it in the first <B>if </B>statement in
+lines 11 through 13. This statement says that if the value stored in <B>Index
+</B>is less than 4, then execute the statements between the reserved words
+<B>then </B>and <B>end if</B>. In this case, we display the message in
+line 12 on the monitor. If the value stored in <B>Index </B>is not less
+than 4, we ignore the statement between the reserved words and go directly
+to line 14, where we encounter another <B>if </B>statement. This one displays
+a different line on the monitor if the value stored in <B>Index </B>is
+greater than 5. This is the simplest kind of <B>if </B>statement, and you
+will find it to be extremely useful, in fact, you used it in the previous
+two example programs. Note that the <B>if</B> condition must evaluate to
+a <B>BOOLEAN</B> value.
+
+<P>Moving ahead to the next loop, the one in lines 21 through 29, we find
+a more elaborate conditional, the <B>if then else</B> statement. In this
+case, if the value of <B>Index </B>is less than 15, one message is displayed
+and if not, a different message is displayed. In the prior loop, we used
+an <B>if </B>statement where a message may or may not have been displayed,
+but in this one, we use an <B>if </B>statement where one of the messages
+will be displayed every time. This, of course, is very similar to other
+programming languages.
+
+<P><B>NOW FOR THE MULTIWAY if STATEMENT</B>
+
+<P>The loop in the statement contained in lines 32 through 44 is a bit
+more involved since there are several possibilities for selection of the
+line to be displayed. The word <B>elsif </B>is another reserved word. In
+this case, one and only one of the statements will be executed during each
+pass through the loop. The reserved word <B>else </B>is optional, and if
+it were not there, it would be possible that none of the conditions would
+be met and therefore none of the messages would be output. As many statements
+as desired can be placed between each of the reserved words such that a
+selection could cause a large number of statements to be executed sequentially.
+
+<P>The last statement, given in lines 51 through 67, gives an illustration
+of nesting of <B>loop </B>and <B>if </B>statements. It should cause you
+no difficulty to understand the nesting and when you compile and run this
+program, you should have a good understanding of the output.
+
+<P><B>THE MULTIWAY CONDITIONAL CONSTRUCT</B>
+
+<P>Example program ------> <B><A HREF="e_c05_p4.ada">e_c05_p4.ada</A></B>
+
+<P>Examine the program named e_c05_p4.ada for an example of a program with
+a case statement, the multiway conditional statement in Ada. Lines 8 through
+20 comprise a loop with a <B>case </B>statement contained in it. Lines
+12 through 18 contain the actual case statement. The variable <B>How_Many</B>
+is the case selector variable and each time we pass through the loop, we
+enter the case statement with a different value stored in the variable
+<B>How_Many</B>. When <B>How_Many</B> has the value of 4 through 6, we
+select the first path, and that path only, when it has the value of 7 or
+9, we select the second path, etc. The vertical bar is the <B>or </B>operator
+here, and means if we have either of these cases, do this list of statements.
+The case statement is composed of the reserved words <B>case</B>, <B>is</B>,
+<B>when</B>, and <B>end case</B> in the manner shown. All cases must be
+accounted for in some way since it is an error to enter the case with a
+value of the case selector variable for which there is not something defined
+for it to do.
+
+<P><B>WHAT IS THE => OPERATOR?</B>
+
+<P>The "=>" operator is used in many places in an Ada program which we
+will see as we progress through this tutorial. It can be loosely defined
+as a "do this" operator, because in most places it can be read as "do this".
+For example in line 13, the line can be read "when <B>How_Many</B> is 4
+through 6 do this <B>Put </B>statement".
+
+<P>A special case is provided which is the <B>others </B>case. It is optional,
+but if it is included, it must be the last one listed. This is illustrated
+in the other example in this program, the example in lines 27 through 37.
+This program is an illustration of more complex operations in each of the
+case branches, and it is expected that you should have no difficulty discerning
+the operation of each of the cases. This is one of the places where a <B>null
+</B>statement can be very useful as in line 35 where we really want to
+do nothing and can explicitly tell the compiler so. Be sure to compile
+and execute this program after you are sure you understand it. The <B>case
+</B>statement occurs rather infrequently in programming, but you will use
+it, so you should understand it thoroughly.
+
+<P>This would be a good time to repeat a list which was given earlier in
+this chapter with the <B>if </B>and <B>case </B>statements added to illustrate
+the symmetry of the control structures and how well thought out they really
+are.
+<PRE>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <B>loop</B> &lt;...> <B>end loop</B>;
+&nbsp;&nbsp; <B>while</B> &lt;BOOLEAN expression>&nbsp; <B>loop</B> &lt;...> <B>end loop</B>;
+&nbsp;&nbsp; <B>for</B> &lt;loop index> <B>in</B> &lt;range> <B>loop</B> &lt;...> <B>end loop</B>;
+&nbsp;&nbsp; <B>if</B> &lt;condition>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <B>then</B> &lt;...> <B>end if</B>;
+&nbsp;&nbsp; <B>case</B> &lt;selector>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <B>is&nbsp;&nbsp;</B> &lt;...> <B>end case</B>;</PRE>
+<B>THE EVIL GOTO STATEMENT</B>
+
+<P>Example program ------> <B><A HREF="e_c05_p5.ada">e_c05_p5.ada</A></B>
+
+<P>The program named e_c05_p5.ada illustrates use of the <B>goto </B>statement,
+a statement that has fallen into ill repute among software developers in
+recent years. This is because the <B>goto </B>can be used very abusively,
+leading to nearly unreadable spaghetti code. There may be instances when
+use of the <B>goto </B>statement will result in very clear code, and when
+those cases arise, it should be used. It has been proven that it is possible
+to write any logic without resorting to the <B>goto </B>statement by using
+only iteration (looping), conditional branching, and sequential statements
+and every effort should be made to rely on these three elements alone.
+
+<P>When Ada was being developed, the developers considered leaving the
+<B>goto </B>statement completely out of the language, but it was included
+for a very nebulous reason. It was felt that after Ada became a popular
+language, there would be a need to translate existing programs from older
+languages, such as FORTRAN, into Ada using automatic translators. Such
+a job would be impossible without the <B>goto </B>statement, so it was
+included in the Ada language. Modula-2 is an example of a language structured
+very much like Ada, but without a <B>goto </B>statement defined as part
+of the language.
+
+<P>The <B>goto </B>is available as a part of the Ada language and is illustrated
+in the present example program. It should be no surprise to you that <B>goto
+</B>is another reserved word. The rather messy looking double "&lt;&lt;"
+and ">>" enclose the label to which you wish to jump and the rest should
+be easy for you to discern. Be sure to compile and run this program.
+
+<P><B>FINALLY, A USEFUL PROGRAM</B>
+
+<P>Example program ------> <B><A HREF="e_c05_p6.ada">e_c05_p6.ada</A></B>
+
+<P>Examine the program named e_c05_p6.ada for an example of a program that
+really does do something useful, it generates a table of Centigrade to
+Fahrenheit temperature conversions, and it outputs a special message at
+the freezing point of water and another at the boiling point of water.
+Notice the program definition in the header that defines exactly what it
+does. You should have no trouble understanding every detail of this program,
+except of course for the rather cryptic code in lines 8 and 9. Although
+we have had a brief introduction to these, we will cover the details of
+them later in this tutorial.
+
+<P><B>POOR CHOICE OF VARIABLE NAMES</B>
+
+<P>Example program ------> <B><A HREF="e_c05_p7.ada">e_c05_p7.ada</A></B>
+
+<P>Compile and run e_c05_p6.ada, then examine the program named e_c05_p7.ada
+for an example that uses some poor choices of variable names and omits
+the comments. This program is the same program that you just studied because
+it does exactly the same thing, but I am sure you will find it a little
+harder to follow since the names are not very useful in helping you understand
+what it is doing. In the beginning of this tutorial, we studied a program
+named e_c02_p1.ada which was absolutely ridiculous in style. No serious
+programmer would write such a program as that, but many programmers seem
+to be happy using a style similar to the present example.
+
+<P>You should begin, even at this early point in your Ada programming development,
+to develop good formatting skills. Remember that Ada was designed to be
+written once and read many times, so the extra time spent keying in long
+meaningful identifiers will be worth it to your colleagues when they find
+a need to study your code.
+
+<P><B>PROGRAMMING EXERCISES</B>
+<OL>
+<LI>
+Write a program with looping and conditional statements that will output
+the year and your age during each year from the time you were born until
+you were 21. Include a special note the year you started school and another
+note the year you graduated from High School. Example output follows;<A HREF=" a_c05_p1.ada">(Solution)</A></LI>
+
+<PRE>&nbsp;&nbsp;&nbsp;&nbsp; In 1938, I was 0 years old.&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp; In 1939, I was 1 years old.&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ...&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ...&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp; In 1943, I was 5 years old, and started School.&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ...&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; etc.</PRE>
+
+<LI>
+Rewrite exercise 1 using a case statement.<A HREF=" a_c05_p2.ada">(Solution)</A></LI>
+</OL>
+<A HREF="chap06.htm">Advance to Chapter 6</A>
+
+<P><A HREF="a95list.htm">Return to the Table of Contents</A>
+
+<P>
+<HR width="100%"><I><FONT SIZE=-1>Copyright &copy; 1988-1998 Coronado Enterprises
+- Last update, February 1, 1998</FONT></I>
+<BR><I><FONT SIZE=-1>Gordon Dodrill - dodrill@swcp.com - </FONT></I><FONT SIZE=-1><A HREF="mailto:dodrill@swcp.com">Please
+email any comments or suggestions.</A></FONT>
+</BODY>
+</HTML>

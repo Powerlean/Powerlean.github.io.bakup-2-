@@ -1,0 +1,358 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="Author" CONTENT="Gordon Dodrill">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (Win95; I) [Netscape]">
+   <TITLE>Ada Tutorial - Chapter 20</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<B>Ada Tutorial - Chapter 20</B>
+
+<P><B><FONT SIZE=+3>A</FONT><FONT SIZE=+2>DVANCED</FONT><FONT SIZE=+3>
+R</FONT><FONT SIZE=+2>ECORD</FONT><FONT SIZE=+3> T</FONT><FONT SIZE=+2>OPICS</FONT></B>
+
+<P><B>A RECORD WITH A DISCRIMINANT</B>
+
+<P>Example program ------> <B><A HREF="e_c20_p1.ada">e_c20_p1.ada</A></B>
+
+<P>Examine the file named e_c20_p1.ada for our first example of a record
+with a discriminant. It will take a little time and study before we get
+to the discriminant and what it does, but we will take it a step at a time.
+
+<P>We begin by defining an unconstrained two dimensional array type in
+line 7 of the declaration part, and an unconstrained one dimensional array
+type in line 10. Next we define a record type, beginning in line 12, with
+a discriminant, the discriminant being a variable named <B>List_Size</B>
+which is of type <B>POSITIVE</B>. The record is composed of four fields,
+each of which is defined in part by the discriminant. The variable named
+<B>Matrix </B>is a square array whose size is given by the value of the
+discriminant, while <B>Elements </B>is initialized to the square of the
+discriminant. Likewise, the other two fields are defined as a function
+of the discriminant. Keep in mind that the discriminant does not yet have
+a value, it is only used as a part of the pattern of the record.
+
+<P>For later use, we define a derived type in line 20, and a subtype in
+line 22. The subtype is defined as being of type <B>STUFF </B>but with
+the discriminant being fixed at 5. We will have more to say about these
+two types later.
+
+<P><B>WE NEED TO DEFINE SOME DATA NOW</B>
+
+<P>In line 24, we declare a variable named <B>Data_Store</B> to be of type
+<B>STUFF </B>with the discriminant set equal to 5. Therefore, the <B>Matrix
+</B>variable which is a part of the record named <B>Data_Store</B> has
+two subscripts, and both cover a range of 1 through 5. The variable named
+<B>Elements </B>will be initialized to the square of 5, and the other fields
+will likewise be defined. The variable <B>Big_Store</B> will have larger
+arrays, and the value of its subfield, named <B>Elements</B>, will be initialized
+to a value of the square of 12. Since these two variables have different
+numbers of elements, they are not assignment compatible, nor can they be
+compared for equality or inequality.
+
+<P>The variable <B>Extra_Store</B> is declared as being of type <B>ANOTHER_STUFF</B>
+with a discriminant of 5, but since the types are different, this variable
+is not assignment compatible with the first variable named <B>Data_Store</B>.
+<B>More_Store</B> is declared as being of type <B>STUFF </B>with a discriminant
+of 5, so it is assignment compatible with <B>Data_Store</B>. <B>Five_Store</B>,
+because it is a subtype of <B>STUFF</B>, and its discriminant is 5, as
+defined in the subtype declaration, is assignment compatible with <B>Data_Store</B>.
+Finally, it should be clear that the last example, <B>Name_Store</B>, is
+assignment compatible with <B>Data_Store,</B> since its only difference
+is that it uses the named method of discriminant selection. This is a hint
+to you that additional discriminants can be used, and there is actually
+no limit to the number that can be a part of a discriminated record type.
+We will have an example program soon that has three discriminants.
+
+<P><B>WHO IS ASSIGNMENT COMPATIBLE WITH WHO?</B>
+
+<P>As mentioned before, the variables named <B>Data_Store, More_Store,
+Five_Store,</B> and <B>Name_Store</B>, are all of the same type and can
+be freely assigned to each other. They can also be compared for equality
+or inequality with each other. The other variables are of different types
+and cannot be assigned as a complete record to each other, or compared
+for equality or inequality.
+
+<P>The discriminant, once declared, is considered to be a constant, and
+cannot be modified. The discriminant of the variable <B>Data_Store</B>
+is accessed in the program as <B>Data_Store.List_Size </B>for purposes
+of reading it. The executable part of the program should be clear. One
+of the declared <B>Matrix </B>variables is assigned values using the <B>RANGE
+</B>attribute for the loop limits. The entire record is then assigned to
+some additional record variables, and a single data point is displayed
+as an example.
+
+<P>When you understand the program, compile and execute it to prove to
+yourself that it works as shown. Notice that, as always, the elements of
+the record cannot be anonymous types but must be named.
+
+<P><B>HOW DO WE USE THE NEW RECORDS?</B>
+
+<P>Example program ------> <B><A HREF="e_c20_p2.ada">e_c20_p2.ada</A></B>
+
+<P>Examine the example program named e_c20_p2.ada for a few examples of
+how to use the discriminated record. The type declarations are identical
+to the last program, but only two records are declared this time, <B>Data_Store</B>
+and <B>Big_Store</B>, which are of different types because they have different
+discriminants.
+
+<P>The declaration part of the program has a function declaration and a
+procedure declaration added to it in this program. If you look closely,
+you will see that the type used for the formal variable in both subprograms
+is of the record type <B>STUFF</B>, but there is no discriminant defined
+for either. These are unconstrained records and add flexibility to the
+use of subprograms. The loops within the subprograms use limits that are
+dependent upon the limits of the actual type as defined in the calling
+program, and the subprograms can therefore be used for any record variable
+of type <B>STUFF </B>regardless of the value of the discriminant.
+
+<P><B>USE OF THE UNCONSTRAINED SUBPROGRAMS</B>
+
+<P>The nested loop in lines 45 through 50, assigns the elements contained
+in the array variable <B>Data_Store.Matrix</B> to a multiplication table
+for later use. In line 52, we call the procedure <B>Set_To_Ones </B>with
+the record <B>Big_Store</B> to set all of its <B>Matrix </B>values to 1.
+Finally, we display the sums of all of the elements by calling the function
+<B>Add_Elements</B> once for each record. Even though the records are actually
+of different types, the function works correctly with both, because of
+the flexibility built into the function itself. Note that even though the
+record is unconstrained in each subprogram, it is constrained when the
+subprogram is called since the discriminant is constrained to the value
+of the actual parameter in the call.
+
+<P>Be sure to compile and execute this program and study the output until
+you are sure you understand the results.
+
+<P><B>A VARIABLE DISCRIMINANT</B>
+
+<P>Example program ------> <B><A HREF="e_c20_p3.ada">e_c20_p3.ada</A></B>
+
+<P>Examine the program named e_c20_p3.ada for an example of a discriminant
+that can be changed dynamically. This program is nearly identical to the
+last example program, but there are two very small changes. The discriminant
+is initialized to a value of 2 in line 14, which will be used for the discriminant
+if none is given in the variable declaration. The second change is illustrated
+in line 24, where the variable <B>Var_Store</B> is declared to be of type
+<B>STUFF</B>, and is defaulted to the initialization value of 2 for its
+discriminant. There is one other property that the variable named <B>Var_Store</B>
+has acquired, and that is the ability to have its discriminant changed
+to any legal value during execution of the program.
+
+<P>The two variables named <B>Data_Store</B> and <B>Big_Store</B> have
+their discriminants fixed at 5 and 12 respectively and cannot be changed
+during program execution.
+
+<P><B>HOW DO WE CHANGE THE DISCRIMINANT?</B>
+
+<P>The discriminant can only be changed by changing the entire record in
+a single statement as is illustrated in line 55 where the entire record
+named <B>Data_Store</B>, with a discriminant of 5, is assigned to the variable
+<B>Var_Store.</B> The variable <B>Var_Store</B> can then be used anywhere
+it is legal to use a record of discriminant 5 as shown in lines 56 through
+62. Note that prior to the assignment in line 55 the variable <B>Var_Store
+</B>can be used as a record with its discriminant set to 2 because that
+is the value of the default.
+
+<P>In line 66, the variable <B>Var_Store</B> is assigned the entire record
+of <B>Big_Store</B> which effectively changes it into a record variable
+with a discriminant of 12. The fact that it is changed is evidenced by
+the output which you can see after you compile and execute this program.
+Note that all of the values contained in <B>Big_Store</B> are copied into
+<B>Var_Store</B>. Be sure to compile and execute this program.
+
+<P><B>A MULTIPLE DISCRIMINANT</B>
+
+<P>Example program ------> <B><A HREF="e_c20_p4.ada">e_c20_p4.ada</A></B>
+
+<P>Examining the example program named e_c20_p4.ada gives you an example
+of how to use a multiple discriminant in a record type. The first difference
+is in lines 14 through 16 where three discriminants are defined for the
+record type, and the next big difference is in lines 24 through 30 where
+5 variables are declared with this type illustrating the various kinds
+of discriminant initialization described in this chapter.
+
+<P>Since we have studied all of these in the last few example programs,
+we will not elaborate on them, except to mention that the variable defined
+in line 30, named <B>Variable, </B>can be assigned the value of any of
+the other variables. It will then have the entire set of discriminants
+assigned to it that the assignment variable possesses and it will be assigned
+all of the current values stored in the source record. This is exactly
+the same as what was illustrated in the last program.
+
+<P>Be sure to compile and run this program after you understand the concepts
+it is meant to convey to you.
+
+<P><B>A VARIANT RECORD</B>
+
+<P>Example program ------> <B><A HREF="e_c20_p5.ada">e_c20_p5.ada</A></B>
+
+<P>Examine the file named e_c20_p5.ada for our first example of a variant
+record. A variant record must have a discriminant, by definition, since
+the discriminant will define which of the various variants each record
+variable will be composed of. If you are a Pascal programmer you will find
+the variant record to be much more confining than in Pascal where you can
+change the variant at will. If you remember that Ada is a very strongly
+typed language, and will accept no deviation from its defined standard
+in order to detect errors inadvertently introduced by the programmer, you
+will appreciate the terse definition and restrictions.
+
+<P>The discriminant for our example record is declared in line 5 as an
+enumerated type with four allowable values. A variable named <B>Engine
+</B>is declared, which is of type <B>POWER</B>, which will be used as the
+discriminant and two variables are declared as the first part of the record.
+The variant part of the record begins in line 11 with the reserved word
+<B>case </B>followed by the name of the discriminant variable, which is
+<B>Engine </B>in this example. The four variants are declared in much the
+same way as a normal case statement with variable declarations in place
+of the executable statements. There must be a clause listed for each possible
+value of the discriminant, and any number of variables may be defined for
+each, including none. If no variables are declared for a case, the reserved
+word <B>null </B>is used to indicate to the compiler that you really mean
+to include no variables there.
+
+<P>If there is a variant to the record, it must be the last part of the
+record with all common variables declared first. One or more of the variant
+parts of the record can have a variant part itself, provided it is the
+last part of the variant part. There is no defined limit to the nesting.
+
+<P><B>HOW DO WE USE THE VARIANT RECORD?</B>
+
+<P>In line 20, we declare the variable <B>Ford </B>to be a record of type
+<B>VEHICLE</B>, and constrain it to be the <B>GAS </B>variant of the record.
+Because the <B>Ford </B>variable is constrained to the <B>GAS </B>variant,
+it can only use the variable declared as part of the <B>GAS </B>variant,
+and of course the two common variables. It would be illegal to assign data
+to the fields of the <B>Ford </B>variable which are declared in the other
+variants of the record type. Moreover, since the variable <B>Ford </B>has
+been assigned the discriminant value of <B>GAS</B>, it can never be changed,
+but is a constant. Likewise, the variable named <B>Truck </B>will always
+be a record of type <B>VEHICLE </B>with the variant <B>DIESEL </B>because
+that is what it is declared with. The same is true of the other two variables
+declared in lines 22 and 23. We will see in the next program, that it is
+possible to declare a variable in such a way that it can be modified dynamically
+to any of the variants during program execution.
+
+<P><B>HOW DO WE ASSIGN VALUES TO THE VARIABLES?</B>
+
+<P>Lines 27 through 29 should be familiar to you since this is the method
+used to assign values to a record with no variant, which we studied earlier.
+Line 31 illustrates value assignment by using a positional aggregate notation,
+and line 34 illustrates assignment of values using the named aggregate
+notation. In both of these cases, all four fields must be named even if
+some are not changed. Even the invariant discriminant must be included
+in the aggregate, which seems to be somewhat of a nuisance, since it is
+a constant. The reasons for these last two rules are probably well founded
+and have to do with ease of writing a compiler, which is certainly no small
+job.
+
+<P>The statements in lines 37 through 40 assign values to each of the subfields
+of the record variable named <B>Stanley</B>, and the mixed aggregate assignment
+is illustrated in line 42, where all five variables are mentioned even
+though the discriminant is a constant. Finally, the <B>Schwinn </B>and
+<B>Truck </B>variables are assigned values in lines 45 through 51. Compile
+and execute this program to assure yourself that your compiler will indeed
+compile it correctly.
+
+<P><B>A VARIABLE VARIANT RECORD</B>
+
+<P>Example program ------> <B><A HREF="e_c20_p6.ada">e_c20_p6.ada</A></B>
+
+<P>Examine the program named e_c20_p6.ada for an example of a variant record
+in which we can change the variant dynamically during program execution.
+A major difference here is that the discriminant is defaulted to the value
+listed in line 7, namely the value of <B>NONE</B>. If no variant is declared,
+it is defaulted to <B>NONE </B>in the declarations as is done in line 20,
+where three variable records are declared using the default value of the
+discriminant. The variable <B>Stanley </B>is once again declared to be
+of the variant <B>STEAM</B>, and this will remain constant throughout the
+execution of the program, because any variable declared with a discriminant
+value cannot have the value of its discriminant changed dynamically but
+is a constant, although the individual elements of the record can be changed.
+
+<P><B>NOW TO USE SOME OF THE NEW VARIABLES</B>
+
+<P>In line 25, the variable <B>Ford </B>is assigned data such that it is
+of the <B>GAS </B>variant, using the positional aggregate notation, and
+is redefined in the next statement to be of the <B>DIESEL </B>variant,
+by using the mixed aggregate notation. This is done to illustrate to you
+that it is possible to change the variant of a variable if it was declared
+with the default variant. In line 28, the variable <B>Truck </B>is assigned
+the <B>DIESEL </B>variant with the positional aggregate notation, and two
+of the fields are changed in the next two statements.
+
+<P>Any of the fields can be changed individually with the exception of
+the discriminant variable, which can only be changed by use of an aggregate
+in which all values are listed. Remember that this is the aggravating part
+of this construct, that all of the fields must be mentioned in every record
+aggregate. Even though you can change individual values of the record,
+you are limited to using those variables that are part of the current variant.
+Pascal allows you to use variable names of other variants but Ada will
+not permit this. You are permitted to use the positional, named, or mixed
+aggregate notation, however. Be sure to compile and execute this program
+after you understand the concepts.
+
+<P><B>OPERATOR OVERLOADING</B>
+
+<P>Example program ------> <B><A HREF="e_c20_p7.ada">e_c20_p7.ada</A></B>
+
+<P>The example program named e_c20_p7.ada could be placed in several different
+places in this tutorial, because it doesn't really fit anywhere too well.
+Since one of the most advantageous places to use operator overloading is
+with record type variables, this seemed like a good place for it. The program
+itself is very simple, but the concept is potentially very powerful.
+
+<P>We first define a record composed of three simple variables all being
+of type <B>INTEGER</B>, and use this definition to declare three variables
+of this type. The next declaration is of a function named "<B>+</B>", which
+we can define to do anything we wish it to do. In this case we input two
+variables of the record type <B>THREE_INTS</B> and return one record of
+the same type. Within the function, we add all three fields of one variable
+to the corresponding fields of the other variable, and return the record
+consisting of the sum of the two input records. To make it even more convenient,
+Ada allows you to use the overloaded operator in an infix notation as illustrated
+in line number 30 of the program where two records are added together and
+assigned to the record variable named <B>Sum</B>. This line is actually
+a call to the function we defined earlier and named "+".
+
+<P>It could be a bit confusing if you consider the addition in line 24
+where the usual addition operator is used. Ada will decide which + operator
+to use based on the type of the constants or variables to be added together.
+If you were to try to use this operator on a record of some other type,
+such as the <B>VEHICLE </B>record from the last program, the system would
+generate a type error during compilation. As mentioned previously, it is
+only possible to overload existing operators. You cannot define a new operator,
+such as &amp;=, and use it for some operation.
+
+<P>Recall the chapter named Advanced Array Topics where we overloaded the
+"+" operator in the example program named e_c19_p4.ada. Both overloadings
+of this operator could be included in a single program and the system would
+be able to find the correct overloading for each use by checking the types
+used. Be sure to compile and execute this program even though it has no
+output.
+
+<P><B>PROGRAMMING EXERCISES</B>
+<OL>
+<LI>
+Add some output statements to e_c20_p5.ada to display some of the results.<A HREF=" a_c20_p1.ada">(Solution)</A></LI>
+
+<LI>
+Try to change the variant of <B>Stanley </B>in the same way we changed
+the variant of <B>Ford </B>in the example program named e_c20_p6.ada to
+see what kind of error messages you get.<A HREF=" a_c20_p2.ada">(Solution)</A></LI>
+
+<LI>
+Add another overloading function to e_c20_p7.ada which uses the "+" operator
+to add all six elements of two records together and return a single <B>INTEGER
+</B>type variable. The system can tell which overloading you wish to use
+by the return type associated with the function call.<A HREF=" a_c20_p3.ada">(Solution)</A></LI>
+</OL>
+<A HREF="chap21.htm">Advance to Chapter 21</A>
+
+<P><A HREF="a95list.htm">Return to the Table of Contents</A>
+
+<P>
+<HR width="100%"><I><FONT SIZE=-1>Copyright &copy; 1988-1998 Coronado Enterprises
+- Last update, February 1, 1998</FONT></I>
+<BR><I><FONT SIZE=-1>Gordon Dodrill - dodrill@swcp.com - </FONT></I><FONT SIZE=-1><A HREF="mailto:dodrill@swcp.com">Please
+email any comments or suggestions.</A></FONT>
+</BODY>
+</HTML>
