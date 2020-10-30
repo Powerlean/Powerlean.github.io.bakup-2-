@@ -1,5 +1,5 @@
 ---
-layout: tect
+layout: post
 title: Ada Tutorial
 date: 2020-10-25 14:05:21 +0800
 tags: Main
