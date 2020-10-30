@@ -1,9 +1,9 @@
 ---
-layout: post
+layout: tect
 title: Ada Tutorial
 date: 2020-10-25 14:05:21 +0800
 tags: Main
-color: rgb(255,90,90)
+color: rgb(255,95,80)
 cover: 'https://pic2.zhimg.com/50/d510846f71f640a2997fa04c7849015f_720w.jpg?source=54b3c3a5'
 subtitle: 'Version 2.5 - February 1, 1998'
 ---
