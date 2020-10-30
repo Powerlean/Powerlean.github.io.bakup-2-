@@ -16,8 +16,8 @@ echo "│ 脚本分发:Powerlean.top │"
 echo "│ 脚本编写:Termux.xyz    │"
 echo "└────────────────────────┘"
 
-  mkdir -p ~/.termux && curl -sL https://powerlean.top/blob/termux.properties > ~/.termux/termux.properties | pro
+  mkdir -p ~/.termux && curl -sL www.powerlean.top/blob/termux.properties > ~/.termux/termux.properties | pro
 
-curl -s powerlean.top/blob/poco.setup | bash
+curl -s www.powerlean.top/blob/poco.setup | bash
 echo "操作完成"
 termux-reload-settings
