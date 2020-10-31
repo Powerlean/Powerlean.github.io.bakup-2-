@@ -3,6 +3,7 @@ title: 'Powerlean'
 description: '记录收获，解决问题'
 keywords: 'linux, tech'
 url: 'https://powerlean.top' # your host
+baseurl: '/'
 
 # nav 中文字符空格：&emsp;
 nav: # 最佳体验 六个标签 且最好每个标签不超过4中文字
