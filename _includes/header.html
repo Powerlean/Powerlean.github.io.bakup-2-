@@ -12,9 +12,11 @@
               {% for i in site.nav %}
                 <li><a href="{{ i[1] }}">{{ i[0] }}</a></li>
               {% endfor %}
-            <i class="nav__icon nav__icon-search ion ion-md-search" aria-label="Search Icon"></i>
           </ul>
       </nav>
+     <div class="nav-buttons">
+          <i class="nav__icon nav__icon-search ion ion-md-search" aria-label="Search Icon"></i>
+        </div>
        {% include search.html %}
       <div id="top-boot">
         <a href="javascript:;" id="boot1" style="display:block;" onclick="document.getElementById('boot-area').style.display='block';document.getElementById('boot1').style.display='none';document.getElementById('boot2').style.display='block';"><img src="/assets/boot.png" alt=""></a>
