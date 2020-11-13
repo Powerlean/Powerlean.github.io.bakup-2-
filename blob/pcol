@@ -176,8 +176,8 @@ done
 export list_url="www.powerlean.top/blob/poco.list"
 export site="www.powerlean.top"
 export bin=`WHICH | sed 's/bash//g'`
-export blob="/blob"
-export tree="/tree"
+export blob="/blob/"
+export tree="/tree/"
 export language="CN"
 export development_mode="True"
 export setup="mv ${in2} ${bin}"
