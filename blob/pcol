@@ -14,7 +14,7 @@ export yellow="\033[33m"
 export red="\033[31m"
 export green="\033[32m"
 export done="\033[0m"
-export footer="echo ────────────────────────────────────────────"
+export footer="echo ===================================================="
 
 DONE() {
   ${done_tip}
@@ -472,25 +472,7 @@ if [ "$in1" == "fetch" -o "$in1" == "f" ]; then #因玄学问题取消一元运�
      echo -e "${come}:${yellow}${site}${blob}${in2}${done}"
      ${footer}
      ${vibrate}
-     read -n1 -p "$install [Y/n]: " choice
-        if [ "$choice" == "y" -o "$choice" == "Y" ]; then
-          echo ""
           curl -#OL ${site}$blob/$in2
-        elif [ "$choice" == "n" -o "$choice" == "N" ]; then
-          echo ""
-          ${abort}
-          VIBRATE_DONE
-          exit 0
-        else
-          ${error_get}
-          VIBRATE_ERROR
-          exit 1
-        fi
-    else
-      ${bad_suffix}
-      VIBRATE_ERROR
-      exit 2
-    fi
     case $? in
       "8")
         ${file_fail}
