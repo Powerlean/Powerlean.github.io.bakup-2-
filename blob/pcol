@@ -430,14 +430,12 @@ if [ "$in1" == "fetch" -o "$in1" == "f" ]; then #因玄学问题取消一元运�
    fi
    ${vibrate}
    }
-   
    #若版本更新被触发，则跳过文件校验
  check_status="CHECK_FILE"
  development_mode_ifs=$(echo "${development_mode}" | tr [a-z] [A-Z])
  if [ "$status" == "complete" -o "$development_mode_ifs" == "TRUE" ]; then
   unset check_status
  fi
-  
    #文件校验环节
   ${check_status}
   ${search}
@@ -455,7 +453,6 @@ if [ "$in1" == "fetch" -o "$in1" == "f" ]; then #因玄学问题取消一元运�
       ${file_exist}
     fi
       ${try_download}
-    
     if [ "$in3" == "-y" -o "$in3" == "-Y" ]; then #跳过确认环节
        curl -#OL ${site}/$blob/$in2
        ${vibrate}
@@ -501,7 +498,6 @@ if [ "$in1" == "fetch" -o "$in1" == "f" ]; then #因玄学问题取消一元运�
   ${done_setup}
   VIBRATE_DONE
 fi
-
 #主体(二扇区) REMOVE
 elif [ "$in1" == "remove" -o "$in1" == "r" ]; then
   if [ not"$in2" == "not" ]; then
