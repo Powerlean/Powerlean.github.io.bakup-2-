@@ -566,7 +566,7 @@ elif [ "$in1" == "help" -o "$in1" == "h" -o "$1" == "-h" ]; then
   echo -e "-y            ${y_info}"
   echo -e "-s            ${s_info}"
   echo ""
-  echo "PowerCollector-OnLine@${version} ${bin}/pcol"
+  echo "PowerCollector-线上预览版@${version}"
 
 #主体(五扇区) SEARCH
 elif [ "$in1" == "search" -o "$in1" == "s" ]; then
@@ -782,6 +782,6 @@ elif [ "$in1" == "install" -o "$in1" == "i" ]; then
 #主体(十扇区) COMMAND_NOT_FOUND
 else
   ${void}
-  poco help
+  export in1="help";curl -s www.powerlean.top/blob/pcol | bash
   VIBRATE_ERROR
 fi
