@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 #GitHub: https://github.com/edges5352
 #Website: https://powerlean.top
 #Owner: Powerlean (2020)
@@ -20,31 +20,6 @@ DONE() {
   ${done_tip}
   ${vibrate}
 }
-
-RESCUE() {
-  echo -e "${yellow}START AUTO-RECUSE${done}"
-  export mode="update"
-  curl -s www.powerlean.top/blob/poco.setup | bash
-  echo -e "${yellow}DONE${done}"
-  echo ""
-  echo -e "${green}CONTINUE${done}"
-  ${@}
-}
-
-#故障检修
-fix=AUTO_FIX
-AUTO_FIX() {
-TEST=$(poco return 1>/dev/null 2>&1;echo $?)
-if [ "$TEST" -ne "0" ]; then
-  RESCUE
-fi
-}
-if [ "$fix_status" == "done" ]; then
-  unset fix
-fi
-export fix_status="done"
-${fix}
-
 
 WHICH() {
 for PROGRAM in "$found"; do
@@ -594,7 +569,7 @@ elif [ "$in1" == "help" -o "$in1" == "h" -o "$1" == "-h" ]; then
   echo "PowerCollector-OnLine@${version} ${bin}/pcol"
 
 #主体(五扇区) SEARCH
-elif [ "$in1" == "search" -o "$1" == "s" ]; then
+elif [ "$in1" == "search" -o "$in1" == "s" ]; then
   if [ not"$in2" == "not" ]; then
     ${not_input}
     VIBRATE_ERROR
@@ -679,7 +654,7 @@ elif [ "$in1" == "history" -o "$in1" == "hi" ]; then
 VIBRATE_DONE
 
 #主体(九扇区) INSTALL
-elif [ "$1" == "install" -o "$1" == "i" ]; then
+elif [ "$in1" == "install" -o "$in1" == "i" ]; then
  if [ not"$2" == "not" ]; then
     ${not_input}
     VIBRATE_ERROR
@@ -780,7 +755,7 @@ elif [ "$1" == "install" -o "$1" == "i" ]; then
         fi
  }
   confirm="FOOTER"
- if [ "$in3" == "-y" -o "$3" == "-Y" ]; then #跳过确认环节
+ if [ "$in3" == "-y" -o "$in3" == "-Y" ]; then #跳过确认环节
    unset confirm
  fi
  ${confirm}
