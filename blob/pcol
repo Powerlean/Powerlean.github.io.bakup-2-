@@ -500,7 +500,7 @@ if [ "$in1" == "fetch" -o "$in1" == "f" ]; then #因玄学问题取消一元运�
    DEPENDS ${in2}
   ${done_setup}
   VIBRATE_DONE
-fi 
+
 
 #主体(二扇区) REMOVE
 elif [ "$in1" == "remove" -o "$in1" == "r" ]; then
