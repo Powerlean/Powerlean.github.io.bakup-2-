@@ -173,7 +173,7 @@ done
 }
 
 #导入config数据#
-export list_url="www.powerlean.top/poco.list"
+export list_url="www.powerlean.top/blob/poco.list"
 export site="www.powerlean.top"
 export bin=`WHICH | sed 's/bash//g'`
 export blob="/blob"
