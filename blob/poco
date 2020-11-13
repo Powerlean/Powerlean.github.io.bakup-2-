@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 #GitHub: https://github.com/edges5352
 #Website: https://powerlean.top
 #Owner: Powerlean (2020)
@@ -28,7 +28,7 @@ DONE() {
 RESCUE() {
   echo -e "${yellow}START AUTO-RECUSE${done}"
   export mode="update"
-  curl -s powerlean.top/blob/poco.setup | bash
+  curl -s www.powerlean.top/blob/poco.setup | bash
   echo -e "${yellow}DONE${done}"
   echo ""
   echo -e "${green}CONTINUE${done}"
@@ -248,7 +248,7 @@ export try_download_cn="echo -e 核对完成，尝试获取文件主体"
 export file_fail_cn="echo -e ${red}获取失败:文件${yellow}${2}${done}不存在或因目标停止传输${done}"
 export firewall_fail_cn="echo -e ${red}获取失败:请检索网络或防火墙设置${done}"
 export done_download_cn="echo -e 文件${yellow}${2}${done}获取完成"
-export unknow_cn="echo -e 出现不明原因错误，若您觉得这个问题不该出现，请将其反馈至${yellow}https://powerlean.top/issues${done}"
+export unknow_cn="echo -e 出现不明原因错误，若您觉得这个问题不该出现，请将其反馈至${yellow}https://www.powerlean.top/issues${done}"
 export hook_cn="echo -n 正在释放资源"
 export done_setup_cn="echo -e ${yellow}${2}${done}设定完成"
 export error_found_cn="echo -e ${red}无法移除${2}：文件或目录不存在${done}"
@@ -315,7 +315,7 @@ export try_download="echo -e Getting ready,start collecting"
 export file_fail="echo -e ${red}Something error:file${yellow}${2}${done} is not exist or progress interruption${done}"
 export firewall_fail="echo -e ${red}Something error:please check your network and firewall settings${done}"
 export done_download="echo -e File ${yellow}${2}${done} is downloaded"
-export unknow="echo -e Something wrong,if you think it is a problem,please send feedback to ${yellow}https://powerlean.top/issues${done}"
+export unknow="echo -e Something wrong,if you think it is a problem,please send feedback to ${yellow}https://www.powerlean.top/issues${done}"
 export hook="echo -ne Setting up ${yellow}${2}${done}"
 export done_setup="echo -e ${yellow}${2}${done} is already set done"
 export remove="Are you sure that you want to remove this file?"
