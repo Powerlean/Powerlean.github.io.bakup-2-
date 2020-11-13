@@ -6,24 +6,24 @@
 
 
 #路径变量设定
-export ver="3.1.7"
+export ver="4.1.7"
 export mirrors="$PREFIX/etc/apt/sources.list"
 export output="/dev/null"
 
 
 #URL变量设定
-export database="https://raw.githubusercontent.com/EdgeS5352/PickPipe/master/fast-up.sh"
-export log="https://powerlean.top/blob/update.log"
+export database="https://www.powerlean.top/blob/fast-up.sh"
+export log="https://www.powerlean.top/blob/update.log"
 
 
 #命令变量设定
 export error="echo -e \033[41;37m │X│遇到不明原因错误:$? \033[0m"
-export install="apt install"
-export remove="apt remove"
-export update="apt update"
-export upgrade="apt upgrade"
-export search="apt search"
-export list="apt list"
+export install="poco fetch"
+export remove="poco remove"
+export update=""
+export upgrade=""
+export search="poco search"
+export list="poco list"
 
 
 
@@ -117,12 +117,10 @@ elif [ $1 == d ]; then
     progress
     $install $2 -y 1>"$output" 2>&1 
   fi
-   if [ $? == 100 ]; then
+   if [ $? !== 0 ]; then
      echo -e "\033[41;37m $EI1软件包$2不存在或未被当前软件源收录 \033[0m"
      exit 1
-   elif [ $? == 2 ]; then
-     echo -e "\033[41;37m $EI1软件包$2已在之前被安装 \033[0m"
-   elif [ "$?" == 0 -o "$?" == 1 ]; then
+   elif [ "$?" == 0 ]; then
      echo -e "\033[47;30m $TI1$2安装完成 \033[0m"
    else
     $error
