@@ -149,7 +149,9 @@ done
 
 CHECK_UPDATE() {
 lastest=$(curl -s $site/$blob/poco | sed '/^export version=/!d;s/.*=//')
-if [[ $version -ne $lastest ]]; then
+if [ "$version" == "$lastest" ]; then
+  ${done_tip}
+else
   ${force_update}
   export mode="update"
   curl -s www.powerlean.top/blob/poco.setup | bash
@@ -453,7 +455,6 @@ if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算�
   progress
   CHECK_UPDATE
   ${vibrate}
-  ${done_tip}
    
    CHECK_FILE() {
    ${check_file}
