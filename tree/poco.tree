@@ -1,1 +1,1 @@
-export depends="poco-rescue"
+export depends="poco-rescue poco-remove"
