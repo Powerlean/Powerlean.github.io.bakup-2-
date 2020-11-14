@@ -1,0 +1,24 @@
+#!/bin/bash
+
+request() {
+        yellow="\033[33m"
+        red="\033[31m"
+        green="\033[32m"
+        done="\033[0m"
+    
+    if [ "$1" == "return" -o "$1" == "[return]" ]; then
+        if [ not"$2" == "not" ]; then
+            echo -e "${red}Please specify a link after the module '[return]'${done}"
+        else
+           curl -I -m 10 -o /dev/null -s -w %{http_code} ${2//herf=/};echo ""
+        fi
+    elif [ "$1" == "return" -o "$1" == "[get]" ]; then
+        if [ not"$2" == "not"  ]; then
+          echo -e "${red}Please specify a link after the module '[get]'${done}"
+        else
+          curl -#OL ${2//herf=/}
+        fi
+    else
+        echo -e "${red}'Module '$1' is not defined'${done}"
+    fi
+}
