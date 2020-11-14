@@ -198,7 +198,6 @@ progress
 try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${blob}${i})
 if [ "$try" -ne "200" ]; then
   ${group_done}
-  VIBRATE_DONE
   exit 0
 fi
 eval "$(curl -s ${site}${tree}${i}.tree)" #生成输出变量
@@ -209,7 +208,6 @@ do
      ${vibrate} #震动一次
    else
       ${group_done}
-      VIBRATE_DONE
       exit 0
    fi
 done
@@ -586,7 +584,6 @@ elif [ "$1" == "remove" -o "$1" == "r" ]; then
   begin=`get_now_timestamp`
   if [ not"$2" == "not" ]; then
     ${not_input}
-    VIBRATE_ERROR
     exit 2
   fi
   
