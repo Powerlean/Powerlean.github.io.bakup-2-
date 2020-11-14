@@ -72,7 +72,7 @@ done
 }
 
 DEPENDS_INSTALL() {
- eval "$(curl -s ${site}${tree}${in1}.tree)" #生成输出变量
+ eval "$(curl -s ${site}${tree}${in2}.tree)" #生成输出变量
 for i in $depends
 do
    if [ ! -f $bin/$i ]; then #递归检查依赖
@@ -84,14 +84,14 @@ done
 DEPENDS() {
 ${check_depends} #提示语
 progress
-try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${tree}${in1}.tree) #调取HTTP代码
+try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${tree}${in2}.tree) #调取HTTP代码
  ${done_tip}
  if [ "$try" -ne "200" ]; then
   ${depends_error}
   VIBRATE_ERROR
   exit 2
 fi
-eval "$(curl -s ${site}${tree}${in1}.tree)" #生成输出变量
+eval "$(curl -s ${site}${tree}${in2}.tree)" #生成输出变量
 for i in $depends
 do
    if [ ! -f $bin/$i ]; then #递归检查依赖
@@ -104,12 +104,12 @@ done
 }
 
 DEPENDS_SILENT() {
- try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${tree}${in1}.tree)
+ try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${tree}${in2}.tree)
  if [ "$try" -ne "200" ]; then
    VIBRATE_ERROR
    exit 2
  fi
- eval "$(curl -s ${site}${tree}${in1}.tree)" #生成输出变量
+ eval "$(curl -s ${site}${tree}${in2}.tree)" #生成输出变量
 for i in $depends
 do
    if [ ! -f $bin/$i ]; then #递归检查依赖
@@ -474,7 +474,7 @@ if [ "$in1" == "fetch" -o "$in1" == "f" ]; then #因玄学问题取消一元运�
      ${vibrate}
      choice="y"
         if [ "$choice" == "y" -o "$choice" == "Y" ]; then
-          echo ""
+          echo "一切就绪，尝试载入文件"
           curl -#OL ${site}$blob/$in2
         elif [ "$choice" == "n" -o "$choice" == "N" ]; then
           echo ""
