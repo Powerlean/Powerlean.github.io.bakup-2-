@@ -550,7 +550,7 @@ elif [ "$in1" == "list" -o "$in1" == "l" ]; then
 
 #主体(四扇区) HELP
 elif [ "$in1" == "help" -o "$in1" == "h" -o "$1" == "-h" ]; then
-  echo "poco       version:${version}"
+  echo "poco-api       version:${version}"
   echo ""
   echo "${intro_info}"
   echo ""
@@ -566,7 +566,7 @@ elif [ "$in1" == "help" -o "$in1" == "h" -o "$1" == "-h" ]; then
   echo -e "-y            ${y_info}"
   echo -e "-s            ${s_info}"
   echo ""
-  echo "PowerCollector-线上预览版@${version}"
+  echo "PowerCollector-API预览版@${version}"
 
 #主体(五扇区) SEARCH
 elif [ "$in1" == "search" -o "$in1" == "s" ]; then
@@ -650,7 +650,7 @@ elif [ "$in1" == "return" ]; then
 
 #主体(八扇区) HISTORY
 elif [ "$in1" == "history" -o "$in1" == "hi" ]; then
-  echo "${red}预览版不支持该功能${done}"
+  echo -e "${red}预览版不支持该功能，您可通过运行'pcol fetch poco'来安装完整版本${done}"
 VIBRATE_DONE
 
 #主体(九扇区) INSTALL
