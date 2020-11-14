@@ -14,7 +14,7 @@ export yellow="\033[33m"
 export red="\033[31m"
 export green="\033[32m"
 export done="\033[0m"
-export footer="echo ===================================================="
+export footer="echo ────────────────────────────────────────────"
 
 DONE() {
   ${done_tip}
@@ -430,12 +430,14 @@ if [ "$in1" == "fetch" -o "$in1" == "f" ]; then #因玄学问题取消一元运�
    fi
    ${vibrate}
    }
+   
    #若版本更新被触发，则跳过文件校验
  check_status="CHECK_FILE"
  development_mode_ifs=$(echo "${development_mode}" | tr [a-z] [A-Z])
  if [ "$status" == "complete" -o "$development_mode_ifs" == "TRUE" ]; then
   unset check_status
  fi
+  
    #文件校验环节
   ${check_status}
   ${search}
@@ -453,6 +455,7 @@ if [ "$in1" == "fetch" -o "$in1" == "f" ]; then #因玄学问题取消一元运�
       ${file_exist}
     fi
       ${try_download}
+    
     if [ "$in3" == "-y" -o "$in3" == "-Y" ]; then #跳过确认环节
        curl -#OL ${site}/$blob/$in2
        ${vibrate}
@@ -469,7 +472,25 @@ if [ "$in1" == "fetch" -o "$in1" == "f" ]; then #因玄学问题取消一元运�
      echo -e "${come}:${yellow}${site}${blob}${in2}${done}"
      ${footer}
      ${vibrate}
+     read -n1 -p "$install [Y/n]: " choice
+        if [ "$choice" == "y" -o "$choice" == "Y" ]; then
+          echo ""
           curl -#OL ${site}$blob/$in2
+        elif [ "$choice" == "n" -o "$choice" == "N" ]; then
+          echo ""
+          ${abort}
+          VIBRATE_DONE
+          exit 0
+        else
+          ${error_get}
+          VIBRATE_ERROR
+          exit 1
+        fi
+    else
+      ${bad_suffix}
+      VIBRATE_ERROR
+      exit 2
+    fi
     case $? in
       "8")
         ${file_fail}
@@ -497,7 +518,8 @@ if [ "$in1" == "fetch" -o "$in1" == "f" ]; then #因玄学问题取消一元运�
    DEPENDS ${in2}
   ${done_setup}
   VIBRATE_DONE
-fi
+fi 
+
 #主体(二扇区) REMOVE
 elif [ "$in1" == "remove" -o "$in1" == "r" ]; then
   if [ not"$in2" == "not" ]; then
@@ -506,7 +528,7 @@ elif [ "$in1" == "remove" -o "$in1" == "r" ]; then
     exit 2
   fi
   
-  for i in $in2
+  for i in $@
   do
   if [ "$i" != "r" -o "$i" != "remove" ]; then
     if [ -f $bin/$i ]; then
