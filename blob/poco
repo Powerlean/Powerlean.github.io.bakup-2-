@@ -20,6 +20,18 @@ export green="\033[32m"
 export done="\033[0m"
 export footer="echo ────────────────────────────────────────────"
 
+get_now_timestamp() {
+  cur_sec_and_ns=`date '+%s-%N'`
+  echo ${cur_sec_and_ns%-*}
+}
+
+end_now_timestamp() {
+end=`get_now_timestamp`
+second=`expr ${end} - ${begin}`
+min=`expr ${second} / 1`
+echo "${cur_time}${min}${second_time}"
+}
+
 DONE() {
   ${done_tip}
   ${vibrate}
@@ -89,6 +101,7 @@ while [ $loop -lt 4 ]; do
     $stop
     loop=$(($loop+1))
 done
+end_now_timestamp
 }
 
 VIBRATE_ERROR() {
@@ -98,6 +111,7 @@ while [ $loop -lt 3 ]; do
     $stop
     loop=$(($loop+1))
 done
+end_now_timestamp
 }
 
 DEPENDS_INSTALL() {
@@ -235,6 +249,8 @@ done
 
 #字符变量#
 #中文
+export cur_time_cn="总计共运行"
+export second_time_cn="秒"
 export check_database_cn="echo -n 覆盖本地缓存数据"
 export file_exist_cn="echo -e ${yellow}警告：${done}目标文件已经存在"
 export null_search_cn="echo -e ${yellow}未搜索到可匹配内容${done}"
@@ -298,6 +314,8 @@ export exist_database_cn="echo -e ${yellow}${2}${done}的最新版本已经存�
 export reles_version_cn="echo -n 核验版本序数"
 
 #English
+export cur_time="Total run time: "
+export second_time=" seconds"
 export reles_version="echo -n Inspecting native release"
 export check_database="echo -n Checking the version of database"
 export fetch_info="No database installation"
@@ -366,6 +384,8 @@ if [ "$language" == EN ]; then
   export LANG="en.UTF-8"
 fi
 if [[ "$LANG" == zh_*.UTF-8 || "$language" == CN ]]; then
+  export cur_time=$cur_time_cn
+  export second_time=$second_time_cn
   export reles_version=$reles_version_cn
   export check_database=$check_database_cn
   export fetch_info=$fetch_info_cn
@@ -432,6 +452,7 @@ fi
 
 #主体(一扇区) FETCH
 if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算符
+  begin=`get_now_timestamp`
   if [ "$3" == "-s" ]; then #静默模式
     try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${blob}${2})
     if [ "$try" -ne "200" ]; then
@@ -562,6 +583,7 @@ fi
 
 #主体(二扇区) REMOVE
 elif [ "$1" == "remove" -o "$1" == "r" ]; then
+  begin=`get_now_timestamp`
   if [ not"$2" == "not" ]; then
     ${not_input}
     VIBRATE_ERROR
@@ -582,6 +604,7 @@ done
 
 #主体(三扇区) LIST
 elif [ "$1" == "list" -o "$1" == "l" ]; then
+  begin=`get_now_timestamp`
   echo -n "${request}"
   progress
   echo ""
@@ -611,6 +634,7 @@ elif [ "$1" == "help" -o "$1" == "h" -o "$1" == "-h" ]; then
 
 #主体(五扇区) SEARCH
 elif [ "$1" == "search" -o "$1" == "s" ]; then
+  begin=`get_now_timestamp`
   if [ not"$2" == "not" ]; then
     ${not_input}
     VIBRATE_ERROR
@@ -628,6 +652,7 @@ elif [ "$1" == "search" -o "$1" == "s" ]; then
 
 #主体(六扇区) GROUP
 elif [ "$1" == "group" -o "$1" == "g" ]; then
+  begin=`get_now_timestamp`
   if [ not"$2" == "not" ]; then
     ${not_input}
     VIBRATE_ERROR
@@ -705,11 +730,11 @@ elif [ "$1" == "history" -o "$1" == "hi" ]; then
   else
     cat $log_file | awk /$2/
   fi
-VIBRATE_DONE
 
 #主体(九扇区) INSTALL
 elif [ "$1" == "install" -o "$1" == "i" ]; then
- if [ not"$2" == "not" ]; then
+  begin=`get_now_timestamp`
+  if [ not"$2" == "not" ]; then
     ${not_input}
     VIBRATE_ERROR
     exit 2
@@ -842,7 +867,6 @@ elif [ "$1" == "install" -o "$1" == "i" ]; then
 else
   ${void}
   poco help
-  VIBRATE_ERROR
 fi
 
 WRITE() {

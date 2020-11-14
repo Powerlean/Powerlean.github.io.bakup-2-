@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 export f="1"
 export output="/dev/null"
 ping -c $f baidu.com 1>"$output" 2>&1
