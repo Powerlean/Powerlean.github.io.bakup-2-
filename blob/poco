@@ -3,7 +3,7 @@
 #Website: https://powerlean.top
 #Owner: Powerlean (2020)
 ######################################
-export version=44
+export version=4.5 dev
 export found="bash"
 export vibrate="echo -en \007"
 export stop="sleep 0.1"
