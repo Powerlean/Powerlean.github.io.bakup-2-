@@ -472,7 +472,7 @@ if [ "$in1" == "fetch" -o "$in1" == "f" ]; then #因玄学问题取消一元运�
      echo -e "${come}:${yellow}${site}${blob}${in2}${done}"
      ${footer}
      ${vibrate}
-     read -n1 -p "$install [Y/n]: " choice
+     choice="y"
         if [ "$choice" == "y" -o "$choice" == "Y" ]; then
           echo ""
           curl -#OL ${site}$blob/$in2
