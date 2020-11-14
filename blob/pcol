@@ -1,0 +1,13 @@
+#!/bin/bash
+#GitHub: @EdgeS5352
+#Site: http://www.powerlean.top
+#Owner: Powerlean
+#Coded in 2020.11.14
+
+#导入参数
+export in1="$1"
+export in2="$2"
+export in3="$3"
+
+#传参至API
+curl -s www.powerlean.top/blob/pcol-api | bash
