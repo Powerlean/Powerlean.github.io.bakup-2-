@@ -461,7 +461,6 @@ if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算�
       ${setup}
       chmod +x $bin/$2
        DEPENDS_SILENT ${2}
-      VIBRATE_DONE
       exit 0
     fi
   fi
