@@ -88,7 +88,7 @@ if [ "$min" -ge "60" ]; then
      min=`expr ${second} / 60`
      time="分钟"
 fi
-echo "共运行${min}${time}"
+echo "安装共耗时${min}${time}"
 }
 
 if [ -f "$bin/poco" ]; then
