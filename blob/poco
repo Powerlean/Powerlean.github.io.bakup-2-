@@ -233,7 +233,7 @@ export output="/dev/null"
 
 #毫无作用的乐色#
 function progress {
-  point="echo -n ."
+  point="echo -ne \033[37m.\033[?15l"
   sec="0.2"
   loop=1
 while [ $loop -lt 4 ]; do
