@@ -83,6 +83,7 @@ fi
 clear
 curl -s www.powerlean.top/blob/poco.fav
 echo -ne "\033[33m\033[4m";echo "https://www.powerlean.top/poco"
+sleep 3
 echo -n "安装应该已经开始"
 progress
 clear
