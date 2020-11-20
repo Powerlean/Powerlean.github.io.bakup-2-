@@ -48,7 +48,7 @@ function progress {
 done
 }
 if [ not"$bin" == "not" ]; then
-  echo -e "${red}输出变量未生效，请将此问题反馈至：https://github.com/EdgeS5352/Power-Collector/issues/new ${done}"
+  echo -e "${red}变量未生效，请将此问题反馈至：https://github.com/EdgeS5352/Power-Collector/issues/new ${done}"
   exit 2
 fi
 #分区一
@@ -73,13 +73,27 @@ if [ "$mode" == "update" ]; then
   exit 0
 fi
 #分区二
+get_now_timestamp() {
+      cur_sec_and_ns=`date '+%s-%N'`
+        echo ${cur_sec_and_ns%-*}
+}
+
+end_now_timestamp() {
+end=`get_now_timestamp`
+second=`expr ${end} - ${begin}`
+min=`expr ${second} / 1`
+echo "${cur_time}${min}${second_time}"
+}
+
 if [ -f "$bin/poco" ]; then
   clear
   curl -s www.powerlean.top/blob/poco.fav
+   echo -ne "\033[33m\033[4m";echo "https://www.powerlean.top/poco"
   echo ""
   echo -e "${green}该设备已存在某个版本的Power Collector，若要重新安装，请尝试将'${bin}poco'移除。${done}"
   exit 0
 fi
+begin=$(get_now_timestamp)
 clear
 curl -s www.powerlean.top/blob/poco.fav
 echo -ne "\033[33m\033[4m";echo "https://www.powerlean.top/poco"
@@ -131,4 +145,6 @@ echo "下次从本站(Powerlean.top)中下载文件，只需运行:"
 echo -e "${green}poco install [文件名称]${done}"
 echo -e "若要获取帮助，请尝试运行${green}poco help${done}"
 export LANG="zh_CN.UTF-8"
+end_now_timestamp
+sleep 4
 poco help
