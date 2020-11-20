@@ -84,11 +84,14 @@ second=`expr ${end} - ${begin}`
 min=`expr ${second} / 1`
 time="秒"
 
+if [ "$min" -ge "20" ]; then
+    des="速度较缓慢"
+fi
 if [ "$min" -ge "60" ]; then
      min=`expr ${second} / 60`
      time="分钟"
 fi
-echo "安装共耗时${min}${time}"
+echo "安装共耗时${min}${time}${des}"
 }
 
 if [ -f "$bin/poco" ]; then
