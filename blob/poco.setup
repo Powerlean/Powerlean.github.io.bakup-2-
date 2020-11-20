@@ -82,7 +82,13 @@ end_now_timestamp() {
 end=`get_now_timestamp`
 second=`expr ${end} - ${begin}`
 min=`expr ${second} / 1`
-echo "${cur_time}${min}${second_time}"
+time="秒"
+
+if [ "$min" -ge "60" ]; then
+     min=`expr ${second} / 60`
+     time="分钟"
+fi
+echo "共运行${min}${time}"
 }
 
 if [ -f "$bin/poco" ]; then
@@ -136,7 +142,7 @@ fi
 echo "完成"
 if [ -f "$bin/sudo" ]; then
   if [ -f "$bin/su" ]; then
-    echo -e ${yellow}"若无法安装，请手动运行'sudo su'以授权PowerCollector执行移动文件等操作"${done}
+    echo -e ${yellow}"若无法安装，请手动运行'sudo su'以授权PowerCollector移动文件等操作"${done}
   fi
 fi
 ${set_env}
