@@ -99,6 +99,7 @@ if [ -f "$bin/poco" ]; then
   curl -s www.powerlean.top/blob/poco.fav
    echo -ne "\033[33m\033[4m";echo "         https://www.powerlean.top/poco"
   echo ""
+  echo ""
   echo -e "${green}该设备已存在某个版本的Power Collector，若要重新安装，请尝试将'${bin}poco'移除。       ${done}"
   exit 0
 fi
