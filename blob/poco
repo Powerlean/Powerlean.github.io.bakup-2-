@@ -30,11 +30,11 @@ end=`get_now_timestamp`
 second=`expr ${end} - ${begin}`
   reset=`expr ${second} / 1`
   unit_time="s"
-if [[ "$min" -ge "3600" ]]; then
+if [[ "$second" -ge "3600" ]]; then
    reset=`expr ${second} / 3600`
    unit_time="h"
-elif [[ "$min" -ge "60" ]]; then
-  if [[ "$min" -lt "3600" ]]; then
+elif [[ "$second" -ge "60" ]]; then
+  if [[ "$second" -lt "3600" ]]; then
     reset=`expr ${second} / 60`
     unit_time="m"
   fi
