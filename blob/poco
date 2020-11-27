@@ -28,10 +28,9 @@ get_now_timestamp() {
 end_now_timestamp() {
 end=`get_now_timestamp`
 second=`expr ${end} - ${begin}`
-reset=`expr ${second} / 1`
+  reset=`expr ${second} / 1`
   unit_time="s"
-if
-  [ "$min" -ge "3600" ]; then
+if [ "$min" -ge "3600" ]; then
    reset=`expr ${second} / 3600`
    unit_time="h"
 elif [ "$min" -ge "60" ]; then
