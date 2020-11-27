@@ -28,8 +28,19 @@ get_now_timestamp() {
 end_now_timestamp() {
 end=`get_now_timestamp`
 second=`expr ${end} - ${begin}`
-min=`expr ${second} / 1`
-echo "${cur_time}${min}${second_time}"
+reset=`expr ${second} / 1`
+  unit_time="s"
+if
+  [ "$min" -ge "3600" ]; then
+   reset=`expr ${second} / 3600`
+   unit_time="h"
+elif [ "$min" -ge "60" ]; then
+  if [ "$min" -lt "3600" ]; then
+    reset=`expr ${second} / 60`
+    unit_time="m"
+  fi
+fi
+echo "${cur_time}${reset}${unit_time}"
 }
 
 DONE() {
