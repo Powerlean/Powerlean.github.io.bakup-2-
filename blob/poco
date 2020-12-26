@@ -534,7 +534,7 @@ if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算�
     if [ -f "$bin/$2" ]; then #等待插入一个新的算法，请在Issues中提出建议
       curl -s ${site}${blob}${2}>${cache}
       diff -q ${cache} ${bin}/${2}>/dev/null
-      if [ "$?" !== "0" ]; then
+      if [[ "$?" != "0" ]]; then
         ${exist_database}
         exit 0
       fi
