@@ -1,0 +1,56 @@
+#!/bin/bash -e
+file="$PREFIX/etc/poco/poco.conf"
+clear
+echo "请完善初始化设置"
+sleep 1s
+clear
+read -p "(1/3)是否将程式默认语言设定为【简体中文】[Y/任意键]:" choice
+choice=$(echo "$choice" | tr [a-z] [A-Z])  
+case $choice in
+"Y")
+sed -i 's/LANG: System/LANG: CN/g' $file
+;;
+*)
+echo "已跳过该项"
+;;
+esac
+sleep 0.5s
+
+clear
+read -p "(2/3)是否要关闭程式的自动修复 [Y/任意键]:" choice       
+choice=$(echo "$choice" | tr [a-z] [A-Z])
+case $choice in
+"Y")
+ sed -i 's/Development Mode: False/Development Mode: True/g' $file
+ ;;
+*)
+echo "已跳过该项"
+;;
+esac
+sleep 0.5s
+
+clear
+read -p "(3/3)是否要重新配置软件源 [Y/任意键]:" choice
+choice=$(echo "$choice" | tr [a-z] [A-Z])
+case $choice in
+    "Y")
+          input(){
+          read -p "键入软件源的链接：" source
+          if [ not"$source" == "not" ]; then
+            echo "请重新键入"
+            clear
+            input
+          else
+            sed -i 's/www.powerlean.top/'${source}'/g' $file
+          fi
+          }
+          input
+          ;;
+      *)
+          echo "已跳过该项"
+          ;;
+  esac
+  sleep 0.5s
+esac
+echo "配置完成，祝使用愉快~"
+rm -rf ${0}

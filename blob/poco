@@ -12,6 +12,12 @@ export log_file="$PREFIX/etc/poco/poco.log"
 export etc="$PREFIX/etc/"
 export data_file="$PREFIX/etc/poco/poco.data"
 export reles_file="$PREFIX/etc/poco/poco.reles"
+export init_file="$PREFIX/etc/poco/poco.init"
+
+#首次启动项
+if [ -f "$init_file" ]; then
+    bash ${init_file}
+fi
 
 #特殊字符#
 export yellow="\033[33m"
@@ -19,6 +25,7 @@ export red="\033[31m"
 export green="\033[32m"
 export done="\033[0m"
 export footer="echo ────────────────────────────────────────────"
+
 
 get_now_timestamp() {
   cur_sec_and_ns=`date '+%s-%N'`
