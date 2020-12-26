@@ -158,4 +158,4 @@ echo -e "若要获取帮助，请尝试运行${green}poco help${done}"
 export LANG="zh_CN.UTF-8"
 end_now_timestamp
 sleep 4
-poco help
+
