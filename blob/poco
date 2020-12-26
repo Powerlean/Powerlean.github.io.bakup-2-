@@ -13,6 +13,7 @@ export etc="$PREFIX/etc/"
 export data_file="$PREFIX/etc/poco/poco.data"
 export reles_file="$PREFIX/etc/poco/poco.reles"
 export init_file="$PREFIX/etc/poco/poco.init"
+export cache="${etc}poco/cache"
 
 #首次启动项
 if [ -f "$init_file" ]; then
@@ -531,7 +532,12 @@ if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算�
     echo -e "${green}${try}[${OK}]${done}"
     ${vibrate}
     if [ -f "$bin/$2" ]; then #等待插入一个新的算法，请在Issues中提出建议
-      ${file_exist}
+      curl -s ${site}${blob}${2}>${cache}
+      diff -q ${cache} ${bin}/${2}>/dev/null
+      if [ "$?" !== "0" ]; then
+        ${exist_database}
+        exit 0
+      fi
     fi
       ${try_download}
     
