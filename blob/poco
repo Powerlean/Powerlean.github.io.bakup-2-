@@ -176,7 +176,9 @@ lastest=$(curl -s $site/$blob/poco | sed '/^export version=/!d;s/.*=//')
 if [ "$version" == "$lastest" ]; then
   ${done_tip}
 elif [ not"$lastest" == "not" ]; then
-     ${firewall_fail}
+    echo "" 
+    ${firewall_fail}
+    exit 2
 else
   ${force_update}
   export mode="update"
