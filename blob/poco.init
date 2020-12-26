@@ -36,21 +36,17 @@ read -p "(3/3)是否要重新配置软件源 [Y/任意键]:" choice
 choice=$(echo "$choice" | tr [a-z] [A-Z])
 case $choice in
     "Y")
-          input(){
           read -p "键入软件源的链接：" source
           if [ not"$source" == "not" ]; then
-            echo "请重新键入"
-            clear
-            input
+            echo "请重新设定"
+            exit 2
           else
             sed -i 's/www.powerlean.top/'${source}'/g' $file
           fi
-          }
-          input
-          ;;
+     ;;
       *)
-          echo "已跳过该项"
-          ;;
+        echo "已跳过该项"
+     ;;
   esac
   sleep 0.5s
 echo "配置完成，祝使用愉快~"
