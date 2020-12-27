@@ -536,6 +536,7 @@ if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算�
       diff -q ${cache} ${bin}/${2}>/dev/null
       if [ "$?" == "0" ]; then
         ${exist_database}
+        echo "">${cache}
         exit 0
       fi
     fi
