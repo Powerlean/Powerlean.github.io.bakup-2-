@@ -553,7 +553,7 @@ if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算�
      DATE=$(date)
      ${footer}
      echo -e "${DATE}" #${size}:${#try}${unit}
-     echo -e "${2} ${size}${view_size}"
+     echo -e "${2} ${size}${view_size%%/*}"
      ${footer}
      echo " ${INTRO}"
      echo ""
