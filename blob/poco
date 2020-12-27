@@ -549,7 +549,7 @@ if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算�
     if [ not"$INTRO" == "not" ]; then
       export INTRO="$not_intro"
     fi
-     view_size=`ls -sh ${cache} | sed "s/ ${cache}//g"` #统计文件大小
+     view_size=`ls -sh ${cache}` #统计文件大小
      DATE=$(date)
      ${footer}
      echo -e "${DATE}" #${size}:${#try}${unit}
