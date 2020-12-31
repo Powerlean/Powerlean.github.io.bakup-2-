@@ -80,7 +80,7 @@
 				context.textAlign = 'center';
 				context.textBaseline = 'middle';
 				context.fillStyle = '#FFF';
-				context.fillText('Pac-Man',this.x,this.y);
+				context.fillText('Pacman',this.x,this.y);
 			}
 		});
 		//版权信息
@@ -248,7 +248,7 @@
 				context.textAlign = 'left';
 				context.textBaseline = 'bottom';
 				context.fillStyle = '#C33';
-				context.fillText('SCORE',this.x,this.y);
+				context.fillText('得分',this.x,this.y);
 				context.font = '28px Helvetica';
 				context.textAlign = 'left';
 				context.textBaseline = 'top';
@@ -267,7 +267,7 @@
 					context.textAlign = 'left';
 					context.textBaseline = 'center';
 					context.fillStyle = '#09F';
-					context.fillText('PAUSE',this.x,this.y);
+					context.fillText('暂停',this.x,this.y);
 				}
 			}
 		});
@@ -525,7 +525,7 @@
 				context.font = 'bold 48px Helvetica';
 				context.textAlign = 'center';
 				context.textBaseline = 'middle';
-				context.fillText('GAME OVER',this.x,this.y);
+				context.fillText('游戏结束',this.x,this.y);
 			}
 		});
 		//记分
@@ -537,7 +537,7 @@
 				context.font = '20px Helvetica';
 				context.textAlign = 'center';
 				context.textBaseline = 'middle';
-				context.fillText('FINAL SCORE: '+(_SCORE+50*Math.max(_LIFE-1,0)),this.x,this.y);
+				context.fillText('最终得分: '+(_SCORE+50*Math.max(_LIFE-1,0)),this.x,this.y);
 			}
 		});
 		//事件绑定
