@@ -151,7 +151,7 @@ if [ -f "$bin/sudo" ]; then
   fi
 fi
 ${set_env}
-echo "Power Collector is ready"
+echo "Power Collector installation is completed"
 echo -e "Run ${green}poco help${done} to get help"
 end_now_timestamp
 echo "Coded by www.powerlean.top"
