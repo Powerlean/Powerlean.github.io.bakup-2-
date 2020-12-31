@@ -100,7 +100,7 @@ if [ -f "$bin/poco" ]; then
    echo -ne "\033[33m\033[4m";echo "         https://www.powerlean.top/poco"
   echo ""
   echo ""
-  echo -e "${green}Power Collector is existing on your device，if you want reinstall, please try to remove'${bin}poco'.       ${done}"
+  echo -e "${green}Power Collector is existing on your device，if you want to reinstall, please try to remove '${bin}poco'.       ${done}"
   exit 0
 fi
 begin=$(get_now_timestamp)
@@ -108,7 +108,7 @@ clear
 curl -s www.powerlean.top/blob/poco.fav
 echo -ne "\033[33m\033[4m";echo "https://www.powerlean.top/poco"
 sleep 3
-echo -n "Installation is should be started"
+echo -n "The installation should be started"
 progress
 clear
 echo -e "${yellow}[1/6] ${done} Downloading poco.sh" #别问我这个地方为什么写得这么弱智，我也不理解你们这群人为什么要把事情想得那么复杂
@@ -117,7 +117,7 @@ clear
 echo -e "${yellow}[2/6] ${done} Downloading poco.conf"
 curl -#OL www.powerlean.top/blob/poco.conf
 clear
-echo -e "${yellow}[3/6] ${done} downloading poco-fix"
+echo -e "${yellow}[3/6] ${done} Downloading poco-fix"
 curl -#OL www.powerlean.top/blob/poco-rescue
 clear
 echo -e "${yellow}[4/6] ${done} Downloading poco-remove"
