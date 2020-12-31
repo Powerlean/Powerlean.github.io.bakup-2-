@@ -21,6 +21,10 @@ if [ -f "$init_file" ]; then
     bash ${init_file}
 fi
 
+if [ ! -f "$cache_file" ]; then
+  touch $cache_file
+fi
+
 #特殊字符#
 export yellow="\033[33m"
 export red="\033[31m"
