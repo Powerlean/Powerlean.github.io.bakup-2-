@@ -21,11 +21,6 @@ if [ -f "$init_file" ]; then
     bash ${init_file}
 fi
 
-#写入缓存
-DATE=$(date)
-echo "Time=${DATE}">${cache_file}
-echo "Op=${@}">>${cache_file}
-
 #特殊字符#
 export yellow="\033[33m"
 export red="\033[31m"
@@ -508,6 +503,9 @@ if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算�
   $last_update
   ${check_version}
   progress
+  #写入缓存
+  DATE=$(date)
+  echo "Time=${DATE}">${cache_file}
   CHECK_UPDATE
   ${vibrate}
    
@@ -544,6 +542,7 @@ if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算�
     VIBRATE_ERROR
     exit 2
   else
+    echo "Op=${@}">>${cache_file}
     echo -e "${green}${try}[${OK}]${done}"
     ${vibrate}
     if [ -f "$bin/$2" ]; then #等待插入一个新的算法，请在Issues中提出建议
@@ -584,6 +583,7 @@ if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算�
           echo ""
           ${abort}
           VIBRATE_DONE
+          echo "Status=done">>${cache_file}
           exit 0
         else
           ${error_get}
@@ -631,7 +631,7 @@ elif [ "$1" == "remove" -o "$1" == "r" ]; then
     ${not_input}
     exit 2
   fi
-  
+  echo "Op=${@}">>${cache_file}
   for i in $@
   do
   if [ "$i" != "r" -o "$i" != "remove" ]; then
@@ -642,6 +642,7 @@ elif [ "$1" == "remove" -o "$1" == "r" ]; then
     fi
   fi
 done
+echo "Status=done">>${cache_file}
  VIBRATE_DONE
 
 #主体(三扇区) LIST
@@ -745,10 +746,12 @@ elif [ "$1" == "group" -o "$1" == "g" ]; then
       VIBRATE_ERROR 
       exit 2
     fi
+    echo "Op=${@}">>${cache_file}
     ${group_install}
     progress
     echo ""
     curl -s ${site}/${blob}/${2} | bash
+     echo "Status=done">>${cache_file}
     ${vibrate}
     ${group_done}
   fi
