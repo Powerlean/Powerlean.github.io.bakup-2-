@@ -14,11 +14,17 @@ export data_file="$PREFIX/etc/poco/poco.data"
 export reles_file="$PREFIX/etc/poco/poco.reles"
 export init_file="$PREFIX/etc/poco/poco.init"
 export cache="${etc}poco/cache"
+export cache_file="${etc}poco/poco.cache"
 
 #首次启动项
 if [ -f "$init_file" ]; then
     bash ${init_file}
 fi
+
+#写入缓存
+DATE=$(date)
+echo "Time=${DATE}">${cache_file}
+echo "Op=${@}">>${cache_file}
 
 #特殊字符#
 export yellow="\033[33m"
@@ -252,6 +258,8 @@ export language=`sed '/^LANG: /!d;s/.*: //' $config_file`
 export development_mode=`sed '/^Development Mode: /!d;s/.*: //' $config_file`
 export setup="mv ${2} ${bin}"
 export output="/dev/null"
+export last_time=`sed '/^Time=/!d;s/.*=//' $cache_file`
+export last_op=`sed '/^Op=/!d;s/.*=//' $cache_file`
 
 #毫无作用的乐色#
 function progress {
@@ -263,8 +271,6 @@ while [ $loop -lt 4 ]; do
     $point
     loop=$(($loop+1))
 done
-#sleep $sec
-#echo "."
 }
 
 #字符变量#
@@ -332,8 +338,10 @@ export not_intro_cn="无描述"
 export fetch_info_cn="无需匹配的垂直安装"
 export exist_database_cn="echo -e ${yellow}${2}${done}的最新版本已经存在，将不会被再次安装"
 export reles_version_cn="echo -n 核验版本序数"
+export last_update_cn="echo -e 最后一次更新于${last_time}"
 
 #English
+export last_update="echo -e Lastest update at ${last_time}"
 export cur_time="Total run time: "
 export second_time=" seconds"
 export reles_version="echo -n Inspecting native release"
@@ -404,6 +412,7 @@ if [ "$language" == EN ]; then
   export LANG="en.UTF-8"
 fi
 if [[ "$LANG" == zh_*.UTF-8 || "$language" == CN ]]; then
+  export last_update=$last_update_cn
   export cur_time=$cur_time_cn
   export second_time=$second_time_cn
   export reles_version=$reles_version_cn
@@ -469,6 +478,9 @@ if [[ "$LANG" == zh_*.UTF-8 || "$language" == CN ]]; then
   export exist_database=$exist_database_cn
 fi
 
+if [ not"$last_time" == "not" ]; then
+  unset last_update
+fi
 
 #主体(一扇区) FETCH
 if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算符
@@ -491,6 +503,9 @@ if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算�
     VIBRATE_ERROR
     exit 2
   fi
+  
+  #显示模式
+  $last_update
   ${check_version}
   progress
   CHECK_UPDATE
