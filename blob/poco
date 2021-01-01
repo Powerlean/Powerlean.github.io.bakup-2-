@@ -244,10 +244,6 @@ if [ ! -f "$PREFIX/etc/poco/poco.conf" ]; then
 fi
 
 #导入config数据#
-export yellow=$(sed '/^Highlight: /!d;s/.*: //' $config_file) #自定义高亮
-if [ not"$yellow" == "not" ]; then
-  yellow="\033[31m"
-fi
 export config_file="$PREFIX/etc/poco/poco.conf"
 export list_url=`sed '/^listURL: /!d;s/.*: //' $config_file`
 export site=`sed '/^URL: /!d;s/.*: //' $config_file`
@@ -261,6 +257,10 @@ export setup="mv ${2} ${bin}"
 export output="/dev/null"
 export last_time=`sed '/^Time=/!d;s/.*=//' $cache_file`
 export last_op=`sed '/^Op=/!d;s/.*=//' $cache_file`
+export yellow=$(sed '/^Highlight: /!d;s/.*: //' $config_file) #自定义高亮
+if [ not"$yellow" == "not" ]; then
+  yellow="\033[31m"
+fi
 
 #毫无作用的乐色#
 function progress {
