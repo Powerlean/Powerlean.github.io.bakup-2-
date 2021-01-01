@@ -257,11 +257,23 @@ export setup="mv ${2} ${bin}"
 export output="/dev/null"
 export last_time=`sed '/^Time=/!d;s/.*=//' $cache_file`
 export last_op=`sed '/^Op=/!d;s/.*=//' $cache_file`
+export status=`sed '/^Status=/!d;s/.*=//' $cache_file`
 export yellow=$(sed '/^Highlight: /!d;s/.*: //' $config_file) #自定义高亮
 if [ not"$yellow" == "not" ]; then
   yellow="\033[33m"
 fi
 
+#中断处理#
+CONFIGURE() {
+if [ not"$status" =="not" ]; then
+  if [ not"$last_op" =="not" ]; then
+    status="done"
+  else
+    ${configure}
+    exit 2
+  fi
+fi
+}
 #毫无作用的乐色#
 function progress {
   point="echo -ne \033[37m.\033[?15l"
