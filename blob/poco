@@ -340,9 +340,10 @@ export fetch_info_cn="无需匹配的垂直安装"
 export exist_database_cn="echo -e ${yellow}${2}${done}的最新版本已经存在，将不会被再次安装"
 export reles_version_cn="echo -n 核验版本序数"
 export last_update_cn="echo -e 最后一次更新于${last_time}"
-export configure_cn="echo -e 遇到poco进程被中断，您须手动执行${yellow}poco configure${done}来回覆进程"
+export configure_cn="echo -e poco进程被中断，您须手动执行${yellow}poco configure${done}来回覆进程"
 
 #English
+export configure="echo -e poco was interrupt,please run ${yellow}poco configure${done}to rollback."
 export last_update="echo -e Lastest update at ${last_time}"
 export cur_time="Total run time: "
 export second_time=" seconds"
