@@ -259,7 +259,7 @@ export last_time=`sed '/^Time=/!d;s/.*=//' $cache_file`
 export last_op=`sed '/^Op=/!d;s/.*=//' $cache_file`
 export yellow=$(sed '/^Highlight: /!d;s/.*: //' $config_file) #自定义高亮
 if [ not"$yellow" == "not" ]; then
-  yellow="\033[31m"
+  yellow="\033[33m"
 fi
 
 #毫无作用的乐色#
