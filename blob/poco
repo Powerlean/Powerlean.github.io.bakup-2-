@@ -415,6 +415,7 @@ if [ "$language" == EN ]; then
   export LANG="en.UTF-8"
 fi
 if [[ "$LANG" == zh_*.UTF-8 || "$language" == CN ]]; then
+  export configure=configure_cn
   export last_update=$last_update_cn
   export cur_time=$cur_time_cn
   export second_time=$second_time_cn
