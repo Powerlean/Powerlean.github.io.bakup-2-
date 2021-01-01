@@ -670,7 +670,7 @@ elif [ "$1" == "help" -o "$1" == "h" -o "$1" == "-h" ]; then
   echo -e "${yellow}i${done}nstall       ${install_info}"
   echo -e "${yellow}f${done}etch         ${fetch_info}"
   echo -e "${yellow}r${done}emove        ${remove_info}"
-  echo -e "$(yellow}h${done}elp          ${help_info}"
+  echo -e "${yellow}h${done}elp          ${help_info}"
   echo -e "${yellow}l${done}ist          ${list_info}"
   echo -e "${yellow}s${done}earch        ${search_info}"
   echo -e "${yellow}g${done}roup         ${group_info}"
