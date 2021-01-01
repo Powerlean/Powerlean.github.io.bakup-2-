@@ -83,11 +83,6 @@ fi
 export fix_status="done"
 ${fix}
 
-export yellow=$(sed '/^Highlight: /!d;s/.*: //' $config_file) #自定义高亮
-if [ not"$yellow" == "not" ]; then
-  yellow="\033[31m"
-fi
-
 WHICH() {
 for PROGRAM in "$found"; do
  RET=1
@@ -249,6 +244,10 @@ if [ ! -f "$PREFIX/etc/poco/poco.conf" ]; then
 fi
 
 #导入config数据#
+export yellow=$(sed '/^Highlight: /!d;s/.*: //' $config_file) #自定义高亮
+if [ not"$yellow" == "not" ]; then
+  yellow="\033[31m"
+fi
 export config_file="$PREFIX/etc/poco/poco.conf"
 export list_url=`sed '/^listURL: /!d;s/.*: //' $config_file`
 export site=`sed '/^URL: /!d;s/.*: //' $config_file`
@@ -668,14 +667,14 @@ elif [ "$1" == "help" -o "$1" == "h" -o "$1" == "-h" ]; then
   echo ""
   echo "${intro_info}"
   echo ""
-  echo -e "${green}i${done}nstall       ${install_info}"
-  echo -e "${green}f${done}etch         ${fetch_info}"
-  echo -e "${green}r${done}emove        ${remove_info}"
-  echo -e "${green}h${done}elp          ${help_info}"
-  echo -e "${green}l${done}ist          ${list_info}"
-  echo -e "${green}s${done}earch        ${search_info}"
-  echo -e "${green}g${done}roup         ${group_info}"
-  echo -e "${green}hi${done}story       ${history_info}"
+  echo -e "${yellow}i${done}nstall       ${install_info}"
+  echo -e "${yellow}f${done}etch         ${fetch_info}"
+  echo -e "${yellow}r${done}emove        ${remove_info}"
+  echo -e "$(yellow}h${done}elp          ${help_info}"
+  echo -e "${yellow}l${done}ist          ${list_info}"
+  echo -e "${yellow}s${done}earch        ${search_info}"
+  echo -e "${yellow}g${done}roup         ${group_info}"
+  echo -e "${yellow}hi${done}story       ${history_info}"
   echo ""
   echo "${suffix}"
   echo -e "-y            ${y_info}"
