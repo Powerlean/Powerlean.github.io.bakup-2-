@@ -264,7 +264,7 @@ if [ not"$yellow" == "not" ]; then
   export yellow="\033[33m"
 fi
 random_ifs=$(echo "${random}" | tr [a-z] [A-Z])
-if [ "$development_mode_ifs" == "TRUE" ]; then
+if [ "$random_ifs" == "TRUE" ]; then
   rancode=$((RANDOM %10))
   export yellow="\033[3${rancode}m"
 fi
