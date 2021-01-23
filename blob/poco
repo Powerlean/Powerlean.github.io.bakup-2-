@@ -504,6 +504,9 @@ if [ not"$last_time" == "not" ]; then
   unset last_update
 fi
 
+#移除光标
+echo -e "\033[?25l"
+
 #主体(一扇区) FETCH
 if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算符
   begin=`get_now_timestamp`
@@ -948,6 +951,7 @@ echo "Operation:$operation  Date:$DATE  PID:$$  Return code:$?  Site:$site  Path
 echo " " >> $log_file
 }
 
+echo -e "\033[?25h" #显示光标
 if [ ! -f "$log_file" ]; then
   touch $log_file
 fi
