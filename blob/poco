@@ -358,9 +358,11 @@ export fetch_info_cn="无需匹配的垂直安装"
 export exist_database_cn="echo -e ${yellow}${2}${done}的最新版本已经存在，将不会被再次安装"
 export reles_version_cn="echo -n 核验版本序数"
 export last_update_cn="echo -e 最后一次更新于${last_time}"
-export configure_cn="echo -e poco进程被中断，您须手动执行${yellow}poco configure${done}来回覆进程"
+export configure_cn="echo -e poco进程被中断，您必须手动执行${yellow}poco configure${done}来回覆进程"
+export pull_cn="echo echo -e 从源文件拉取最新信息"
 
 #English
+export pull="echo echo -e Pulling lastest info from source link"
 export configure="echo -e poco was interrupt,please run ${yellow}poco configure${done}to rollback."
 export last_update="echo -e Lastest update at ${last_time}"
 export cur_time="Total run time: "
@@ -433,7 +435,8 @@ if [ "$language" == EN ]; then
   export LANG="en.UTF-8"
 fi
 if [[ "$LANG" == zh_*.UTF-8 || "$language" == CN ]]; then
-  export configure=configure_cn
+  export pull=$pull_cn
+  export configure=$configure_cn
   export last_update=$last_update_cn
   export cur_time=$cur_time_cn
   export second_time=$second_time_cn
@@ -576,8 +579,11 @@ if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算�
     echo -e "${green}${try}[${OK}]${done}"
     ${vibrate}
     if [ -f "$bin/$2" ]; then #等待插入一个新的算法，请在Issues中提出建议
+      ${pull}
+      progress
       curl -s ${site}${blob}${2}>${cache}
       diff -q ${cache} ${bin}/${2}>/dev/null
+      ${vibrate}
       if [ "$?" == "0" ]; then
         ${exist_database}
         echo "">${cache}
