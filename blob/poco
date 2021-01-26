@@ -439,6 +439,7 @@ if [ "$language" == EN ]; then
   export LANG="en.UTF-8"
 fi
 if [[ "$LANG" == zh_*.UTF-8 || "$language" == CN ]]; then
+  export install=$install_cn
   export pull=$pull_cn
   export configure=$configure_cn
   export last_update=$last_update_cn
