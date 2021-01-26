@@ -583,6 +583,7 @@ if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算�
       progress
       curl -s ${site}${blob}${2}>${cache}
       diff -q ${cache} ${bin}/${2}>/dev/null
+      ${done_tip}
       ${vibrate}
       if [ "$?" == "0" ]; then
         ${exist_database}
