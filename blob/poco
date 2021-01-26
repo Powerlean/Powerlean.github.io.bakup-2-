@@ -320,12 +320,12 @@ export intro_info_cn="POWER COLLECTOR是Powerlean资源存储分发库附带的�
 export not_input_cn="echo -e ${red}请指定一个目标文件${done}"
 export come_cn="来自"
 export size_cn="总计大小："
-export install_cn="您希望继续执行吗?"
+export install_cn="您希望继续${fetch_status}吗?"
 export error_get_cn="echo -e ${red}无效操作 ${choice}${done}"
 export unit_cn="字符"
 export list_info_cn="列出所有可供下载的文件"
 export request_cn="正在从远端拉取请求"
-export force_update_cn="echo -e ${red}正在进行必要的更新,请勿终止程序${done}"
+export force_update_cn="echo -e ${red}正在进行版本升级,请勿终止程序${done}"
 export check_version_cn="echo -n 检索版本信息"
 export check_file_cn="echo -n 校验程序完整性"
 export re_install_cn="echo -e ${red}您的程序好像不完整或已被修改，将拉取线上文件进行修复${done}"
@@ -360,6 +360,8 @@ export reles_version_cn="echo -n 核验版本序数"
 export last_update_cn="echo -e 最后一次更新于${last_time}"
 export configure_cn="echo -e poco进程被中断，您必须手动执行${yellow}poco configure${done}来回覆进程"
 export pull_cn="echo -n 从源文件拉取最新信息"
+export install_cn="【安装】"
+export upgrade_cn="【升级】"
 
 #English
 export pull="echo echo -e Pulling lastest info from source link"
@@ -375,7 +377,7 @@ export done_tip="echo -e Done"
 export file_remove="echo -e File ${yellow}${i}${done} will be remove"
 export group_install="echo -n Pulling the group index file"
 export void_group="echo -e ${yellow}${2}${done} is not a group index file,but can be installed with ${yellow}poco install ${2}"
-export install="Do you want to continue?"
+export install="Do you want to ${fetch_status}?"
 export come="From"
 export void="echo -e ${red}Invalid operation ${1}${done}"
 export search="echo -n -e  Waiting for response:${yellow}${site}${blob}${2}${done}"
@@ -387,7 +389,7 @@ export done_download="echo -e File ${yellow}${2}${done} is downloaded"
 export unknow="echo -e Something wrong,if you think it is a problem,please send feedback to ${yellow}https://www.powerlean.top/issues${done}"
 export hook="echo -ne Setting up ${yellow}${2}${done}"
 export done_setup="echo -e ${yellow}${2}${done} is already set done"
-export remove="Are you sure that you want to remove this file?"
+export remove="Do you want to remove this file?"
 export error_remove="echo -e ${red}Invalid operation ${choice}${done}"
 export error_found="echo -e ${red}cannot remove $2: No such file or directory${done}"
 export install_info="Get a specified file"
@@ -415,7 +417,7 @@ export update_note="echo -e \033[41;37m  Release Note \033[0m"
 export search_info="To find the software description"
 export check_depends="echo -n Building dependency tree"
 export depends_loaded="Auto-selected package "
-export depends_done="echo Dependency were built done"
+export depends_done="echo Dependencies were built done"
 export site_warn="echo ${red}Unofficial websites can be dangerous${done}"
 export depends_error="echo -e ${red}${2}'s dependencies cannot be met${done}"
 export null_search="echo -e ${yellow}NULL${done}"
@@ -428,6 +430,8 @@ export OK="OK"
 export history_info="Search records"
 export not_intro="No description"
 export exist_database="echo -e ${yellow}${2}${done} is already exist,it will not be installed"
+export install="[Install]"
+export upgrade="[Upgrade]"
 
 #语言设定
 #LANG="zh_CN.UTF-8" #取消该注释将程序设定为中文(在句尾另添一个"#")
@@ -578,6 +582,7 @@ if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算�
     echo "Op=${@}">>${cache_file} #写入操作
     echo -e "${green}${try}[${OK}]${done}"
     ${vibrate}
+    fetch_status="${install}"
     if [ -f "$bin/$2" ]; then #等待插入一个新的算法，请在Issues中提出建议
       ${pull}
       progress
@@ -590,6 +595,7 @@ if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算�
         echo "">${cache}
         exit 0
       fi
+      fetch_status="${upgrade}"
     fi
       ${try_download}
     
