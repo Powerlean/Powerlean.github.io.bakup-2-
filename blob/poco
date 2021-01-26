@@ -320,7 +320,7 @@ export intro_info_cn="POWER COLLECTOR是Powerlean资源存储分发库附带的�
 export not_input_cn="echo -e ${red}请指定一个目标文件${done}"
 export come_cn="来自"
 export size_cn="总计大小："
-export install_cn="您希望继续${fetch_status}吗?"
+export install_tip_cn="您希望继续${fetch_status}吗?"
 export error_get_cn="echo -e ${red}无效操作 ${choice}${done}"
 export unit_cn="字符"
 export list_info_cn="列出所有可供下载的文件"
@@ -377,7 +377,7 @@ export done_tip="echo -e Done"
 export file_remove="echo -e File ${yellow}${i}${done} will be remove"
 export group_install="echo -n Pulling the group index file"
 export void_group="echo -e ${yellow}${2}${done} is not a group index file,but can be installed with ${yellow}poco install ${2}"
-export install="Do you want to ${fetch_status}?"
+export install_tip="Do you want to ${fetch_status}?"
 export come="From"
 export void="echo -e ${red}Invalid operation ${1}${done}"
 export search="echo -n -e  Waiting for response:${yellow}${site}${blob}${2}${done}"
@@ -459,7 +459,7 @@ if [[ "$LANG" == zh_*.UTF-8 || "$language" == CN ]]; then
   export list_info=$list_info_cn
   export unit=$unit_cn
   export size=$size_cn
-  export install=$install_cn
+  export install_tip=$install_tip_cn
   export come=$come_cn
   export intro_info=$intro_info_cn
   export error_found=$error_found_cn
@@ -618,7 +618,7 @@ if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算�
      echo -e "${come}:${yellow}${site}${blob}${2}${done}"
      ${footer}
      ${vibrate}
-     read -n1 -p "$install [Y/n]: " choice
+     read -n1 -p "$install_tip [Y/n]: " choice
         if [ "$choice" == "y" -o "$choice" == "Y" ]; then
           echo ""
           curl -#OL ${site}$blob/$2
