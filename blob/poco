@@ -359,7 +359,7 @@ export exist_database_cn="echo -e ${yellow}${2}${done}的最新版本已经存�
 export reles_version_cn="echo -n 核验版本序数"
 export last_update_cn="echo -e 最后一次更新于${last_time}"
 export configure_cn="echo -e poco进程被中断，您必须手动执行${yellow}poco configure${done}来回覆进程"
-export pull_cn="echo echo -e 从源文件拉取最新信息"
+export pull_cn="echo -n 从源文件拉取最新信息"
 
 #English
 export pull="echo echo -e Pulling lastest info from source link"
