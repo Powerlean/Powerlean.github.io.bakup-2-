@@ -152,8 +152,25 @@ if [ -f "$bin/sudo" ]; then
 fi
 ${set_env}
 echo "Power Collector已就绪"
-echo -e "若要获取帮助，请尝试运行${green}poco help${done}"
-export LANG="zh_CN.UTF-8"
+#######检验#########
+echo -e "\033[0m检查程序是否已正常安装..."
+if [ $(which poco)  ]; then
+echo -e "\033[32mpoco已正常安装在$(which poco)"
+echo -e "\033[0m检查是否可以正常运行..."
+poco > /dev/null 2>&1
+if [ $? == 0  ]; then
+echo -e "\033[32m运行正常"
+else
+bash -x poco 1> $PREFIX/tmp/poco.log 2>&1
+echo -e "\033[31m运行过程中出现错误，请检查程序是否正确安装,日志已存放在$PREFIX/tmp/poco.log"
+fi
+else
+echo -e "\033[31mpoco未安装"
+exit
+fi
+echo -en "\033[0m"
+########检验#########
+echo -e "运行${green}poco help${done}来取得帮助"
 end_now_timestamp
 sleep 4
 
