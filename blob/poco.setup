@@ -147,7 +147,7 @@ chmod +x $bin/poco-remove
 echo "Done"
 if [ -f "$bin/sudo" ]; then
   if [ -f "$bin/su" ]; then
-    echo -e ${yellow}"Please run 'sudo su' to allow PowerCollector'operates"${done}
+    echo -e ${yellow}"Please run 'sudo su' to allow PowerCollector's operates"${done}
   fi
 fi
 ${set_env}
