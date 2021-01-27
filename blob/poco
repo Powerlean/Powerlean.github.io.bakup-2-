@@ -956,6 +956,45 @@ elif [ "$1" == "install" -o "$1" == "i" ]; then
  ${done_setup}
  VIBRATE_DONE
 
+elif [ "$1" == "status" -o "$1" == "st" ]; then
+  echo -e "\033[0m检查程序是否正常安装..."
+  if [ $(which poco)  ]; then
+    echo -e "\033[32mpoco已正常安装在$(which poco)"
+    echo -e "\033[0m检查是否可以正常运行..."
+    poco > /dev/null 2>&1
+    if [ $? == 0  ]; then
+      echo -e "\033[32m运行正常"
+    else
+      bash -x poco 1> $PREFIX/tmp/poco.log 2>&1
+      echo -e "\033[31m运行过程中出现错误，请检查程序是否正确安装,日志已存放在$PREFIX/tmp/poco.log"
+    fi
+  else
+    echo -e "\033[31mpoco未安装, 如果确认已经安装，请检查权限设置是否正确"
+    exit 2
+  fi
+  echo -e "\033[0m检查配置文件..."
+  if [ -f $PREFIX/etc/poco/poco.conf  ]; then
+     echo -e "\033[32m配置文件正常"
+     echo -e "\033[0m读取配置..."
+     CONFIG="$PREFIX/etc/poco/poco.conf"
+     echo 程序获取地址: http://$(sed '/^URL: /!d;s/.*: //' ${CONFIG})$(sed '/^blob: /!d;s/.*: //' ${CONFIG})
+     echo 依赖获取地址: http://$(sed '/^URL: /!d;s/.*: //' ${CONFIG})$(sed '/^tree: /!d;s/.*: //' ${CONFIG})
+     echo 空指向地址: http://$(sed '/^page404: /!d;s/.*: //' ${CONFIG})
+     echo 程序列表获取地址: http://$(sed '/^listURL: /!d;s/.*: //' ${CONFIG})
+     echo -en "语言设置: "
+     if [ "$(sed '/^LANG: /!d;s/.*: //' ${CONFIG})" == "CN"  ]; then
+       echo -en 简体中文
+     elif [ "$(sed '/^LANG: /!d;s/.*: //' ${CONFIG})" == "EN"  ]; then
+       echo -en English
+     fi
+   echo -en "\n开发模式: "
+   if [ "$(sed '/^Development Mode: /!d;s/.*: //' ${CONFIG})" == "TRUE"  ]; then
+      echo 启用
+   else
+      echo 禁用
+   fi
+ fi
+
 #主体(十扇区) COMMAND_NOT_FOUND
 else
   ${void}
