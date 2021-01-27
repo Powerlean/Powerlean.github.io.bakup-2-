@@ -37,6 +37,7 @@ export yellow="\033[33m"
 export red="\033[31m"
 export green="\033[32m"
 export done="\033[0m"
+##进度条##
 function progress {
   point="echo -e -n -"
   sec="0.45"
@@ -49,6 +50,7 @@ done
   sleep $sec
   echo -en ">"
 }
+##进度条##
 if [ not"$bin" == "not" ]; then
   echo -e "${red}变量未生效，请将此问题反馈至：https://github.com/EdgeS5352/Power-Collector/issues/new ${done}"
   exit 2
