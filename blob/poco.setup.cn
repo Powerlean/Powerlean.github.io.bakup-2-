@@ -42,6 +42,7 @@ function progress {
   point="echo -e -n -"
   sec="0.45"
   loop=1
+  echo -n " "
   while [[ $loop -lt 3 ]]; do
     sleep $sec
     $point
@@ -49,6 +50,7 @@ function progress {
 done
   sleep $sec
   echo -en ">"
+  echo -n " "
 }
 ##进度条##
 if [ not"$bin" == "not" ]; then
