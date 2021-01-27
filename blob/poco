@@ -320,7 +320,8 @@ export intro_info_cn="POWER COLLECTOR是Powerlean资源存储分发库附带的�
 export not_input_cn="echo -e ${red}请指定一个目标文件${done}"
 export come_cn="来自"
 export size_cn="总计大小："
-export install_tip_cn="您希望继续${fetch_status}吗?"
+export install_tip_cn="您希望继续"
+export ask_cn="吗"
 export error_get_cn="echo -e ${red}无效操作 ${choice}${done}"
 export unit_cn="字符"
 export list_info_cn="列出所有可供下载的文件"
@@ -364,7 +365,7 @@ export install_cn="【安装】"
 export upgrade_cn="【升级】"
 
 #English
-export pull="echo echo -e Pulling lastest info from source link"
+export pull="echo echo -n Pulling lastest info from source link"
 export configure="echo -e poco was interrupt,please run ${yellow}poco configure${done}to rollback."
 export last_update="echo -e Lastest update at ${last_time}"
 export cur_time="Total run time: "
@@ -377,7 +378,7 @@ export done_tip="echo -e Done"
 export file_remove="echo -e File ${yellow}${i}${done} will be remove"
 export group_install="echo -n Pulling the group index file"
 export void_group="echo -e ${yellow}${2}${done} is not a group index file,but can be installed with ${yellow}poco install ${2}"
-export install_tip="Do you want to ${fetch_status}?"
+export install_tip="Do you want to "
 export come="From"
 export void="echo -e ${red}Invalid operation ${1}${done}"
 export search="echo -n -e  Waiting for response:${yellow}${site}${blob}${2}${done}"
@@ -439,6 +440,7 @@ if [ "$language" == EN ]; then
   export LANG="en.UTF-8"
 fi
 if [[ "$LANG" == zh_*.UTF-8 || "$language" == CN ]]; then
+  export ask=$ask_cn
   export install=$install_cn
   export pull=$pull_cn
   export configure=$configure_cn
@@ -619,7 +621,7 @@ if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算�
      echo -e "${come}:${yellow}${site}${blob}${2}${done}"
      ${footer}
      ${vibrate}
-     read -n1 -p "$install_tip [Y/n]: " choice
+     read -n1 -p "${install_tip}${fetch_status}${ask}? [Y/n]: " choice
         if [ "$choice" == "y" -o "$choice" == "Y" ]; then
           echo ""
           curl -#OL ${site}$blob/$2
