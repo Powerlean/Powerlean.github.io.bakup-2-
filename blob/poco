@@ -440,6 +440,7 @@ if [ "$language" == EN ]; then
   export LANG="en.UTF-8"
 fi
 if [[ "$LANG" == zh_*.UTF-8 || "$language" == CN ]]; then
+  export upgrade=$upgrade_cn
   export ask=$ask_cn
   export install=$install_cn
   export pull=$pull_cn
