@@ -637,9 +637,11 @@ if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算�
      center "${DATE}"
      center "${2} ${size}${view_size%%/*}"
      footer
+     echo " "
      center "${INTRO}"
-     echo ""
+     echo " "
      center "${come}:${yellow}${site}${blob}${2}${done}"
+     echo " "
      footer
      ${vibrate}
      read -n1 -p "${install_tip}${fetch_status}${ask}? [Y/n]: " choice
