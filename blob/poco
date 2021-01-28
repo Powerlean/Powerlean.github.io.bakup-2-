@@ -295,7 +295,7 @@ center() {
                 let i++
                 printf " "
         done
-        echo $1
+        echo -e "$1"
 }
 
 #毫无作用的乐色#
