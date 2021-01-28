@@ -29,7 +29,7 @@ fi
 export red="\033[31m"
 export green="\033[32m"
 export done="\033[0m"
-export footer="echo ────────────────────────────────────────────"
+export footer="yes "─" | sed ''$COLUMNS''q | tr -d '\n'"
 
 
 get_now_timestamp() {
