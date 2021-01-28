@@ -384,7 +384,7 @@ export install_cn="【安装】"
 export upgrade_cn="【升级】"
 
 #English
-export pull="echo echo -n Pulling lastest info from source link"
+export pull="echo -n Pulling lastest info from source link"
 export configure="echo -e poco was interrupt,please run ${yellow}poco configure${done}to rollback."
 export last_update="echo -e Lastest update at ${last_time}"
 export cur_time="Total run time: "
