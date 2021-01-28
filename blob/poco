@@ -65,7 +65,7 @@ RESCUE() {
   curl -s www.powerlean.top/blob/poco.setup | bash
   echo -e "${yellow}DONE${done}"
   echo ""
-  echo -e "${green}CONTINUE${done}"
+  echo -e "${green}ERROR DETAILS${done}"
   ${@}
 }
 
