@@ -634,12 +634,12 @@ if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算�
      view_size=`ls -sh ${cache}` #统计文件大小
      DATE=$(date)
      footer
-     echo -e "${DATE}" #${size}:${#try}${unit}
-     echo -e "${2} ${size}${view_size%%/*}"
+     center "${DATE}"
+     center "${2} ${size}${view_size%%/*}"
      footer
-     echo " ${INTRO}"
+     center "${INTRO}"
      echo ""
-     echo -e "${come}:${yellow}${site}${blob}${2}${done}"
+     center "${come}:${yellow}${site}${blob}${2}${done}"
      footer
      ${vibrate}
      read -n1 -p "${install_tip}${fetch_status}${ask}? [Y/n]: " choice
