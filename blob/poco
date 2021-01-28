@@ -29,8 +29,9 @@ fi
 export red="\033[31m"
 export green="\033[32m"
 export done="\033[0m"
-export footer="yes "─" | sed ''$COLUMNS''q | tr -d '\n'"
-
+footer() {
+  "yes "─" | sed ''$COLUMNS''q | tr -d '\n'"
+}
 
 get_now_timestamp() {
   cur_sec_and_ns=`date '+%s-%N'`
