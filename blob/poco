@@ -30,7 +30,9 @@ export red="\033[31m"
 export green="\033[32m"
 export done="\033[0m"
 footer() {
-  "yes "─" | sed ''$COLUMNS''q | tr -d '\n'"
+  ls /dev/null>/dev/null
+  screen="$COLUMNS"
+  yes "─" | sed ''$screen''q | tr -d '\n'
 }
 
 get_now_timestamp() {
