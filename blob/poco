@@ -32,7 +32,7 @@ export done="\033[0m"
 footer() {
   ls /dev/null>/dev/null
   screen="$COLUMNS"
-  yes "─" | sed ''$screen''q | tr -d '\n'
+  yes "=" | sed ''$screen''q | tr -d '\n'
 }
 
 get_now_timestamp() {
