@@ -621,8 +621,8 @@ if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算�
       fi
       fetch_status="${upgrade}"
     fi
-      ${try_download}
-    
+    echo ""
+    ${try_download}
     if [ "$3" == "-y" -o "$3" == "-Y" ]; then #跳过确认环节
        curl -#OL ${site}/$blob/$2
        ${vibrate}
@@ -686,7 +686,9 @@ if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算�
   ${setup}
   chmod +x $bin/$2
   ${done_tip}
-   DEPENDS ${2}
+  echo ""
+  DEPENDS ${2}
+  echo ""
   ${done_setup}
   VIBRATE_DONE
 fi 
