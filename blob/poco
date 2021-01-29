@@ -29,6 +29,7 @@ fi
 export red="\033[31m"
 export green="\033[32m"
 export done="\033[0m"
+export inter="echo  "
 footer() {
   ls /dev/null>/dev/null
   screen="$COLUMNS"
@@ -560,6 +561,9 @@ if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算�
   fi
   
   #显示模式
+  if [ "$3" == "-y" -o "$3" == "-Y" ]; then
+    unset inter #解除分隔符
+  fi
   $last_update
   ${check_version}
   progress
@@ -621,7 +625,7 @@ if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算�
       fi
       fetch_status="${upgrade}"
     fi
-    echo ""
+    ${inter}
     ${try_download}
     if [ "$3" == "-y" -o "$3" == "-Y" ]; then #跳过确认环节
        curl -#OL ${site}/$blob/$2
@@ -688,9 +692,9 @@ if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算�
   ${setup}
   chmod +x $bin/$2
   ${done_tip}
-  echo ""
+  ${inter}
   DEPENDS ${2}
-  echo ""
+  ${inter}
   ${done_setup}
   VIBRATE_DONE
 fi 
