@@ -1,6 +1,7 @@
 #!/bin/bash
 if [ "$LANG" == zh_*.UTF-8 ]; then
-  echo "已重定向至中文版。"
+  echo "将重定向至中文版。"
+  sleep 1.5s
   curl -s www.powerlean.top/blob/poco.setup.cn|bash
   exit 0
 fi
