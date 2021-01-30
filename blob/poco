@@ -576,10 +576,12 @@ if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算�
    CHECK_FILE() {
    ${check_file}
    progress
-   origin=$(curl -s ${site}$blob/poco)
-   local=$(cat $bin/poco)
+   curl -s ${site}$blob/poco>${cache}
+   local=${bin}/poco
+   diff ${cache} ${local}>/dev/null
+   export diff_reslut=$?
    ${done_tip}
-   if [[ "${#origin}" -ne "${#local}" ]]; then
+   if [ "$diff_reslut" != "0" ]; then
      ${re_install}
      VIBRATE_ERROR
      export mode="update" #输出模式
