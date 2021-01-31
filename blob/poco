@@ -383,8 +383,11 @@ export configure_cn="echo -e poco进程被中断，您必须手动执行${yellow
 export pull_cn="echo -n 从源文件拉取最新信息"
 export install_cn="【安装】"
 export upgrade_cn="【升级】"
+export usage_cn="用法"
 
 #English
+export usage="USAGE"
+export description="
 export pull="echo -n Pulling lastest info from source link"
 export configure="echo -e poco was interrupt,please run ${yellow}poco configure${done}to rollback."
 export last_update="echo -e Lastest update at ${last_time}"
@@ -460,6 +463,7 @@ if [ "$language" == EN ]; then
   export LANG="en.UTF-8"
 fi
 if [[ "$LANG" == zh_*.UTF-8 || "$language" == CN ]]; then
+  export usage=$usage_cn
   export upgrade=$upgrade_cn
   export ask=$ask_cn
   export install=$install_cn
@@ -733,22 +737,27 @@ elif [ "$1" == "list" -o "$1" == "l" ]; then
 
 #主体(四扇区) HELP
 elif [ "$1" == "help" -o "$1" == "h" -o "$1" == "-h" ]; then
-  echo "poco       version:${version}"
+  echo -e "\033[27;37;1m${usage}\033[0m"
+  echo -e "  poco [<command>] [arguments] [options]"
   echo ""
-  echo "${intro_info}"
+  echo -e "\033[27;37;1m ${description} \033[0m"
+  echo "  ${intro_info}"
   echo ""
-  echo -e "${yellow}i${done}nstall       ${install_info}"
-  echo -e "${yellow}f${done}etch         ${fetch_info}"
-  echo -e "${yellow}r${done}emove        ${remove_info}"
-  echo -e "${yellow}h${done}elp          ${help_info}"
-  echo -e "${yellow}l${done}ist          ${list_info}"
-  echo -e "${yellow}s${done}earch        ${search_info}"
-  echo -e "${yellow}g${done}roup         ${group_info}"
-  echo -e "${yellow}hi${done}story       ${history_info}"
+  echo -e "\033[27;37;1m${command}\033[0m"
+  echo -e "  ${yellow}i${done}nstall       ${install_info}"
+  echo -e "  ${yellow}f${done}etch         ${fetch_info}"
+  echo -e "  ${yellow}r${done}emove        ${remove_info}"
+  echo -e "  ${yellow}h${done}elp          ${help_info}"
+  echo -e "  ${yellow}l${done}ist          ${list_info}"
+  echo -e "  ${yellow}s${done}earch        ${search_info}"
+  echo -e "  ${yellow}g${done}roup         ${group_info}"
+  echo -e "  ${yellow}hi${done}story       ${history_info}"
   echo ""
-  echo "${suffix}"
-  echo -e "-y            ${y_info}"
-  echo -e "-s            ${s_info}"
+  echo -e "\033[27;37;1m${suffix}\033[0m"
+  echo -e "\033[27;37;1m  -y --help\033[0m"            
+  echo -e "   ${y_info}"
+  echo -e "\033[27;37;1m  -s --silent\033[0m"
+  echo -e "   ${s_info}"
   echo ""
   echo "PowerCollector@${version} ${0}"
 
