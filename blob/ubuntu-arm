@@ -48,7 +48,7 @@ cat > /data/data/com.termux/files/usr/bin/unubuntu <<- EOM
 rm -rf $HOME/ubu*; chmod +x /data/data/com.termux/files/usr/bin/ubuntu; rm -rf /data/data/com.termux/files/usr/bin/ubuntu; chmod +x /data/data/com.termux/files/usr/bin/unububtu; 
 EOM
 chmod +x /data/data/com.termux/files/usr/bin/unubuntu
-
+chmod +x /data/data/com.termux/files/usr/bin/ubuntu
 apt install debootstrap -y
 debootstrap --foreign --arch arm64 bionic ubufs $url
 unset LD_PRELOAD
