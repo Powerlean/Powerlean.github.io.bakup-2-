@@ -2,6 +2,7 @@ poco         - Powerlean.top附带的下载工具
 pipe         - 包管理器简化脚本
 coraph       - Linux发行版本安装工具
 coraph.conf  - coraph的配置文件，需一并下载
+screenfetch  - Bash截图信息工具
 net-checker  - 网络状态检测脚本
 nbnhhsh      - 一个转换缩写的工具
 which        - 检索可执行文件的所在位置
