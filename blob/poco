@@ -748,7 +748,7 @@ elif [ "$1" == "help" -o "$1" == "h" -o "$1" == "-h" ]; then
   echo -e "\033[27;37;1m${usage}\033[0m"
   echo -e "  poco [<${command}>] [${arguments}] [${suffix}]"
   echo ""
-  echo -e "\033[27;37;1m ${description} \033[0m"
+  echo -e "\033[27;37;1m${description}\033[0m"
   echo "  ${intro_info}"
   echo ""
   echo -e "\033[27;37;1m${command}\033[0m"
