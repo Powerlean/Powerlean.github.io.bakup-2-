@@ -350,7 +350,7 @@ export force_update_cn="echo -e ${red}正在进行版本升级,请勿终止程�
 export check_version_cn="echo -n 检索版本信息"
 export check_file_cn="echo -n 校验程序完整性"
 export re_install_cn="echo -e ${red}您的程序好像不完整或已被修改，将拉取线上文件进行修复${done}"
-export suffix_cn="后缀"
+export suffix_cn="选项"
 export y_info_cn="跳过确认环节"
 export s_info_cn="静默模式"
 export size_info_cn="总计下载"
@@ -384,10 +384,15 @@ export pull_cn="echo -n 从源文件拉取最新信息"
 export install_cn="【安装】"
 export upgrade_cn="【升级】"
 export usage_cn="用法"
+export description_cn="关于"
+export command_cn="命令"
+export arguments_cn="参数"
 
 #English
+export arguments="arguments"
+export command="COMMANDS"
 export usage="USAGE"
-export description="
+export description="DESCRIPTION"
 export pull="echo -n Pulling lastest info from source link"
 export configure="echo -e poco was interrupt,please run ${yellow}poco configure${done}to rollback."
 export last_update="echo -e Lastest update at ${last_time}"
@@ -431,7 +436,7 @@ export bad_suffix="echo -e ${red}Invalid operation，do not enter multiple file 
 export check_version="echo -n Checking version information"
 export check_file="echo -n Checking program integrity"
 export re_install="echo -e ${red}Your program is incomplete,being repaired${done}"
-export suffix="suffix"
+export suffix="OPTIONS"
 export y_info="Skip confirmation"
 export s_info="Silent mode"
 export size_info="Total downloaded "
@@ -463,6 +468,9 @@ if [ "$language" == EN ]; then
   export LANG="en.UTF-8"
 fi
 if [[ "$LANG" == zh_*.UTF-8 || "$language" == CN ]]; then
+  export arguments=$arguments_cn
+  export command=$command_cn
+  export description=$description_cn
   export usage=$usage_cn
   export upgrade=$upgrade_cn
   export ask=$ask_cn
@@ -738,7 +746,7 @@ elif [ "$1" == "list" -o "$1" == "l" ]; then
 #主体(四扇区) HELP
 elif [ "$1" == "help" -o "$1" == "h" -o "$1" == "-h" ]; then
   echo -e "\033[27;37;1m${usage}\033[0m"
-  echo -e "  poco [<command>] [arguments] [options]"
+  echo -e "  poco [<${command}>] [${arguments}] [${suffix}]"
   echo ""
   echo -e "\033[27;37;1m ${description} \033[0m"
   echo "  ${intro_info}"
