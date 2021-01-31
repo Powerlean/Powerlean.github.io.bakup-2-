@@ -762,7 +762,7 @@ elif [ "$1" == "help" -o "$1" == "h" -o "$1" == "-h" ]; then
   echo -e "  ${yellow}hi${done}story       ${history_info}"
   echo ""
   echo -e "\033[27;37;1m${suffix}\033[0m"
-  echo -e "\033[27;37;1m  -y --help\033[0m"            
+  echo -e "\033[27;37;1m  -y --yes\033[0m"            
   echo -e "   ${y_info}"
   echo -e "\033[27;37;1m  -s --silent\033[0m"
   echo -e "   ${s_info}"
