@@ -798,7 +798,6 @@ elif [ "$1" == "group" -o "$1" == "g" ]; then
   ${check_version}
   progress
   CHECK_UPDATE
-  ${done_tip}
   ${vibrate}
    
    CHECK_FILE() {
