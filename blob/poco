@@ -16,15 +16,6 @@ export init_file="$PREFIX/etc/poco/poco.init"
 export cache="${etc}poco/cache"
 export cache_file="${etc}poco/poco.cache"
 
-#首次启动项
-if [ -f "$init_file" ]; then
-    bash ${init_file}
-fi
-
-if [ ! -f "$cache_file" ]; then
-  touch $cache_file
-fi
-
 #ASCII#
 export red="\033[31m"
 export green="\033[32m"
@@ -35,6 +26,30 @@ footer() {
   screen="$COLUMNS"
   yes "=" | sed ''$screen''q | tr -d '\n'
 }
+
+if [ -f "$bin/sudo" ]; then
+  if [ -f "$bin/su" ]; then
+    if [ $USER != "root" ]; then
+      echo "">/etc/poco/cache
+      return=$?
+      if [ $return != 0 ]; then
+      echo -e "${red}E:${done} Unable to acquire the cache file,are you root?"
+      echo -e "Run the follow command to solve this problem:"
+      echo ""
+      echo -e "\033[27;37;1msudo ${0} ${@}\033[0m"
+      echo ""
+    fi
+  fi
+fi
+
+#首次启动项
+if [ -f "$init_file" ]; then
+    bash ${init_file}
+fi
+
+if [ ! -f "$cache_file" ]; then
+  touch $cache_file
+fi
 
 get_now_timestamp() {
   cur_sec_and_ns=`date '+%s-%N'`
