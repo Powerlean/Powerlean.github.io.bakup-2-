@@ -75,20 +75,6 @@ RESCUE() {
   ${@}
 }
 
-#故障检修
-fix=AUTO_FIX
-AUTO_FIX() {
-TEST=$(poco return 1>/dev/null 2>&1;echo $?)
-if [ "$TEST" -ne "0" ]; then
-  RESCUE
-fi
-}
-if [ "$fix_status" == "done" ]; then
-  unset fix
-fi
-export fix_status="done"
-${fix}
-
 WHICH() {
 for PROGRAM in "$found"; do
  RET=1
@@ -151,10 +137,10 @@ do
 done     
 }
 
-if [ -f "$bin/sudo" ]; then
-  if [ -f "$bin/su" ]; then
+if [ -f "$PREFIX/usr/bin/sudo" ]; then
+  if [ -f "$PREFIX/bin/su" ]; then
     if [ $USER != "root" ]; then
-      echo "">/etc/poco/cache
+      bash -c "echo ''> $PREFIX/etc/poco/cache" 1>/dev/null 2>&1
       return=$?
       if [ $return != 0 ]; then
       echo -e "${red}E:${done} Unable to acquire the cache file,are you root?"
@@ -167,6 +153,20 @@ if [ -f "$bin/sudo" ]; then
     fi
   fi
 fi
+
+#故障检修
+fix=AUTO_FIX
+AUTO_FIX() {
+TEST=$(poco return 1>/dev/null 2>&1;echo $?)
+if [ "$TEST" -ne "0" ]; then
+  RESCUE
+fi
+}
+if [ "$fix_status" == "done" ]; then
+  unset fix
+fi
+export fix_status="done"
+${fix}
 
 DEPENDS() {
 ${check_depends} #提示语
