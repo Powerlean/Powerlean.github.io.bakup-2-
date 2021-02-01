@@ -503,6 +503,7 @@ if [ "$language" == EN ]; then
   export LANG="en.UTF-8"
 fi
 if [[ "$LANG" == zh_*.UTF-8 || "$language" == CN ]]; then
+  export try_class=$try_class_cn
   export arguments=$arguments_cn
   export command=$command_cn
   export description=$description_cn
