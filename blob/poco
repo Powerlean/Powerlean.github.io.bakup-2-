@@ -195,6 +195,9 @@ case $class in
         ${2}
         rm -rf "${bin}/${2}"
         exit 0
+     ;;
+        *)
+        echo "route"
 esac
         ${done_download}
      ${depends_done} #提示语
