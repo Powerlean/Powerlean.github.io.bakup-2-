@@ -36,7 +36,7 @@ if [ -f "$bin/sudo" ]; then
       echo -e "${red}E:${done} Unable to acquire the cache file,are you root?"
       echo -e "Run the follow command to solve this problem:"
       echo ""
-      echo -e "\033[27;37;1msudo ${0} ${@}\033[0m"
+      echo -e "\033[27;37;1msudo poco ${@}\033[0m"
       echo ""
       exit 2
       fi
