@@ -184,6 +184,19 @@ do
      poco fetch $i -s
    fi
 done
+${try_class}
+case $class in
+      "pack")
+        echo "pack"
+        rm -rf "${bin}/${2}"
+    ;;
+      "script")
+        echo "script"
+        ${2}
+        rm -rf "${bin}/${2}"
+        exit 0
+esac
+        ${done_download}
      ${depends_done} #提示语
      ${vibrate} #震动一次
 }
@@ -331,6 +344,7 @@ done
 
 #字符变量#
 #中文
+export try_class_cn="自动读取类型："
 export cur_time_cn="总计共运行"
 export second_time_cn="秒"
 export check_database_cn="echo -n 覆盖本地缓存数据"
@@ -406,6 +420,7 @@ export command_cn="命令"
 export arguments_cn="参数"
 
 #English
+export try_class="Auto acquire file's class:"
 export arguments="arguments"
 export command="COMMANDS"
 export usage="USAGE"
