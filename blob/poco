@@ -38,6 +38,7 @@ if [ -f "$bin/sudo" ]; then
       echo ""
       echo -e "\033[27;37;1msudo ${0} ${@}\033[0m"
       echo ""
+      exit 2
       fi
     fi
   fi
