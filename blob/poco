@@ -1,7 +1,9 @@
 #!/bin/bash
+#Website: https://www.powerlean.top/poco
 #GitHub: https://github.com/edges5352
-#Website: https://www.powerlean.top
-#Owner: Powerlean (2020)
+#Since:Sat May 16 13:41:55 2020
+#Owner: Powerlean (2021)
+#coding:UTF-8
 
 export version=5.6
 export found="bash"
