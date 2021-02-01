@@ -136,9 +136,9 @@ do
 done     
 }
 
-if [ -f "$PREFIX/usr/bin/sudo" ]; then
-  if [ -f "$PREFIX/bin/su" ]; then
-    if [ $USER != "root" ]; then
+test_sudo=$(WHICH sudo)
+if [ not"$test_sudo" != "not" ]; then
+  if [ $USER != "root" ]; then
       bash -c "echo ''> $PREFIX/etc/poco/cache" 1>/dev/null 2>&1
       return=$?
       if [ $return != 0 ]; then
@@ -149,9 +149,8 @@ if [ -f "$PREFIX/usr/bin/sudo" ]; then
       echo ""
       exit 2
       fi
-    fi
-  fi
-fi
+   fi
+ fi
 
 #故障检修
 fix=AUTO_FIX
