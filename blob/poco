@@ -6,7 +6,6 @@
 #coding:UTF-8
 
 export version=5.6
-export found="bash"
 export vibrate="echo -en \007"
 export stop="sleep 0.1"
 export operation="$@"
@@ -76,7 +75,7 @@ RESCUE() {
 }
 
 WHICH() {
-for PROGRAM in "$found"; do
+for PROGRAM in "${1}"; do
  RET=1
  IFS_SAVE="$IFS"
  IFS=:
@@ -271,7 +270,7 @@ export config_file="$PREFIX/etc/poco/poco.conf" #配置文件路径
 export list_url=`sed '/^listURL: /!d;s/.*: //' $config_file` #列表链接
 export site=`sed '/^URL: /!d;s/.*: //' $config_file` #源网址
 export site_404=`sed '/^page404: /!d;s/.*: //' $config_file` #404页面链接
-export bin=`WHICH | sed 's/bash//g'` #指定搜索文件
+export bin=`WHICH bash| sed 's/bash//g'` #指定搜索文件
 export blob=`sed '/^blob: /!d;s/.*: //' $config_file` #文件存储链接
 export tree=`sed '/^tree: /!d;s/.*: //' $config_file` #依赖文件存放链接
 export language=`sed '/^LANG: /!d;s/.*: //' $config_file` #语言设定
