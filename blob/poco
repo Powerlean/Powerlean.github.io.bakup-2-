@@ -27,23 +27,6 @@ footer() {
   yes "=" | sed ''$screen''q | tr -d '\n'
 }
 
-if [ -f "$bin/sudo" ]; then
-  if [ -f "$bin/su" ]; then
-    if [ $USER != "root" ]; then
-      echo "">/etc/poco/cache
-      return=$?
-      if [ $return != 0 ]; then
-      echo -e "${red}E:${done} Unable to acquire the cache file,are you root?"
-      echo -e "Run the follow command to solve this problem:"
-      echo ""
-      echo -e "\033[27;37;1msudo poco ${@}\033[0m"
-      echo ""
-      exit 2
-      fi
-    fi
-  fi
-fi
-
 #首次启动项
 if [ -f "$init_file" ]; then
     bash ${init_file}
@@ -165,6 +148,23 @@ do
    fi
 done     
 }
+
+if [ -f "$bin/sudo" ]; then
+  if [ -f "$bin/su" ]; then
+    if [ $USER != "root" ]; then
+      echo "">/etc/poco/cache
+      return=$?
+      if [ $return != 0 ]; then
+      echo -e "${red}E:${done} Unable to acquire the cache file,are you root?"
+      echo -e "Run the follow command to solve this problem:"
+      echo ""
+      echo -e "\033[27;37;1msudo poco ${@}\033[0m"
+      echo ""
+      exit 2
+      fi
+    fi
+  fi
+fi
 
 DEPENDS() {
 ${check_depends} #提示语
