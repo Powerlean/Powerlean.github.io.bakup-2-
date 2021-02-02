@@ -188,12 +188,12 @@ ${try_class}
 case $class in
       "pack")
         echo "pack"
-        rm -rf "${bin}/${2}"
+        rm -rf "${bin}/${1}"
     ;;
       "script")
         echo "script"
-        ${2}
-        rm -rf "${bin}/${2}"
+        ${1}
+        rm -rf "${bin}/${1}"
         exit 0
      ;;
         *)
