@@ -654,6 +654,7 @@ if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算�
     echo -e "${red}${try}[${ERROR}]${done}"
     ${void_found}
     VIBRATE_ERROR
+    echo -ne "\033[?25h" #显示光标
     exit 2
   else
     echo "Op=${@}">>${cache_file} #写入操作
