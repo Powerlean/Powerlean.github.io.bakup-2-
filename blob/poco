@@ -670,7 +670,8 @@ if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算�
       ${vibrate}
       if [ "$diff_reslut" == "0" ]; then
         ${exist_database}
-        echo "">${cache}
+        echo "">${cache} #清除缓存
+        echo -ne "\033[?25h" #显示光标
         exit 0
       fi
       fetch_status="${upgrade}"
@@ -707,6 +708,8 @@ if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算�
           ${abort}
           VIBRATE_DONE
           echo "Status=done">>${cache_file} #写入状态
+          echo "">${cache} #清除缓存
+          echo -ne "\033[?25h" #显示光标
           exit 0
         else
           ${error_get}
