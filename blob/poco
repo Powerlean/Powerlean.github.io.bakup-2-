@@ -347,6 +347,7 @@ done
 
 #字符变量#
 #中文
+export remove_tip_cn="echo -e 若存在，则以下程序将被移除："
 export try_class_cn="echo -n 自动读取类型："
 export cur_time_cn="总计共运行"
 export second_time_cn="秒"
@@ -355,7 +356,7 @@ export file_exist_cn="echo -e ${yellow}警告：${done}目标文件已经存在"
 export null_search_cn="echo -e ${yellow}未搜索到可匹配内容${done}"
 export bad_suffix_cn="echo -e ${red}无效操作：未定义的后缀,或许您输入了多个文件名${done}"
 export error_remove_cn="echo -e ${red}无效操作 ${choice}${done}"
-export remove_cn="确定要移除此文件吗？"
+export remove_cn="您希望继续【移除】吗？"
 export void_cn="echo -e ${red}无效操作 ${1}${done}"
 export search_cn="echo -n -e  向${yellow}${site}${blob}${2}${done}核对报头"
 export void_found_cn="echo -e ${red}此文件不存在或暂不提供下载，抱歉...${done}"
@@ -754,13 +755,20 @@ if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算�
 fi 
 
 #主体(二扇区) REMOVE
-elif [ "$1" == "remove" -o "$1" == "r" ]; then
+elif [ "$1" == "remove" ]; then
   begin=`get_now_timestamp`
   if [ not"$2" == "not" ]; then
     ${not_input}
     exit 2
   fi
   echo "Op=${@}">>${cache_file} #写入操作
+   ${remove_tip}
+   echo "${@#remove }"
+   read -n1 -p "${remove} [Y/n]: " choice
+        if [ "$choice" == "n" -o "$choice" == "N" ]; then
+          ${abort}
+          exit 0
+        elif [ "$choice" == "y" -o "$choice" == "Y" ]; then
   for range in $@
   do
   if [ "$range" != "r" -a "$range" != "remove" ]; then
@@ -772,7 +780,8 @@ elif [ "$1" == "remove" -o "$1" == "r" ]; then
   fi
 done
 echo "Status=done">>${cache_file} #写入状态
- VIBRATE_DONE
+VIBRATE_DONE
+fi
 
 #主体(三扇区) LIST
 elif [ "$1" == "list" -o "$1" == "l" ]; then
@@ -794,7 +803,7 @@ elif [ "$1" == "help" -o "$1" == "h" -o "$1" == "-h" ]; then
   echo -e "\033[27;37;1m${command}\033[0m"
   echo -e "  ${yellow}i${done}nstall       ${install_info}"
   echo -e "  ${yellow}f${done}etch         ${fetch_info}"
-  echo -e "  ${yellow}r${done}emove        ${remove_info}"
+  echo -e "  ${yellow}remove${done}        ${remove_info}"
   echo -e "  ${yellow}h${done}elp          ${help_info}"
   echo -e "  ${yellow}l${done}ist          ${list_info}"
   echo -e "  ${yellow}s${done}earch        ${search_info}"
