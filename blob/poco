@@ -509,6 +509,7 @@ if [ "$language" == EN ]; then
   export LANG="en.UTF-8"
 fi
 if [[ "$LANG" == zh_*.UTF-8 || "$language" == CN ]]; then
+  export remove_tip=$remove_tip_cn
   export try_class=$try_class_cn
   export arguments=$arguments_cn
   export command=$command_cn
