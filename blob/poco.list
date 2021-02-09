@@ -7,7 +7,6 @@ screenfetch  - Bash截图信息工具
 net-checker  - 网络状态检测脚本
 nbnhhsh      - 一个转换缩写的工具
 which        - 检索可执行文件的所在位置
-cowsay       - 字符动物绘
 adb          - ADB Shell for Termux arm 
 ubuntu-arm   - Ubuntu 18.04 LTS安装脚本
 clean-arm    - 清理无用文件和软件包,适用ARM
