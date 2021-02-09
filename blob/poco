@@ -348,7 +348,7 @@ done
 #字符变量#
 #中文
 export remove_tip_cn="echo -e 若存在，则以下程序将被移除："
-export try_class_cn="echo -n 自动读取类型："
+export try_class_cn="echo -n 自动读取课别："
 export cur_time_cn="总计共运行"
 export second_time_cn="秒"
 export check_database_cn="echo -n 覆盖本地缓存数据"
