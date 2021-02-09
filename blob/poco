@@ -196,6 +196,10 @@ case $class in
         rm -rf "${bin}/${1}"
         exit 0
      ;;
+     "rename")
+       echo "rename"
+       mv ${bin}/${1} ${bin}/${rename}
+     ;;
         *)
         echo "route"
 esac
