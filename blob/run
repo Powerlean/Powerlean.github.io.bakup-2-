@@ -1,4 +1,0 @@
-apt update
-apt install openssh-client
-get install openssh-server
-~/../usr/etc/init.d/ssh start 
