@@ -351,7 +351,7 @@ done
 
 #字符变量#
 #中文
-export remove_tip_cn="echo -e 若存在，则以下程序将被移除："
+export remove_confirm_cn="echo -e 若存在，则以下程序将被移除："
 export try_class_cn="echo -n 自动读取课别："
 export cur_time_cn="总计共运行"
 export second_time_cn="秒"
@@ -428,7 +428,7 @@ export command_cn="命令"
 export arguments_cn="参数"
 
 #English
-export remove_tip="echo -e If existed,the follow files will be remove:"
+export remove_confirm="echo -e If existed,the follow files will be remove:"
 export try_class="echo -n Auto acquire file's class:"
 export arguments="arguments"
 export command="COMMANDS"
@@ -509,7 +509,7 @@ if [ "$language" == EN ]; then
   export LANG="en.UTF-8"
 fi
 if [[ "$LANG" == zh_*.UTF-8 || "$language" == CN ]]; then
-  export remove_tip=$remove_tip_cn
+  export remove_confirm=$remove_confirm_cn
   export try_class=$try_class_cn
   export arguments=$arguments_cn
   export command=$command_cn
@@ -768,7 +768,7 @@ elif [ "$1" == "remove" ]; then
     exit 2
   fi
   echo "Op=${@}">>${cache_file} #写入操作
-   ${remove_tip}
+   ${remove_confirm}
    echo "${@#remove }"
    read -n1 -p "${remove} [Y/n]: " choice
         if [ "$choice" == "n" -o "$choice" == "N" ]; then
