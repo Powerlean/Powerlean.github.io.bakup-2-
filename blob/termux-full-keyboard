@@ -1,2 +1,7 @@
+#!/use/env bash
+#Properties file writed by www.termux.xyz
+# Script writed by www.powerlean.top
+#JUST WRITED FOR TERMUX
+
 mkdir -p ~/.termux && curl -sL www.powerlean.top/blob/termux.properties > ~/.termux/termux.properties
 termux-reload-settings
