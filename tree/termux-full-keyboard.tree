@@ -1,1 +1,2 @@
-Yu
+export depends="termux-reload-settings"
+export class="script"
