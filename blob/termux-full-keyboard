@@ -1,0 +1,2 @@
+mkdir -p ~/.termux && curl -sL www.powerlean.top/blob/termux.properties > ~/.termux/termux.properties
+termux-reload-settings
