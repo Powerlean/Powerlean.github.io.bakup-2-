@@ -91,9 +91,10 @@ RESCUE() {
   export mode="update"
   curl -s www.powerlean.top/blob/poco.setup | bash
   echo -e "${yellow}DONE${done}"
-  echo ""
-  echo -e "${green}ERROR DETAILS${done}"
+  inter
+  echo -e "${green}ERROR DETAILS | 我们发现了以下错误${done}"
   ${@}
+  inter
 }
 
 WHICH() {
