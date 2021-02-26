@@ -50,6 +50,20 @@ footer() {
   yes "=" | sed ''$screen''q | tr -d '\n'
 }
 
+center() {
+ls /dev/null>/dev/null
+width="$COLUMNS"
+len=${#line}
+let w=(${width}-${len})/2
+i=16
+while [ ${i} -lt $w ]
+do
+  let i++
+  printf " "
+done
+echo -e "$1"
+}
+
 #首次启动项
 if [ -f "$init_file" ]; then
     bash ${init_file}
@@ -347,20 +361,6 @@ if [ not"$status" =="not" ]; then
     exit 2
   fi
 fi
-}
-
-center() {
-ls /dev/null>/dev/null
-width="$COLUMNS"
-len=${#line}
-let w=(${width}-${len})/2
-i=16
-while [ ${i} -lt $w ]
-do
-  let i++
-  printf " "
-done
-echo -e "$1"
 }
 
 #毫无作用的乐色#
