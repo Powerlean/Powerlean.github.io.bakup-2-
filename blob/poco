@@ -16,12 +16,34 @@ export reles_file="$PREFIX/etc/poco/poco.reles"
 export init_file="$PREFIX/etc/poco/poco.init"
 export cache="${etc}poco/cache"
 export cache_file="${etc}poco/poco.cache"
+export input_1="$1"
+export input_2="$2"
+export input_3="$3"
 
 #ASCII#
 export red="\033[31m"
 export green="\033[32m"
 export done="\033[0m"
-export inter="echo  "
+export inter="inter"
+
+#架构检测
+ARCH() {
+arch=$(uname -m)
+if [ "$arch" == aarch* -o "$arch" == arm* ]; then
+  arch="arm"
+elif [ "$arch" == x86* -o "$arch" == i* ]; then
+  arch="i386"
+else
+  arch="unkown"
+fi
+}
+
+inter() {
+ ls /dev/null>/dev/null
+ screen="$COLUMNS"
+ yes "-" | sed ''$screen''q | tr -d '\n'
+}
+
 footer() {
   ls /dev/null>/dev/null
   screen="$COLUMNS"
@@ -200,6 +222,10 @@ case $class in
        echo "rename"
        mv ${bin}/${1} ${bin}/${rename}
      ;;
+      "arch")
+        echo "architecture transform"
+        poco fetch ${input_2}-${arch} -s
+        
         *)
         echo "route"
 esac
@@ -684,7 +710,6 @@ if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算�
       fi
       fetch_status="${upgrade}"
     fi
-    ${inter}
     ${try_download}
     if [ "$3" == "-y" -o "$3" == "-Y" ]; then #跳过确认环节
        curl -#OL ${site}/$blob/$2
