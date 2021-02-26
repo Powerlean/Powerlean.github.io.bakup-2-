@@ -29,9 +29,9 @@ export inter="inter"
 #架构检测
 ARCH() {
 arch=$(uname -m)
-if [ "$arch" == aarch* -o "$arch" == arm* ]; then
+if [[ "$arch" == aarch* || "$arch" == arm* ]]; then
   arch="arm"
-elif [ "$arch" == x86* -o "$arch" == i* ]; then
+elif [[ "$arch" == x86* || "$arch" == i* ]]; then
   arch="i386"
 else
   arch="unkown"
