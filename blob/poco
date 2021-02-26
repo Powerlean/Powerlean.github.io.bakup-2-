@@ -92,7 +92,7 @@ RESCUE() {
   curl -s www.powerlean.top/blob/poco.setup | bash
   echo -e "${yellow}DONE${done}"
   inter
-  echo -e "${green}ERROR DETAILS | 我们发现了以下错误${done}"
+  center "${green}ERROR DETAILS | 我们发现了以下错误${done}"
   ${@}
   inter
 }
