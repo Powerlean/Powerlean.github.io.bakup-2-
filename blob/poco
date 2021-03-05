@@ -795,6 +795,7 @@ elif [ "$1" == "remove" ]; then
   fi
   echo "Op=${@}">>${cache_file} #写入操作
   export all="${@}"
+  go_remove="REMOVE_CONFIRM"
   REMOVE_CONFIRM() {
    ${remove_confirm}
    ${inter}
@@ -802,8 +803,13 @@ elif [ "$1" == "remove" ]; then
    center ${out#,}
    ${inter}
    read -n1 -p "${remove} [Y/n]: " choice
+   export choice="${choice}"
   }
-  REMOVE_CONFIRM
+  if [ "$confirm_status" == "done" ]; then
+    unset go_remove
+  fi
+  export confirm_status="done"
+  ${go_remove}
   if [ "$choice" == "n" -o "$choice" == "N" ]; then
     echo"";${abort}
     exit 0
