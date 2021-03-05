@@ -794,17 +794,21 @@ elif [ "$1" == "remove" ]; then
     exit 2
   fi
   echo "Op=${@}">>${cache_file} #写入操作
+  export all="${@}"
+  REMOVE_CONFIRM() {
    ${remove_confirm}
    ${inter}
-   out=$(echo "${@#*remove}"|sed 's/ /,/g')
+   out=$(echo "${all#*remove}"|sed 's/ /,/g')
    center ${out#,}
    ${inter}
    read -n1 -p "${remove} [Y/n]: " choice
-        if [ "$choice" == "n" -o "$choice" == "N" ]; then
-          echo"";${abort}
-          exit 0
-        elif [ "$choice" == "y" -o "$choice" == "Y" ]; then
-        echo "";
+  }
+  REMOVE_CONFIRM
+  if [ "$choice" == "n" -o "$choice" == "N" ]; then
+    echo"";${abort}
+    exit 0
+  elif [ "$choice" == "y" -o "$choice" == "Y" ]; then
+    echo "";
   for range in $@
   do
   if [ "$range" != "r" -a "$range" != "remove" ]; then
