@@ -33,8 +33,6 @@ if [[ "$arch" == aarch* || "$arch" == arm* ]]; then
   arch="arm"
 elif [[ "$arch" == x86* || "$arch" == i* ]]; then
   arch="i386"
-else
-  arch="unkown"
 fi
 }
 
@@ -798,13 +796,15 @@ elif [ "$1" == "remove" ]; then
   echo "Op=${@}">>${cache_file} #写入操作
    ${remove_confirm}
    ${inter}
-   echo "${@#remove }"
+   out=$(echo "${@#*remove}"|sed 's/ /,/g')
+   center ${out#,}
    ${inter}
    read -n1 -p "${remove} [Y/n]: " choice
         if [ "$choice" == "n" -o "$choice" == "N" ]; then
-          ${abort}
+          echo"";${abort}
           exit 0
         elif [ "$choice" == "y" -o "$choice" == "Y" ]; then
+        echo "";
   for range in $@
   do
   if [ "$range" != "r" -a "$range" != "remove" ]; then
