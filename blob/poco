@@ -239,7 +239,6 @@ case $class in
        ARCH
        echo "architecture transform"
        poco fetch ${input_2}-${arch} -s
-       mv "${bin}/${input_2}-${arch}" "${bin}/${input_2}"
      ;;
         *)
         echo "route"
