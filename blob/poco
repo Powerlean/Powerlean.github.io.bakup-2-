@@ -239,7 +239,7 @@ case $class in
        ARCH
        echo "architecture transform"
        rm -rf ${bin}/${input_2}
-       echo -e "${depends_loaded}${yellow}${input_2}-${arch}${done}" #提示语
+       echo -e "${arch_loaded}${yellow}${input_2}-${arch}${done}" #提示语
        poco fetch ${input_2}-${arch} -s
      ;;
         *)
@@ -262,7 +262,25 @@ do
    if [ ! -f $bin/$i ]; then #遍历检查依赖
      poco fetch $i -s
    fi
-done     
+done
+case $class in
+      "pack")
+        rm -rf "${bin}/${1}"
+    ;;
+      "script")
+        ${1}
+        rm -rf "${bin}/${1}"
+        exit 0
+     ;;
+     "rename")
+       mv ${bin}/${1} ${bin}/${rename}
+     ;;
+      "arch")
+       ARCH
+       rm -rf ${bin}/${input_2}
+       echo -e "${depends_loaded}${yellow}${input_2}-${arch}${done}" #提示语
+       poco fetch ${input_2}-${arch} -s
+esac
 }
 
 CHECK_UPDATE() {
@@ -454,6 +472,7 @@ export usage_cn="用法"
 export description_cn="关于"
 export command_cn="命令"
 export arguments_cn="参数"
+export arch_loaded_cn="修正架构类型并选定"
 
 #English
 export remove_confirm="echo -e If existed,the follow files will be remove:"
@@ -530,6 +549,7 @@ export not_intro="No description"
 export exist_database="echo -e ${yellow}${2}${done} is already exist,it will not be installed"
 export install="[Install]"
 export upgrade="[Upgrade]"
+export arch_loaded="$depends_loaded"
 
 #语言设定
 #LANG="zh_CN.UTF-8" #取消该注释将程序设定为中文(在句尾另添一个"#")
@@ -537,6 +557,7 @@ if [ "$language" == EN ]; then
   export LANG="en.UTF-8"
 fi
 if [[ "$LANG" == zh_*.UTF-8 || "$language" == CN ]]; then
+  export arch_loaded=$arch_loaded_cn
   export remove_confirm=$remove_confirm_cn
   export try_class=$try_class_cn
   export arguments=$arguments_cn
