@@ -10,7 +10,6 @@ which        - 检索可执行文件的所在位置
 cowsay       - 字符动物绘
 adb          - ADB Shell for Termux arm 
 ubuntu-arm   - Ubuntu 18.04 LTS安装脚本
-clean-arm    - 清理无用文件和软件包,适用ARM
-clean-i386   - 清理无用文件和软件包,适用i386
+clean        - 清理无用文件和软件包
 pcol         - poco-api程式接口
 termux-full-keyboard - Termux键盘预设脚本
