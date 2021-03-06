@@ -238,6 +238,7 @@ case $class in
       "arch")
        ARCH
        echo "architecture transform"
+       echo -e "${depends_loaded}${yellow}${input_2}-${arch}${done}" #提示语
        poco fetch ${input_2}-${arch} -s
      ;;
         *)
