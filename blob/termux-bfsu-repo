@@ -1,0 +1,11 @@
+echo -n "设定main镜像源..."
+sed -i 's@^\(deb.*stable main\)$@#\1\ndeb https://mirrors.bfsu.edu.cn/termux/termux-packages-24 stable main@' $PREFIX/etc/apt/sources.list
+echo "完成"
+echo -n "设定games镜像源..."
+sed -i 's@^\(deb.*games stable\)$@#\1\ndeb https://mirrors.bfsu.edu.cn/termux/game-packages-24 games stable@' $PREFIX/etc/apt/sources.list.d/game.list
+echo "完成"
+echo -n "设定science镜像源..."
+sed -i 's@^\(deb.*science stable\)$@#\1\ndeb https://mirrors.bfsu.edu.cn/termux/science-packages-24 science stable@' $PREFIX/etc/apt/sources.list.d/science.list
+echo "完成"
+echo "尝试运行更新..."
+apt update && apt upgrade
