@@ -16,6 +16,7 @@ export reles_file="$PREFIX/etc/poco/poco.reles"
 export init_file="$PREFIX/etc/poco/poco.init"
 export cache="${etc}poco/cache"
 export cache_file="${etc}poco/poco.cache"
+export download_file="${etc}poco/poco.download"
 export input_1="$1"
 export input_2="$2"
 export input_3="$3"
@@ -344,6 +345,10 @@ if [ ! -f "$PREFIX/etc/poco/poco.conf" ]; then
   RESCUE
 fi
 
+if [ ! -f "${download_file}" ]; then
+  touch ${download_file}
+fi
+
 #导入config数据#
 export config_file="$PREFIX/etc/poco/poco.conf" #配置文件路径
 export list_url=`sed '/^listURL: /!d;s/.*: //' $config_file` #列表链接
@@ -652,6 +657,7 @@ if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算�
       exit 2
     else
       curl -#OL ${site}$blob/$2
+      echo "$2" >>${download_file}
       ${setup}
       chmod +x $bin/$2
        DEPENDS_SILENT ${2}
@@ -736,6 +742,7 @@ if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算�
     ${try_download}
     if [ "$3" == "-y" -o "$3" == "-Y" ]; then #跳过确认环节
        curl -#OL ${site}/$blob/$2
+       echo "$2" >>${download_file}
        ${vibrate}
     elif [ not"$3" == "not" ]; then
     INTRO=$(curl -s ${site}/${blob}/poco.list | sed '/^'"$2"' *-/!d;s/.*- //')
@@ -759,6 +766,7 @@ if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算�
         if [ "$choice" == "y" -o "$choice" == "Y" ]; then
           echo ""
           curl -#OL ${site}$blob/$2
+          echo "$2" >>${download_file}
         elif [ "$choice" == "n" -o "$choice" == "N" ]; then
           echo ""
           ${abort}
@@ -1153,6 +1161,9 @@ elif [ "$1" == "status" -o "$1" == "st" ]; then
       echo 禁用
    fi
  fi
+
+elif [ "$1" == "upgrade" -o "$1" == "up" ]; then
+  echo "void"
 
 #主体(十扇区) COMMAND_NOT_FOUND
 else
