@@ -477,7 +477,7 @@ export description_cn="关于"
 export command_cn="命令"
 export arguments_cn="参数"
 export arch_loaded_cn="修正架构类型并选定"
-export select_editor_cn="选择一个文本编辑器以编辑"
+export select_editor_cn="选择一个文本编辑器"
 export choose_one_cn="输入【1-3】以选择："
 
 #English
@@ -1173,11 +1173,11 @@ elif [ "$1" == "console" -o "$1" == "c" ]; then
   vi=$(WHICH nano)
   vim=$(WHICH nano)
   nano=$(WHICH vim)
-  echo "${select_editor}"
+  echo -e "\033[27;37;1m${select_editor}\033[0m"
   echo ""
   echo "1. ${nano}"
   echo "2. ${vi}"
-  echo "3. {vim}"
+  echo "3. ${vim}"
   echo ""
   read -p "${choose_one}" choice
   case $choice in
