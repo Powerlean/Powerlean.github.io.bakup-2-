@@ -1177,12 +1177,12 @@ elif [ "$1" == "console" -o "$1" == "c" ]; then
   vi=$(WHICH vi)
   vim=$(WHICH vim)
   nano=$(WHICH nano)
-  echo -e "\033[27;37;1m${select_editor}\033[0m"
-  echo ""
-  echo "1. ${nano}"
-  echo "2. ${vi}"
-  echo "3. ${vim}"
-  echo ""
+  center "\033[27;37;1m${select_editor}\033[0m"
+  inter
+  center "1. ${nano}"
+  center "2. ${vi}"
+  center "3. ${vim}"
+  inter
   read -p "${choose_one}" choice
   case $choice in
     "1")
@@ -1214,7 +1214,7 @@ elif [ "$1" == "console" -o "$1" == "c" ]; then
    else
       echo False
    fi
-  
+  inter
 
 #主体(十扇区) COMMAND_NOT_FOUND
 else
