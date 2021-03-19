@@ -1174,9 +1174,9 @@ elif [ "$1" == "upgrade" -o "$1" == "up" ]; then
   echo "Developing..."
   
 elif [ "$1" == "console" -o "$1" == "c" ]; then
-  vi=$(WHICH nano)
-  vim=$(WHICH nano)
-  nano=$(WHICH vim)
+  vi=$(WHICH vi)
+  vim=$(WHICH vim)
+  nano=$(WHICH nano)
   echo -e "\033[27;37;1m${select_editor}\033[0m"
   echo ""
   echo "1. ${nano}"
@@ -1193,15 +1193,18 @@ elif [ "$1" == "console" -o "$1" == "c" ]; then
     ;;
     "3")
     vim ${config_file}
+    ;;
+    *)
+    ${abort}
   esac
   echo "${update_conf}"
-  echo FETCH: http://$(sed '/^URL: /!d;s/.*: //' ${CONFIG})$(sed '/^blob: /!d;s/.*: //' ${CONFIG})
-  echo TREE: http://$(sed '/^URL: /!d;s/.*: //' ${CONFIG})$(sed '/^tree: /!d;s/.*: //' ${CONFIG})
-  echo LIST: http://$(sed '/^listURL: /!d;s/.*: //' ${CONFIG})
+  echo FETCH: http://$(sed '/^URL: /!d;s/.*: //' ${config_file})$(sed '/^blob: /!d;s/.*: //' ${config_file})
+  echo TREE: http://$(sed '/^URL: /!d;s/.*: //' ${config_file})$(sed '/^tree: /!d;s/.*: //' ${config_file})
+  echo LIST: http://$(sed '/^listURL: /!d;s/.*: //' ${config_file})
   echo -en "LANG: "
-     if [ "$(sed '/^LANG: /!d;s/.*: //' ${CONFIG})" == "CN"  ]; then
+     if [ "$(sed '/^LANG: /!d;s/.*: //' ${config_file})" == "CN"  ]; then
        echo -en 简体中文
-     elif [ "$(sed '/^LANG: /!d;s/.*: //' ${CONFIG})" == "EN"  ]; then
+     elif [ "$(sed '/^LANG: /!d;s/.*: //' ${config_file})" == "EN"  ]; then
        echo -en English
      fi
    echo -en "\nDEV: "
