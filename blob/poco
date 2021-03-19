@@ -353,7 +353,6 @@ fi
 export config_file="$PREFIX/etc/poco/poco.conf" #配置文件路径
 export list_url=`sed '/^listURL: /!d;s/.*: //' $config_file` #列表链接
 export site=`sed '/^URL: /!d;s/.*: //' $config_file` #源网址
-export site_404=`sed '/^page404: /!d;s/.*: //' $config_file` #404页面链接
 export bin=`WHICH bash| sed 's/bash//g'` #指定搜索文件
 export blob=`sed '/^blob: /!d;s/.*: //' $config_file` #文件存储链接
 export tree=`sed '/^tree: /!d;s/.*: //' $config_file` #依赖文件存放链接
@@ -478,8 +477,12 @@ export description_cn="关于"
 export command_cn="命令"
 export arguments_cn="参数"
 export arch_loaded_cn="修正架构类型并选定"
+export select_editor_cn="选择一个文本编辑器以编辑"
+export choose_one_cn="输入【1-3】以选择："
 
 #English
+export choose_one="Keyin [1-3] to select:"
+export select_editor="Choose an editor"
 export remove_confirm="echo -e If existed,the follow files will be remove:"
 export try_class="echo -n Auto acquire file's class:"
 export arguments="arguments"
@@ -562,6 +565,8 @@ if [ "$language" == EN ]; then
   export LANG="en.UTF-8"
 fi
 if [[ "$LANG" == zh_*.UTF-8 || "$language" == CN ]]; then
+  export choose_one=$choose_one_cn
+  export select_editor=$select_editor_cn
   export arch_loaded=$arch_loaded_cn
   export remove_confirm=$remove_confirm_cn
   export try_class=$try_class_cn
@@ -1146,7 +1151,6 @@ elif [ "$1" == "status" -o "$1" == "st" ]; then
      CONFIG="$PREFIX/etc/poco/poco.conf"
      echo 程序获取地址: http://$(sed '/^URL: /!d;s/.*: //' ${CONFIG})$(sed '/^blob: /!d;s/.*: //' ${CONFIG})
      echo 依赖获取地址: http://$(sed '/^URL: /!d;s/.*: //' ${CONFIG})$(sed '/^tree: /!d;s/.*: //' ${CONFIG})
-     echo 空指向地址: http://$(sed '/^page404: /!d;s/.*: //' ${CONFIG})
      echo 程序列表获取地址: http://$(sed '/^listURL: /!d;s/.*: //' ${CONFIG})
      echo -en "语言设置: "
      if [ "$(sed '/^LANG: /!d;s/.*: //' ${CONFIG})" == "CN"  ]; then
@@ -1163,7 +1167,30 @@ elif [ "$1" == "status" -o "$1" == "st" ]; then
  fi
 
 elif [ "$1" == "upgrade" -o "$1" == "up" ]; then
-  echo "void"
+  echo "Developing..."
+  
+elif [ "$1" == "console" -o "$1" == "c" ]; then
+  vi=$(WHICH nano)
+  vim=$(WHICH nano)
+  nano=$(WHICH vim)
+  echo "${select_editor}"
+  echo ""
+  echo "1. ${nano}"
+  echo "2. ${vi}"
+  echo "3. {vim}"
+  echo ""
+  read -p "${choose_one}" choice
+  case $choice in
+    "1")
+    nano ${config_file}
+    ;;
+    "2")
+    vi ${config_file}
+    ;;
+    "3")
+    vim ${config_file}
+  esac
+  
 
 #主体(十扇区) COMMAND_NOT_FOUND
 else
