@@ -479,8 +479,10 @@ export arguments_cn="参数"
 export arch_loaded_cn="修正架构类型并选定"
 export select_editor_cn="选择一个文本编辑器"
 export choose_one_cn="输入【1-3】以选择："
+export update_conf_cn="更新控制台信息"
 
 #English
+export update_conf="Updating console info"
 export choose_one="Keyin [1-3] to select:"
 export select_editor="Choose an editor"
 export remove_confirm="echo -e If existed,the follow files will be remove:"
@@ -565,6 +567,7 @@ if [ "$language" == EN ]; then
   export LANG="en.UTF-8"
 fi
 if [[ "$LANG" == zh_*.UTF-8 || "$language" == CN ]]; then
+  export update_conf=$update_conf_cn
   export choose_one=$choose_one_cn
   export select_editor=$select_editor_cn
   export arch_loaded=$arch_loaded_cn
@@ -1159,7 +1162,8 @@ elif [ "$1" == "status" -o "$1" == "st" ]; then
        echo -en English
      fi
    echo -en "\n开发模式: "
-   if [ "$(sed '/^Development Mode: /!d;s/.*: //' ${CONFIG})" == "TRUE"  ]; then
+   development_mode_ifs=$(echo "${development_mode}" | tr [a-z] [A-Z])
+   if [ "$status" == "complete" -o "$development_mode_ifs" == "TRUE" ]; then
       echo 启用
    else
       echo 禁用
@@ -1190,6 +1194,23 @@ elif [ "$1" == "console" -o "$1" == "c" ]; then
     "3")
     vim ${config_file}
   esac
+  echo "${update_conf}"
+  echo FETCH: http://$(sed '/^URL: /!d;s/.*: //' ${CONFIG})$(sed '/^blob: /!d;s/.*: //' ${CONFIG})
+  echo TREE: http://$(sed '/^URL: /!d;s/.*: //' ${CONFIG})$(sed '/^tree: /!d;s/.*: //' ${CONFIG})
+  echo LIST: http://$(sed '/^listURL: /!d;s/.*: //' ${CONFIG})
+  echo -en "LANG: "
+     if [ "$(sed '/^LANG: /!d;s/.*: //' ${CONFIG})" == "CN"  ]; then
+       echo -en 简体中文
+     elif [ "$(sed '/^LANG: /!d;s/.*: //' ${CONFIG})" == "EN"  ]; then
+       echo -en English
+     fi
+   echo -en "\nDEV: "
+   development_mode_ifs=$(echo "${development_mode}" | tr [a-z] [A-Z])
+   if [ "$status" == "complete" -o "$development_mode_ifs" == "TRUE" ]; then
+      echo Enable
+   else
+      echo False
+   fi
   
 
 #主体(十扇区) COMMAND_NOT_FOUND
