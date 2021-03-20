@@ -1,0 +1,2 @@
+export depends="zsh"
+export class="script"
