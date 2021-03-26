@@ -1,0 +1,12 @@
+while true
+do
+loop=1
+while [ $loop -lt 10  ]; do
+  echo ""
+  loop=$(($loop+1))
+done
+date=$(date +"%H:%M:%S")
+figlet -cf block ${date}
+sleep 1
+clear
+done
