@@ -7,6 +7,7 @@ while [ $loop -lt 10  ]; do
 done
 date=$(date +"%H:%M")
 figlet -c ${date}
+echo -n "【安逸一时，谬误一世。】"
 date
 sleep 60
 clear
