@@ -7,6 +7,7 @@ while [ $loop -lt 10  ]; do
 done
 date=$(date +"%H:%M")
 figlet -c ${date}
+date
 sleep 60
 clear
 done
