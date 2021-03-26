@@ -5,8 +5,8 @@ while [ $loop -lt 10  ]; do
   echo ""
   loop=$(($loop+1))
 done
-date=$(date +"%H:%M:%S")
-figlet -cf block ${date}
-sleep 1
+date=$(date +"%H:%M")
+figlet -c ${date}
+sleep 60
 clear
 done
