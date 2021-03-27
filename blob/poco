@@ -433,7 +433,7 @@ export install_tip_cn="您希望继续"
 export ask_cn="吗"
 export error_get_cn="echo -e ${red}无效操作 ${choice}${done}"
 export unit_cn="字符"
-export list_info_cn="列出所有可供下载的文件"
+export list_info_cn="检视可被安装的程序包"
 export request_cn="正在从远端拉取请求"
 export force_update_cn="echo -e ${red}正在进行版本升级,请勿终止程序${done}"
 export check_version_cn="echo -n 检视版本信息"
@@ -446,13 +446,13 @@ export size_info_cn="总计下载"
 export abort_cn="echo -e 终止"
 export res_cn="echo -e 搜索结果："
 export update_note_cn="echo -e \033[41;37m 更新日志 \033[0m"
-export search_info_cn="联网查找软件描述"
+export search_info_cn="基于名称检索程序包信息"
 export check_depends_cn="echo -n 正在校验树状依赖"
 export depends_loaded_cn="自动选定依赖"
 export depends_done_cn="echo 所有依赖均已加入哈希表"
 export site_warn_cn="echo ${red}请谨慎不明身份的网站${done}"
 export depends_error_cn="echo -e ${red}${2}的依赖项无法被满足${done}"
-export group_info_cn="自定义的引导安装"
+export group_info_cn="指定并运行引导脚本"
 export void_group_cn="echo -e 所选中${yellow}${2}${done}不是group引导文件，但您可以使用${yellow}poco install ${2}${done}来将其安装"
 export group_install_cn="echo -n 拉取所选中的group引导"
 export group_done_cn="echo 子进程结束"
@@ -464,7 +464,7 @@ export ERROR_cn="误差"
 export OK_cn="正常"
 export history_info_cn="检索使用记录"
 export not_intro_cn="无描述"
-export fetch_info_cn="无需匹配的垂直安装"
+export fetch_info_cn="安装程序包"
 export exist_database_cn="echo -e ${yellow}${2}${done}的最新版本已经存在，将不会被再次安装"
 export reles_version_cn="echo -n 核验版本序数"
 export last_update_cn="echo -e 最后一次更新于${last_time}"
@@ -479,10 +479,14 @@ export arguments_cn="参数"
 export arch_loaded_cn="修正架构类型并选定"
 export select_editor_cn="选择一个文本编辑器"
 export choose_one_cn="输入【1-3】以选择："
-export update_conf_cn="更新控制台信息"
+export update_conf_cn="更新配置信息"
+export console_info_cn="编辑配置文件"
+export status_info_cn="显示配置信息"
 
 #English
-export update_conf="Updating console info"
+export status_info="Show configuration info"
+export console_info="Edit configuration file"
+export update_conf="Updating configuration info"
 export choose_one="Keyin [1-3] to select:"
 export select_editor="Choose an editor"
 export remove_confirm="echo -e If existed,the follow files will be remove:"
@@ -567,6 +571,8 @@ if [ "$language" == EN ]; then
   export LANG="en.UTF-8"
 fi
 if [[ "$LANG" == zh_*.UTF-8 || "$language" == CN ]]; then
+  export console_info=$console_info_cn
+  export status_info=$status_info_cn
   export update_conf=$update_conf_cn
   export choose_one=$choose_one_cn
   export select_editor=$select_editor_cn
@@ -885,7 +891,6 @@ elif [ "$1" == "help" -o "$1" == "h" -o "$1" == "-h" ]; then
   echo "  ${intro_info}"
   echo ""
   echo -e "\033[27;37;1m${command}\033[0m"
-  echo -e "  ${yellow}i${done}nstall       ${install_info}"
   echo -e "  ${yellow}f${done}etch         ${fetch_info}"
   echo -e "  ${yellow}remove${done}        ${remove_info}"
   echo -e "  ${yellow}h${done}elp          ${help_info}"
@@ -893,6 +898,9 @@ elif [ "$1" == "help" -o "$1" == "h" -o "$1" == "-h" ]; then
   echo -e "  ${yellow}s${done}earch        ${search_info}"
   echo -e "  ${yellow}g${done}roup         ${group_info}"
   echo -e "  ${yellow}hi${done}story       ${history_info}"
+  echo -e "  ${yellow}s${done}tatus        ${status_info}"
+  echo -e "  ${yellow}c${done}onsole       ${console_info}"
+  
   echo ""
   echo -e "\033[27;37;1m${suffix}\033[0m"
   echo -e "\033[27;37;1m  -y --yes\033[0m"            
@@ -915,7 +923,12 @@ elif [ "$1" == "search" -o "$1" == "s" ]; then
     ${null_search}
     exit 0
   fi
-  echo -e "${yellow}${result}${done}"
+  inter
+  for i in $result
+  do
+    center "${yellow}${i}${done}"
+    inter
+  done
 
 #主体(六扇区) GROUP
 elif [ "$1" == "group" -o "$1" == "g" ]; then
