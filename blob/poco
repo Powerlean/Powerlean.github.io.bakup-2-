@@ -917,7 +917,7 @@ elif [ "$1" == "search" -o "$1" == "s" ]; then
     VIBRATE_ERROR
     exit 2
   fi
-  result=`curl -s ${list_url} | awk /$2/`
+  result=$(curl -s ${list_url} | awk /$2/)
   ${res}
   if [ not"$result" == not ]; then
     ${null_search}
@@ -926,8 +926,8 @@ elif [ "$1" == "search" -o "$1" == "s" ]; then
   inter
   for i in ${result}
   do
-    center "${yellow}${i}${done}" #遍历显示
-    inter
+  center "${yellow}${i}${done}" #遍历显示
+  inter
   done
 
 #主体(六扇区) GROUP
