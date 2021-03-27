@@ -924,7 +924,7 @@ elif [ "$1" == "search" -o "$1" == "s" ]; then
     exit 0
   fi
   inter
-  for i in $result
+  for i in ${result}
   do
     center "${yellow}${i}${done}" #遍历显示
     inter
