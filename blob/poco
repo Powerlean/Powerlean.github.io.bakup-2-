@@ -924,9 +924,9 @@ elif [ "$1" == "search" -o "$1" == "s" ]; then
     exit 0
   fi
   inter
-  for i in ${result}
+  echo "${result}"|while read line
   do
-  center "${yellow}${i}${done}" #遍历显示
+  echo -e "${yellow}${line}${done}" #遍历显示
   inter
   done
 
