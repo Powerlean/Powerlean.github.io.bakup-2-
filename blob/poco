@@ -874,6 +874,20 @@ fi
 #主体(三扇区) LIST
 elif [ "$1" == "list" -o "$1" == "l" ]; then
   begin=`get_now_timestamp`
+  if [ "$2" == "-installed" -o "$2" == "--installed" ]; then
+    content=$(cat ${download_file})
+    for i in ${content}
+    do
+       INTRO=$(curl -s ${site}/${blob}/poco.list | sed '/^'"$i"' *-/!d;s/.*- //')
+    if [ not"$INTRO" == "not" ]; then
+      export INTRO="$not_intro"
+    fi
+      echo "${i}"
+      echo "${INTRO}"
+      echo ""
+    done
+    exit 0
+  fi
   echo -n "${request}"
   progress
   echo ""
