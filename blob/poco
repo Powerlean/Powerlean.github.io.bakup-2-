@@ -862,6 +862,7 @@ elif [ "$1" == "remove" ]; then
     if [ -f $bin/$range ]; then
       echo -e "${files}${yellow}${range}${done}${remove_tip}"
       rm -rf $bin/$range #因为不明文件属性，故强制递归
+      echo $(sed '/'${range}'/d' ${download_file})>${download_file}
       DEPENDS_REMOVE
     fi
   fi
