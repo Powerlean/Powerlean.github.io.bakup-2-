@@ -38,20 +38,17 @@ fi
 }
 
 inter() {
- ls /dev/null>/dev/null
- screen="$COLUMNS"
+ screen=$(stty size|awk '{print $2}')
  yes "-" | sed ''$screen''q | tr -d '\n'
 }
 
 footer() {
-  ls /dev/null>/dev/null
-  screen="$COLUMNS"
+  screen=$(stty size|awk '{print $2}')
   yes "=" | sed ''$screen''q | tr -d '\n'
 }
 
 center() {
-ls /dev/null>/dev/null
-width="$COLUMNS"
+width=$(stty size|awk '{print $2}')
 len=${#line}
 let w=(${width}-${len})/2
 i=16
