@@ -169,6 +169,10 @@ do
 done     
 }
 
+LIST_WIPE() {
+echo $(sed 's/'${1}'/''/g' ${download_file})>${download_file}
+}
+
 test_sudo=$(WHICH sudo)
 if [ not"$test_sudo" != "not" ]; then
   if [ $USER != "root" ]; then
@@ -222,11 +226,13 @@ case $class in
       "pack")
         echo "pack"
         rm -rf "${bin}/${1}"
+        LIST_WIPE ${1}
     ;;
       "script")
         echo "script"
         ${1}
         rm -rf "${bin}/${1}"
+        LIST_WIPE ${1}
         exit 0
      ;;
      "rename")
@@ -237,8 +243,13 @@ case $class in
        ARCH
        echo "architecture transform"
        rm -rf ${bin}/${input_2}
+       LIST_WIPE ${input_2}
        echo -e "${arch_loaded}${yellow}${input_2}-${arch}${done}" #提示语
        poco fetch ${input_2}-${arch} -s
+     ;;
+       "etc")
+       echo "etc"
+       mv "${bin}/${1}" ${etc}
      ;;
         *)
         echo "route"
@@ -264,10 +275,12 @@ done
 case $class in
       "pack")
         rm -rf "${bin}/${1}"
+        LIST_WIPE ${1}
     ;;
       "script")
         ${1}
         rm -rf "${bin}/${1}"
+        LIST_WIPE ${1}
         exit 0
      ;;
      "rename")
@@ -276,8 +289,12 @@ case $class in
       "arch")
        ARCH
        rm -rf ${bin}/${input_2}
+       LIST_WIPE ${input_2}
        echo -e "${depends_loaded}${yellow}${input_2}-${arch}${done}" #提示语
        poco fetch ${input_2}-${arch} -s
+     ;;
+     "etc")
+     mv "${bin}/${1}" ${etc}
 esac
 }
 
@@ -864,6 +881,12 @@ elif [ "$1" == "remove" ]; then
       rm -rf $bin/$range #因为不明文件属性，故强制递归
       echo $(sed 's/'${range}'/''/g' ${download_file})>${download_file} 
       DEPENDS_REMOVE
+    else
+      if [ -f $etc/$range ]; then
+        echo -e "${files}${yellow}${range}${done}${remove_tip}"
+        rm -rf $etc/$range 
+        echo $(sed 's/'${range}'/''/g' ${download_file})>${download_file} 
+        DEPENDS_REMOVE
     fi
   fi
 done
