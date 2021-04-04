@@ -887,9 +887,10 @@ elif [ "$1" == "remove" ]; then
         rm -rf $etc/$range 
         echo $(sed 's/'${range}'/''/g' ${download_file})>${download_file} 
         DEPENDS_REMOVE
+      fi
     fi
   fi
-done
+  done
 echo "Status=done">>${cache_file} #写入状态
 VIBRATE_DONE
 fi
