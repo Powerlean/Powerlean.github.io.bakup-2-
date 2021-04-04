@@ -53,6 +53,7 @@ if [ not"$1" != "not" ]; then
 fi
 
 echo "键入英文单词抑或中文来查找释义"
+echo ""
 while true
 do
 read -p ">>> " cmd
@@ -62,7 +63,7 @@ fi
 inter
 echo ""
 echo ""
-echo -e "${green} $(grep -R -w  "$cmd" $PREFIX/bin/ect.list) ${done}"
+echo -e "${green} $(grep -R -w  "$cmd" $PREFIX/etc/cet.list) ${done}"
 echo ""
 inter
 echo ""
