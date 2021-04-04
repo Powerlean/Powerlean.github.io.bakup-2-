@@ -47,7 +47,7 @@ echo -e "$1"
 
 if [ not"$1" != "not" ]; then
 	echo ""
-	echo -e "${red} $(grep -R -w  "$1" $PREFIX/bin/ect.list) ${done}"
+	echo -e "${red} $(grep -R -w  "$1" $PREFIX/etc/cet.list) ${done}"
         echo ""
 	exit 0
 fi
