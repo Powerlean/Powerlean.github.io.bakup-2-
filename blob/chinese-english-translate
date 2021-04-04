@@ -66,6 +66,7 @@ echo ""
 result="$(grep -R -w  "$cmd" $PREFIX/etc/cet.list)"
 if [ not"$result" == "not" ]; then
   result="无结果"
+fi
 echo -e "${green} ${result} ${done}"
 echo ""
 inter
