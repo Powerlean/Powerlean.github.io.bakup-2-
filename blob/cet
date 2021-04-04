@@ -1,0 +1,69 @@
+#!/usr/bin/bash
+
+if [ "$1" == "-help" -o "$1" == "--help" ]; then
+	echo "Chinese-English Translate for CLI"
+	echo "用法:"
+	echo ""
+	echo "cet <参数>"
+	echo ""
+	echo "参数:"
+	echo "--help                展示帮助信息"
+	echo "(英文/中文词)        搜索该词释义"
+	echo "(空)                  进入查词模式"
+	echo ""
+	echo "查词模式:"
+	echo "(英文/中文词)        搜索该词释义"
+	echo "EXIT                 退出查词模式"
+        echo ""
+	exit 0
+fi
+
+export red="\033[31m"
+export green="\033[32m"
+export done="\033[0m"
+
+inter() {
+ screen=$(stty size|awk '{print $2}')
+ yes "-" | sed ''$screen''q | tr -d '\n'
+}
+
+footer() {
+  screen=$(stty size|awk '{print $2}')
+  yes "=" | sed ''$screen''q | tr -d '\n'
+}
+
+center() {
+width=$(stty size|awk '{print $2}')
+len=${#line}
+let w=(${width}-${len})/2
+i=16
+while [ ${i} -lt $w ]
+do
+  let i++
+  printf " "
+done
+echo -e "$1"
+}
+
+if [ not"$1" != "not" ]; then
+	echo ""
+	echo -e "${red} $(grep -R -w  "$1" $PREFIX/bin/ect.list) ${done}"
+        echo ""
+	exit 0
+fi
+
+echo "键入英文单词抑或中文来查找释义"
+while true
+do
+read -p ">>> " cmd
+if [ "${cmd}" == "EXIT" ]; then
+	break
+fi
+inter
+echo ""
+echo ""
+echo -e "${green} $(grep -R -w  "$cmd" $PREFIX/bin/ect.list) ${done}"
+echo ""
+inter
+echo ""
+done
