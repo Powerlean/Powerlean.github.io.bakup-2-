@@ -63,7 +63,10 @@ fi
 inter
 echo ""
 echo ""
-echo -e "${green} $(grep -R -w  "$cmd" $PREFIX/etc/cet.list) ${done}"
+result="$(grep -R -w  "$cmd" $PREFIX/etc/cet.list)"
+if [ not"$result" == "not" ]; then
+  result="无结果"
+echo -e "${green} ${result} ${done}"
 echo ""
 inter
 echo ""
