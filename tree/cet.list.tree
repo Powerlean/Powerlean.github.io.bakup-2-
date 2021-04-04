@@ -1,2 +1,2 @@
 export depends=""
-class="etc"
+export class="etc"
