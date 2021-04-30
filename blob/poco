@@ -518,7 +518,7 @@ export reles_version="echo -n Inspecting native release"
 export check_database="echo -n Checking the version of database"
 export fetch_info="Fetch packages and run preset function"
 export file_exist="echo -e ${yellow}Warning:${done}target file is already exist"
-export done_tip="echo -e Done"
+export done_tip="echo -e Okay"
 export file_remove="echo -e File ${yellow}${i}${done} will be remove"
 export group_install="echo -n Pulling the group index file"
 export void_group="echo -e ${yellow}${2}${done} is not a group index file,but can be installed with ${yellow}poco install ${2}"
@@ -1220,7 +1220,41 @@ elif [ "$1" == "status" -o "$1" == "st" ]; then
  fi
 
 elif [ "$1" == "upgrade" -o "$1" == "up" ]; then
-  echo "Developing..."
+  echo -ne "\033[?25l" #移除光标
+  ${read_line} #提示语
+  progress
+  range=$(cat $download_file)
+  ${done_tip}
+  ${vibrate}
+  ${proc_line} #提示语
+  for i in $range
+  do
+    ${check_status}
+  ${search}
+  progress
+  try=$(curl -I -m 10 -o /dev/null -s -w %{http_code} ${site}${blob}${range})
+  if [ "$try" -ne "200" ]; then
+    echo -e "${red}${try}[${ERROR}]${done}"
+    ${void_found}
+    VIBRATE_ERROR
+    echo -ne "\033[?25h" #显示光标
+    exit 2
+  else
+    echo "Op=${@}">>${cache_file} #写入操作
+    echo -e "${green}${try}[${OK}]${done}"
+    ${vibrate}
+     if [ -f "$bin/$2" ]; then #等待插入一个新的算法，请在Issues中提出建议
+      ${pull}
+      progress
+      curl -s ${site}${blob}${2}>${cache}
+      diff ${cache} ${bin}/${2}>/dev/null
+      export diff_reslut=$?
+      ${done_tip}
+      ${vibrate}
+      if [ "$diff_reslut" == "0" ]; then
+        ${exist_database}
+        echo "">${cache} #清除缓存
+      fi
   
 elif [ "$1" == "console" -o "$1" == "c" ]; then
   vi=$(WHICH vi)
