@@ -706,7 +706,7 @@ if [ "$1" == "fetch" -o "$1" == "f" ]; then #因玄学问题取消一元运算�
   ${check_version}
   progress
   #写入缓存
-  DATE=$(date '+%Y'/'%m'/'%d','%T')
+  DATE=$(date '+%Y'/'%m'/'%d','%T') #简易时间
   echo "Time=${DATE}">${cache_file}
   CHECK_UPDATE
   ${vibrate}
