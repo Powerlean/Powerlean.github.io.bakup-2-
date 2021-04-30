@@ -1255,7 +1255,8 @@ elif [ "$1" == "upgrade" -o "$1" == "up" ]; then
         ${exist_database}
         echo "">${cache} #清除缓存
       fi
-  
+  done
+
 elif [ "$1" == "console" -o "$1" == "c" ]; then
   vi=$(WHICH vi)
   vim=$(WHICH vim)
