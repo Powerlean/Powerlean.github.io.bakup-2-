@@ -377,6 +377,8 @@ export output="/dev/null" #输出路径
 export last_time=`sed '/^Time=/!d;s/.*=//' $cache_file` #时间记录
 export last_op=`sed '/^Op=/!d;s/.*=//' $cache_file` #操作缓存
 export status=`sed '/^Status=/!d;s/.*=//' $cache_file` #状态缓存
+export anime=`sed '/^Anime: /!d;s/.*: //' $config_file` #动画设定
+export anime_speed=`sed '/^Anime Speed: /!d;s/.*: //' $config_file` #动画设定
 export yellow=$(sed '/^Highlight: /!d;s/.*: //' $config_file) #自定义配色
 export random=$(sed '/^Random: /!d;s/.*: //' $config_file) #随机配色
 if [ not"$yellow" == "not" ]; then
@@ -402,11 +404,21 @@ fi
 
 #毫无作用的乐色#
 function progress {
+if [ not"$anime_speed" == "not" ]; then
+  export anime_speed="0.2"
+fi
+
+SLEEP="sleep ${anime_speed}"
+anime=$(echo "${anime}" | tr [a-z] [A-Z])
+if [ "$anime" == "FALSE" -o "$anime_speed" == "0" ]; then
+  unset SLEEP
+fi
+
 for i in {0..2};
 do
   for i in {0..3};
   do
-    sleep 0.2
+    ${SLEEP}
     echo -en "."
   done
   echo -en "\b\b\b   \b\b\b"
