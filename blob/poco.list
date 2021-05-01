@@ -1,15 +1,14 @@
-base-tools   - 基础工具集合
+base-tools   - 基础工具配件
 poco         - Powerlean.top附带的下载工具
 pipe         - 包管理器简化脚本
-coraph       - Linux发行版本安装工具
-coraph.conf  - coraph的配置文件，需一并下载
+coraph       - Linux发行版本安装工具 [失效]
 screenfetch  - Bash截图信息工具
 net-checker  - 网络状态检测脚本
 nbnhhsh      - 一个转换缩写的工具
 which        - 检索可执行文件的所在位置
 cowsay       - 字符动物绘
-adb          - ADB Shell for Termux arm 
-ubuntu-arm   - Ubuntu 18.04 LTS安装脚本
+adb          -  Android Debug Bridge 1.0.36
+ubuntu-arm   - Ubuntu 18.04 LTS安装程序
 clean        - 清理无用文件和软件包
 pcol         - poco-api程式接口
 termux-full-keyboard - Termux键盘预设脚本
