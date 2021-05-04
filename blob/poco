@@ -324,8 +324,21 @@ done
   sleep 5
 }
   clear
+  
   ${update_note}
-  curl -s www.powerlean.top/blob/poco.note
+  color=$(curl -s $site/$blob/poco.note | sed '/^#color: /!d;s/.*=//')
+  
+  case $color in
+  "green")
+   color=$green
+   ;;
+  "red")
+   color=$red
+   esac
+   
+  echo -e "${color}
+  $(curl -s www.powerlean.top/blob/poco.note)
+  ${done}"
   progress_strong
   $vibrate;$vibrate;$vibrate
   clear
