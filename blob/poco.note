@@ -13,5 +13,5 @@ sed -i 's/www.powerlean.top/'powerlean.github.io'/g' $PREFIX/etc/poco/poco.conf
 
 ///////////////注意！！！///////////////
 
-GitHub
+项目地址
 https://github.com/Powerlean/Power-Collector/
