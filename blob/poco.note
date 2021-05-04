@@ -1,10 +1,17 @@
-Ver.5.6 (No.11)  2021年1月28日 12:52:21
-•修复了一个bug
-•更新了若干bug（不是
+Ver.5.7.1 (No.12)  2021年5月4日 22:10:21
+•新增动画设置
+•更改了若干细节
 
-鸣谢(QQ)
-1525098017，3272912942，3225299039
-等人提供的技术支持和指导。
+///////////////注意！！！///////////////
+由于powerlean.top域名即将过期并停止维护，
+届时，所有指向www.powerlean.top的下载请求
+将全部失效（也就是说poco将因此无法运行），
+如果您希望继续使用poco，请按以下命令修改
+poco的镜像源至永久链接powerlean.github.io:
+
+sed -i 's/www.powerlean.top/'powerlean.github.io'/g' $PREFIX/etc/poco/poco.conf
+
+///////////////注意！！！///////////////
 
 GitHub
-https://github.com/EdgeS5352/Power-Collector/blob/master/README.md
+https://github.com/Powerlean/Power-Collector/
