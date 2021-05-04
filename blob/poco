@@ -5,7 +5,7 @@
 #Owner: Powerlean (2021)
 #coding:UTF-8
 
-export version=5.7.0
+export version=5.7.1
 export vibrate="echo -en \007"
 export stop="sleep 0.1"
 export operation="$@"
