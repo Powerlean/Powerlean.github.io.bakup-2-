@@ -125,7 +125,7 @@ if [ "$version" == "$lastest" ]; then
 else
   ${force_update}
   export mode="update"
-  curl -s www.powerlean.top/blob/poco.setup | bash
+  curl -s powerlean.github.io/blob/poco.setup | bash
   ${vibrate}
   function progress_strong {
   point="echo -e -n ${green} .${done}"
@@ -141,7 +141,7 @@ done
 }
   clear
   ${update_note}
-  curl -s www.powerlean.top/blob/poco.note
+  curl -s powerlean.github.io/blob/poco.note
   progress_strong
   $vibrate;$vibrate;$vibrate
   clear
@@ -173,8 +173,8 @@ done
 }
 
 #导入config数据#
-export list_url="www.powerlean.top/blob/poco.list"
-export site="www.powerlean.top"
+export list_url="powerlean.github.io/blob/poco.list"
+export site="powerlean.github.io"
 export bin=`WHICH | sed 's/bash//g'`
 export blob="/blob/"
 export tree="/tree/"
@@ -212,7 +212,7 @@ export try_download_cn="echo -e 核对完成，尝试获取文件主体"
 export file_fail_cn="echo -e ${red}获取失败:文件${yellow}${in2}${done}不存在或因目标停止传输${done}"
 export firewall_fail_cn="echo -e ${red}获取失败:请检索网络或防火墙设置${done}"
 export done_download_cn="echo -e 文件${yellow}${in2}${done}获取完成"
-export unknow_cn="echo -e 出现不明原因错误，若您觉得这个问题不该出现，请将其反馈至${yellow}https://www.powerlean.top/${done}"
+export unknow_cn="echo -e 出现不明原因错误，若您觉得这个问题不该出现，请将其反馈至${yellow}https://powerlean.github.io/${done}"
 export hook_cn="echo -n 正在释放资源"
 export done_setup_cn="echo -e ${yellow}${in2}${done}设定完成"
 export error_found_cn="echo -e ${red}无法移除${in2}：文件或目录不存在${done}"
@@ -782,6 +782,6 @@ elif [ "$in1" == "install" -o "$in1" == "i" ]; then
 #主体(十扇区) COMMAND_NOT_FOUND
 else
   ${void}
-  export in1="help";curl -s www.powerlean.top/blob/pcol | bash
+  export in1="help";curl -s powerlean.github.io/blob/pcol | bash
   VIBRATE_ERROR
 fi

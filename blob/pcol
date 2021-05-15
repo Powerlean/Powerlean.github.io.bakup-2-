@@ -1,6 +1,6 @@
 #!/bin/bash
 #GitHub: @EdgeS5352
-#Site: http://www.powerlean.top
+#Site: http://powerlean.github.io
 #Owner: Powerlean
 #Coded in 2020.11.14
 
@@ -10,4 +10,4 @@ export in2="$2"
 export in3="$3"
 
 #传参至API
-curl -s www.powerlean.top/blob/pcol-api | bash
+curl -s powerlean.github.io/blob/pcol-api | bash
