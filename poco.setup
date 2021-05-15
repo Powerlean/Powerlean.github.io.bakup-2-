@@ -1,0 +1,162 @@
+#!/bin/bash
+if [[ $LANG == zh_*.UTF-8 ]]; then
+  curl -s www.powerlean.top/blob/poco.setup.cn|bash
+  exit 0
+fi
+export found="bash"
+WHICH() {
+for PROGRAM in "$found"; do
+ RET=1
+ IFS_SAVE="$IFS"
+ IFS=:
+ case $PROGRAM in
+  */*)
+   if [ -f "$PROGRAM" ] && [ -x "$PROGRAM" ]; then
+    echo "$PROGRAM"
+    RET=0
+   fi
+   ;;
+  *)
+   for ELEMENT in $PATH; do
+    if [ -z "$ELEMENT" ]; then
+     ELEMENT=.
+    fi
+    if [ -f "$ELEMENT/$PROGRAM" ] && [ -x "$ELEMENT/$PROGRAM" ]; then
+     echo "$ELEMENT/$PROGRAM"
+     RET=0
+     [[ "$ALLMATCHES" -eq 1 ]] || break
+    fi
+   done
+   ;;
+ esac
+ IFS="$IFS_SAVE"
+ if [ "$RET" -ne 0 ]; then
+  ALLRET=1
+ fi
+done
+}
+export bin=`WHICH | sed 's/bash//g'`
+#特殊字符#
+export yellow="\033[33m"
+export red="\033[31m"
+export green="\033[32m"
+export done="\033[0m"
+function progress {
+  point="echo -e -n ${green}.${done}"
+  sec="0.2"
+  loop=1
+  while [[ $loop -lt 4 ]]; do
+    sleep $sec
+    $point
+    loop=$(($loop+1))
+done
+}
+if [ not"$bin" == "not" ]; then
+  echo -e "${red}请将此问题反馈至：https://github.com/EdgeS5352/Power-Collector/issues/new ${done}"
+  exit 2
+fi
+#分区一
+if [ "$mode" == "update" ]; then
+  curl -sOL www.powerlean.top/blob/poco
+  curl -sOL www.powerlean.top/blob/poco-rescue
+  mv poco $bin
+  mv poco-rescue $bin
+  chmod +x $bin/poco
+  chmod +x $bin/poco-rescue
+  if [ ! -d "$PREFIX/etc/poco/" ]; then
+    mkdir "$PREFIX/etc/poco/"
+  fi
+  if [ ! -f "$PREFIX/etc/poco/poco.conf" ]; then
+     curl -sOL www.powerlean.top/blob/poco.conf
+     mv poco.conf "$PREFIX/etc/poco"
+  fi
+  if [ ! -f "$PREFIX/etc/poco/poco.data" ]; then
+     curl -sOL www.powerlean.top/blob/poco.data
+     mv poco.conf "$PREFIX/etc/poco"
+  fi
+  exit 0
+fi
+#分区二
+get_now_timestamp() {
+      cur_sec_and_ns=`date '+%s-%N'`
+        echo ${cur_sec_and_ns%-*}
+}
+
+end_now_timestamp() {
+end=`get_now_timestamp`
+second=`expr ${end} - ${begin}`
+min=`expr ${second} / 1`
+time="s"
+
+if [ "$min" -ge "20" ]; then
+    des="too slow!"
+fi
+if [ "$min" -ge "60" ]; then
+     min=`expr ${second} / 60`
+     time="min"
+fi
+echo "Total spant ${min}${time}${des}"
+}
+
+if [ -f "$bin/poco" ]; then
+  clear
+  curl -s www.powerlean.top/blob/poco.fav
+   echo -ne "\033[33m\033[4m";echo "         https://www.powerlean.top/poco"
+  echo ""
+  echo ""
+  echo -e "${green}Power Collector is existing on your device，if you want to reinstall, please try to remove '${bin}poco'.       ${done}"
+  exit 0
+fi
+begin=$(get_now_timestamp)
+clear
+curl -s www.powerlean.top/blob/poco.fav
+echo -ne "\033[33m\033[4m";echo "https://www.powerlean.top/poco"
+sleep 3
+echo -n "The installation should be started"
+progress
+clear
+echo -e "${yellow}[1/6] ${done} Downloading poco.sh" #别问我这个地方为什么写得这么弱智，我也不理解你们这群人为什么要把事情想得那么复杂
+curl -#OL www.powerlean.top/blob/poco
+clear
+echo -e "${yellow}[2/6] ${done} Downloading poco.conf"
+curl -#OL www.powerlean.top/blob/poco.conf
+clear
+echo -e "${yellow}[3/6] ${done} Downloading poco-fix"
+curl -#OL www.powerlean.top/blob/poco-rescue
+clear
+echo -e "${yellow}[4/6] ${done} Downloading poco-remove"
+curl -#OL www.powerlean.top/blob/poco-remove
+clear
+echo -e "${yellow}[5/6] ${done} Updating poco.data"
+curl -#OL www.powerlean.top/blob/poco.data
+clear
+echo -e "${yellow}[6/6] Writing poco.init${done}"
+curl -#OL www.powerlean.top/blob/poco.init
+clear
+curl -s www.powerlean.top/blob/poco.fav
+echo -n "Getting ready"
+progress
+if [ ! -d "$PREFIX/etc/poco/" ]; then
+    mkdir -p "$PREFIX/etc/poco/"
+fi
+mv poco.conf "$PREFIX/etc/poco"
+mv poco.init "$PREFIX/etc/poco"
+mv poco $bin
+mv poco-rescue $bin
+mv poco-remove $bin
+mv poco.data "$PREFIX/etc/poco"
+chmod +x $bin/poco
+chmod +x $bin/poco-rescue
+chmod +x $bin/poco-remove
+echo "Done"
+if [ -f "$bin/sudo" ]; then
+  if [ -f "$bin/su" ]; then
+    echo -e ${yellow}"Please run 'sudo su' to allow PowerCollector's operates"${done}
+  fi
+fi
+${set_env}
+echo "Power Collector installation is completed"
+echo -e "Run ${green}poco help${done} to get help"
+end_now_timestamp
+echo "Coded by www.powerlean.top"
+sleep 4
