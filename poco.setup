@@ -1,6 +1,6 @@
 #!/bin/bash
 if [[ $LANG == zh_*.UTF-8 ]]; then
-  curl -s www.powerlean.top/blob/poco.setup.cn|bash
+  curl -sL powerlean.github.io/blob/poco.setup.cn|bash
   exit 0
 fi
 export found="bash"
@@ -52,13 +52,13 @@ function progress {
 done
 }
 if [ not"$bin" == "not" ]; then
-  echo -e "${red}请将此问题反馈至：https://github.com/EdgeS5352/Power-Collector/issues/new ${done}"
+  echo -e "${red}请将此问题反馈至：https://github.com/Powerlean/Power-Collector/issues/new ${done}"
   exit 2
 fi
 #分区一
 if [ "$mode" == "update" ]; then
-  curl -sOL www.powerlean.top/blob/poco
-  curl -sOL www.powerlean.top/blob/poco-rescue
+  curl -sOL powerlean.github.io/blob/poco
+  curl -sOL powerlean.github.io/blob/poco-rescue
   mv poco $bin
   mv poco-rescue $bin
   chmod +x $bin/poco
@@ -67,11 +67,11 @@ if [ "$mode" == "update" ]; then
     mkdir "$PREFIX/etc/poco/"
   fi
   if [ ! -f "$PREFIX/etc/poco/poco.conf" ]; then
-     curl -sOL www.powerlean.top/blob/poco.conf
+     curl -sOL powerlean.github.io/blob/poco.conf
      mv poco.conf "$PREFIX/etc/poco"
   fi
   if [ ! -f "$PREFIX/etc/poco/poco.data" ]; then
-     curl -sOL www.powerlean.top/blob/poco.data
+     curl -sOL powerlean.github.io/blob/poco.data
      mv poco.conf "$PREFIX/etc/poco"
   fi
   exit 0
@@ -100,8 +100,8 @@ echo "Total spant ${min}${time}${des}"
 
 if [ -f "$bin/poco" ]; then
   clear
-  curl -s www.powerlean.top/blob/poco.fav
-   echo -ne "\033[33m\033[4m";echo "         https://www.powerlean.top/poco"
+  curl -s powerlean.github.io/blob/poco.fav
+   echo -ne "\033[33m\033[4m";echo "         https://powerlean.github.io/poco"
   echo ""
   echo ""
   echo -e "${green}Power Collector is existing on your device，if you want to reinstall, please try to remove '${bin}poco'.       ${done}"
@@ -109,31 +109,31 @@ if [ -f "$bin/poco" ]; then
 fi
 begin=$(get_now_timestamp)
 clear
-curl -s www.powerlean.top/blob/poco.fav
-echo -ne "\033[33m\033[4m";echo "https://www.powerlean.top/poco"
+curl -s powerlean.github.io/blob/poco.fav
+echo -ne "\033[33m\033[4m";echo "https://powerlean.github.io/poco"
 sleep 3
 echo -n "The installation should be started"
 progress
 clear
 echo -e "${yellow}[1/6] ${done} Downloading poco.sh" #别问我这个地方为什么写得这么弱智，我也不理解你们这群人为什么要把事情想得那么复杂
-curl -#OL www.powerlean.top/blob/poco
+curl -#OL powerlean.github.io/blob/poco
 clear
 echo -e "${yellow}[2/6] ${done} Downloading poco.conf"
-curl -#OL www.powerlean.top/blob/poco.conf
+curl -#OL powerlean.github.io/blob/poco.conf
 clear
 echo -e "${yellow}[3/6] ${done} Downloading poco-fix"
-curl -#OL www.powerlean.top/blob/poco-rescue
+curl -#OL powerlean.github.io/blob/poco-rescue
 clear
 echo -e "${yellow}[4/6] ${done} Downloading poco-remove"
-curl -#OL www.powerlean.top/blob/poco-remove
+curl -#OL powerlean.github.io/blob/poco-remove
 clear
 echo -e "${yellow}[5/6] ${done} Updating poco.data"
-curl -#OL www.powerlean.top/blob/poco.data
+curl -#OL powerlean.github.io/blob/poco.data
 clear
 echo -e "${yellow}[6/6] Writing poco.init${done}"
-curl -#OL www.powerlean.top/blob/poco.init
+curl -#OL powerlean.github.io/blob/poco.init
 clear
-curl -s www.powerlean.top/blob/poco.fav
+curl -s powerlean.github.io/blob/poco.fav
 echo -n "Getting ready"
 progress
 if [ ! -d "$PREFIX/etc/poco/" ]; then
@@ -158,5 +158,5 @@ ${set_env}
 echo "Power Collector installation is completed"
 echo -e "Run ${green}poco help${done} to get help"
 end_now_timestamp
-echo "Coded by www.powerlean.top"
+echo "Coded by powerlean.github.io"
 sleep 4
