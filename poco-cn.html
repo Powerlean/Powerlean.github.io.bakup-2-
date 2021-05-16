@@ -9,6 +9,15 @@
   return false;
  }
   </script>
+	
+<script> 
+var lang=(navigator.language||navigator.userLanguage).slice(-2).toLowerCase();
+var langPage={
+    cn:'/poco-cn.html'
+}
+window.location.replace( langPage[lang]|| '' );
+</script>
+
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>PowerCollector</title>
 <!-- 引入head标签 -->
