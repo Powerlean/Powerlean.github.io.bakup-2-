@@ -438,6 +438,32 @@ do
 done
 }
 
+#load动画
+Load_Anime() {
+input="$@"
+
+Progress() {
+until [ -f "Poco_Progress_Done" ]
+do
+    for i in {0..3};
+  do
+    sleep 0.1
+    echo -en "."
+  done
+  echo -en "\b\b\b   \b\b\b\    \b\b\b"
+  echo -en "\b\b\b   \b\b\b"
+done
+rm Poco_Progress_Done
+}
+
+Input() {
+${input}
+touch Poco_Progress_Done
+}
+
+Input >/dev/null 2>&1 | Progress
+}
+
 #字符变量#
 #中文
 export remove_confirm_cn="echo -e 若存在，则以下程序将被移除："
@@ -938,9 +964,11 @@ elif [ "$1" == "list" -o "$1" == "l" ]; then
     exit 0
   fi
   echo -n "${request}"
-  progress
+  curl_list() {
   echo ""
   curl -sL ${list_url}
+  }
+  Load_Anime curl_list
   VIBRATE_DONE
 
 #主体(四扇区) HELP
