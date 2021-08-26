@@ -54,7 +54,7 @@ done
 }
 ##进度条##
 if [ not"$bin" == "not" ]; then
-  echo -e "${red}变量未生效，请将此问题反馈至：https://github.com/EdgeS5352/Power-Collector/issues/new ${done}"
+  echo -e "${red}变量未生效，请将此问题反馈至：https://github.com/Powerlean/Power-Collector/issues/new ${done}"
   exit 2
 fi
 #分区一
@@ -102,7 +102,7 @@ echo "安装共耗时${min}${time}${des}"
 
 if [ -f "$bin/poco" ]; then
   clear
-  curl -s powerlean.github.io/blob/poco.fav
+  curl -sL powerlean.github.io/blob/poco.fav
    echo -ne "\033[33m\033[4m";echo "         https://powerlean.github.io/poco"
   echo ""
   echo ""
@@ -111,12 +111,47 @@ if [ -f "$bin/poco" ]; then
 fi
 begin=$(get_now_timestamp)
 clear
-curl -s powerlean.github.io/blob/poco.fav
+curl -sL powerlean.github.io/blob/poco.fav
 echo -ne "\033[33m\033[4m";echo "https://powerlean.github.io/poco"
 sleep 3
 echo -n "安装应该已经开始"
 progress
 clear
+
+Wave_Anime(){
+export cmd="$@"
+Load_Anime() {
+input="$@"
+
+Progress() {
+proc(){ sleep 0.05;printf '\e[15D';printf "\e[38;5;$2m";printf $1;: "${_:0-1:1}""${_:0:14}"; if [[ -f Poco_Progress_Done ]]; then rm "Poco_Progress_Done";exit 0; else proc $_ $[$2 + 1]; fi; }; printf '\e[?25l'; : echo  $(echo "4KLIDYUWQLRJNA7CS2COFFUF4KLINYUWQ7RJNCHCS2D6FFUG4KLILYUWQTRJNA7CS2BOFFUBBI======" | base32 -d);proc $_ 1
+#code by nidhogg
+}
+
+Input() {
+${input}
+touch Poco_Progress_Done
+}
+
+Input >/dev/null 2>&1 | Progress
+}
+
+main() {
+echo " 请耐心等待..."
+echo ""
+Load_Anime $cmd
+for i in {0..4};
+do
+    echo -en "\b\b\b   \b\b\b"
+done
+echo " 完成！"
+}
+
+main
+}
+
+
+Download(){
 echo -e "${yellow}[1/6] ${done}下载主体" #别问我这个地方为什么写得这么弱智，我也不理解你们这群人为什么要把事情想得那么复杂
 curl -#OL powerlean.github.io/blob/poco
 clear
@@ -135,7 +170,10 @@ clear
 echo -e "${yellow}[6/6] ${done}载入初始指令集"
 curl -#OL powerlean.github.io/blob/poco.init
 clear
-curl -s powerlean.github.io/blob/poco.fav
+}
+
+Wave_Anime Download
+
 echo -n "设定中"
 progress
 if [ ! -d "$PREFIX/etc/poco/" ]; then
