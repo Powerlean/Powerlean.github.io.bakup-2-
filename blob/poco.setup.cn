@@ -145,6 +145,7 @@ do
     echo -en "\b\b\b   \b\b\b"
 done
 echo " 完成！"
+clear
 }
 
 main
@@ -201,18 +202,8 @@ echo -ne "\033[0m检查程序是否已正常安装"
 progress
 if [ $(which poco)  ]; then
 echo -e "\033[32mpoco已正常安装在$(which poco)"
-echo -ne "\033[0m检查是否可以正常运行"
-progress
-poco > /dev/null 2>&1
-if [ $? == 0  ]; then
-echo -e "\033[32m运行正常"
 else
-bash -x poco 1> $PREFIX/tmp/poco.log 2>&1
-echo -e "\033[31m运行过程中出现错误，请检查程序是否正确安装,日志已存放在$PREFIX/tmp/poco.log"
-fi
-else
-echo -e "\033[31mpoco未安装"
-exit
+echo -e "${red}安装异常${done}"
 fi
 echo -en "\033[0m"
 ########检验#########
