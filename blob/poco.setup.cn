@@ -112,7 +112,7 @@ fi
 begin=$(get_now_timestamp)
 clear
 curl -sL powerlean.github.io/blob/poco.fav
-echo -ne "\033[33m\033[4m";echo "https://powerlean.github.io/poco"
+echo -ne "\033[33m\033[4m";echo "https://powerlean.github.io/poco${done}"
 sleep 3
 echo -n "安装应该已经开始"
 progress
