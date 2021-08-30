@@ -103,7 +103,7 @@ echo "安装共耗时${min}${time}${des}"
 if [ -f "$bin/poco" ]; then
   clear
   curl -sL powerlean.github.io/blob/poco.fav
-   echo -ne "\033[33m\033[4m";echo "         https://powerlean.github.io/poco"
+   echo -ne "\033[33m\033[4m        https://powerlean.github.io/poco"
   echo ""
   echo ""
   echo -e "${green}该设备已存在某个版本的Power Collector，若要重新安装，请尝试将'${bin}poco'移除。       ${done}"
@@ -112,7 +112,7 @@ fi
 begin=$(get_now_timestamp)
 clear
 curl -sL powerlean.github.io/blob/poco.fav
-echo -ne "\033[4m";echo "https://powerlean.github.io/poco${done}"
+echo -ne "\033[33m\033[4mhttps://powerlean.github.io/poco${done}"
 sleep 3
 echo -n "安装应该已经开始"
 progress
