@@ -1,9 +1,10 @@
 ---                                                                   layout: post
-title: 'What the OCD bring to my life'
+title: "What the OCD bring to my life"
 date: 2021-10-16 19:43:20 +0800
 tags: Life
 color: rgb(235,60,70)
-cover: '/images/3.2.20-OCD.jpg'
+cover: 
+'/images/3.2.20-OCD.jpg'
 subtitle: 'The feeling of a OCD sufferer'
 ---
 
