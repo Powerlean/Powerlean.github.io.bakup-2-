@@ -12,5 +12,5 @@ Obsessive–compulsive disorder (OCD) is a mental and behavioral disorder
 in which a person has certain thoughts repeatedly (called "obsessions") and/or feels the need to perform certain routines repeatedly (called "compulsions") 
 to an extent that generates distress or impairs general functioning.
 The person is unable to control either the thoughts or activities for more than a short period of time.
-Common compulsions include excessive hand washing, the counting of things, and checking to see if a door is locked. (Wikipedia)['https://en.m.wikipedia.org/wiki/Obsessive%E2%80%93compulsive_disorder']
+Common compulsions include excessive hand washing, the counting of things, and checking to see if a door is locked. [Wikipedia](https://en.m.wikipedia.org/wiki/Obsessive%E2%80%93compulsive_disorder "Wikipedia")
 
