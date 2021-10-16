@@ -1,16 +1,16 @@
----                              
-
+--
 layout: post
-title:  What the OCD bring to my life
-date:   2021-10-16 14:05:21 +0800
-tags: Main
+title:  "What the OCD bring to my life"
+date:   2021-05-27 16:05:21 +0800
+tags: Shell
 color: rgb(255,90,90)
-cover: 'https://ae01.alicdn.com/kf/Hb0be877146b14ec09a1fa2fa438bc208W.jpg'
-subtitle: '序言'
-
+cover: 'https://ae02.alicdn.com/kf/H8537c948baf64f43bb745fd5a4e0c31d4.jpg'
+subtitle: '更好的通'
 ---
-
 # What's the OCD
-
-Obsessive–compulsive disorder (OCD) is a mental and behavioral disorder in which a person has certain thoughts repeatedly (called "obsessions") and/or feels the need to perform certain routines repeatedly (called "compulsions") to an extent that generates distress or impairs general functioning.The person is unable to control either the thoughts or activities for more than a short period of time.Common compulsions include excessive hand washing, the counting of things, and checking to see if a door is locked. (Wikipedia)[https://en.m.wikipedia.org/wiki/Obsessive%E2%80%93compulsive_disorder]
+Obsessive–compulsive disorder (OCD) is a mental and behavioral disorder 
+in which a person has certain thoughts repeatedly (called "obsessions") and/or feels the need to perform certain routines repeatedly (called "compulsions") 
+to an extent that generates distress or impairs general functioning.
+The person is unable to control either the thoughts or activities for more than a short period of time.
+Common compulsions include excessive hand washing, the counting of things, and checking to see if a door is locked. (Wikipedia)[https://en.m.wikipedia.org/wiki/Obsessive%E2%80%93compulsive_disorder]
 
