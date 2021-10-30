@@ -19,5 +19,5 @@ subtitle: '持续更新'
 - [QQ](https://qm.qq.com/cgi-bin/qm/qr?k=PJemsUFPRexZMeBd1N1JjEf07DFiIqis&noverify=0 "腾讯QQ")
 
 - [Telegram](https://t.me/wearos_watchface "Telegram") 
-- [微信]() 
+- [微信](/images/IMG_20211030_181157.jpg) 
  
