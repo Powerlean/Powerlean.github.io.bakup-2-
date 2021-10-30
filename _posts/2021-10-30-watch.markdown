@@ -9,4 +9,15 @@ subtitle: '持续更新'
 ---
 # 前言
 近来发现自己对表盘的美观需求愈加的强烈了，然市面上的表盘应用前篇一律，毫无新意。在审美疲劳之中，我突然想到，何不自己整点新活？于是有了下文......
-### 所有表盘基于watchmaker设计，如果看到了喜欢的表盘，请透过我的微信，QQ或telegram与我联系购入。
+### 所有表盘基于watchmaker设计，如果看到了喜欢的表盘，请透过我的微信，QQ或telegram等与我联系购入。
+
+联系我
+- [Email](https://bluebreeze191@gmail.com "谷歌邮箱")
+
+- [GitHub](https://github.com/edges5352 "GitHub")
+
+- [QQ](https://qm.qq.com/cgi-bin/qm/qr?k=PJemsUFPRexZMeBd1N1JjEf07DFiIqis&noverify=0 "腾讯QQ")
+
+- [Telegram](https://t.me/wearos_watchface "Telegram") 
+- [微信]() 
+ 
