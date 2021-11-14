@@ -4,7 +4,7 @@ mode: Rule
 log-level: info
 external-controller: :9090
 proxies:
-  - {name: wulabing_proxy.liberas.xyz, server: proxy.liberas.xyz, port: 443, type: vmess, uuid: 700fc7f1-3759-4fc1-aad0-3a28c314a9b4, alterId: 2, cipher: auto, tls: true, network: ws, ws-path: /e2131d7167b6ff4/, ws-headers: {Host: proxy.liberas.xyz}}
+  - {name: liberas, server: proxy.liberas.xyz, port: 443, type: vmess, uuid: 700fc7f1-3759-4fc1-aad0-3a28c314a9b4, alterId: 2, cipher: auto, tls: true, network: ws, ws-path: /e2131d7167b6ff4/, ws-headers: {Host: proxy.liberas.xyz}}
 proxy-groups:
   - name: Proxies
     type: select
@@ -14,7 +14,7 @@ proxy-groups:
       - JP
       - US
       - TW
-      - wulabing_proxy.liberas.xyz
+      - liberas
   - name: Apple
     type: select
     proxies:
