@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "What the OCD bring to me"
+title:  "How the OCD occupied my life"
 date:   2021-10-16 19:52:10 +0800
 tags: Life
 color: rgb(100,149,237)
@@ -14,3 +14,4 @@ to an extent that generates distress or impairs general functioning.
 The person is unable to control either the thoughts or activities for more than a short period of time.
 Common compulsions include excessive hand washing, the counting of things, and checking to see if a door is locked. [Wikipedia](https://en.m.wikipedia.org/wiki/Obsessive%E2%80%93compulsive_disorder "Wikipedia")
 
+As I diagnosed OCD,
